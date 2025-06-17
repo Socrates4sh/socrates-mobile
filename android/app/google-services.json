@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "399924722785",
+    "project_id": "education-4sh",
+    "storage_bucket": "education-4sh.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399924722785:android:232171329aeb8e38273e20",
+        "android_client_info": {
+          "package_name": "com.socrates.website"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBJcnCzfjLg94xxqyXeq0nGRBIg6xt2hY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399924722785:android:dfb9f9fde1f6b19a273e20",
+        "android_client_info": {
+          "package_name": "com.socrates.zappa"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBJcnCzfjLg94xxqyXeq0nGRBIg6xt2hY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

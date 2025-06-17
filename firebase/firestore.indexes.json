@@ -1,0 +1,120 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "exams",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "is_display",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "exam_sequence",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "subjects",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "is_display",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "subject_sequence",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "WebsiteStructure",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "is_display",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "nav_seq",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "uploadedVideos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "exam",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "subject",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "chapter",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "is_display",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "video_sequence",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "WebsiteVideos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "sub_category",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "is_display",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "video_sequence",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "WebsiteVideos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "is_display",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "recommended_videos_homepage",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "video_sequence",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": [
+    {
+      "collectionGroup": "fcm_tokens",
+      "fieldPath": "fcm_token",
+      "indexes": [
+        {
+          "order": "ASCENDING",
+          "queryScope": "COLLECTION_GROUP"
+        }
+      ]
+    }
+  ]
+}
