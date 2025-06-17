@@ -91,205 +91,185 @@ class _VideosListWidgetState extends State<VideosListWidget> {
                         alignment: AlignmentDirectional(0.0, -1.0),
                         child: Padding(
                           padding: EdgeInsets.all(30.0),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 2.0),
-                                      child: Text(
-                                        valueOrDefault<String>(
-                                          widget.websiteCategory,
-                                          'Website Category',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .headlineMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMediumFamily,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              fontSize: 14.0,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts:
-                                                  !FlutterFlowTheme.of(context)
-                                                      .headlineMediumIsCustom,
-                                            ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 2.0),
+                                    child: Text(
+                                      valueOrDefault<String>(
+                                        widget.websiteCategory,
+                                        'Website Category',
                                       ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .headlineMedium
+                                          .override(
+                                            fontFamily:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineMediumFamily,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            fontSize: 14.0,
+                                            letterSpacing: 0.0,
+                                            useGoogleFonts:
+                                                !FlutterFlowTheme.of(context)
+                                                    .headlineMediumIsCustom,
+                                          ),
                                     ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 20.0),
-                                      child: Text(
-                                        valueOrDefault<String>(
-                                          widget.subCategory,
-                                          'Sub-category',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .headlineMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .headlineMediumFamily,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              fontSize: 25.0,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts:
-                                                  !FlutterFlowTheme.of(context)
-                                                      .headlineMediumIsCustom,
-                                            ),
+                                  ),
+                                ],
+                              ),
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 20.0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    widget.subCategory,
+                                    'Sub-category',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .headlineMedium
+                                      .override(
+                                        fontFamily: FlutterFlowTheme.of(context)
+                                            .headlineMediumFamily,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        fontSize: 25.0,
+                                        letterSpacing: 0.0,
+                                        useGoogleFonts:
+                                            !FlutterFlowTheme.of(context)
+                                                .headlineMediumIsCustom,
                                       ),
-                                    ),
-                                  ],
                                 ),
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Builder(
-                                        builder: (context) {
-                                          final subCategoryVideos =
-                                              widget.videosDocs!.toList();
+                              ),
+                              Expanded(
+                                child: Container(
+                                  child: Builder(
+                                    builder: (context) {
+                                      final subCategoryVideos =
+                                          widget.videosDocs!.toList();
 
-                                          return ListView.separated(
-                                            padding: EdgeInsets.zero,
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.vertical,
-                                            itemCount: subCategoryVideos.length,
-                                            separatorBuilder: (_, __) =>
-                                                SizedBox(height: 10.0),
-                                            itemBuilder: (context,
-                                                subCategoryVideosIndex) {
-                                              final subCategoryVideosItem =
-                                                  subCategoryVideos[
-                                                      subCategoryVideosIndex];
-                                              return Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  ClipRRect(
+                                      return ListView.separated(
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        itemCount: subCategoryVideos.length,
+                                        separatorBuilder: (_, __) =>
+                                            SizedBox(height: 10.0),
+                                        itemBuilder:
+                                            (context, subCategoryVideosIndex) {
+                                          final subCategoryVideosItem =
+                                              subCategoryVideos[
+                                                  subCategoryVideosIndex];
+                                          return Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Container(
+                                                  width:
+                                                      MediaQuery.sizeOf(context)
+                                                              .width *
+                                                          0.3,
+                                                  height: 80.0,
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .alternate,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             8.0),
-                                                    child: Container(
-                                                      width: MediaQuery.sizeOf(
-                                                                  context)
-                                                              .width *
-                                                          0.3,
-                                                      height: 80.0,
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .alternate,
+                                                  ),
+                                                  child: Stack(
+                                                    children: [
+                                                      ClipRRect(
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(8.0),
+                                                        child: Image.network(
+                                                          subCategoryVideosItem
+                                                              .videoThumbnailImageUrl,
+                                                          width: 200.0,
+                                                          height: 200.0,
+                                                          fit: BoxFit.cover,
+                                                        ),
                                                       ),
-                                                      child: Stack(
-                                                        children: [
-                                                          ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8.0),
-                                                            child:
-                                                                Image.network(
-                                                              subCategoryVideosItem
-                                                                  .videoThumbnailImageUrl,
-                                                              width: 200.0,
-                                                              height: 200.0,
-                                                              fit: BoxFit.cover,
-                                                            ),
-                                                          ),
-                                                          Align(
-                                                            alignment:
-                                                                AlignmentDirectional(
-                                                                    0.0, 0.0),
-                                                            child: Icon(
-                                                              Icons
-                                                                  .play_arrow_rounded,
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryBackground,
-                                                              size: 24.0,
-                                                            ),
-                                                          ),
-                                                        ],
+                                                      Align(
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                0.0, 0.0),
+                                                        child: Icon(
+                                                          Icons
+                                                              .play_arrow_rounded,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          size: 24.0,
+                                                        ),
                                                       ),
-                                                    ),
+                                                    ],
                                                   ),
-                                                  Flexible(
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  20.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            subCategoryVideosItem
-                                                                .topic,
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .headlineSmall
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
+                                                ),
+                                              ),
+                                              Flexible(
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          20.0, 0.0, 0.0, 0.0),
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        subCategoryVideosItem
+                                                            .topic,
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .headlineSmall
+                                                            .override(
+                                                              fontFamily:
+                                                                  FlutterFlowTheme.of(
                                                                           context)
                                                                       .headlineSmallFamily,
-                                                                  fontSize:
-                                                                      16.0,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                  useGoogleFonts:
-                                                                      !FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .headlineSmallIsCustom,
-                                                                ),
-                                                          ),
-                                                        ],
+                                                              fontSize: 16.0,
+                                                              letterSpacing:
+                                                                  0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              useGoogleFonts:
+                                                                  !FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .headlineSmallIsCustom,
+                                                            ),
                                                       ),
-                                                    ),
+                                                    ],
                                                   ),
-                                                ],
-                                              );
-                                            },
+                                                ),
+                                              ),
+                                            ],
                                           );
                                         },
-                                      ),
-                                    ),
-                                  ],
+                                      );
+                                    },
+                                  ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       );
