@@ -50,6 +50,11 @@ class SubCategoriesRecord extends FirestoreRecord {
   List<SubjectsWebsiteStruct> get subjects => _subjects ?? const [];
   bool hasSubjects() => _subjects != null;
 
+  // "language" field.
+  String? _language;
+  String get language => _language ?? '';
+  bool hasLanguage() => _language != null;
+
   DocumentReference get parentReference => reference.parent.parent!;
 
   void _initializeFields() {
@@ -63,6 +68,7 @@ class SubCategoriesRecord extends FirestoreRecord {
       snapshotData['subjects'],
       SubjectsWebsiteStruct.fromMap,
     );
+    _language = snapshotData['language'] as String?;
   }
 
   static Query<Map<String, dynamic>> collection([DocumentReference? parent]) =>
@@ -111,6 +117,7 @@ Map<String, dynamic> createSubCategoriesRecordData({
   String? region,
   String? examImageUrl,
   bool? isDisplay,
+  String? language,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -120,6 +127,7 @@ Map<String, dynamic> createSubCategoriesRecordData({
       'region': region,
       'exam_image_url': examImageUrl,
       'is_display': isDisplay,
+      'language': language,
     }.withoutNulls,
   );
 
@@ -139,7 +147,8 @@ class SubCategoriesRecordDocumentEquality
         e1?.region == e2?.region &&
         e1?.examImageUrl == e2?.examImageUrl &&
         e1?.isDisplay == e2?.isDisplay &&
-        listEquality.equals(e1?.subjects, e2?.subjects);
+        listEquality.equals(e1?.subjects, e2?.subjects) &&
+        e1?.language == e2?.language;
   }
 
   @override
@@ -150,7 +159,8 @@ class SubCategoriesRecordDocumentEquality
         e?.region,
         e?.examImageUrl,
         e?.isDisplay,
-        e?.subjects
+        e?.subjects,
+        e?.language
       ]);
 
   @override

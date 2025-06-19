@@ -619,48 +619,41 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                               ),
                                             ),
                                           ),
-                                        if (responsiveVisibility(
-                                          context: context,
-                                          phone: false,
-                                          tablet: false,
-                                          tabletLandscape: false,
-                                          desktop: false,
-                                        ))
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, -1.0),
-                                            child: Container(
-                                              decoration: BoxDecoration(),
-                                              child: wrapWithModel(
-                                                model: _model
-                                                    .homepageListViewModel4,
-                                                updateCallback: () =>
-                                                    safeSetState(() {}),
-                                                child: HomepageListViewWidget(
-                                                  subCategory:
-                                                      'Mastering Resilience (English)',
-                                                  websiteStructureDoc: _model
-                                                      .websiteStructureDocs!
-                                                      .where((e) =>
-                                                          e.categories ==
-                                                          'Resilience Training')
-                                                      .toList()
-                                                      .firstOrNull!
-                                                      .reference,
-                                                  websiteVideosDoc: _model
-                                                      .websiteVideosDoc!
-                                                      .where((e) =>
-                                                          e.subCategory ==
-                                                          'Mastering Resilience (English)')
-                                                      .toList()
-                                                      .sortedList(
-                                                          keyOf: (e) =>
-                                                              e.videoSequence,
-                                                          desc: false),
-                                                ),
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(0.0, -1.0),
+                                          child: Container(
+                                            decoration: BoxDecoration(),
+                                            child: wrapWithModel(
+                                              model:
+                                                  _model.homepageListViewModel4,
+                                              updateCallback: () =>
+                                                  safeSetState(() {}),
+                                              child: HomepageListViewWidget(
+                                                subCategory:
+                                                    'Mastering Resilience (English)',
+                                                websiteStructureDoc: _model
+                                                    .websiteStructureDocs!
+                                                    .where((e) =>
+                                                        e.categories ==
+                                                        'Resilience Training')
+                                                    .toList()
+                                                    .firstOrNull!
+                                                    .reference,
+                                                websiteVideosDoc: _model
+                                                    .websiteVideosDoc!
+                                                    .where((e) =>
+                                                        e.subCategory ==
+                                                        'Mastering Resilience (English)')
+                                                    .toList()
+                                                    .sortedList(
+                                                        keyOf: (e) =>
+                                                            e.videoSequence,
+                                                        desc: false),
                                               ),
                                             ),
                                           ),
+                                        ),
                                       ].divide(SizedBox(height: 20.0)),
                                     ),
                                   ),
