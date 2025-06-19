@@ -11,18 +11,31 @@ class HomepageV3Model extends FlutterFlowModel<HomepageV3Widget> {
 
   bool? initCompleted = false;
 
+  List<HomeAllDataStruct> allDataList = [];
+  void addToAllDataList(HomeAllDataStruct item) => allDataList.add(item);
+  void removeFromAllDataList(HomeAllDataStruct item) =>
+      allDataList.remove(item);
+  void removeAtIndexFromAllDataList(int index) => allDataList.removeAt(index);
+  void insertAtIndexInAllDataList(int index, HomeAllDataStruct item) =>
+      allDataList.insert(index, item);
+  void updateAllDataListAtIndex(
+          int index, Function(HomeAllDataStruct) updateFn) =>
+      allDataList[index] = updateFn(allDataList[index]);
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Firestore Query - Query a collection] action in HomepageV3 widget.
   List<WebsiteStructureRecord>? websiteStructureDocs;
   // Stores action output result for [Firestore Query - Query a collection] action in HomepageV3 widget.
   List<WebsiteVideosRecord>? websiteVideosDoc;
+  // Stores action output result for [Firestore Query - Query a collection] action in HomepageV3 widget.
+  List<HomepageLanguageSequenceRecord>? langSeq;
+  // Stores action output result for [Custom Action - fetchHomeAllData] action in HomepageV3 widget.
+  List<HomeAllDataStruct>? dataRecord;
   // State field(s) for Carousel widget.
   CarouselSliderController? carouselController;
   int carouselCurrentIndex = 1;
 
-  // Model for homepageListView component.
-  late HomepageListViewModel homepageListViewModel1;
   // Model for homepageListView component.
   late HomepageListViewModel homepageListViewModel2;
   // Model for homepageListView component.
@@ -32,8 +45,6 @@ class HomepageV3Model extends FlutterFlowModel<HomepageV3Widget> {
 
   @override
   void initState(BuildContext context) {
-    homepageListViewModel1 =
-        createModel(context, () => HomepageListViewModel());
     homepageListViewModel2 =
         createModel(context, () => HomepageListViewModel());
     homepageListViewModel3 =
@@ -44,7 +55,6 @@ class HomepageV3Model extends FlutterFlowModel<HomepageV3Widget> {
 
   @override
   void dispose() {
-    homepageListViewModel1.dispose();
     homepageListViewModel2.dispose();
     homepageListViewModel3.dispose();
     homepageListViewModel4.dispose();

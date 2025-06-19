@@ -8,6 +8,7 @@ import '/auth/base_auth_user_provider.dart';
 
 import '/backend/push_notifications/push_notifications_handler.dart'
     show PushNotificationsHandler;
+import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -79,14 +80,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomepageV3Widget() : HomepageV3Widget(),
+          appStateNotifier.loggedIn ? NavBarPage() : HomepageV3Widget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? HomepageV3Widget()
-              : HomepageV3Widget(),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? NavBarPage() : HomepageV3Widget(),
         ),
         FFRoute(
           name: EnterOTPWidget.routeName,
@@ -99,14 +99,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => OnboardingFormWidget(),
         ),
         FFRoute(
-          name: SearchWidget.routeName,
-          path: SearchWidget.routePath,
-          builder: (context, params) => SearchWidget(),
-        ),
+            name: SearchWidget.routeName,
+            path: SearchWidget.routePath,
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: SearchWidget(),
+                )),
         FFRoute(
           name: ProfileWidget.routeName,
           path: ProfileWidget.routePath,
-          builder: (context, params) => ProfileWidget(),
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Profile')
+              : ProfileWidget(),
         ),
         FFRoute(
           name: BookmarksWidget.routeName,
@@ -169,33 +173,37 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => TopicsDemoWidget(),
         ),
         FFRoute(
-          name: HomepageWidget.routeName,
-          path: HomepageWidget.routePath,
-          builder: (context, params) => HomepageWidget(),
-        ),
+            name: HomepageWidget.routeName,
+            path: HomepageWidget.routePath,
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: HomepageWidget(),
+                )),
         FFRoute(
           name: HomepageOption2Widget.routeName,
           path: HomepageOption2Widget.routePath,
           builder: (context, params) => HomepageOption2Widget(),
         ),
         FFRoute(
-          name: SubjectsV1Widget.routeName,
-          path: SubjectsV1Widget.routePath,
-          builder: (context, params) => SubjectsV1Widget(
-            examSequence: params.getParam(
-              'examSequence',
-              ParamType.int,
-            ),
-            grade: params.getParam(
-              'grade',
-              ParamType.String,
-            ),
-            exam: params.getParam(
-              'exam',
-              ParamType.String,
-            ),
-          ),
-        ),
+            name: SubjectsV1Widget.routeName,
+            path: SubjectsV1Widget.routePath,
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: SubjectsV1Widget(
+                    examSequence: params.getParam(
+                      'examSequence',
+                      ParamType.int,
+                    ),
+                    grade: params.getParam(
+                      'grade',
+                      ParamType.String,
+                    ),
+                    exam: params.getParam(
+                      'exam',
+                      ParamType.String,
+                    ),
+                  ),
+                )),
         FFRoute(
           name: SubjectsCopyWidget.routeName,
           path: SubjectsCopyWidget.routePath,
@@ -211,31 +219,33 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: ChaptersWidget.routeName,
-          path: ChaptersWidget.routePath,
-          builder: (context, params) => ChaptersWidget(
-            exam: params.getParam(
-              'exam',
-              ParamType.String,
-            ),
-            grade: params.getParam(
-              'grade',
-              ParamType.String,
-            ),
-            subject: params.getParam(
-              'subject',
-              ParamType.String,
-            ),
-            examSequence: params.getParam(
-              'examSequence',
-              ParamType.int,
-            ),
-            subjectSequence: params.getParam(
-              'subjectSequence',
-              ParamType.int,
-            ),
-          ),
-        ),
+            name: ChaptersWidget.routeName,
+            path: ChaptersWidget.routePath,
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: ChaptersWidget(
+                    exam: params.getParam(
+                      'exam',
+                      ParamType.String,
+                    ),
+                    grade: params.getParam(
+                      'grade',
+                      ParamType.String,
+                    ),
+                    subject: params.getParam(
+                      'subject',
+                      ParamType.String,
+                    ),
+                    examSequence: params.getParam(
+                      'examSequence',
+                      ParamType.int,
+                    ),
+                    subjectSequence: params.getParam(
+                      'subjectSequence',
+                      ParamType.int,
+                    ),
+                  ),
+                )),
         FFRoute(
           name: ChaptersDemoWidget.routeName,
           path: ChaptersDemoWidget.routePath,
@@ -255,35 +265,39 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: NewsLetterWidget.routeName,
-          path: NewsLetterWidget.routePath,
-          builder: (context, params) => NewsLetterWidget(),
-        ),
+            name: NewsLetterWidget.routeName,
+            path: NewsLetterWidget.routePath,
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: NewsLetterWidget(),
+                )),
         FFRoute(
-          name: SubjectsWidget.routeName,
-          path: SubjectsWidget.routePath,
-          asyncParams: {
-            'examdoc': getDoc(['exams'], ExamsRecord.fromSnapshot),
-          },
-          builder: (context, params) => SubjectsWidget(
-            exam: params.getParam(
-              'exam',
-              ParamType.String,
-            ),
-            grade: params.getParam(
-              'grade',
-              ParamType.String,
-            ),
-            examSequence: params.getParam(
-              'examSequence',
-              ParamType.int,
-            ),
-            examdoc: params.getParam(
-              'examdoc',
-              ParamType.Document,
-            ),
-          ),
-        ),
+            name: SubjectsWidget.routeName,
+            path: SubjectsWidget.routePath,
+            asyncParams: {
+              'examdoc': getDoc(['exams'], ExamsRecord.fromSnapshot),
+            },
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: SubjectsWidget(
+                    exam: params.getParam(
+                      'exam',
+                      ParamType.String,
+                    ),
+                    grade: params.getParam(
+                      'grade',
+                      ParamType.String,
+                    ),
+                    examSequence: params.getParam(
+                      'examSequence',
+                      ParamType.int,
+                    ),
+                    examdoc: params.getParam(
+                      'examdoc',
+                      ParamType.Document,
+                    ),
+                  ),
+                )),
         FFRoute(
           name: ShortsVideoPageWidget.routeName,
           path: ShortsVideoPageWidget.routePath,
@@ -325,39 +339,41 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: TopicsWidget.routeName,
-          path: TopicsWidget.routePath,
-          builder: (context, params) => TopicsWidget(
-            examSequence: params.getParam(
-              'examSequence',
-              ParamType.int,
-            ),
-            subjectSequence: params.getParam(
-              'subjectSequence',
-              ParamType.int,
-            ),
-            exam: params.getParam(
-              'exam',
-              ParamType.String,
-            ),
-            grade: params.getParam(
-              'grade',
-              ParamType.String,
-            ),
-            subject: params.getParam(
-              'subject',
-              ParamType.String,
-            ),
-            chapter: params.getParam(
-              'chapter',
-              ParamType.String,
-            ),
-            chapterSequence: params.getParam(
-              'chapterSequence',
-              ParamType.int,
-            ),
-          ),
-        ),
+            name: TopicsWidget.routeName,
+            path: TopicsWidget.routePath,
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: TopicsWidget(
+                    examSequence: params.getParam(
+                      'examSequence',
+                      ParamType.int,
+                    ),
+                    subjectSequence: params.getParam(
+                      'subjectSequence',
+                      ParamType.int,
+                    ),
+                    exam: params.getParam(
+                      'exam',
+                      ParamType.String,
+                    ),
+                    grade: params.getParam(
+                      'grade',
+                      ParamType.String,
+                    ),
+                    subject: params.getParam(
+                      'subject',
+                      ParamType.String,
+                    ),
+                    chapter: params.getParam(
+                      'chapter',
+                      ParamType.String,
+                    ),
+                    chapterSequence: params.getParam(
+                      'chapterSequence',
+                      ParamType.int,
+                    ),
+                  ),
+                )),
         FFRoute(
           name: TermsofServiceWidget.routeName,
           path: TermsofServiceWidget.routePath,
@@ -379,48 +395,58 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => DeleteAccountWebWidget(),
         ),
         FFRoute(
-          name: SubscriptionPageWidget.routeName,
-          path: SubscriptionPageWidget.routePath,
-          builder: (context, params) => SubscriptionPageWidget(),
-        ),
+            name: SubscriptionPageWidget.routeName,
+            path: SubscriptionPageWidget.routePath,
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: SubscriptionPageWidget(),
+                )),
         FFRoute(
           name: VerifyCodeWidget.routeName,
           path: VerifyCodeWidget.routePath,
           builder: (context, params) => VerifyCodeWidget(),
         ),
         FFRoute(
-          name: HomepageV2Widget.routeName,
-          path: HomepageV2Widget.routePath,
-          builder: (context, params) => HomepageV2Widget(),
-        ),
+            name: HomepageV2Widget.routeName,
+            path: HomepageV2Widget.routePath,
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: HomepageV2Widget(),
+                )),
         FFRoute(
-          name: HomepageV3Widget.routeName,
-          path: HomepageV3Widget.routePath,
-          builder: (context, params) => HomepageV3Widget(),
-        ),
+            name: HomepageV3Widget.routeName,
+            path: HomepageV3Widget.routePath,
+            builder: (context, params) => params.isEmpty
+                ? NavBarPage(initialPage: 'HomepageV3')
+                : NavBarPage(
+                    initialPage: 'HomepageV3',
+                    page: HomepageV3Widget(),
+                  )),
         FFRoute(
-          name: VideosListWidget.routeName,
-          path: VideosListWidget.routePath,
-          asyncParams: {
-            'videosDocs':
-                getDocList(['WebsiteVideos'], WebsiteVideosRecord.fromSnapshot),
-          },
-          builder: (context, params) => VideosListWidget(
-            videosDocs: params.getParam<WebsiteVideosRecord>(
-              'videosDocs',
-              ParamType.Document,
-              isList: true,
-            ),
-            subCategory: params.getParam(
-              'subCategory',
-              ParamType.String,
-            ),
-            websiteCategory: params.getParam(
-              'websiteCategory',
-              ParamType.String,
-            ),
-          ),
-        ),
+            name: VideosListWidget.routeName,
+            path: VideosListWidget.routePath,
+            asyncParams: {
+              'videosDocs': getDocList(
+                  ['WebsiteVideos'], WebsiteVideosRecord.fromSnapshot),
+            },
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: VideosListWidget(
+                    videosDocs: params.getParam<WebsiteVideosRecord>(
+                      'videosDocs',
+                      ParamType.Document,
+                      isList: true,
+                    ),
+                    subCategory: params.getParam(
+                      'subCategory',
+                      ParamType.String,
+                    ),
+                    websiteCategory: params.getParam(
+                      'websiteCategory',
+                      ParamType.String,
+                    ),
+                  ),
+                )),
         FFRoute(
           name: VideoPageV2Widget.routeName,
           path: VideoPageV2Widget.routePath,
@@ -433,18 +459,28 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'videoDoc',
               ParamType.Document,
             ),
+            subCategory: params.getParam(
+              'subCategory',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
-          name: RecommendedWidget.routeName,
-          path: RecommendedWidget.routePath,
-          builder: (context, params) => RecommendedWidget(),
-        ),
+            name: RecommendedWidget.routeName,
+            path: RecommendedWidget.routePath,
+            builder: (context, params) => params.isEmpty
+                ? NavBarPage(initialPage: 'Recommended')
+                : NavBarPage(
+                    initialPage: 'Recommended',
+                    page: RecommendedWidget(),
+                  )),
         FFRoute(
-          name: MyListWidget.routeName,
-          path: MyListWidget.routePath,
-          builder: (context, params) => MyListWidget(),
-        )
+            name: MyListWidget.routeName,
+            path: MyListWidget.routePath,
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: MyListWidget(),
+                ))
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],
     );

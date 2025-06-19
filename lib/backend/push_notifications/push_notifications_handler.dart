@@ -217,6 +217,7 @@ final parametersBuilderMap =
         allParams: {
           'videoDoc': await getDocumentParameter<WebsiteVideosRecord>(
               data, 'videoDoc', WebsiteVideosRecord.fromSnapshot),
+          'subCategory': getParameter<String>(data, 'subCategory'),
         },
       ),
   'Recommended': ParameterData.none(),

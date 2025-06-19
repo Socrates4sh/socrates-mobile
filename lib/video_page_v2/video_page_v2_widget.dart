@@ -12,9 +12,11 @@ class VideoPageV2Widget extends StatefulWidget {
   const VideoPageV2Widget({
     super.key,
     required this.videoDoc,
+    this.subCategory,
   });
 
   final WebsiteVideosRecord? videoDoc;
+  final String? subCategory;
 
   static String routeName = 'VideoPage_V2';
   static String routePath = '/videoPageV2';
@@ -38,7 +40,7 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
       await queryWebsiteVideosRecordOnce(
         queryBuilder: (websiteVideosRecord) => websiteVideosRecord.where(
           'sub_category',
-          isEqualTo: '',
+          isEqualTo: widget.subCategory,
         ),
       );
     });
@@ -73,47 +75,22 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
                 child: Builder(
                   builder: (context) {
                     if (_model.initCompleted) {
-                      return Container(
-                        height: MediaQuery.sizeOf(context).height * 1.0,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 30.0, 0.0, 0.0),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Flexible(
-                                  child: Align(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
-                                    child: ClipRRect(
-                                      child: Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                1.0,
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                0.9,
-                                        decoration: BoxDecoration(),
-                                        child: FlutterFlowVideoPlayer(
-                                          path:
-                                              'assets/videos/words_for_slide_11.mp4',
-                                          videoType: VideoType.asset,
-                                          aspectRatio: 0.56,
-                                          autoPlay: true,
-                                          looping: true,
-                                          showControls: true,
-                                          allowFullScreen: true,
-                                          allowPlaybackSpeedMenu: false,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                      return Align(
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: ClipRRect(
+                          child: Container(
+                            width: MediaQuery.sizeOf(context).width * 1.0,
+                            height: MediaQuery.sizeOf(context).height * 0.9,
+                            decoration: BoxDecoration(),
+                            child: FlutterFlowVideoPlayer(
+                              path: 'assets/videos/words_for_slide_11.mp4',
+                              videoType: VideoType.asset,
+                              aspectRatio: 0.56,
+                              autoPlay: true,
+                              looping: true,
+                              showControls: true,
+                              allowFullScreen: true,
+                              allowPlaybackSpeedMenu: false,
                             ),
                           ),
                         ),

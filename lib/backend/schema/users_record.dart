@@ -107,6 +107,11 @@ class UsersRecord extends FirestoreRecord {
   String get photoUrl => _photoUrl ?? '';
   bool hasPhotoUrl() => _photoUrl != null;
 
+  // "videos_mylist" field.
+  List<VideoDocsMylistStruct>? _videosMylist;
+  List<VideoDocsMylistStruct> get videosMylist => _videosMylist ?? const [];
+  bool hasVideosMylist() => _videosMylist != null;
+
   void _initializeFields() {
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
@@ -136,6 +141,10 @@ class UsersRecord extends FirestoreRecord {
     _subscribedEmail = snapshotData['subscribedEmail'] as String?;
     _wACommunity = snapshotData['WACommunity'] as bool?;
     _photoUrl = snapshotData['photo_url'] as String?;
+    _videosMylist = getStructList(
+      snapshotData['videos_mylist'],
+      VideoDocsMylistStruct.fromMap,
+    );
   }
 
   static CollectionReference get collection =>
@@ -235,7 +244,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
             e1?.subscriptionPaymentList, e2?.subscriptionPaymentList) &&
         e1?.subscribedEmail == e2?.subscribedEmail &&
         e1?.wACommunity == e2?.wACommunity &&
-        e1?.photoUrl == e2?.photoUrl;
+        e1?.photoUrl == e2?.photoUrl &&
+        listEquality.equals(e1?.videosMylist, e2?.videosMylist);
   }
 
   @override
@@ -257,7 +267,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.subscriptionPaymentList,
         e?.subscribedEmail,
         e?.wACommunity,
-        e?.photoUrl
+        e?.photoUrl,
+        e?.videosMylist
       ]);
 
   @override

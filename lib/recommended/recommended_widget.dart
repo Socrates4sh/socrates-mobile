@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -76,241 +77,317 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                   child: Builder(
                     builder: (context) {
                       if (_model.initCompleted ?? false) {
-                        return Container(
-                          height: MediaQuery.sizeOf(context).height * 0.9,
-                          decoration: BoxDecoration(),
+                        return Align(
+                          alignment: AlignmentDirectional(0.0, -1.0),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                30.0, 0.0, 30.0, 0.0),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Flexible(
-                                        child: Text(
-                                          'Top recommended Videos',
-                                          textAlign: TextAlign.center,
-                                          style: FlutterFlowTheme.of(context)
-                                              .headlineMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .headlineMediumFamily,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                fontSize: 25.0,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts:
-                                                    !FlutterFlowTheme.of(
-                                                            context)
-                                                        .headlineMediumIsCustom,
-                                              ),
+                                30.0, 50.0, 30.0, 30.0),
+                            child: Container(
+                              height: MediaQuery.sizeOf(context).height * 0.85,
+                              decoration: BoxDecoration(),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Flexible(
+                                          child: Text(
+                                            'Top Recommended Videos',
+                                            textAlign: TextAlign.center,
+                                            style: FlutterFlowTheme.of(context)
+                                                .headlineMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .headlineMediumFamily,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
+                                                  fontSize: 25.0,
+                                                  letterSpacing: 0.0,
+                                                  useGoogleFonts:
+                                                      !FlutterFlowTheme.of(
+                                                              context)
+                                                          .headlineMediumIsCustom,
+                                                ),
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0.0, -1.0),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 100.0),
-                                      child: Container(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                1.0,
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                0.8,
-                                        decoration: BoxDecoration(),
-                                        child: Builder(
-                                          builder: (context) {
-                                            final recVideosList = _model
-                                                    .websiteVideosDoc
-                                                    ?.toList() ??
-                                                [];
+                                      ],
+                                    ),
+                                    Align(
+                                      alignment:
+                                          AlignmentDirectional(0.0, -1.0),
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 100.0),
+                                        child: Container(
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  1.0,
+                                          height: MediaQuery.sizeOf(context)
+                                                  .height *
+                                              0.8,
+                                          decoration: BoxDecoration(),
+                                          child: Builder(
+                                            builder: (context) {
+                                              final recVideosList = _model
+                                                      .websiteVideosDoc
+                                                      ?.toList() ??
+                                                  [];
 
-                                            return GridView.builder(
-                                              padding: EdgeInsets.zero,
-                                              gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                crossAxisSpacing: 10.0,
-                                                mainAxisSpacing: 10.0,
-                                                childAspectRatio: 1.0,
-                                              ),
-                                              scrollDirection: Axis.vertical,
-                                              itemCount: recVideosList.length,
-                                              itemBuilder: (context,
-                                                  recVideosListIndex) {
-                                                final recVideosListItem =
-                                                    recVideosList[
-                                                        recVideosListIndex];
-                                                return ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  child: Container(
-                                                    width: 150.0,
-                                                    height: 200.0,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
+                                              return GridView.builder(
+                                                padding: EdgeInsets.zero,
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                  crossAxisCount: 2,
+                                                  crossAxisSpacing: 20.0,
+                                                  mainAxisSpacing: 20.0,
+                                                  childAspectRatio: 0.7,
+                                                ),
+                                                scrollDirection: Axis.vertical,
+                                                itemCount: recVideosList.length,
+                                                itemBuilder: (context,
+                                                    recVideosListIndex) {
+                                                  final recVideosListItem =
+                                                      recVideosList[
+                                                          recVideosListIndex];
+                                                  return InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      context.pushNamed(
+                                                        VideoPageV2Widget
+                                                            .routeName,
+                                                        queryParameters: {
+                                                          'videoDoc':
+                                                              serializeParam(
+                                                            recVideosListItem,
+                                                            ParamType.Document,
+                                                          ),
+                                                          'subCategory':
+                                                              serializeParam(
+                                                            recVideosListItem
+                                                                .subCategory,
+                                                            ParamType.String,
+                                                          ),
+                                                        }.withoutNulls,
+                                                        extra: <String,
+                                                            dynamic>{
+                                                          'videoDoc':
+                                                              recVideosListItem,
+                                                        },
+                                                      );
+                                                    },
+                                                    child: ClipRRect(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               10.0),
-                                                    ),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Flexible(
-                                                          child: ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8.0),
-                                                            child:
-                                                                Image.network(
-                                                              recVideosListItem
-                                                                  .videoThumbnailImageUrl,
-                                                              width: MediaQuery
-                                                                          .sizeOf(
-                                                                              context)
-                                                                      .width *
-                                                                  1.0,
-                                                              height: MediaQuery
-                                                                          .sizeOf(
-                                                                              context)
-                                                                      .height *
-                                                                  0.6,
-                                                              fit: BoxFit.cover,
-                                                              errorBuilder: (context,
-                                                                      error,
-                                                                      stackTrace) =>
-                                                                  Image.asset(
-                                                                'assets/images/error_image.png',
-                                                                width: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .width *
-                                                                    1.0,
-                                                                height: MediaQuery.sizeOf(
-                                                                            context)
-                                                                        .height *
-                                                                    0.6,
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              ),
-                                                            ),
-                                                          ),
+                                                      child: Container(
+                                                        width: 150.0,
+                                                        height: 200.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.0),
                                                         ),
-                                                        Align(
+                                                        child: Stack(
                                                           alignment:
                                                               AlignmentDirectional(
-                                                                  0.0, 0.0),
-                                                          child: Container(
-                                                            width: MediaQuery
-                                                                        .sizeOf(
-                                                                            context)
-                                                                    .width *
-                                                                1.0,
-                                                            height: 50.0,
-                                                            decoration:
-                                                                BoxDecoration(),
-                                                            child: Align(
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      0.0, 0.0),
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .all(
-                                                                            5.0),
-                                                                child: Text(
-                                                                  recVideosListItem
-                                                                      .topic,
-                                                                  textAlign:
-                                                                      TextAlign
-                                                                          .center,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .secondaryBackground,
-                                                                        fontSize:
-                                                                            16.0,
-                                                                        letterSpacing:
+                                                                  1.0, -1.0),
+                                                          children: [
+                                                            Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                  child: Image
+                                                                      .network(
+                                                                    recVideosListItem
+                                                                        .videoThumbnailImageUrl,
+                                                                    width: MediaQuery.sizeOf(context)
+                                                                            .width *
+                                                                        1.0,
+                                                                    height:
+                                                                        150.0,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                    errorBuilder: (context,
+                                                                            error,
+                                                                            stackTrace) =>
+                                                                        Image
+                                                                            .asset(
+                                                                      'assets/images/error_image.png',
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          1.0,
+                                                                      height:
+                                                                          150.0,
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                Flexible(
+                                                                  child: Align(
+                                                                    alignment:
+                                                                        AlignmentDirectional(
                                                                             0.0,
-                                                                        useGoogleFonts:
-                                                                            !FlutterFlowTheme.of(context).bodyMediumIsCustom,
+                                                                            1.0),
+                                                                    child:
+                                                                        Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          1.0,
+                                                                      height:
+                                                                          MediaQuery.sizeOf(context).height *
+                                                                              0.1,
+                                                                      decoration:
+                                                                          BoxDecoration(),
+                                                                      child:
+                                                                          Align(
+                                                                        alignment: AlignmentDirectional(
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Padding(
+                                                                          padding:
+                                                                              EdgeInsets.all(5.0),
+                                                                          child:
+                                                                              Text(
+                                                                            recVideosListItem.topic,
+                                                                            textAlign:
+                                                                                TextAlign.center,
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                  color: FlutterFlowTheme.of(context).primary,
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  useGoogleFonts: !FlutterFlowTheme.of(context).bodyMediumIsCustom,
+                                                                                ),
+                                                                          ),
+                                                                        ),
                                                                       ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          5.0,
+                                                                          5.0,
+                                                                          0.0),
+                                                              child: InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                onTap:
+                                                                    () async {
+                                                                  await currentUserReference!
+                                                                      .update({
+                                                                    ...mapToFirestore(
+                                                                      {
+                                                                        'videos_mylist':
+                                                                            FieldValue.arrayUnion([
+                                                                          getVideoDocsMylistFirestoreData(
+                                                                            updateVideoDocsMylistStruct(
+                                                                              VideoDocsMylistStruct(
+                                                                                listSeq: (currentUserDocument?.videosMylist.toList() ?? []).length + 1,
+                                                                                videoDocId: recVideosListItem.reference,
+                                                                                topic: recVideosListItem.topic,
+                                                                                subCategory: recVideosListItem.subCategory,
+                                                                                websiteCategory: recVideosListItem.websiteCategory,
+                                                                                videoThumbnailImageUrl: recVideosListItem.videoThumbnailImageUrl,
+                                                                                videoUrl: recVideosListItem.videoFileUrl,
+                                                                              ),
+                                                                              clearUnsetFields: false,
+                                                                            ),
+                                                                            true,
+                                                                          )
+                                                                        ]),
+                                                                      },
+                                                                    ),
+                                                                  });
+                                                                },
+                                                                child: Icon(
+                                                                  Icons
+                                                                      .add_rounded,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  size: 24.0,
                                                                 ),
                                                               ),
                                                             ),
-                                                          ),
+                                                          ],
                                                         ),
-                                                      ],
+                                                      ),
                                                     ),
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          },
+                                                  );
+                                                },
+                                              );
+                                            },
+                                          ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ].divide(SizedBox(height: 20.0)),
+                                  ].divide(SizedBox(height: 20.0)),
+                                ),
                               ),
                             ),
                           ),
                         );
                       } else {
-                        return Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Lottie.asset(
-                              'assets/jsons/White_Circular_Lottie.json',
-                              width: 200.0,
-                              height: 150.0,
-                              fit: BoxFit.contain,
-                              animate: true,
-                            ),
-                            Flexible(
-                              child: Text(
-                                'Getting things ready!',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryBackground,
-                                      fontSize: 16.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts:
-                                          !FlutterFlowTheme.of(context)
-                                              .bodyMediumIsCustom,
-                                    ),
+                        return Container(
+                          height: MediaQuery.sizeOf(context).height * 0.85,
+                          decoration: BoxDecoration(),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Lottie.asset(
+                                'assets/jsons/White_Circular_Lottie.json',
+                                width: 200.0,
+                                height: 150.0,
+                                fit: BoxFit.contain,
+                                animate: true,
                               ),
-                            ),
-                            Flexible(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 0.0),
+                              Flexible(
                                 child: Text(
-                                  'We’re preparing powerful lessons to shape your future.',
+                                  'Getting things ready!',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -318,154 +395,43 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                             .bodyMediumFamily,
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
-                                        fontSize: 12.0,
+                                        fontSize: 16.0,
                                         letterSpacing: 0.0,
+                                        fontWeight: FontWeight.bold,
                                         useGoogleFonts:
                                             !FlutterFlowTheme.of(context)
                                                 .bodyMediumIsCustom,
                                       ),
                                 ),
                               ),
-                            ),
-                          ],
+                              Flexible(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 5.0, 0.0, 100.0),
+                                  child: Text(
+                                    'We’re preparing powerful lessons to shape your future.',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
+                                          useGoogleFonts:
+                                              !FlutterFlowTheme.of(context)
+                                                  .bodyMediumIsCustom,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         );
                       }
                     },
-                  ),
-                ),
-                Align(
-                  alignment: AlignmentDirectional(0.0, 1.0),
-                  child: Container(
-                    width: MediaQuery.sizeOf(context).width * 1.0,
-                    height: 55.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
-                    ),
-                    alignment: AlignmentDirectional(0.0, 0.0),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 2.0, 0.0, 0.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.pushNamed(HomepageV3Widget.routeName);
-                              },
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Icon(
-                                    Icons.home,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 24.0,
-                                  ),
-                                  Text(
-                                    'Home',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts:
-                                              !FlutterFlowTheme.of(context)
-                                                  .bodyMediumIsCustom,
-                                        ),
-                                  ),
-                                ].divide(SizedBox(height: 2.0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 2.0, 0.0, 0.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.pushNamed(RecommendedWidget.routeName);
-                              },
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Icon(
-                                    Icons.recommend_outlined,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 24.0,
-                                  ),
-                                  Text(
-                                    'Recommended',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts:
-                                              !FlutterFlowTheme.of(context)
-                                                  .bodyMediumIsCustom,
-                                        ),
-                                  ),
-                                ].divide(SizedBox(height: 2.0)),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 2.0, 0.0, 0.0),
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                context.pushNamed(ProfileWidget.routeName);
-                              },
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Icon(
-                                    Icons.person,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
-                                    size: 24.0,
-                                  ),
-                                  Text(
-                                    'My Account',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts:
-                                              !FlutterFlowTheme.of(context)
-                                                  .bodyMediumIsCustom,
-                                        ),
-                                  ),
-                                ].divide(SizedBox(height: 2.0)),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                   ),
                 ),
               ],

@@ -1,18 +1,20 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'search_widget.dart' show SearchWidget;
 import 'package:flutter/material.dart';
 
 class SearchModel extends FlutterFlowModel<SearchWidget> {
+  ///  Local state fields for this page.
+
+  bool isSearch = false;
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for SearchBar widget.
   FocusNode? searchBarFocusNode;
   TextEditingController? searchBarTextController;
   String? Function(BuildContext, String?)? searchBarTextControllerValidator;
-  // State field(s) for Carousel widget.
-  CarouselSliderController? carouselController;
-  int carouselCurrentIndex = 1;
+  List<WebsiteVideosRecord> simpleSearchResults = [];
 
   @override
   void initState(BuildContext context) {}

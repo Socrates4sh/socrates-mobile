@@ -13,6 +13,8 @@ import 'schema/uploaded_videos_record.dart';
 import 'schema/website_structure_record.dart';
 import 'schema/sub_categories_record.dart';
 import 'schema/website_videos_record.dart';
+import 'schema/constant_data_record.dart';
+import 'schema/homepage_language_sequence_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -29,6 +31,8 @@ export 'schema/uploaded_videos_record.dart';
 export 'schema/website_structure_record.dart';
 export 'schema/sub_categories_record.dart';
 export 'schema/website_videos_record.dart';
+export 'schema/constant_data_record.dart';
+export 'schema/homepage_language_sequence_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -331,6 +335,85 @@ Future<List<WebsiteVideosRecord>> queryWebsiteVideosRecordOnce({
       limit: limit,
       singleRecord: singleRecord,
     );
+
+/// Functions to query ConstantDataRecords (as a Stream and as a Future).
+Future<int> queryConstantDataRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ConstantDataRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ConstantDataRecord>> queryConstantDataRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ConstantDataRecord.collection,
+      ConstantDataRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ConstantDataRecord>> queryConstantDataRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ConstantDataRecord.collection,
+      ConstantDataRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query HomepageLanguageSequenceRecords (as a Stream and as a Future).
+Future<int> queryHomepageLanguageSequenceRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      HomepageLanguageSequenceRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<HomepageLanguageSequenceRecord>>
+    queryHomepageLanguageSequenceRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+        queryCollection(
+          HomepageLanguageSequenceRecord.collection(parent),
+          HomepageLanguageSequenceRecord.fromSnapshot,
+          queryBuilder: queryBuilder,
+          limit: limit,
+          singleRecord: singleRecord,
+        );
+
+Future<List<HomepageLanguageSequenceRecord>>
+    queryHomepageLanguageSequenceRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+        queryCollectionOnce(
+          HomepageLanguageSequenceRecord.collection(parent),
+          HomepageLanguageSequenceRecord.fromSnapshot,
+          queryBuilder: queryBuilder,
+          limit: limit,
+          singleRecord: singleRecord,
+        );
 
 Future<int> queryCollectionCount(
   Query collection, {
