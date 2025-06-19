@@ -53,6 +53,7 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
             )
             .orderBy('video_sequence'),
       );
+      _model.initialTabIndex = widget.initialIndex!;
       _model.initCompleted = true;
       safeSetState(() {});
     });
