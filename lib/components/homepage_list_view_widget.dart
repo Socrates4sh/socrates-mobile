@@ -211,6 +211,10 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                   videosItem.videoSequence,
                                   ParamType.double,
                                 ),
+                                'initialIndex': serializeParam(
+                                  videosIndex,
+                                  ParamType.int,
+                                ),
                               }.withoutNulls,
                               extra: <String, dynamic>{
                                 'videoDoc': videosItem,

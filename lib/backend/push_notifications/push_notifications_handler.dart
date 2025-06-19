@@ -219,6 +219,7 @@ final parametersBuilderMap =
               data, 'videoDoc', WebsiteVideosRecord.fromSnapshot),
           'subCategory': getParameter<String>(data, 'subCategory'),
           'videoSequence': getParameter<double>(data, 'videoSequence'),
+          'initialIndex': getParameter<int>(data, 'initialIndex'),
         },
       ),
   'Recommended': ParameterData.none(),

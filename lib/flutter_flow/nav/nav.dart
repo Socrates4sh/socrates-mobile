@@ -467,6 +467,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'videoSequence',
               ParamType.double,
             ),
+            initialIndex: params.getParam(
+              'initialIndex',
+              ParamType.int,
+            ),
           ),
         ),
         FFRoute(

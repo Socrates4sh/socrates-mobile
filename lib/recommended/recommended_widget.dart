@@ -187,6 +187,11 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                                 .videoSequence,
                                                             ParamType.double,
                                                           ),
+                                                          'initialIndex':
+                                                              serializeParam(
+                                                            recVideosListIndex,
+                                                            ParamType.int,
+                                                          ),
                                                         }.withoutNulls,
                                                         extra: <String,
                                                             dynamic>{

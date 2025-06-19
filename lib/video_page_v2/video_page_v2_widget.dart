@@ -14,11 +14,13 @@ class VideoPageV2Widget extends StatefulWidget {
     required this.videoDoc,
     this.subCategory,
     required this.videoSequence,
+    required this.initialIndex,
   });
 
   final WebsiteVideosRecord? videoDoc;
   final String? subCategory;
   final double? videoSequence;
+  final int? initialIndex;
 
   static String routeName = 'VideoPage_V2';
   static String routePath = '/videoPageV2';
@@ -40,10 +42,16 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.websiteVideoDoc = await queryWebsiteVideosRecordOnce(
-        queryBuilder: (websiteVideosRecord) => websiteVideosRecord.where(
-          'sub_category',
-          isEqualTo: widget.subCategory,
-        ),
+        queryBuilder: (websiteVideosRecord) => websiteVideosRecord
+            .where(
+              'sub_category',
+              isEqualTo: widget.subCategory,
+            )
+            .where(
+              'is_display',
+              isEqualTo: true,
+            )
+            .orderBy('video_sequence'),
       );
       _model.initCompleted = true;
       safeSetState(() {});
