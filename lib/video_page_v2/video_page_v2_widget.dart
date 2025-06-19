@@ -1,3 +1,4 @@
+import '../flutter_flow/custom_video_player.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -125,6 +126,14 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
                                   showControls: true,
                                   allowFullScreen: true,
                                   allowPlaybackSpeedMenu: false,
+                                    onVideoComplete: () {
+                                    print("Call------");
+                                      if (_model.pageViewCurrentIndex <  video.length  - 1) {
+                                        _model.pageViewController?.nextPage(
+                                            duration: Duration(milliseconds: 500),
+                                            curve: Curves.bounceInOut);
+                                      }
+                                    }
                                 );
                               },
                             ),

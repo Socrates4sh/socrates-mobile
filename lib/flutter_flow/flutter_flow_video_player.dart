@@ -32,6 +32,7 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
     this.allowPlaybackSpeedMenu = false,
     this.lazyLoad = false,
     this.pauseOnNavigate = true,
+    this.onVideoComplete,
   });
 
   final String path;
@@ -46,6 +47,7 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
   final bool allowPlaybackSpeedMenu;
   final bool lazyLoad;
   final bool pauseOnNavigate;
+  final VoidCallback? onVideoComplete;
 
   @override
   State<StatefulWidget> createState() => _FlutterFlowVideoPlayerState();
@@ -166,6 +168,13 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer>
           }
         });
       }
+      if (_videoPlayerController!.value.position >=
+          _videoPlayerController!.value.duration) {
+        // Optionally: notify parent widget via a callback if needed.
+        if (widget.onVideoComplete != null) {
+          widget.onVideoComplete!();
+        }
+      }
     });
 
     _chewieController!.addListener(() {
@@ -207,11 +216,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer>
                         SizedBox(
                           width: 50.0,
                           height: 50.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primary,
-                            ),
-                          ),
+                          child: Image.asset("assets/images/socrates_blue.png"),
                         ),
                         const SizedBox(height: 20),
                         const Text('Loading'),
