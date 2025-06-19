@@ -502,34 +502,24 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                       (allDataIndex) {
                                                 final allDataItem =
                                                     allData[allDataIndex];
-                                                return Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.0, -1.0),
-                                                  child: Container(
-                                                    decoration: BoxDecoration(),
-                                                    child:
-                                                        HomepageListViewWidget(
-                                                      key: Key(
-                                                          'Key4e7_${allDataIndex}_of_${allData.length}'),
-                                                      websiteStructureDoc:
+                                                return HomepageListViewWidget(
+                                                  key: Key(
+                                                      'Key4e7_${allDataIndex}_of_${allData.length}'),
+                                                  websiteStructureDoc: allDataItem
+                                                      .referenceWebStructure!,
+                                                  websiteVideosDoc: _model
+                                                      .websiteVideosDoc!
+                                                      .where((e) =>
+                                                          e.subCategory ==
                                                           allDataItem
-                                                              .referenceWebStructure!,
-                                                      websiteVideosDoc: _model
-                                                          .websiteVideosDoc!
-                                                          .where((e) =>
-                                                              e.subCategory ==
-                                                              allDataItem
-                                                                  .subCategory)
-                                                          .toList()
-                                                          .sortedList(
-                                                              keyOf: (e) => e
-                                                                  .videoSequence,
-                                                              desc: false),
-                                                      subCategory: allDataItem
-                                                          .subCategory,
-                                                    ),
-                                                  ),
+                                                              .subCategory)
+                                                      .toList()
+                                                      .sortedList(
+                                                          keyOf: (e) =>
+                                                              e.videoSequence,
+                                                          desc: false),
+                                                  subCategory:
+                                                      allDataItem.subCategory,
                                                 );
                                               }),
                                             );
