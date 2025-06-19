@@ -521,7 +521,7 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                   subCategory:
                                                       allDataItem.subCategory,
                                                 );
-                                              }),
+                                              }).divide(SizedBox(height: 10.0)),
                                             );
                                           },
                                         ),

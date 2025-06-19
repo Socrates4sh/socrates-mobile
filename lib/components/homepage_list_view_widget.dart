@@ -97,79 +97,84 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                       .toList()
                       .length >
                   0)
-                InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    _model.videosList = await queryWebsiteVideosRecordOnce(
-                      queryBuilder: (websiteVideosRecord) => websiteVideosRecord
-                          .where(
-                            'sub_category',
-                            isEqualTo: containerSubCategoriesRecord?.exam,
-                          )
-                          .where(
-                            'is_display',
-                            isEqualTo: true,
-                          )
-                          .orderBy('video_sequence'),
-                    );
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      _model.videosList = await queryWebsiteVideosRecordOnce(
+                        queryBuilder: (websiteVideosRecord) =>
+                            websiteVideosRecord
+                                .where(
+                                  'sub_category',
+                                  isEqualTo: containerSubCategoriesRecord?.exam,
+                                )
+                                .where(
+                                  'is_display',
+                                  isEqualTo: true,
+                                )
+                                .orderBy('video_sequence'),
+                      );
 
-                    context.pushNamed(
-                      VideosListWidget.routeName,
-                      queryParameters: {
-                        'videosDocs': serializeParam(
-                          _model.videosList,
-                          ParamType.Document,
-                          isList: true,
-                        ),
-                        'subCategory': serializeParam(
-                          containerSubCategoriesRecord?.exam,
-                          ParamType.String,
-                        ),
-                        'websiteCategory': serializeParam(
-                          _model.videosList?.firstOrNull?.websiteCategory,
-                          ParamType.String,
-                        ),
-                      }.withoutNulls,
-                      extra: <String, dynamic>{
-                        'videosDocs': _model.videosList,
-                      },
-                    );
-
-                    safeSetState(() {});
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          valueOrDefault<String>(
-                            containerSubCategoriesRecord?.exam,
-                            'Sub-Category',
+                      context.pushNamed(
+                        VideosListWidget.routeName,
+                        queryParameters: {
+                          'videosDocs': serializeParam(
+                            _model.videosList,
+                            ParamType.Document,
+                            isList: true,
                           ),
-                          style: FlutterFlowTheme.of(context)
-                              .headlineMedium
-                              .override(
-                                fontFamily: FlutterFlowTheme.of(context)
-                                    .headlineMediumFamily,
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                fontSize: 20.0,
-                                letterSpacing: 0.0,
-                                useGoogleFonts: !FlutterFlowTheme.of(context)
-                                    .headlineMediumIsCustom,
-                              ),
+                          'subCategory': serializeParam(
+                            containerSubCategoriesRecord?.exam,
+                            ParamType.String,
+                          ),
+                          'websiteCategory': serializeParam(
+                            _model.videosList?.firstOrNull?.websiteCategory,
+                            ParamType.String,
+                          ),
+                        }.withoutNulls,
+                        extra: <String, dynamic>{
+                          'videosDocs': _model.videosList,
+                        },
+                      );
+
+                      safeSetState(() {});
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            valueOrDefault<String>(
+                              containerSubCategoriesRecord?.exam,
+                              'Sub-Category',
+                            ),
+                            style: FlutterFlowTheme.of(context)
+                                .headlineMedium
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .headlineMediumFamily,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  fontSize: 20.0,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: !FlutterFlowTheme.of(context)
+                                      .headlineMediumIsCustom,
+                                ),
+                          ),
                         ),
-                      ),
-                      Icon(
-                        Icons.chevron_right_rounded,
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        size: 30.0,
-                      ),
-                    ],
+                        Icon(
+                          Icons.chevron_right_rounded,
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          size: 30.0,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               Builder(
@@ -252,9 +257,7 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                           width:
                                               MediaQuery.sizeOf(context).width *
                                                   1.0,
-                                          height: MediaQuery.sizeOf(context)
-                                                  .height *
-                                              0.3,
+                                          height: 50.0,
                                           decoration: BoxDecoration(),
                                           child: Align(
                                             alignment:
