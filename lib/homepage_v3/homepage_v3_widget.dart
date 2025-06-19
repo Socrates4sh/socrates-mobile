@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/index.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:lottie/lottie.dart';
@@ -524,125 +523,6 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                               }).divide(SizedBox(height: 10.0)),
                                             );
                                           },
-                                        ),
-                                        if (responsiveVisibility(
-                                          context: context,
-                                          phone: false,
-                                          tablet: false,
-                                          tabletLandscape: false,
-                                          desktop: false,
-                                        ))
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, -1.0),
-                                            child: Container(
-                                              decoration: BoxDecoration(),
-                                              child: wrapWithModel(
-                                                model: _model
-                                                    .homepageListViewModel2,
-                                                updateCallback: () =>
-                                                    safeSetState(() {}),
-                                                child: HomepageListViewWidget(
-                                                  subCategory:
-                                                      'Mastering Resilience (Hindi)',
-                                                  websiteStructureDoc: _model
-                                                      .websiteStructureDocs!
-                                                      .where((e) =>
-                                                          e.categories ==
-                                                          'Resilience Training')
-                                                      .toList()
-                                                      .firstOrNull!
-                                                      .reference,
-                                                  websiteVideosDoc: _model
-                                                      .websiteVideosDoc!
-                                                      .where((e) =>
-                                                          e.subCategory ==
-                                                          'Mastering Resilience (Hindi)')
-                                                      .toList()
-                                                      .sortedList(
-                                                          keyOf: (e) =>
-                                                              e.videoSequence,
-                                                          desc: false),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        if (responsiveVisibility(
-                                          context: context,
-                                          phone: false,
-                                          tablet: false,
-                                          tabletLandscape: false,
-                                          desktop: false,
-                                        ))
-                                          Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, -1.0),
-                                            child: Container(
-                                              decoration: BoxDecoration(),
-                                              child: wrapWithModel(
-                                                model: _model
-                                                    .homepageListViewModel3,
-                                                updateCallback: () =>
-                                                    safeSetState(() {}),
-                                                child: HomepageListViewWidget(
-                                                  subCategory:
-                                                      'Securing admission (English)',
-                                                  websiteStructureDoc: _model
-                                                      .websiteStructureDocs!
-                                                      .where((e) =>
-                                                          e.categories ==
-                                                          'US Admissions')
-                                                      .toList()
-                                                      .firstOrNull!
-                                                      .reference,
-                                                  websiteVideosDoc: _model
-                                                      .websiteVideosDoc!
-                                                      .where((e) =>
-                                                          e.subCategory ==
-                                                          'Securing admission (English)')
-                                                      .toList()
-                                                      .sortedList(
-                                                          keyOf: (e) =>
-                                                              e.videoSequence,
-                                                          desc: false),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(0.0, -1.0),
-                                          child: Container(
-                                            decoration: BoxDecoration(),
-                                            child: wrapWithModel(
-                                              model:
-                                                  _model.homepageListViewModel4,
-                                              updateCallback: () =>
-                                                  safeSetState(() {}),
-                                              child: HomepageListViewWidget(
-                                                subCategory:
-                                                    'Mastering Resilience (English)',
-                                                websiteStructureDoc: _model
-                                                    .websiteStructureDocs!
-                                                    .where((e) =>
-                                                        e.categories ==
-                                                        'Resilience Training')
-                                                    .toList()
-                                                    .firstOrNull!
-                                                    .reference,
-                                                websiteVideosDoc: _model
-                                                    .websiteVideosDoc!
-                                                    .where((e) =>
-                                                        e.subCategory ==
-                                                        'Mastering Resilience (English)')
-                                                    .toList()
-                                                    .sortedList(
-                                                        keyOf: (e) =>
-                                                            e.videoSequence,
-                                                        desc: false),
-                                              ),
-                                            ),
-                                          ),
                                         ),
                                       ].divide(SizedBox(height: 20.0)),
                                     ),

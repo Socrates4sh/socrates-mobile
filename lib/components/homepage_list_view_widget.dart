@@ -199,10 +199,6 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                             context.pushNamed(
                               VideoPageV2Widget.routeName,
                               queryParameters: {
-                                'videoDoc': serializeParam(
-                                  videosItem,
-                                  ParamType.Document,
-                                ),
                                 'subCategory': serializeParam(
                                   videosItem.subCategory,
                                   ParamType.String,
@@ -216,9 +212,6 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                   ParamType.int,
                                 ),
                               }.withoutNulls,
-                              extra: <String, dynamic>{
-                                'videoDoc': videosItem,
-                              },
                             );
                           },
                           child: ClipRRect(

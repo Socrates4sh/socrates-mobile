@@ -2,6 +2,7 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:lottie/lottie.dart';
@@ -11,13 +12,11 @@ export 'video_page_v2_model.dart';
 class VideoPageV2Widget extends StatefulWidget {
   const VideoPageV2Widget({
     super.key,
-    required this.videoDoc,
     this.subCategory,
     required this.videoSequence,
-    required this.initialIndex,
+    this.initialIndex,
   });
 
-  final WebsiteVideosRecord? videoDoc;
   final String? subCategory;
   final double? videoSequence;
   final int? initialIndex;
@@ -53,7 +52,15 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
             )
             .orderBy('video_sequence'),
       );
-      _model.initialTabIndex = widget.initialIndex!;
+      if (widget.initialIndex == null) {
+        _model.initialTabIndex = functions.findIndexOfTable(
+            _model.websiteVideoDoc!.toList(), widget.videoSequence!);
+        safeSetState(() {});
+      } else {
+        _model.initialTabIndex = widget.initialIndex!;
+        safeSetState(() {});
+      }
+
       _model.initCompleted = true;
       safeSetState(() {});
     });

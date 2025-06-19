@@ -215,8 +215,6 @@ final parametersBuilderMap =
       ),
   'VideoPage_V2': (data) async => ParameterData(
         allParams: {
-          'videoDoc': await getDocumentParameter<WebsiteVideosRecord>(
-              data, 'videoDoc', WebsiteVideosRecord.fromSnapshot),
           'subCategory': getParameter<String>(data, 'subCategory'),
           'videoSequence': getParameter<double>(data, 'videoSequence'),
           'initialIndex': getParameter<int>(data, 'initialIndex'),

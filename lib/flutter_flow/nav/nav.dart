@@ -450,15 +450,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: VideoPageV2Widget.routeName,
           path: VideoPageV2Widget.routePath,
-          asyncParams: {
-            'videoDoc':
-                getDoc(['WebsiteVideos'], WebsiteVideosRecord.fromSnapshot),
-          },
           builder: (context, params) => VideoPageV2Widget(
-            videoDoc: params.getParam(
-              'videoDoc',
-              ParamType.Document,
-            ),
             subCategory: params.getParam(
               'subCategory',
               ParamType.String,

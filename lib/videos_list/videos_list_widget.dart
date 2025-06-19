@@ -1,6 +1,7 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:lottie/lottie.dart';
@@ -157,7 +158,29 @@ class _VideosListWidgetState extends State<VideosListWidget> {
                                             focusColor: Colors.transparent,
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
-                                            onTap: () async {},
+                                            onTap: () async {
+                                              context.pushNamed(
+                                                VideoPageV2Widget.routeName,
+                                                queryParameters: {
+                                                  'subCategory': serializeParam(
+                                                    subCategoryVideosItem
+                                                        .subCategory,
+                                                    ParamType.String,
+                                                  ),
+                                                  'videoSequence':
+                                                      serializeParam(
+                                                    subCategoryVideosItem
+                                                        .videoSequence,
+                                                    ParamType.double,
+                                                  ),
+                                                  'initialIndex':
+                                                      serializeParam(
+                                                    subCategoryVideosIndex,
+                                                    ParamType.int,
+                                                  ),
+                                                }.withoutNulls,
+                                              );
+                                            },
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               crossAxisAlignment:

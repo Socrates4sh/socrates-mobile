@@ -48,3 +48,11 @@ List<String> getDialCode() {
 
   return dialCodesWithCountry; // Still returns the display list to show both
 }
+
+int findIndexOfTable(
+  List<WebsiteVideosRecord> websiteVideo,
+  double videoSeq,
+) {
+  int index = websiteVideo.indexWhere((row) => row.videoSequence == videoSeq);
+  return index;
+}

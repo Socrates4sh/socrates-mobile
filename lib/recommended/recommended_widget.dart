@@ -170,11 +170,6 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                         VideoPageV2Widget
                                                             .routeName,
                                                         queryParameters: {
-                                                          'videoDoc':
-                                                              serializeParam(
-                                                            recVideosListItem,
-                                                            ParamType.Document,
-                                                          ),
                                                           'subCategory':
                                                               serializeParam(
                                                             recVideosListItem
@@ -187,17 +182,7 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                                 .videoSequence,
                                                             ParamType.double,
                                                           ),
-                                                          'initialIndex':
-                                                              serializeParam(
-                                                            recVideosListIndex,
-                                                            ParamType.int,
-                                                          ),
                                                         }.withoutNulls,
-                                                        extra: <String,
-                                                            dynamic>{
-                                                          'videoDoc':
-                                                              recVideosListItem,
-                                                        },
                                                       );
                                                     },
                                                     child: ClipRRect(
