@@ -87,7 +87,7 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
           },
           child: Scaffold(
             key: scaffoldKey,
-            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            backgroundColor: FlutterFlowTheme.of(context).primaryText,
             body: SafeArea(
               top: true,
               child: Align(
