@@ -13,10 +13,12 @@ class VideoPageV2Widget extends StatefulWidget {
     super.key,
     required this.videoDoc,
     this.subCategory,
+    required this.videoSequence,
   });
 
   final WebsiteVideosRecord? videoDoc;
   final String? subCategory;
+  final double? videoSequence;
 
   static String routeName = 'VideoPage_V2';
   static String routePath = '/videoPageV2';
@@ -37,12 +39,14 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      await queryWebsiteVideosRecordOnce(
+      _model.websiteVideoDoc = await queryWebsiteVideosRecordOnce(
         queryBuilder: (websiteVideosRecord) => websiteVideosRecord.where(
           'sub_category',
           isEqualTo: widget.subCategory,
         ),
       );
+      _model.initCompleted = true;
+      safeSetState(() {});
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -75,25 +79,41 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
                 child: Builder(
                   builder: (context) {
                     if (_model.initCompleted) {
-                      return Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
-                        child: ClipRRect(
-                          child: Container(
-                            width: MediaQuery.sizeOf(context).width * 1.0,
-                            height: MediaQuery.sizeOf(context).height * 0.9,
-                            decoration: BoxDecoration(),
-                            child: FlutterFlowVideoPlayer(
-                              path: 'assets/videos/words_for_slide_11.mp4',
-                              videoType: VideoType.asset,
-                              aspectRatio: 0.56,
-                              autoPlay: true,
-                              looping: true,
-                              showControls: true,
-                              allowFullScreen: true,
-                              allowPlaybackSpeedMenu: false,
+                      return Builder(
+                        builder: (context) {
+                          final video = _model.websiteVideoDoc?.toList() ?? [];
+
+                          return Container(
+                            width: double.infinity,
+                            child: PageView.builder(
+                              controller: _model.pageViewController ??=
+                                  PageController(
+                                      initialPage: max(
+                                          0,
+                                          min(
+                                              valueOrDefault<int>(
+                                                _model.initialTabIndex,
+                                                0,
+                                              ),
+                                              video.length - 1))),
+                              onPageChanged: (_) => safeSetState(() {}),
+                              scrollDirection: Axis.vertical,
+                              itemCount: video.length,
+                              itemBuilder: (context, videoIndex) {
+                                final videoItem = video[videoIndex];
+                                return FlutterFlowVideoPlayer(
+                                  path: videoItem.videoFileUrl,
+                                  videoType: VideoType.network,
+                                  autoPlay: true,
+                                  looping: true,
+                                  showControls: true,
+                                  allowFullScreen: true,
+                                  allowPlaybackSpeedMenu: false,
+                                );
+                              },
                             ),
-                          ),
-                        ),
+                          );
+                        },
                       );
                     } else {
                       return Column(

@@ -203,6 +203,14 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                   videosItem,
                                   ParamType.Document,
                                 ),
+                                'subCategory': serializeParam(
+                                  videosItem.subCategory,
+                                  ParamType.String,
+                                ),
+                                'videoSequence': serializeParam(
+                                  videosItem.videoSequence,
+                                  ParamType.double,
+                                ),
                               }.withoutNulls,
                               extra: <String, dynamic>{
                                 'videoDoc': videosItem,

@@ -463,6 +463,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'subCategory',
               ParamType.String,
             ),
+            videoSequence: params.getParam(
+              'videoSequence',
+              ParamType.double,
+            ),
           ),
         ),
         FFRoute(
