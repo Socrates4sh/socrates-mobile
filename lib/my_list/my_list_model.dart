@@ -8,6 +8,8 @@ class MyListModel extends FlutterFlowModel<MyListWidget> {
 
   bool? initCompleted = false;
 
+  bool isEdit = false;
+
   ///  State fields for stateful widgets in this page.
 
   // Stores action output result for [Firestore Query - Query a collection] action in MyList widget.

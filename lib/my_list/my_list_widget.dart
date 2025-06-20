@@ -2,6 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -114,11 +115,21 @@ class _MyListWidgetState extends State<MyListWidget> {
                                               ),
                                         ),
                                       ),
-                                      FaIcon(
-                                        FontAwesomeIcons.pencilAlt,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        size: 25.0,
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          _model.isEdit = !_model.isEdit;
+                                          safeSetState(() {});
+                                        },
+                                        child: FaIcon(
+                                          FontAwesomeIcons.pencilAlt,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                          size: 25.0,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -223,14 +234,34 @@ class _MyListWidgetState extends State<MyListWidget> {
                                                           ),
                                                         ),
                                                       ),
-                                                      Icon(
-                                                        Icons.delete,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                      if (_model.isEdit == true)
+                                                        InkWell(
+                                                          splashColor: Colors
+                                                              .transparent,
+                                                          focusColor: Colors
+                                                              .transparent,
+                                                          hoverColor: Colors
+                                                              .transparent,
+                                                          highlightColor: Colors
+                                                              .transparent,
+                                                          onTap: () async {
+                                                            await (currentUserDocument
+                                                                        ?.videosMylist
+                                                                        .toList() ??
+                                                                    [])
+                                                                .elementAtOrNull(
+                                                                    myListVideosIndex)!
+                                                                .videoDocId!
+                                                                .delete();
+                                                          },
+                                                          child: Icon(
+                                                            Icons.delete,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
                                                                 .error,
-                                                        size: 20.0,
-                                                      ),
+                                                            size: 20.0,
+                                                          ),
+                                                        ),
                                                     ],
                                                   );
                                                 },
