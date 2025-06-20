@@ -873,7 +873,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                             context.mounted);
                                                       } else {
                                                         context.pushNamedAuth(
-                                                            HomepageWidget
+                                                            HomepageV3Widget
                                                                 .routeName,
                                                             context.mounted);
                                                       }
