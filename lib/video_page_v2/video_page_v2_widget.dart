@@ -95,41 +95,45 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
                 child: Builder(
                   builder: (context) {
                     if (_model.initCompleted) {
-                      return Builder(
-                        builder: (context) {
-                          final video = _model.websiteVideoDoc?.toList() ?? [];
+                      return Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Builder(
+                          builder: (context) {
+                            final video =
+                                _model.websiteVideoDoc?.toList() ?? [];
 
-                          return Container(
-                            width: double.infinity,
-                            child: PageView.builder(
-                              controller: _model.pageViewController ??=
-                                  PageController(
-                                      initialPage: max(
-                                          0,
-                                          min(
-                                              valueOrDefault<int>(
-                                                _model.initialTabIndex,
-                                                0,
-                                              ),
-                                              video.length - 1))),
-                              onPageChanged: (_) => safeSetState(() {}),
-                              scrollDirection: Axis.vertical,
-                              itemCount: video.length,
-                              itemBuilder: (context, videoIndex) {
-                                final videoItem = video[videoIndex];
-                                return FlutterFlowVideoPlayer(
-                                  path: videoItem.videoFileUrl,
-                                  videoType: VideoType.network,
-                                  autoPlay: true,
-                                  looping: true,
-                                  showControls: true,
-                                  allowFullScreen: true,
-                                  allowPlaybackSpeedMenu: false,
-                                );
-                              },
-                            ),
-                          );
-                        },
+                            return Container(
+                              width: double.infinity,
+                              child: PageView.builder(
+                                controller: _model.pageViewController ??=
+                                    PageController(
+                                        initialPage: max(
+                                            0,
+                                            min(
+                                                valueOrDefault<int>(
+                                                  _model.initialTabIndex,
+                                                  0,
+                                                ),
+                                                video.length - 1))),
+                                onPageChanged: (_) => safeSetState(() {}),
+                                scrollDirection: Axis.vertical,
+                                itemCount: video.length,
+                                itemBuilder: (context, videoIndex) {
+                                  final videoItem = video[videoIndex];
+                                  return FlutterFlowVideoPlayer(
+                                    path: videoItem.videoFileUrl,
+                                    videoType: VideoType.network,
+                                    autoPlay: true,
+                                    looping: true,
+                                    showControls: true,
+                                    allowFullScreen: true,
+                                    allowPlaybackSpeedMenu: false,
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        ),
                       );
                     } else {
                       return Column(

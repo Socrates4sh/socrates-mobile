@@ -67,7 +67,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(30.0, 50.0, 30.0, 30.0),
                 child: SingleChildScrollView(
                   child: Column(
-                    mainAxisSize: MainAxisSize.max,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Flexible(
                         child: Text(
@@ -259,7 +259,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                     builder: (context) {
                                       if (_model.isSearch) {
                                         return Column(
-                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisSize: MainAxisSize.min,
                                           children: [
                                             Container(
                                               width: MediaQuery.sizeOf(context)
@@ -423,7 +423,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                         );
                                       } else {
                                         return Column(
-                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisSize: MainAxisSize.min,
                                           children: [
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -519,7 +519,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                               child: Column(
                                                                 mainAxisSize:
                                                                     MainAxisSize
-                                                                        .max,
+                                                                        .min,
                                                                 mainAxisAlignment:
                                                                     MainAxisAlignment
                                                                         .spaceBetween,
