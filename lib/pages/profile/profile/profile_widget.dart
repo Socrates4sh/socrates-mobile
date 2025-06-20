@@ -1052,7 +1052,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                               .clearRedirectLocation();
 
                                           _navigate = () => context.goNamedAuth(
-                                              HomepageV3Widget.routeName,
+                                              SignUpWidget.routeName,
                                               context.mounted);
                                         }
 

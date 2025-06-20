@@ -80,13 +80,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? NavBarPage() : HomepageV3Widget(),
+          appStateNotifier.loggedIn ? NavBarPage() : SignUpWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? NavBarPage() : HomepageV3Widget(),
+              appStateNotifier.loggedIn ? NavBarPage() : SignUpWidget(),
         ),
         FFRoute(
           name: EnterOTPWidget.routeName,
@@ -653,7 +653,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/homepagev3';
+            return '/signUp';
           }
           return null;
         },

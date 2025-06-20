@@ -214,7 +214,7 @@ class _UserDeleteConfirmationBoxWidgetState
                         GoRouter.of(context).clearRedirectLocation();
 
                         _navigate = () => context.goNamedAuth(
-                            HomepageV3Widget.routeName, context.mounted);
+                            SignUpWidget.routeName, context.mounted);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
