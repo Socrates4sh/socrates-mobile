@@ -122,10 +122,24 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
                                   path: videoItem.videoFileUrl,
                                   videoType: VideoType.network,
                                   autoPlay: true,
-                                  looping: true,
+                                  looping: false,
                                   showControls: true,
                                   allowFullScreen: true,
                                   allowPlaybackSpeedMenu: false,
+                                    onVideoComplete: () async {
+                                      print("Calll:- ${videoIndex.toString()} and full length ${(_model.websiteVideoDoc!.length -
+                                          1)}");
+                                      if (videoIndex <
+                                          (_model.websiteVideoDoc!.length -
+                                              1)) {
+                                        await _model.pageViewController
+                                            ?.nextPage(
+                                          duration:
+                                          Duration(milliseconds: 300),
+                                          curve: Curves.ease,
+                                        );
+                                      }
+                                    }
                                 );
                               },
                             ),
