@@ -132,8 +132,9 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
                                     ),
                                     FFButtonWidget(
                                       onPressed: () async {
-                                        if (_model.pageViewCurrentIndex <
-                                            (videoIndex - 1)) {
+                                        if (videoIndex <
+                                            (_model.websiteVideoDoc!.length -
+                                                1)) {
                                           await _model.pageViewController
                                               ?.nextPage(
                                             duration:
