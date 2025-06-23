@@ -60,6 +60,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer>
   bool _loggedError = false;
   bool _subscribedRoute = false;
   bool _isFullScreen = false;
+  bool _hasCompleted = false;
 
   @override
   void initState() {
@@ -151,30 +152,43 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer>
     );
 
     _videoPlayers.add(_videoPlayerController!);
+
     _videoPlayerController!.addListener(() {
-      if (_videoPlayerController!.value.hasError && !_loggedError) {
-        print(
-            'Error playing video: ${_videoPlayerController!.value.errorDescription}');
+      print("Listener triggered");
+      final controller = _videoPlayerController!;
+      final position = controller.value.position;
+      final duration = controller.value.duration;
+
+      if (controller.value.hasError && !_loggedError) {
+        print('Error playing video: ${controller.value.errorDescription}');
         _loggedError = true;
       }
-      // Stop all other players when one video is playing.
-      if (_videoPlayerController!.value.isPlaying) {
-        _videoPlayers.forEach((otherPlayer) {
-          if (otherPlayer != _videoPlayerController &&
+
+      // Pause other players
+      if (controller.value.isPlaying) {
+        for (final otherPlayer in _videoPlayers) {
+          if (otherPlayer != controller &&
               otherPlayer.value.isPlaying &&
               mounted) {
             setState(() {
               otherPlayer.pause();
             });
           }
-        });
-      }
-      if (_videoPlayerController!.value.position >=
-          _videoPlayerController!.value.duration) {
-        // Optionally: notify parent widget via a callback if needed.
-        if (widget.onVideoComplete != null) {
-          widget.onVideoComplete!();
         }
+      }
+
+      // Detect video completion
+      if (!_hasCompleted &&
+          !controller.value.isPlaying &&
+          position >= duration - const Duration(milliseconds: 200)) {
+        _hasCompleted = true;
+        print("Video completed callback fired");
+        widget.onVideoComplete?.call();
+      }
+
+      // Reset _hasCompleted when replayed
+      if (_hasCompleted && position < duration) {
+        _hasCompleted = false;
       }
     });
 
@@ -233,7 +247,7 @@ class CustomControlsWithPadding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all( 10.0), // <-- padding from bottom
+      padding: const EdgeInsets.all(10.0), // <-- padding from bottom
       child: MaterialControls(), // default chewie controls
     );
   }
