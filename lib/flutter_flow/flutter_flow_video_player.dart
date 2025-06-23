@@ -141,7 +141,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer>
         DeviceOrientation.landscapeRight,
       ],
       deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-      aspectRatio: widget.aspectRatio,
+      aspectRatio: widget.aspectRatio??6.5 / 13.2,
       autoPlay: widget.autoPlay,
       looping: widget.looping,
       showControls: widget.showControls,
@@ -197,31 +197,28 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer>
   }
 
   @override
-  Widget build(BuildContext context) => FittedBox(
-        fit: BoxFit.cover,
-        child: Container(
-          height: height,
-          width: width,
-          child: _chewieController != null &&
-                  (widget.lazyLoad ||
-                      _chewieController!
-                          .videoPlayerController.value.isInitialized)
-              ? Chewie(controller: _chewieController!)
-              : (_chewieController != null &&
-                      _chewieController!.videoPlayerController.value.hasError)
-                  ? Text('Error playing video')
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 50.0,
-                          height: 50.0,
-                          child: Image.asset("assets/images/socrates_blue.png"),
-                        ),
-                        const SizedBox(height: 20),
-                        const Text('Loading'),
-                      ],
-                    ),
-        ),
-      );
+  Widget build(BuildContext context) => Container(
+    height: height,
+    width: width,
+    child: _chewieController != null &&
+            (widget.lazyLoad ||
+                _chewieController!
+                    .videoPlayerController.value.isInitialized)
+        ? Chewie(controller: _chewieController!)
+        : (_chewieController != null &&
+                _chewieController!.videoPlayerController.value.hasError)
+            ? Text('Error playing video')
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 50.0,
+                    height: 50.0,
+                    child: Image.asset("assets/images/socrates_blue.png"),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text('Loading'),
+                ],
+              ),
+  );
 }
