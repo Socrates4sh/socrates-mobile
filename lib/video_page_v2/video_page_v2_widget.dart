@@ -121,7 +121,7 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
                                   path: videoItem.videoFileUrl,
                                   videoType: VideoType.network,
                                   autoPlay: true,
-                                  looping: true,
+                                  looping: false,
                                   showControls: true,
                                   allowFullScreen: true,
                                   allowPlaybackSpeedMenu: false,
