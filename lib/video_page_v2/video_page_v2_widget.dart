@@ -3,7 +3,6 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -119,59 +118,14 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
                               itemCount: video.length,
                               itemBuilder: (context, videoIndex) {
                                 final videoItem = video[videoIndex];
-                                return Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    FlutterFlowVideoPlayer(
-                                      path: videoItem.videoFileUrl,
-                                      videoType: VideoType.network,
-                                      autoPlay: true,
-                                      looping: true,
-                                      showControls: true,
-                                      allowFullScreen: true,
-                                      allowPlaybackSpeedMenu: false,
-                                    ),
-                                    FFButtonWidget(
-                                      onPressed: () async {
-                                        if (videoIndex <
-                                            (_model.websiteVideoDoc!.length -
-                                                1)) {
-                                          await _model.pageViewController
-                                              ?.nextPage(
-                                            duration:
-                                                Duration(milliseconds: 300),
-                                            curve: Curves.ease,
-                                          );
-                                        }
-                                      },
-                                      text: 'next',
-                                      options: FFButtonOptions(
-                                        height: 40.0,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 0.0, 16.0, 0.0),
-                                        iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
-                                        color: FlutterFlowTheme.of(context)
-                                            .primary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmallFamily,
-                                              color: Colors.white,
-                                              letterSpacing: 0.0,
-                                              useGoogleFonts:
-                                                  !FlutterFlowTheme.of(context)
-                                                      .titleSmallIsCustom,
-                                            ),
-                                        elevation: 0.0,
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                      ),
-                                    ),
-                                  ],
+                                return FlutterFlowVideoPlayer(
+                                  path: videoItem.videoFileUrl,
+                                  videoType: VideoType.network,
+                                  autoPlay: true,
+                                  looping: true,
+                                  showControls: true,
+                                  allowFullScreen: true,
+                                  allowPlaybackSpeedMenu: false,
                                 );
                               },
                             ),
