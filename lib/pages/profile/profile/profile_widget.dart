@@ -38,8 +38,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       _model.userRecord =
           await UsersRecord.getDocumentOnce(currentUserReference!);
-      _model.isLoading = false;
-      safeSetState(() {});
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -1502,24 +1500,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 ),
                               ),
                             ),
-                            if (!_model.isLoading)
-                              Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                                child: Text(
-                                  'Loading....',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .bodyMediumFamily,
-                                        fontSize: 18.0,
-                                        letterSpacing: 0.0,
-                                        useGoogleFonts:
-                                            !FlutterFlowTheme.of(context)
-                                                .bodyMediumIsCustom,
-                                      ),
-                                ),
-                              ),
                           ],
                         ),
                       );
