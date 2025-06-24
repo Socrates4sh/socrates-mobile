@@ -530,7 +530,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                                             context.mounted);
                                                       } else {
                                                         context.pushNamedAuth(
-                                                            HomepageWidget
+                                                            HomepageV3Widget
                                                                 .routeName,
                                                             context.mounted);
                                                       }
