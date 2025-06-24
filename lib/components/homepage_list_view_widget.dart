@@ -196,23 +196,47 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            context.pushNamed(
-                              VideoPageV2Widget.routeName,
-                              queryParameters: {
-                                'subCategory': serializeParam(
-                                  videosItem.subCategory,
-                                  ParamType.String,
+                            if (((valueOrDefault<bool>(
+                                            currentUserDocument?.isSubscribed,
+                                            false) ==
+                                        null) ||
+                                    !valueOrDefault<bool>(
+                                        currentUserDocument?.isSubscribed,
+                                        false)) &&
+                                (videosIndex >= 3)) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Please take Subscription for premium features',
+                                    style: TextStyle(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
+                                    ),
+                                  ),
+                                  duration: Duration(milliseconds: 4000),
+                                  backgroundColor:
+                                      FlutterFlowTheme.of(context).secondary,
                                 ),
-                                'videoSequence': serializeParam(
-                                  videosItem.videoSequence,
-                                  ParamType.double,
-                                ),
-                                'initialIndex': serializeParam(
-                                  videosIndex,
-                                  ParamType.int,
-                                ),
-                              }.withoutNulls,
-                            );
+                              );
+                            } else {
+                              context.pushNamed(
+                                VideoPageV2Widget.routeName,
+                                queryParameters: {
+                                  'subCategory': serializeParam(
+                                    videosItem.subCategory,
+                                    ParamType.String,
+                                  ),
+                                  'videoSequence': serializeParam(
+                                    videosItem.videoSequence,
+                                    ParamType.double,
+                                  ),
+                                  'initialIndex': serializeParam(
+                                    videosIndex,
+                                    ParamType.int,
+                                  ),
+                                }.withoutNulls,
+                              );
+                            }
                           },
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10.0),
@@ -224,56 +248,61 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               child: Stack(
-                                alignment: AlignmentDirectional(1.0, -1.0),
                                 children: [
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                  Stack(
+                                    alignment: AlignmentDirectional(1.0, -1.0),
                                     children: [
-                                      Flexible(
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.network(
-                                            videosItem.videoThumbnailImageUrl,
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                1.0,
-                                            height: 150.0,
-                                            fit: BoxFit.cover,
-                                            errorBuilder:
-                                                (context, error, stackTrace) =>
+                                      Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Flexible(
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Image.network(
+                                                videosItem
+                                                    .videoThumbnailImageUrl,
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        1.0,
+                                                height: 150.0,
+                                                fit: BoxFit.cover,
+                                                errorBuilder: (context, error,
+                                                        stackTrace) =>
                                                     Image.asset(
-                                              'assets/images/error_image.png',
+                                                  'assets/images/error_image.png',
+                                                  width:
+                                                      MediaQuery.sizeOf(context)
+                                                              .width *
+                                                          1.0,
+                                                  height: 150.0,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(0.0, 0.0),
+                                            child: Container(
                                               width: MediaQuery.sizeOf(context)
                                                       .width *
                                                   1.0,
-                                              height: 150.0,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(0.0, 0.0),
-                                        child: Container(
-                                          width:
-                                              MediaQuery.sizeOf(context).width *
-                                                  1.0,
-                                          height: 50.0,
-                                          decoration: BoxDecoration(),
-                                          child: Align(
-                                            alignment:
-                                                AlignmentDirectional(0.0, 0.0),
-                                            child: Padding(
-                                              padding: EdgeInsets.all(5.0),
-                                              child: Text(
-                                                videosItem.topic,
-                                                textAlign: TextAlign.center,
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                              height: 50.0,
+                                              decoration: BoxDecoration(),
+                                              child: Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(5.0),
+                                                  child: Text(
+                                                    videosItem.topic,
+                                                    textAlign: TextAlign.center,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .bodyMedium
                                                         .override(
                                                           fontFamily:
@@ -290,67 +319,97 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                                                       .of(context)
                                                                   .bodyMediumIsCustom,
                                                         ),
+                                                  ),
+                                                ),
                                               ),
                                             ),
+                                          ),
+                                        ],
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 5.0, 5.0, 0.0),
+                                        child: InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            await currentUserReference!.update({
+                                              ...mapToFirestore(
+                                                {
+                                                  'videos_mylist':
+                                                      FieldValue.arrayUnion([
+                                                    getVideoDocsMylistFirestoreData(
+                                                      updateVideoDocsMylistStruct(
+                                                        VideoDocsMylistStruct(
+                                                          listSeq: (currentUserDocument
+                                                                          ?.videosMylist
+                                                                          .toList() ??
+                                                                      [])
+                                                                  .length +
+                                                              1,
+                                                          videoDocId: videosItem
+                                                              .reference,
+                                                          topic:
+                                                              videosItem.topic,
+                                                          subCategory:
+                                                              videosItem
+                                                                  .subCategory,
+                                                          websiteCategory:
+                                                              videosItem
+                                                                  .websiteCategory,
+                                                          videoThumbnailImageUrl:
+                                                              videosItem
+                                                                  .videoThumbnailImageUrl,
+                                                          videoUrl: videosItem
+                                                              .videoFileUrl,
+                                                        ),
+                                                        clearUnsetFields: false,
+                                                      ),
+                                                      true,
+                                                    )
+                                                  ]),
+                                                },
+                                              ),
+                                            });
+                                          },
+                                          child: Icon(
+                                            Icons.add_rounded,
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            size: 24.0,
                                           ),
                                         ),
                                       ),
                                     ],
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 5.0, 5.0, 0.0),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        await currentUserReference!.update({
-                                          ...mapToFirestore(
-                                            {
-                                              'videos_mylist':
-                                                  FieldValue.arrayUnion([
-                                                getVideoDocsMylistFirestoreData(
-                                                  updateVideoDocsMylistStruct(
-                                                    VideoDocsMylistStruct(
-                                                      listSeq: (currentUserDocument
-                                                                      ?.videosMylist
-                                                                      .toList() ??
-                                                                  [])
-                                                              .length +
-                                                          1,
-                                                      videoDocId:
-                                                          videosItem.reference,
-                                                      topic: videosItem.topic,
-                                                      subCategory: videosItem
-                                                          .subCategory,
-                                                      websiteCategory:
-                                                          videosItem
-                                                              .websiteCategory,
-                                                      videoThumbnailImageUrl:
-                                                          videosItem
-                                                              .videoThumbnailImageUrl,
-                                                      videoUrl: videosItem
-                                                          .videoFileUrl,
-                                                    ),
-                                                    clearUnsetFields: false,
-                                                  ),
-                                                  true,
-                                                )
-                                              ]),
-                                            },
-                                          ),
-                                        });
-                                      },
-                                      child: Icon(
-                                        Icons.add_rounded,
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        size: 24.0,
+                                  if (((valueOrDefault<bool>(
+                                                  currentUserDocument
+                                                      ?.isSubscribed,
+                                                  false) ==
+                                              null) ||
+                                          !valueOrDefault<bool>(
+                                              currentUserDocument?.isSubscribed,
+                                              false)) &&
+                                      (videosIndex >= 3))
+                                    AuthUserStreamWidget(
+                                      builder: (context) => Container(
+                                        width: double.infinity,
+                                        height: 150.0,
+                                        decoration: BoxDecoration(
+                                          color: Color(0x8757636C),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        child: Icon(
+                                          Icons.lock,
+                                          color: FlutterFlowTheme.of(context)
+                                              .alternate,
+                                          size: 24.0,
+                                        ),
                                       ),
                                     ),
-                                  ),
                                 ],
                               ),
                             ),

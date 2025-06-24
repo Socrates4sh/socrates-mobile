@@ -244,9 +244,25 @@ class _MyListWidgetState extends State<MyListWidget> {
                                                           highlightColor: Colors
                                                               .transparent,
                                                           onTap: () async {
-                                                            await myListVideosItem
-                                                                .videoDocId!
-                                                                .delete();
+                                                            await currentUserReference!
+                                                                .update({
+                                                              ...mapToFirestore(
+                                                                {
+                                                                  'videos_mylist':
+                                                                      FieldValue
+                                                                          .arrayRemove([
+                                                                    getVideoDocsMylistFirestoreData(
+                                                                      updateVideoDocsMylistStruct(
+                                                                        myListVideosItem,
+                                                                        clearUnsetFields:
+                                                                            false,
+                                                                      ),
+                                                                      true,
+                                                                    )
+                                                                  ]),
+                                                                },
+                                                              ),
+                                                            });
                                                           },
                                                           child: Icon(
                                                             Icons.delete,

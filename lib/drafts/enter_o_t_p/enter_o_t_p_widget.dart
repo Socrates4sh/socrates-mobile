@@ -217,7 +217,7 @@ class _EnterOTPWidgetState extends State<EnterOTPWidget> {
                                   context.mounted);
                             } else {
                               context.pushNamedAuth(
-                                  HomepageWidget.routeName, context.mounted);
+                                  HomepageV3Widget.routeName, context.mounted);
                             }
 
                             safeSetState(() {});
