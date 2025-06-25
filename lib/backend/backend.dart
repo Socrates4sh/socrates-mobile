@@ -15,6 +15,7 @@ import 'schema/sub_categories_record.dart';
 import 'schema/website_videos_record.dart';
 import 'schema/constant_data_record.dart';
 import 'schema/homepage_language_sequence_record.dart';
+import 'schema/payment_plan_details_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -33,6 +34,7 @@ export 'schema/sub_categories_record.dart';
 export 'schema/website_videos_record.dart';
 export 'schema/constant_data_record.dart';
 export 'schema/homepage_language_sequence_record.dart';
+export 'schema/payment_plan_details_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -414,6 +416,46 @@ Future<List<HomepageLanguageSequenceRecord>>
           limit: limit,
           singleRecord: singleRecord,
         );
+
+/// Functions to query PaymentPlanDetailsRecords (as a Stream and as a Future).
+Future<int> queryPaymentPlanDetailsRecordCount({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      PaymentPlanDetailsRecord.collection(parent),
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<PaymentPlanDetailsRecord>> queryPaymentPlanDetailsRecord({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      PaymentPlanDetailsRecord.collection(parent),
+      PaymentPlanDetailsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<PaymentPlanDetailsRecord>> queryPaymentPlanDetailsRecordOnce({
+  DocumentReference? parent,
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      PaymentPlanDetailsRecord.collection(parent),
+      PaymentPlanDetailsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
 
 Future<int> queryCollectionCount(
   Query collection, {

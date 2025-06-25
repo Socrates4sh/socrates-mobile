@@ -496,8 +496,8 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
 
                                             return Column(
                                               mainAxisSize: MainAxisSize.max,
-                                              children:
-                                                  List.generate(allData.length,
+                                              children: List.generate(
+                                                      allData.length,
                                                       (allDataIndex) {
                                                 final allDataItem =
                                                     allData[allDataIndex];
@@ -520,7 +520,11 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                   subCategory:
                                                       allDataItem.subCategory,
                                                 );
-                                              }).divide(SizedBox(height: 10.0)),
+                                              })
+                                                  .divide(
+                                                      SizedBox(height: 20.0))
+                                                  .addToStart(
+                                                      SizedBox(height: 10.0)),
                                             );
                                           },
                                         ),

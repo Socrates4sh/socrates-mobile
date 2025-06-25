@@ -63,7 +63,7 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(12.0),
                       child: Image.asset(
-                        'assets/images/Socrates_Logo.png',
+                        'assets/images/socrates_blue.png',
                         width: 150.0,
                         height: 150.0,
                         fit: BoxFit.cover,

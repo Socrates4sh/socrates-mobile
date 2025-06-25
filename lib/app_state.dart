@@ -37,4 +37,10 @@ class FFAppState extends ChangeNotifier {
   set continueOnTap(bool value) {
     _continueOnTap = value;
   }
+
+  String _monthlySubscriptionId = '';
+  String get monthlySubscriptionId => _monthlySubscriptionId;
+  set monthlySubscriptionId(String value) {
+    _monthlySubscriptionId = value;
+  }
 }
