@@ -10,11 +10,11 @@ class SubscriptionStruct extends FFFirebaseStruct {
   SubscriptionStruct({
     double? planAmount,
     String? planTitle,
-    DateTime? subscriptionStartDate,
+    DateTime? subscriptionDateTime,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _planAmount = planAmount,
         _planTitle = planTitle,
-        _subscriptionStartDate = subscriptionStartDate,
+        _subscriptionDateTime = subscriptionDateTime,
         super(firestoreUtilData);
 
   // "planAmount" field.
@@ -33,18 +33,18 @@ class SubscriptionStruct extends FFFirebaseStruct {
 
   bool hasPlanTitle() => _planTitle != null;
 
-  // "subscriptionStartDate" field.
-  DateTime? _subscriptionStartDate;
-  DateTime? get subscriptionStartDate => _subscriptionStartDate;
-  set subscriptionStartDate(DateTime? val) => _subscriptionStartDate = val;
+  // "subscriptionDateTime" field.
+  DateTime? _subscriptionDateTime;
+  DateTime? get subscriptionDateTime => _subscriptionDateTime;
+  set subscriptionDateTime(DateTime? val) => _subscriptionDateTime = val;
 
-  bool hasSubscriptionStartDate() => _subscriptionStartDate != null;
+  bool hasSubscriptionDateTime() => _subscriptionDateTime != null;
 
   static SubscriptionStruct fromMap(Map<String, dynamic> data) =>
       SubscriptionStruct(
         planAmount: castToType<double>(data['planAmount']),
         planTitle: data['planTitle'] as String?,
-        subscriptionStartDate: data['subscriptionStartDate'] as DateTime?,
+        subscriptionDateTime: data['subscriptionDateTime'] as DateTime?,
       );
 
   static SubscriptionStruct? maybeFromMap(dynamic data) => data is Map
@@ -54,7 +54,7 @@ class SubscriptionStruct extends FFFirebaseStruct {
   Map<String, dynamic> toMap() => {
         'planAmount': _planAmount,
         'planTitle': _planTitle,
-        'subscriptionStartDate': _subscriptionStartDate,
+        'subscriptionDateTime': _subscriptionDateTime,
       }.withoutNulls;
 
   @override
@@ -67,8 +67,8 @@ class SubscriptionStruct extends FFFirebaseStruct {
           _planTitle,
           ParamType.String,
         ),
-        'subscriptionStartDate': serializeParam(
-          _subscriptionStartDate,
+        'subscriptionDateTime': serializeParam(
+          _subscriptionDateTime,
           ParamType.DateTime,
         ),
       }.withoutNulls;
@@ -85,8 +85,8 @@ class SubscriptionStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
-        subscriptionStartDate: deserializeParam(
-          data['subscriptionStartDate'],
+        subscriptionDateTime: deserializeParam(
+          data['subscriptionDateTime'],
           ParamType.DateTime,
           false,
         ),
@@ -100,18 +100,18 @@ class SubscriptionStruct extends FFFirebaseStruct {
     return other is SubscriptionStruct &&
         planAmount == other.planAmount &&
         planTitle == other.planTitle &&
-        subscriptionStartDate == other.subscriptionStartDate;
+        subscriptionDateTime == other.subscriptionDateTime;
   }
 
   @override
   int get hashCode =>
-      const ListEquality().hash([planAmount, planTitle, subscriptionStartDate]);
+      const ListEquality().hash([planAmount, planTitle, subscriptionDateTime]);
 }
 
 SubscriptionStruct createSubscriptionStruct({
   double? planAmount,
   String? planTitle,
-  DateTime? subscriptionStartDate,
+  DateTime? subscriptionDateTime,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -120,7 +120,7 @@ SubscriptionStruct createSubscriptionStruct({
     SubscriptionStruct(
       planAmount: planAmount,
       planTitle: planTitle,
-      subscriptionStartDate: subscriptionStartDate,
+      subscriptionDateTime: subscriptionDateTime,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

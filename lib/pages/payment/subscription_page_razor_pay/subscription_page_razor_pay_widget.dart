@@ -62,6 +62,34 @@ class _SubscriptionPageRazorPayWidgetState
       ).then((s) => s.firstOrNull);
       _model.initComplete = true;
       safeSetState(() {});
+
+      await currentUserReference!.update({
+        ...createUsersRecordData(
+          subscriptionEndDateTime: functions.getSubscriptionEndDate(30),
+          subscriptionStartDateTime: getCurrentTimestamp,
+          subscriptionID: FFAppState().monthlySubscriptionId,
+          userSubscribed: true,
+          subscriptionCancelled: false,
+        ),
+        ...mapToFirestore(
+          {
+            'subscriptionDetails': FieldValue.arrayUnion([
+              getSubscriptionFirestoreData(
+                createSubscriptionStruct(
+                  planAmount: valueOrDefault<double>(
+                    _model.paymentPlanDoc?.originalPrice.toDouble(),
+                    99.0,
+                  ),
+                  planTitle: 'Monthly',
+                  subscriptionDateTime: getCurrentTimestamp,
+                  clearUnsetFields: false,
+                ),
+                true,
+              )
+            ]),
+          },
+        ),
+      });
       _model.razorPayResponseMonthly = await CreateSubscriptionIDCall.call(
         planId: _model.paymentPlanDoc?.planId,
         totalCount: 1,
@@ -596,7 +624,9 @@ class _SubscriptionPageRazorPayWidgetState
                                                                       .toDouble(),
                                                                   99.0,
                                                                 ),
-                                                                subscriptionStartDate:
+                                                                planTitle:
+                                                                    'Monthly',
+                                                                subscriptionDateTime:
                                                                     getCurrentTimestamp,
                                                                 clearUnsetFields:
                                                                     false,
