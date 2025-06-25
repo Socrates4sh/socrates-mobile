@@ -353,41 +353,41 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                             ),
                                           ],
                                         ),
-                                        Builder(
-                                          builder: (context) {
-                                            if (!functions
-                                                .checkVideoInFavourite(
-                                                    (currentUserDocument
-                                                                ?.videosMylist
-                                                                .toList() ??
-                                                            [])
-                                                        .toList(),
-                                                    VideoDocsMylistStruct(
-                                                      listSeq: (currentUserDocument
-                                                                      ?.videosMylist
-                                                                      .toList() ??
-                                                                  [])
-                                                              .length +
-                                                          1,
-                                                      videoDocId:
-                                                          videosItem.reference,
-                                                      topic: videosItem.topic,
-                                                      subCategory: videosItem
-                                                          .subCategory,
-                                                      websiteCategory:
-                                                          videosItem
-                                                              .websiteCategory,
-                                                      videoThumbnailImageUrl:
-                                                          videosItem
-                                                              .videoThumbnailImageUrl,
-                                                      videoUrl: videosItem
-                                                          .videoFileUrl,
-                                                    ))) {
-                                              return Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        0.0, 5.0, 5.0, 0.0),
-                                                child: InkWell(
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 5.0, 5.0, 0.0),
+                                          child: Builder(
+                                            builder: (context) {
+                                              if (!functions
+                                                  .checkVideoInFavourite(
+                                                      (currentUserDocument
+                                                                  ?.videosMylist
+                                                                  .toList() ??
+                                                              [])
+                                                          .toList(),
+                                                      VideoDocsMylistStruct(
+                                                        listSeq: (currentUserDocument
+                                                                        ?.videosMylist
+                                                                        .toList() ??
+                                                                    [])
+                                                                .length +
+                                                            1,
+                                                        videoDocId: videosItem
+                                                            .reference,
+                                                        topic: videosItem.topic,
+                                                        subCategory: videosItem
+                                                            .subCategory,
+                                                        websiteCategory:
+                                                            videosItem
+                                                                .websiteCategory,
+                                                        videoThumbnailImageUrl:
+                                                            videosItem
+                                                                .videoThumbnailImageUrl,
+                                                        videoUrl: videosItem
+                                                            .videoFileUrl,
+                                                      ))) {
+                                                return InkWell(
                                                   splashColor:
                                                       Colors.transparent,
                                                   focusColor:
@@ -429,6 +429,9 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                                                   videoUrl:
                                                                       videosItem
                                                                           .videoFileUrl,
+                                                                  videoSeq:
+                                                                      videosItem
+                                                                          .videoSequence,
                                                                 ),
                                                                 clearUnsetFields:
                                                                     false,
@@ -439,6 +442,8 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                                         },
                                                       ),
                                                     });
+
+                                                    safeSetState(() {});
                                                   },
                                                   child: Icon(
                                                     Icons.add_rounded,
@@ -447,18 +452,18 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                                         .secondaryBackground,
                                                     size: 28.0,
                                                   ),
-                                                ),
-                                              );
-                                            } else {
-                                              return Icon(
-                                                Icons.bookmark_sharp,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .accent4,
-                                                size: 28.0,
-                                              );
-                                            }
-                                          },
+                                                );
+                                              } else {
+                                                return Icon(
+                                                  Icons.bookmark_sharp,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .accent4,
+                                                  size: 28.0,
+                                                );
+                                              }
+                                            },
+                                          ),
                                         ),
                                       ],
                                     ),

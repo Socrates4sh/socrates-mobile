@@ -1,5 +1,6 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'search_widget.dart' show SearchWidget;
 import 'package:flutter/material.dart';
 
