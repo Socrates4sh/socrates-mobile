@@ -479,14 +479,13 @@ class _SubscriptionPageRazorPayWidgetState
                                                                         ),
                                                                   ),
                                                                   Text(
-                                                                    valueOrDefault<
-                                                                        String>(
+                                                                    '₹${valueOrDefault<String>(
                                                                       _model
                                                                           .paymentPlanDoc
                                                                           ?.originalPrice
                                                                           .toString(),
                                                                       '99',
-                                                                    ),
+                                                                    )}',
                                                                     textAlign:
                                                                         TextAlign
                                                                             .center,
