@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'index.dart'; // Imports other custom actions
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 // import 'dart:async';
 import '../../auth/firebase_auth/auth_util.dart';
 
@@ -23,21 +25,18 @@ Future startRazorpaySubscriptionPayment(
   const kTestRazorpayKeyId = 'rzp_test_ied4aHHzhvJlLE';
   String razorpayKeyId = isProd ? kProdRazorpayKeyId : kTestRazorpayKeyId;
   // razorpay.initilizeSDK(razorpayKeyId);
-  final completer = Completer<bool>();
 
   razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS,
       (PaymentSuccessResponse response) {
     print('Payment Success: ${response.paymentId}');
     razorpay.clear();
     successAction();
-    completer.complete(true);
   });
 
   razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, (PaymentFailureResponse response) {
     print('Payment Error: ${response.code} | ${response.message}');
     razorpay.clear();
     failureAction();
-    completer.complete(false);
   });
 
   razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET,
@@ -86,6 +85,5 @@ Future startRazorpaySubscriptionPayment(
     razorpay.open(options);
   } catch (e) {
     print('Error opening Razorpay: $e');
-    completer.complete(false);
   }
 }
