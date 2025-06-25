@@ -372,81 +372,123 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                                   children: [
                                                                     Flexible(
                                                                       child:
-                                                                          Container(
-                                                                        width: MediaQuery.sizeOf(context).width *
-                                                                            0.3,
-                                                                        height:
-                                                                            40.0,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).secondaryBackground,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8.0),
-                                                                        ),
+                                                                          InkWell(
+                                                                        splashColor:
+                                                                            Colors.transparent,
+                                                                        focusColor:
+                                                                            Colors.transparent,
+                                                                        hoverColor:
+                                                                            Colors.transparent,
+                                                                        highlightColor:
+                                                                            Colors.transparent,
+                                                                        onTap:
+                                                                            () async {
+                                                                          context
+                                                                              .pushNamed(
+                                                                            VideoPageV2Widget.routeName,
+                                                                            queryParameters:
+                                                                                {
+                                                                              'videoSequence': serializeParam(
+                                                                                recVideosListItem.videoSequence,
+                                                                                ParamType.double,
+                                                                              ),
+                                                                              'subCategory': serializeParam(
+                                                                                recVideosListItem.subCategory,
+                                                                                ParamType.String,
+                                                                              ),
+                                                                            }.withoutNulls,
+                                                                          );
+                                                                        },
                                                                         child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children:
-                                                                              [
-                                                                            Icon(
-                                                                              Icons.play_arrow_rounded,
-                                                                              color: FlutterFlowTheme.of(context).primaryText,
-                                                                              size: 24.0,
-                                                                            ),
-                                                                            Text(
-                                                                              'Play',
-                                                                              style: FlutterFlowTheme.of(context).headlineSmall.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).headlineSmallFamily,
-                                                                                    fontSize: 22.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                    useGoogleFonts: !FlutterFlowTheme.of(context).headlineSmallIsCustom,
-                                                                                  ),
-                                                                            ),
-                                                                          ].divide(SizedBox(width: 10.0)),
+                                                                            Container(
+                                                                          width:
+                                                                              MediaQuery.sizeOf(context).width * 0.3,
+                                                                          height:
+                                                                              40.0,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).secondaryBackground,
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(8.0),
+                                                                          ),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.center,
+                                                                            children:
+                                                                                [
+                                                                              Icon(
+                                                                                Icons.play_arrow_rounded,
+                                                                                color: FlutterFlowTheme.of(context).primaryText,
+                                                                                size: 24.0,
+                                                                              ),
+                                                                              Text(
+                                                                                'Play',
+                                                                                style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                                      fontFamily: FlutterFlowTheme.of(context).headlineSmallFamily,
+                                                                                      fontSize: 22.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                      useGoogleFonts: !FlutterFlowTheme.of(context).headlineSmallIsCustom,
+                                                                                    ),
+                                                                              ),
+                                                                            ].divide(SizedBox(width: 10.0)),
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ),
                                                                     Flexible(
                                                                       child:
-                                                                          Container(
-                                                                        width: MediaQuery.sizeOf(context).width *
-                                                                            0.3,
-                                                                        height:
-                                                                            40.0,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).secondaryBackground,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8.0),
-                                                                        ),
+                                                                          InkWell(
+                                                                        splashColor:
+                                                                            Colors.transparent,
+                                                                        focusColor:
+                                                                            Colors.transparent,
+                                                                        hoverColor:
+                                                                            Colors.transparent,
+                                                                        highlightColor:
+                                                                            Colors.transparent,
+                                                                        onTap:
+                                                                            () async {},
                                                                         child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children:
-                                                                              [
-                                                                            Icon(
-                                                                              Icons.add_rounded,
-                                                                              color: FlutterFlowTheme.of(context).primaryText,
-                                                                              size: 24.0,
-                                                                            ),
-                                                                            Text(
-                                                                              'My List',
-                                                                              style: FlutterFlowTheme.of(context).headlineSmall.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).headlineSmallFamily,
-                                                                                    fontSize: 22.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                    useGoogleFonts: !FlutterFlowTheme.of(context).headlineSmallIsCustom,
-                                                                                  ),
-                                                                            ),
-                                                                          ].divide(SizedBox(width: 5.0)),
+                                                                            Container(
+                                                                          width:
+                                                                              MediaQuery.sizeOf(context).width * 0.3,
+                                                                          height:
+                                                                              40.0,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).secondaryBackground,
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(8.0),
+                                                                          ),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.center,
+                                                                            children:
+                                                                                [
+                                                                              Icon(
+                                                                                Icons.add_rounded,
+                                                                                color: FlutterFlowTheme.of(context).primaryText,
+                                                                                size: 24.0,
+                                                                              ),
+                                                                              Text(
+                                                                                'My List',
+                                                                                style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                                      fontFamily: FlutterFlowTheme.of(context).headlineSmallFamily,
+                                                                                      fontSize: 22.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                      useGoogleFonts: !FlutterFlowTheme.of(context).headlineSmallIsCustom,
+                                                                                    ),
+                                                                              ),
+                                                                            ].divide(SizedBox(width: 5.0)),
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ),

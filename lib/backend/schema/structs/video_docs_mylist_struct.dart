@@ -15,6 +15,7 @@ class VideoDocsMylistStruct extends FFFirebaseStruct {
     String? websiteCategory,
     String? videoThumbnailImageUrl,
     String? videoUrl,
+    double? videoSeq,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
   })  : _listSeq = listSeq,
         _videoDocId = videoDocId,
@@ -23,6 +24,7 @@ class VideoDocsMylistStruct extends FFFirebaseStruct {
         _websiteCategory = websiteCategory,
         _videoThumbnailImageUrl = videoThumbnailImageUrl,
         _videoUrl = videoUrl,
+        _videoSeq = videoSeq,
         super(firestoreUtilData);
 
   // "list_seq" field.
@@ -76,6 +78,15 @@ class VideoDocsMylistStruct extends FFFirebaseStruct {
 
   bool hasVideoUrl() => _videoUrl != null;
 
+  // "video_seq" field.
+  double? _videoSeq;
+  double get videoSeq => _videoSeq ?? 0.0;
+  set videoSeq(double? val) => _videoSeq = val;
+
+  void incrementVideoSeq(double amount) => videoSeq = videoSeq + amount;
+
+  bool hasVideoSeq() => _videoSeq != null;
+
   static VideoDocsMylistStruct fromMap(Map<String, dynamic> data) =>
       VideoDocsMylistStruct(
         listSeq: castToType<int>(data['list_seq']),
@@ -85,6 +96,7 @@ class VideoDocsMylistStruct extends FFFirebaseStruct {
         websiteCategory: data['websiteCategory'] as String?,
         videoThumbnailImageUrl: data['video_thumbnail_image_url'] as String?,
         videoUrl: data['video_url'] as String?,
+        videoSeq: castToType<double>(data['video_seq']),
       );
 
   static VideoDocsMylistStruct? maybeFromMap(dynamic data) => data is Map
@@ -99,6 +111,7 @@ class VideoDocsMylistStruct extends FFFirebaseStruct {
         'websiteCategory': _websiteCategory,
         'video_thumbnail_image_url': _videoThumbnailImageUrl,
         'video_url': _videoUrl,
+        'video_seq': _videoSeq,
       }.withoutNulls;
 
   @override
@@ -130,6 +143,10 @@ class VideoDocsMylistStruct extends FFFirebaseStruct {
         'video_url': serializeParam(
           _videoUrl,
           ParamType.String,
+        ),
+        'video_seq': serializeParam(
+          _videoSeq,
+          ParamType.double,
         ),
       }.withoutNulls;
 
@@ -171,6 +188,11 @@ class VideoDocsMylistStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        videoSeq: deserializeParam(
+          data['video_seq'],
+          ParamType.double,
+          false,
+        ),
       );
 
   @override
@@ -185,7 +207,8 @@ class VideoDocsMylistStruct extends FFFirebaseStruct {
         subCategory == other.subCategory &&
         websiteCategory == other.websiteCategory &&
         videoThumbnailImageUrl == other.videoThumbnailImageUrl &&
-        videoUrl == other.videoUrl;
+        videoUrl == other.videoUrl &&
+        videoSeq == other.videoSeq;
   }
 
   @override
@@ -196,7 +219,8 @@ class VideoDocsMylistStruct extends FFFirebaseStruct {
         subCategory,
         websiteCategory,
         videoThumbnailImageUrl,
-        videoUrl
+        videoUrl,
+        videoSeq
       ]);
 }
 
@@ -208,6 +232,7 @@ VideoDocsMylistStruct createVideoDocsMylistStruct({
   String? websiteCategory,
   String? videoThumbnailImageUrl,
   String? videoUrl,
+  double? videoSeq,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -221,6 +246,7 @@ VideoDocsMylistStruct createVideoDocsMylistStruct({
       websiteCategory: websiteCategory,
       videoThumbnailImageUrl: videoThumbnailImageUrl,
       videoUrl: videoUrl,
+      videoSeq: videoSeq,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,
