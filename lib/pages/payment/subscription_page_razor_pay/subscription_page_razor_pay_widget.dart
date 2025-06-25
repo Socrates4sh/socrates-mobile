@@ -439,9 +439,8 @@ class _SubscriptionPageRazorPayWidgetState
                                                           child: Container(
                                                             decoration:
                                                                 BoxDecoration(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryBackground,
+                                                              color: Color(
+                                                                  0x0A192452),
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
@@ -615,6 +614,9 @@ class _SubscriptionPageRazorPayWidgetState
                                                             },
                                                           ),
                                                         });
+                                                        FFAppState()
+                                                            .monthlySubscriptionId = '';
+                                                        safeSetState(() {});
                                                       },
                                                     );
                                                   } else {
@@ -732,7 +734,9 @@ class _SubscriptionPageRazorPayWidgetState
                                                               FlutterFlowTheme.of(
                                                                       context)
                                                                   .titleSmallFamily,
-                                                          color: Colors.white,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBackground,
                                                           letterSpacing: 0.0,
                                                           useGoogleFonts:
                                                               !FlutterFlowTheme
