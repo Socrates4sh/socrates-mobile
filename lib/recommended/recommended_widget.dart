@@ -202,7 +202,7 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                               BoxDecoration(
                                                             color: FlutterFlowTheme
                                                                     .of(context)
-                                                                .tertiary,
+                                                                .secondaryBackground,
                                                             borderRadius:
                                                                 BorderRadius
                                                                     .circular(
