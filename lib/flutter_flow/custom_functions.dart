@@ -65,3 +65,10 @@ DateTime getSubscriptionEndDate(int startDay) {
   print("Date & Time After 7 Days: $subscriptionEndDateTime");
   return subscriptionEndDateTime;
 }
+
+bool checkVideoInFavourite(
+  List<VideoDocsMylistStruct> userVideoList,
+  VideoDocsMylistStruct videoDoc,
+) {
+  return userVideoList.any((item) => item == videoDoc);
+}

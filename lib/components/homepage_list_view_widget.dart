@@ -3,6 +3,7 @@ import '/backend/backend.dart';
 import '/components/locked_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -220,9 +221,7 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                         height:
                                             MediaQuery.sizeOf(context).height *
                                                 0.5,
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                0.5,
+                                        width: double.infinity,
                                         child: LockedWidget(),
                                       ),
                                     );
@@ -354,66 +353,110 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                             ),
                                           ],
                                         ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 5.0, 5.0, 0.0),
-                                          child: InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              await currentUserReference!
-                                                  .update({
-                                                ...mapToFirestore(
-                                                  {
-                                                    'videos_mylist':
-                                                        FieldValue.arrayUnion([
-                                                      getVideoDocsMylistFirestoreData(
-                                                        updateVideoDocsMylistStruct(
-                                                          VideoDocsMylistStruct(
-                                                            listSeq: (currentUserDocument
-                                                                            ?.videosMylist
-                                                                            .toList() ??
-                                                                        [])
-                                                                    .length +
-                                                                1,
-                                                            videoDocId:
-                                                                videosItem
-                                                                    .reference,
-                                                            topic: videosItem
-                                                                .topic,
-                                                            subCategory:
-                                                                videosItem
-                                                                    .subCategory,
-                                                            websiteCategory:
-                                                                videosItem
-                                                                    .websiteCategory,
-                                                            videoThumbnailImageUrl:
-                                                                videosItem
-                                                                    .videoThumbnailImageUrl,
-                                                            videoUrl: videosItem
-                                                                .videoFileUrl,
-                                                          ),
-                                                          clearUnsetFields:
-                                                              false,
-                                                        ),
-                                                        true,
-                                                      )
-                                                    ]),
+                                        Builder(
+                                          builder: (context) {
+                                            if (functions.checkVideoInFavourite(
+                                                (currentUserDocument
+                                                            ?.videosMylist
+                                                            .toList() ??
+                                                        [])
+                                                    .toList(),
+                                                VideoDocsMylistStruct(
+                                                  listSeq: (currentUserDocument
+                                                                  ?.videosMylist
+                                                                  .toList() ??
+                                                              [])
+                                                          .length +
+                                                      1,
+                                                  videoDocId:
+                                                      videosItem.reference,
+                                                  topic: videosItem.topic,
+                                                  subCategory:
+                                                      videosItem.subCategory,
+                                                  websiteCategory: videosItem
+                                                      .websiteCategory,
+                                                  videoThumbnailImageUrl:
+                                                      videosItem
+                                                          .videoThumbnailImageUrl,
+                                                  videoUrl:
+                                                      videosItem.videoFileUrl,
+                                                ))) {
+                                              return Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 5.0, 5.0, 0.0),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    await currentUserReference!
+                                                        .update({
+                                                      ...mapToFirestore(
+                                                        {
+                                                          'videos_mylist':
+                                                              FieldValue
+                                                                  .arrayUnion([
+                                                            getVideoDocsMylistFirestoreData(
+                                                              updateVideoDocsMylistStruct(
+                                                                VideoDocsMylistStruct(
+                                                                  listSeq: (currentUserDocument?.videosMylist.toList() ??
+                                                                              [])
+                                                                          .length +
+                                                                      1,
+                                                                  videoDocId:
+                                                                      videosItem
+                                                                          .reference,
+                                                                  topic:
+                                                                      videosItem
+                                                                          .topic,
+                                                                  subCategory:
+                                                                      videosItem
+                                                                          .subCategory,
+                                                                  websiteCategory:
+                                                                      videosItem
+                                                                          .websiteCategory,
+                                                                  videoThumbnailImageUrl:
+                                                                      videosItem
+                                                                          .videoThumbnailImageUrl,
+                                                                  videoUrl:
+                                                                      videosItem
+                                                                          .videoFileUrl,
+                                                                ),
+                                                                clearUnsetFields:
+                                                                    false,
+                                                              ),
+                                                              true,
+                                                            )
+                                                          ]),
+                                                        },
+                                                      ),
+                                                    });
                                                   },
+                                                  child: Icon(
+                                                    Icons.add_rounded,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryBackground,
+                                                    size: 28.0,
+                                                  ),
                                                 ),
-                                              });
-                                            },
-                                            child: Icon(
-                                              Icons.add_rounded,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              size: 28.0,
-                                            ),
-                                          ),
+                                              );
+                                            } else {
+                                              return Icon(
+                                                Icons.bookmark_sharp,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .accent4,
+                                                size: 28.0,
+                                              );
+                                            }
+                                          },
                                         ),
                                       ],
                                     ),
