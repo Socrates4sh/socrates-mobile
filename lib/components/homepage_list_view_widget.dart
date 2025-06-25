@@ -355,32 +355,34 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                         ),
                                         Builder(
                                           builder: (context) {
-                                            if (functions.checkVideoInFavourite(
-                                                (currentUserDocument
-                                                            ?.videosMylist
-                                                            .toList() ??
-                                                        [])
-                                                    .toList(),
-                                                VideoDocsMylistStruct(
-                                                  listSeq: (currentUserDocument
-                                                                  ?.videosMylist
-                                                                  .toList() ??
-                                                              [])
-                                                          .length +
-                                                      1,
-                                                  videoDocId:
-                                                      videosItem.reference,
-                                                  topic: videosItem.topic,
-                                                  subCategory:
-                                                      videosItem.subCategory,
-                                                  websiteCategory: videosItem
-                                                      .websiteCategory,
-                                                  videoThumbnailImageUrl:
-                                                      videosItem
-                                                          .videoThumbnailImageUrl,
-                                                  videoUrl:
-                                                      videosItem.videoFileUrl,
-                                                ))) {
+                                            if (!functions
+                                                .checkVideoInFavourite(
+                                                    (currentUserDocument
+                                                                ?.videosMylist
+                                                                .toList() ??
+                                                            [])
+                                                        .toList(),
+                                                    VideoDocsMylistStruct(
+                                                      listSeq: (currentUserDocument
+                                                                      ?.videosMylist
+                                                                      .toList() ??
+                                                                  [])
+                                                              .length +
+                                                          1,
+                                                      videoDocId:
+                                                          videosItem.reference,
+                                                      topic: videosItem.topic,
+                                                      subCategory: videosItem
+                                                          .subCategory,
+                                                      websiteCategory:
+                                                          videosItem
+                                                              .websiteCategory,
+                                                      videoThumbnailImageUrl:
+                                                          videosItem
+                                                              .videoThumbnailImageUrl,
+                                                      videoUrl: videosItem
+                                                          .videoFileUrl,
+                                                    ))) {
                                               return Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(

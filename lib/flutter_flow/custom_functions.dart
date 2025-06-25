@@ -70,5 +70,5 @@ bool checkVideoInFavourite(
   List<VideoDocsMylistStruct> userVideoList,
   VideoDocsMylistStruct videoDoc,
 ) {
-  return userVideoList.any((item) => item == videoDoc);
+  return userVideoList.any((item) => item.videoDocId == videoDoc.videoDocId);
 }
