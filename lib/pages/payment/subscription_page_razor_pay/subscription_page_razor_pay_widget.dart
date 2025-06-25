@@ -533,18 +533,39 @@ class _SubscriptionPageRazorPayWidgetState
                                                     0.0, 30.0, 0.0, 0.0),
                                             child: FFButtonWidget(
                                               onPressed: () async {
-                                                if (FFAppState()
-                                                            .monthlySubscriptionId ==
+                                                if (CreateSubscriptionIDCall
+                                                            .subscriptionId(
+                                                          (_model.razorPayResponseMonthly
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                        ) ==
+                                                        null ||
+                                                    CreateSubscriptionIDCall
+                                                            .subscriptionId(
+                                                          (_model.razorPayResponseMonthly
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                        ) ==
                                                         '') {
-                                                  _model.razorpaySubscriptionResponseAvvv =
+                                                  _model.razorPayResponseMonthlyAvv =
                                                       await CreateSubscriptionIDCall
-                                                          .call();
+                                                          .call(
+                                                    planId: _model
+                                                        .paymentPlanDoc?.planId,
+                                                    totalCount: 1,
+                                                    uID: currentUserUid,
+                                                    customerId: valueOrDefault(
+                                                        currentUserDocument
+                                                            ?.customerId,
+                                                        ''),
+                                                    description: 'Monthly Plan',
+                                                  );
 
                                                   FFAppState()
                                                           .monthlySubscriptionId =
                                                       CreateSubscriptionIDCall
                                                           .subscriptionId(
-                                                    (_model.razorpaySubscriptionResponseAvvv
+                                                    (_model.razorPayResponseMonthlyAvv
                                                             ?.jsonBody ??
                                                         ''),
                                                   )!;
