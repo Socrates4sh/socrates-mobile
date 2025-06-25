@@ -117,6 +117,11 @@ class UsersRecord extends FirestoreRecord {
   bool get isSubscribed => _isSubscribed ?? false;
   bool hasIsSubscribed() => _isSubscribed != null;
 
+  // "customerId" field.
+  String? _customerId;
+  String get customerId => _customerId ?? '';
+  bool hasCustomerId() => _customerId != null;
+
   void _initializeFields() {
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
@@ -151,6 +156,7 @@ class UsersRecord extends FirestoreRecord {
       VideoDocsMylistStruct.fromMap,
     );
     _isSubscribed = snapshotData['isSubscribed'] as bool?;
+    _customerId = snapshotData['customerId'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -203,6 +209,7 @@ Map<String, dynamic> createUsersRecordData({
   bool? wACommunity,
   String? photoUrl,
   bool? isSubscribed,
+  String? customerId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -222,6 +229,7 @@ Map<String, dynamic> createUsersRecordData({
       'WACommunity': wACommunity,
       'photo_url': photoUrl,
       'isSubscribed': isSubscribed,
+      'customerId': customerId,
     }.withoutNulls,
   );
 
@@ -254,7 +262,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.wACommunity == e2?.wACommunity &&
         e1?.photoUrl == e2?.photoUrl &&
         listEquality.equals(e1?.videosMylist, e2?.videosMylist) &&
-        e1?.isSubscribed == e2?.isSubscribed;
+        e1?.isSubscribed == e2?.isSubscribed &&
+        e1?.customerId == e2?.customerId;
   }
 
   @override
@@ -278,7 +287,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.wACommunity,
         e?.photoUrl,
         e?.videosMylist,
-        e?.isSubscribed
+        e?.isSubscribed,
+        e?.customerId
       ]);
 
   @override

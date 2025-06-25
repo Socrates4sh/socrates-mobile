@@ -222,6 +222,8 @@ final parametersBuilderMap =
       ),
   'Recommended': ParameterData.none(),
   'MyList': ParameterData.none(),
+  'SubscriptionPageRazorPay': ParameterData.none(),
+  'CancellationRazorPay': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

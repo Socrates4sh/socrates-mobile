@@ -1,21 +1,21 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'locked_model.dart';
-export 'locked_model.dart';
+import 'cancellation_pop_up_model.dart';
+export 'cancellation_pop_up_model.dart';
 
-class LockedWidget extends StatefulWidget {
-  const LockedWidget({super.key});
+class CancellationPopUpWidget extends StatefulWidget {
+  const CancellationPopUpWidget({super.key});
 
   @override
-  State<LockedWidget> createState() => _LockedWidgetState();
+  State<CancellationPopUpWidget> createState() =>
+      _CancellationPopUpWidgetState();
 }
 
-class _LockedWidgetState extends State<LockedWidget> {
-  late LockedModel _model;
+class _CancellationPopUpWidgetState extends State<CancellationPopUpWidget> {
+  late CancellationPopUpModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -26,7 +26,7 @@ class _LockedWidgetState extends State<LockedWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LockedModel());
+    _model = createModel(context, () => CancellationPopUpModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -43,8 +43,8 @@ class _LockedWidgetState extends State<LockedWidget> {
     return Align(
       alignment: AlignmentDirectional(0.0, 0.0),
       child: Container(
-        width: MediaQuery.sizeOf(context).width * 0.9,
-        height: MediaQuery.sizeOf(context).height * 0.3,
+        width: MediaQuery.sizeOf(context).width * 0.95,
+        height: 250.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
           borderRadius: BorderRadius.circular(20.0),
@@ -61,25 +61,48 @@ class _LockedWidgetState extends State<LockedWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Text(
-                        'Video Locked 🔒',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              font: GoogleFonts.merriweatherSans(
-                                fontWeight: FontWeight.w500,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .fontStyle,
-                              ),
-                              fontSize: 25.0,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w500,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontStyle,
-                            ),
+                      Align(
+                        alignment: AlignmentDirectional(1.0, -1.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            Navigator.pop(context);
+                          },
+                          child: Icon(
+                            Icons.close_rounded,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 24.0,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 10.0, 0.0, 10.0),
+                        child: Text(
+                          'Are You Sure You Want to Cancel?',
+                          textAlign: TextAlign.center,
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.merriweatherSans(
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    fontSize: 20.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                        ),
                       ),
                       Text(
-                        'You need to subscribe to unlock this video and access exclusive content. \n\nSubscribe Now!',
+                        'If you cancel, you\'ll lose access to all premium content after [End Date].',
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily:
@@ -99,10 +122,10 @@ class _LockedWidgetState extends State<LockedWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               FFButtonWidget(
-                                onPressed: () async {
-                                  Navigator.pop(context);
+                                onPressed: () {
+                                  print('Button pressed ...');
                                 },
-                                text: 'Go Back',
+                                text: 'Cancel Plan',
                                 options: FFButtonOptions(
                                   height: 50.0,
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -129,10 +152,9 @@ class _LockedWidgetState extends State<LockedWidget> {
                               ),
                               FFButtonWidget(
                                 onPressed: () async {
-                                  context.pushNamed(
-                                      SubscriptionPageRazorPayWidget.routeName);
+                                  Navigator.pop(context);
                                 },
-                                text: 'Subscribe',
+                                text: 'Continue',
                                 options: FFButtonOptions(
                                   height: 50.0,
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -161,26 +183,6 @@ class _LockedWidgetState extends State<LockedWidget> {
                         ),
                       ),
                     ],
-                  ),
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(1.0, -1.0),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 20.0, 0.0),
-                  child: InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      Navigator.pop(context);
-                    },
-                    child: Icon(
-                      Icons.close_rounded,
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      size: 24.0,
-                    ),
                   ),
                 ),
               ),

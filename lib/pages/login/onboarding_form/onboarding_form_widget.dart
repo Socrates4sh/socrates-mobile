@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -885,6 +886,27 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
                                         safeSetState(() =>
                                             _model.verifiedUserDetails = false);
                                         return;
+                                      }
+                                      _model.customerIdResponse =
+                                          await CreateCustomerIDCall.call(
+                                        name:
+                                            '${_model.userFirstNameTextController.text}${_model.userLastNameTextController.text}',
+                                        email: currentUserEmail,
+                                        phone: currentPhoneNumber,
+                                      );
+
+                                      if ((_model
+                                              .customerIdResponse?.succeeded ??
+                                          true)) {
+                                        await currentUserReference!
+                                            .update(createUsersRecordData(
+                                          customerId:
+                                              CreateCustomerIDCall.customerId(
+                                            (_model.customerIdResponse
+                                                    ?.jsonBody ??
+                                                ''),
+                                          ),
+                                        ));
                                       }
 
                                       await currentUserReference!

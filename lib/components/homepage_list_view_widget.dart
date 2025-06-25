@@ -242,7 +242,7 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                             borderRadius: BorderRadius.circular(10.0),
                             child: Container(
                               width: 150.0,
-                              height: 200.0,
+                              height: 210.0,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context).primary,
                                 borderRadius: BorderRadius.circular(10.0),
@@ -259,8 +259,14 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                         children: [
                                           Flexible(
                                             child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
+                                              borderRadius: BorderRadius.only(
+                                                bottomLeft:
+                                                    Radius.circular(0.0),
+                                                bottomRight:
+                                                    Radius.circular(0.0),
+                                                topLeft: Radius.circular(8.0),
+                                                topRight: Radius.circular(8.0),
+                                              ),
                                               child: Image.network(
                                                 videosItem
                                                     .videoThumbnailImageUrl,
@@ -291,8 +297,12 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                               width: MediaQuery.sizeOf(context)
                                                       .width *
                                                   1.0,
-                                              height: 50.0,
-                                              decoration: BoxDecoration(),
+                                              height: 60.0,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                              ),
                                               child: Align(
                                                 alignment: AlignmentDirectional(
                                                     0.0, 0.0),
@@ -311,9 +321,11 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                                                   .bodyMediumFamily,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .secondaryBackground,
+                                                              .primary,
                                                           fontSize: 16.0,
                                                           letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w500,
                                                           useGoogleFonts:
                                                               !FlutterFlowTheme
                                                                       .of(context)
@@ -377,8 +389,8 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                           child: Icon(
                                             Icons.add_rounded,
                                             color: FlutterFlowTheme.of(context)
-                                                .secondaryText,
-                                            size: 24.0,
+                                                .secondaryBackground,
+                                            size: 28.0,
                                           ),
                                         ),
                                       ),
