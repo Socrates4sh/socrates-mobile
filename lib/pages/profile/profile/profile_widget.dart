@@ -392,9 +392,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
-                                              context.pushNamed(
-                                                  SubscriptionPageWidget
-                                                      .routeName);
+                                              if (isAndroid) {
+                                                context.pushNamed(
+                                                    SubscriptionPageRazorPayWidget
+                                                        .routeName);
+                                              } else {
+                                                context.pushNamed(
+                                                    SubscriptionPageWidget
+                                                        .routeName);
+                                              }
                                             },
                                             child: Container(
                                               width: double.infinity,
