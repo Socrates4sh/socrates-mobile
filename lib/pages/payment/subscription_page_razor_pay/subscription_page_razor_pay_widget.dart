@@ -439,8 +439,14 @@ class _SubscriptionPageRazorPayWidgetState
                                                           child: Container(
                                                             decoration:
                                                                 BoxDecoration(
-                                                              color: Color(
-                                                                  0x0A192452),
+                                                              color: _model
+                                                                          .selectedPlan ==
+                                                                      'Monthly'
+                                                                  ? Color(
+                                                                      0xD1192452)
+                                                                  : FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryBackground,
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
@@ -617,6 +623,27 @@ class _SubscriptionPageRazorPayWidgetState
                                                         FFAppState()
                                                             .monthlySubscriptionId = '';
                                                         safeSetState(() {});
+                                                        await showDialog(
+                                                          context: context,
+                                                          builder:
+                                                              (alertDialogContext) {
+                                                            return AlertDialog(
+                                                              title: Text(
+                                                                  'Payment Successful'),
+                                                              content: Text(
+                                                                  'Hii${currentUserDisplayName}!  Your payment  was successful.'),
+                                                              actions: [
+                                                                TextButton(
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          alertDialogContext),
+                                                                  child: Text(
+                                                                      'Ok'),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
+                                                        );
                                                       },
                                                     );
                                                   } else {
