@@ -169,9 +169,10 @@ class _CancellationRazorPayWidgetState
                                                 ),
                                           ),
                                           TextSpan(
-                                            text: currentUserDocument!
-                                                .subscriptionEndDateTime!
-                                                .toString(),
+                                            text: dateTimeFormat(
+                                                "d/M/y",
+                                                currentUserDocument!
+                                                    .subscriptionEndDateTime!),
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 14.0,
@@ -184,6 +185,9 @@ class _CancellationRazorPayWidgetState
                                               fontFamily:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMediumFamily,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
                                               letterSpacing: 0.0,
                                               useGoogleFonts:
                                                   !FlutterFlowTheme.of(context)
