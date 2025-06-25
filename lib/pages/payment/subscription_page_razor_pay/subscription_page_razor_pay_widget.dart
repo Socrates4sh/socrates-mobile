@@ -53,6 +53,8 @@ class _SubscriptionPageRazorPayWidgetState
           ));
         }
       }
+      FFAppState().monthlySubscriptionId = '';
+      safeSetState(() {});
       _model.constantDataDoc = await queryConstantDataRecordOnce(
         singleRecord: true,
       ).then((s) => s.firstOrNull);
@@ -531,19 +533,8 @@ class _SubscriptionPageRazorPayWidgetState
                                                     0.0, 30.0, 0.0, 0.0),
                                             child: FFButtonWidget(
                                               onPressed: () async {
-                                                if (CreateSubscriptionIDCall
-                                                            .subscriptionId(
-                                                          (_model.razorPayResponseMonthly
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                        ) ==
-                                                        null ||
-                                                    CreateSubscriptionIDCall
-                                                            .subscriptionId(
-                                                          (_model.razorPayResponseMonthly
-                                                                  ?.jsonBody ??
-                                                              ''),
-                                                        ) ==
+                                                if (FFAppState()
+                                                            .monthlySubscriptionId ==
                                                         '') {
                                                   _model.razorpaySubscriptionResponseAvvv =
                                                       await CreateSubscriptionIDCall
