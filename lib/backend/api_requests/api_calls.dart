@@ -182,6 +182,11 @@ class CancelSubscriptionCall {
       alwaysAllowBody: false,
     );
   }
+
+  static String? error(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.error.description''',
+      ));
 }
 
 class ApiPagingParams {

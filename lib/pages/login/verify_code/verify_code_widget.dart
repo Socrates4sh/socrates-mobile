@@ -302,6 +302,9 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                                                               context)
                                                                           .bodyMediumIsCustom,
                                                                 ),
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .number,
                                                             cursorColor:
                                                                 FlutterFlowTheme.of(
                                                                         context)

@@ -169,7 +169,9 @@ class _CancellationRazorPayWidgetState
                                                 ),
                                           ),
                                           TextSpan(
-                                            text: '[End Date].',
+                                            text: currentUserDocument!
+                                                .subscriptionEndDateTime!
+                                                .toString(),
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 14.0,
