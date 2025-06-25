@@ -112,15 +112,41 @@ class UsersRecord extends FirestoreRecord {
   List<VideoDocsMylistStruct> get videosMylist => _videosMylist ?? const [];
   bool hasVideosMylist() => _videosMylist != null;
 
-  // "isSubscribed" field.
-  bool? _isSubscribed;
-  bool get isSubscribed => _isSubscribed ?? false;
-  bool hasIsSubscribed() => _isSubscribed != null;
-
   // "customerId" field.
   String? _customerId;
   String get customerId => _customerId ?? '';
   bool hasCustomerId() => _customerId != null;
+
+  // "subscriptionEndDateTime" field.
+  DateTime? _subscriptionEndDateTime;
+  DateTime? get subscriptionEndDateTime => _subscriptionEndDateTime;
+  bool hasSubscriptionEndDateTime() => _subscriptionEndDateTime != null;
+
+  // "subscriptionStartDateTime" field.
+  DateTime? _subscriptionStartDateTime;
+  DateTime? get subscriptionStartDateTime => _subscriptionStartDateTime;
+  bool hasSubscriptionStartDateTime() => _subscriptionStartDateTime != null;
+
+  // "subscriptionID" field.
+  String? _subscriptionID;
+  String get subscriptionID => _subscriptionID ?? '';
+  bool hasSubscriptionID() => _subscriptionID != null;
+
+  // "userSubscribed" field.
+  bool? _userSubscribed;
+  bool get userSubscribed => _userSubscribed ?? false;
+  bool hasUserSubscribed() => _userSubscribed != null;
+
+  // "subscriptionCancelled" field.
+  bool? _subscriptionCancelled;
+  bool get subscriptionCancelled => _subscriptionCancelled ?? false;
+  bool hasSubscriptionCancelled() => _subscriptionCancelled != null;
+
+  // "subscriptionDetails" field.
+  List<SubscriptionStruct>? _subscriptionDetails;
+  List<SubscriptionStruct> get subscriptionDetails =>
+      _subscriptionDetails ?? const [];
+  bool hasSubscriptionDetails() => _subscriptionDetails != null;
 
   void _initializeFields() {
     _uid = snapshotData['uid'] as String?;
@@ -155,8 +181,18 @@ class UsersRecord extends FirestoreRecord {
       snapshotData['videos_mylist'],
       VideoDocsMylistStruct.fromMap,
     );
-    _isSubscribed = snapshotData['isSubscribed'] as bool?;
     _customerId = snapshotData['customerId'] as String?;
+    _subscriptionEndDateTime =
+        snapshotData['subscriptionEndDateTime'] as DateTime?;
+    _subscriptionStartDateTime =
+        snapshotData['subscriptionStartDateTime'] as DateTime?;
+    _subscriptionID = snapshotData['subscriptionID'] as String?;
+    _userSubscribed = snapshotData['userSubscribed'] as bool?;
+    _subscriptionCancelled = snapshotData['subscriptionCancelled'] as bool?;
+    _subscriptionDetails = getStructList(
+      snapshotData['subscriptionDetails'],
+      SubscriptionStruct.fromMap,
+    );
   }
 
   static CollectionReference get collection =>
@@ -208,8 +244,12 @@ Map<String, dynamic> createUsersRecordData({
   String? subscribedEmail,
   bool? wACommunity,
   String? photoUrl,
-  bool? isSubscribed,
   String? customerId,
+  DateTime? subscriptionEndDateTime,
+  DateTime? subscriptionStartDateTime,
+  String? subscriptionID,
+  bool? userSubscribed,
+  bool? subscriptionCancelled,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -228,8 +268,12 @@ Map<String, dynamic> createUsersRecordData({
       'subscribedEmail': subscribedEmail,
       'WACommunity': wACommunity,
       'photo_url': photoUrl,
-      'isSubscribed': isSubscribed,
       'customerId': customerId,
+      'subscriptionEndDateTime': subscriptionEndDateTime,
+      'subscriptionStartDateTime': subscriptionStartDateTime,
+      'subscriptionID': subscriptionID,
+      'userSubscribed': userSubscribed,
+      'subscriptionCancelled': subscriptionCancelled,
     }.withoutNulls,
   );
 
@@ -262,8 +306,13 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.wACommunity == e2?.wACommunity &&
         e1?.photoUrl == e2?.photoUrl &&
         listEquality.equals(e1?.videosMylist, e2?.videosMylist) &&
-        e1?.isSubscribed == e2?.isSubscribed &&
-        e1?.customerId == e2?.customerId;
+        e1?.customerId == e2?.customerId &&
+        e1?.subscriptionEndDateTime == e2?.subscriptionEndDateTime &&
+        e1?.subscriptionStartDateTime == e2?.subscriptionStartDateTime &&
+        e1?.subscriptionID == e2?.subscriptionID &&
+        e1?.userSubscribed == e2?.userSubscribed &&
+        e1?.subscriptionCancelled == e2?.subscriptionCancelled &&
+        listEquality.equals(e1?.subscriptionDetails, e2?.subscriptionDetails);
   }
 
   @override
@@ -287,8 +336,13 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.wACommunity,
         e?.photoUrl,
         e?.videosMylist,
-        e?.isSubscribed,
-        e?.customerId
+        e?.customerId,
+        e?.subscriptionEndDateTime,
+        e?.subscriptionStartDateTime,
+        e?.subscriptionID,
+        e?.userSubscribed,
+        e?.subscriptionCancelled,
+        e?.subscriptionDetails
       ]);
 
   @override

@@ -159,6 +159,31 @@ class CreateCustomerIDCall {
       ));
 }
 
+class CancelSubscriptionCall {
+  static Future<ApiCallResponse> call({
+    String? subId = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'cancelSubscription',
+      apiUrl: 'https://api.razorpay.com/v1/subscriptions/${subId}/cancel',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization':
+            'Basic cnpwX3Rlc3RfdVR6eTl4QlZoaU5yU086Rm9qUnRlSVZIWDBCQTBaWDQ0MWoxajdU',
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

@@ -199,11 +199,12 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                             highlightColor: Colors.transparent,
                             onTap: () async {
                               if (((valueOrDefault<bool>(
-                                              currentUserDocument?.isSubscribed,
+                                              currentUserDocument
+                                                  ?.userSubscribed,
                                               false) ==
                                           null) ||
                                       !valueOrDefault<bool>(
-                                          currentUserDocument?.isSubscribed,
+                                          currentUserDocument?.userSubscribed,
                                           false)) &&
                                   (videosIndex >= 3)) {
                                 await showDialog(
@@ -418,12 +419,12 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                     ),
                                     if (((valueOrDefault<bool>(
                                                     currentUserDocument
-                                                        ?.isSubscribed,
+                                                        ?.userSubscribed,
                                                     false) ==
                                                 null) ||
                                             !valueOrDefault<bool>(
                                                 currentUserDocument
-                                                    ?.isSubscribed,
+                                                    ?.userSubscribed,
                                                 false)) &&
                                         (videosIndex >= 3))
                                       AuthUserStreamWidget(
