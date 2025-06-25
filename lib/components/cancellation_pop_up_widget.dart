@@ -137,6 +137,25 @@ class _CancellationPopUpWidgetState extends State<CancellationPopUpWidget> {
                                       true)) {
                                     context.pushNamed(
                                         CancellationRazorPayWidget.routeName);
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          CancelSubscriptionCall.error(
+                                            (_model.apiResult1u4?.jsonBody ??
+                                                ''),
+                                          )!,
+                                          style: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                        ),
+                                        duration: Duration(milliseconds: 4000),
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context)
+                                                .secondary,
+                                      ),
+                                    );
                                   }
 
                                   safeSetState(() {});
