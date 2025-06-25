@@ -56,3 +56,12 @@ int findIndexOfTable(
   int index = websiteVideo.indexWhere((row) => row.videoSequence == videoSeq);
   return index;
 }
+
+DateTime getSubscriptionEndDate(int startDay) {
+  DateTime now = DateTime.now(); // Current date & time
+
+  DateTime subscriptionEndDateTime = now.add(Duration(days: startDay));
+
+  print("Date & Time After 7 Days: $subscriptionEndDateTime");
+  return subscriptionEndDateTime;
+}

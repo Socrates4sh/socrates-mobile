@@ -1,6 +1,9 @@
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'cancellation_pop_up_model.dart';
@@ -122,8 +125,21 @@ class _CancellationPopUpWidgetState extends State<CancellationPopUpWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
+                                onPressed: () async {
+                                  _model.apiResult1u4 =
+                                      await CancelSubscriptionCall.call(
+                                    subId: valueOrDefault(
+                                        currentUserDocument?.subscriptionID,
+                                        ''),
+                                  );
+
+                                  if ((_model.apiResult1u4?.succeeded ??
+                                      true)) {
+                                    context.pushNamed(
+                                        CancellationRazorPayWidget.routeName);
+                                  }
+
+                                  safeSetState(() {});
                                 },
                                 text: 'Cancel Plan',
                                 options: FFButtonOptions(

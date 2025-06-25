@@ -1,10 +1,12 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
+import '/components/cancellation_pop_up_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -131,9 +133,14 @@ class _SubscriptionPageRazorPayWidgetState
                               if (_model.initComplete) {
                                 return Builder(
                                   builder: (context) {
-                                    if (!revenue_cat.activeEntitlementIds
-                                        .contains(FFAppConstants
-                                            .EntitlementIDVideoAccess)) {
+                                    if (!valueOrDefault<bool>(
+                                            currentUserDocument?.userSubscribed,
+                                            false) ||
+                                        (valueOrDefault<bool>(
+                                                currentUserDocument
+                                                    ?.userSubscribed,
+                                                false) ==
+                                            null)) {
                                       return Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
@@ -563,7 +570,52 @@ class _SubscriptionPageRazorPayWidgetState
                                                       FFAppState()
                                                           .monthlySubscriptionId,
                                                       () async {},
-                                                      () async {},
+                                                      () async {
+                                                        await currentUserReference!
+                                                            .update({
+                                                          ...createUsersRecordData(
+                                                            subscriptionEndDateTime:
+                                                                functions
+                                                                    .getSubscriptionEndDate(
+                                                                        30),
+                                                            subscriptionStartDateTime:
+                                                                getCurrentTimestamp,
+                                                            subscriptionID:
+                                                                FFAppState()
+                                                                    .monthlySubscriptionId,
+                                                            userSubscribed:
+                                                                true,
+                                                            subscriptionCancelled:
+                                                                false,
+                                                          ),
+                                                          ...mapToFirestore(
+                                                            {
+                                                              'subscriptionDetails':
+                                                                  FieldValue
+                                                                      .arrayUnion([
+                                                                getSubscriptionFirestoreData(
+                                                                  createSubscriptionStruct(
+                                                                    planAmount:
+                                                                        valueOrDefault<
+                                                                            double>(
+                                                                      _model
+                                                                          .paymentPlanDoc
+                                                                          ?.originalPrice
+                                                                          .toDouble(),
+                                                                      99.0,
+                                                                    ),
+                                                                    subscriptionStartDate:
+                                                                        getCurrentTimestamp,
+                                                                    clearUnsetFields:
+                                                                        false,
+                                                                  ),
+                                                                  true,
+                                                                )
+                                                              ]),
+                                                            },
+                                                          ),
+                                                        });
+                                                      },
                                                     );
                                                   } else {
                                                     _model.annualPurchase =
@@ -970,28 +1022,87 @@ class _SubscriptionPageRazorPayWidgetState
                                                                 ),
                                                       ),
                                                     ),
-                                                    Text(
-                                                      'Cancel Subscription',
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .headlineMedium
-                                                          .override(
-                                                            fontFamily:
-                                                                FlutterFlowTheme.of(
+                                                    Builder(
+                                                      builder: (context) =>
+                                                          InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          await showDialog(
+                                                            context: context,
+                                                            builder:
+                                                                (dialogContext) {
+                                                              return Dialog(
+                                                                elevation: 0,
+                                                                insetPadding:
+                                                                    EdgeInsets
+                                                                        .zero,
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                alignment: AlignmentDirectional(
+                                                                        0.0,
+                                                                        0.0)
+                                                                    .resolve(
+                                                                        Directionality.of(
+                                                                            context)),
+                                                                child:
+                                                                    GestureDetector(
+                                                                  onTap: () {
+                                                                    FocusScope.of(
+                                                                            dialogContext)
+                                                                        .unfocus();
+                                                                    FocusManager
+                                                                        .instance
+                                                                        .primaryFocus
+                                                                        ?.unfocus();
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    height:
+                                                                        MediaQuery.sizeOf(context).height *
+                                                                            0.5,
+                                                                    width: double
+                                                                        .infinity,
+                                                                    child:
+                                                                        CancellationPopUpWidget(),
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                          );
+                                                        },
+                                                        child: Text(
+                                                          'Cancel Subscription',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .headlineMedium
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
                                                                         context)
                                                                     .headlineMediumFamily,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .error,
-                                                            fontSize: 12.0,
-                                                            letterSpacing: 0.0,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            useGoogleFonts:
-                                                                !FlutterFlowTheme.of(
+                                                                color: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .headlineMediumIsCustom,
-                                                          ),
+                                                                    .error,
+                                                                fontSize: 12.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                useGoogleFonts:
+                                                                    !FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .headlineMediumIsCustom,
+                                                              ),
+                                                        ),
+                                                      ),
                                                     ),
                                                   ].divide(
                                                       SizedBox(height: 10.0)),
