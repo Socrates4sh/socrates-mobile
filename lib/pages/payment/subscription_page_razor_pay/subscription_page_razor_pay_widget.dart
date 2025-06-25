@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
-import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -439,14 +438,9 @@ class _SubscriptionPageRazorPayWidgetState
                                                           child: Container(
                                                             decoration:
                                                                 BoxDecoration(
-                                                              color: _model
-                                                                          .selectedPlan ==
-                                                                      'Monthly'
-                                                                  ? Color(
-                                                                      0xD1192452)
-                                                                  : FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryBackground,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryBackground,
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
@@ -537,202 +531,107 @@ class _SubscriptionPageRazorPayWidgetState
                                                     0.0, 30.0, 0.0, 0.0),
                                             child: FFButtonWidget(
                                               onPressed: () async {
-                                                if (_model.selectedPlan !=
-                                                        null &&
-                                                    _model.selectedPlan != '') {
-                                                  if (_model.selectedPlan ==
-                                                      'Monthly') {
-                                                    if (CreateSubscriptionIDCall
-                                                                .subscriptionId(
-                                                              (_model.razorPayResponseMonthly
-                                                                      ?.jsonBody ??
-                                                                  ''),
-                                                            ) ==
-                                                            null ||
-                                                        CreateSubscriptionIDCall
-                                                                .subscriptionId(
-                                                              (_model.razorPayResponseMonthly
-                                                                      ?.jsonBody ??
-                                                                  ''),
-                                                            ) ==
-                                                            '') {
-                                                      _model.razorpaySubscriptionResponseAvvv =
-                                                          await CreateSubscriptionIDCall
-                                                              .call();
+                                                if (CreateSubscriptionIDCall
+                                                            .subscriptionId(
+                                                          (_model.razorPayResponseMonthly
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                        ) ==
+                                                        null ||
+                                                    CreateSubscriptionIDCall
+                                                            .subscriptionId(
+                                                          (_model.razorPayResponseMonthly
+                                                                  ?.jsonBody ??
+                                                              ''),
+                                                        ) ==
+                                                        '') {
+                                                  _model.razorpaySubscriptionResponseAvvv =
+                                                      await CreateSubscriptionIDCall
+                                                          .call();
 
-                                                      FFAppState()
-                                                              .monthlySubscriptionId =
-                                                          CreateSubscriptionIDCall
-                                                              .subscriptionId(
-                                                        (_model.razorpaySubscriptionResponseAvvv
-                                                                ?.jsonBody ??
-                                                            ''),
-                                                      )!;
-                                                      safeSetState(() {});
-                                                    }
-                                                    await actions
-                                                        .startRazorpaySubscriptionPayment(
-                                                      FFAppState()
-                                                          .monthlySubscriptionId,
-                                                      () async {},
-                                                      () async {
-                                                        await currentUserReference!
-                                                            .update({
-                                                          ...createUsersRecordData(
-                                                            subscriptionEndDateTime:
-                                                                functions
-                                                                    .getSubscriptionEndDate(
-                                                                        30),
-                                                            subscriptionStartDateTime:
-                                                                getCurrentTimestamp,
-                                                            subscriptionID:
-                                                                FFAppState()
-                                                                    .monthlySubscriptionId,
-                                                            userSubscribed:
-                                                                true,
-                                                            subscriptionCancelled:
-                                                                false,
-                                                          ),
-                                                          ...mapToFirestore(
-                                                            {
-                                                              'subscriptionDetails':
-                                                                  FieldValue
-                                                                      .arrayUnion([
-                                                                getSubscriptionFirestoreData(
-                                                                  createSubscriptionStruct(
-                                                                    planAmount:
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                      _model
-                                                                          .paymentPlanDoc
-                                                                          ?.originalPrice
-                                                                          .toDouble(),
-                                                                      99.0,
-                                                                    ),
-                                                                    subscriptionStartDate:
-                                                                        getCurrentTimestamp,
-                                                                    clearUnsetFields:
-                                                                        false,
-                                                                  ),
-                                                                  true,
-                                                                )
-                                                              ]),
-                                                            },
-                                                          ),
-                                                        });
-                                                        FFAppState()
-                                                            .monthlySubscriptionId = '';
-                                                        safeSetState(() {});
-                                                        await showDialog(
-                                                          context: context,
-                                                          builder:
-                                                              (alertDialogContext) {
-                                                            return AlertDialog(
-                                                              title: Text(
-                                                                  'Payment Successful'),
-                                                              content: Text(
-                                                                  'Hii${currentUserDisplayName}!  Your payment  was successful.'),
-                                                              actions: [
-                                                                TextButton(
-                                                                  onPressed: () =>
-                                                                      Navigator.pop(
-                                                                          alertDialogContext),
-                                                                  child: Text(
-                                                                      'Ok'),
+                                                  FFAppState()
+                                                          .monthlySubscriptionId =
+                                                      CreateSubscriptionIDCall
+                                                          .subscriptionId(
+                                                    (_model.razorpaySubscriptionResponseAvvv
+                                                            ?.jsonBody ??
+                                                        ''),
+                                                  )!;
+                                                  safeSetState(() {});
+                                                }
+                                                await actions
+                                                    .startRazorpaySubscriptionPayment(
+                                                  FFAppState()
+                                                      .monthlySubscriptionId,
+                                                  () async {},
+                                                  () async {
+                                                    await currentUserReference!
+                                                        .update({
+                                                      ...createUsersRecordData(
+                                                        subscriptionEndDateTime:
+                                                            functions
+                                                                .getSubscriptionEndDate(
+                                                                    30),
+                                                        subscriptionStartDateTime:
+                                                            getCurrentTimestamp,
+                                                        subscriptionID: FFAppState()
+                                                            .monthlySubscriptionId,
+                                                        userSubscribed: true,
+                                                        subscriptionCancelled:
+                                                            false,
+                                                      ),
+                                                      ...mapToFirestore(
+                                                        {
+                                                          'subscriptionDetails':
+                                                              FieldValue
+                                                                  .arrayUnion([
+                                                            getSubscriptionFirestoreData(
+                                                              createSubscriptionStruct(
+                                                                planAmount:
+                                                                    valueOrDefault<
+                                                                        double>(
+                                                                  _model
+                                                                      .paymentPlanDoc
+                                                                      ?.originalPrice
+                                                                      .toDouble(),
+                                                                  99.0,
                                                                 ),
-                                                              ],
-                                                            );
-                                                          },
+                                                                subscriptionStartDate:
+                                                                    getCurrentTimestamp,
+                                                                clearUnsetFields:
+                                                                    false,
+                                                              ),
+                                                              true,
+                                                            )
+                                                          ]),
+                                                        },
+                                                      ),
+                                                    });
+                                                    FFAppState()
+                                                        .monthlySubscriptionId = '';
+                                                    safeSetState(() {});
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text(
+                                                              'Payment Successful'),
+                                                          content: Text(
+                                                              'Hii${currentUserDisplayName}!  Your payment  was successful.'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext),
+                                                              child: Text('Ok'),
+                                                            ),
+                                                          ],
                                                         );
                                                       },
                                                     );
-                                                  } else {
-                                                    _model.annualPurchase =
-                                                        await revenue_cat
-                                                            .purchasePackage(
-                                                                revenue_cat
-                                                                    .offerings!
-                                                                    .current!
-                                                                    .annual!
-                                                                    .identifier);
-                                                    if (_model
-                                                        .annualPurchase!) {
-                                                      await currentUserReference!
-                                                          .update({
-                                                        ...mapToFirestore(
-                                                          {
-                                                            'subscriptionPaymentList':
-                                                                FieldValue
-                                                                    .arrayUnion([
-                                                              getSubscriptionPaymentFirestoreData(
-                                                                createSubscriptionPaymentStruct(
-                                                                  subscriptionPlan:
-                                                                      'Annual',
-                                                                  subscriptionDate:
-                                                                      getCurrentTimestamp,
-                                                                  packageID: revenue_cat
-                                                                      .offerings!
-                                                                      .current!
-                                                                      .annual!
-                                                                      .identifier,
-                                                                  clearUnsetFields:
-                                                                      false,
-                                                                ),
-                                                                true,
-                                                              )
-                                                            ]),
-                                                          },
-                                                        ),
-                                                      });
-
-                                                      context.pushNamed(
-                                                          SubscriptionPageRazorPayWidget
-                                                              .routeName);
-                                                    } else {
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                        SnackBar(
-                                                          content: Text(
-                                                            'Something went wrong. Please try again.',
-                                                            style: TextStyle(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryText,
-                                                            ),
-                                                          ),
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                                  4000),
-                                                          backgroundColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .secondary,
-                                                        ),
-                                                      );
-                                                    }
-                                                  }
-                                                } else {
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                      content: Text(
-                                                        'Please select the plan first.',
-                                                        style: TextStyle(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryText,
-                                                        ),
-                                                      ),
-                                                      duration: Duration(
-                                                          milliseconds: 4000),
-                                                      backgroundColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondary,
-                                                    ),
-                                                  );
-                                                }
+                                                  },
+                                                );
 
                                                 safeSetState(() {});
                                               },

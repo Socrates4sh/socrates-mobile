@@ -52,7 +52,7 @@ Future startRazorpaySubscriptionPayment(
     'description': 'Subscription Payment',
 
     'theme': {
-      'color': '#6237A0',
+      'color': '#192452',
     },
     'prefill': {
       'contact': currentPhoneNumber, // User's phone number
