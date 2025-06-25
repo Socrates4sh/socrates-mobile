@@ -20,9 +20,9 @@ Future startRazorpaySubscriptionPayment(
   Future Function() successAction,
 ) async {
   var razorpay = Razorpay();
-  const bool isProd = true;
+  const bool isProd = false;
   const kProdRazorpayKeyId = 'rzp_live_cgnRQm5EBC1S3s';
-  const kTestRazorpayKeyId = 'rzp_test_ied4aHHzhvJlLE';
+  const kTestRazorpayKeyId = 'rzp_test_uTzy9xBVhiNrSO';
   String razorpayKeyId = isProd ? kProdRazorpayKeyId : kTestRazorpayKeyId;
   // razorpay.initilizeSDK(razorpayKeyId);
 
