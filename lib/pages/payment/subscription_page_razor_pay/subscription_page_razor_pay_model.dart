@@ -24,7 +24,7 @@ class SubscriptionPageRazorPayModel
   // Stores action output result for [Backend Call - API (createSubscriptionID)] action in SubscriptionPageRazorPay widget.
   ApiCallResponse? razorPayResponseMonthly;
   // Stores action output result for [Backend Call - API (createSubscriptionID)] action in Button widget.
-  ApiCallResponse? razorpaySubscriptionResponseAvvv;
+  ApiCallResponse? razorPayResponseMonthlyAvv;
 
   @override
   void initState(BuildContext context) {}
