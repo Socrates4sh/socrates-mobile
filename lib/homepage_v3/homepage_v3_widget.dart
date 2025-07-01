@@ -414,28 +414,33 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                                                 BorderRadius.circular(8.0),
                                                                           ),
                                                                           child:
-                                                                              Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.center,
-                                                                            children:
-                                                                                [
-                                                                              Icon(
-                                                                                Icons.play_arrow_rounded,
-                                                                                color: FlutterFlowTheme.of(context).primaryText,
-                                                                                size: 24.0,
-                                                                              ),
-                                                                              Text(
-                                                                                'Play',
-                                                                                style: FlutterFlowTheme.of(context).headlineSmall.override(
-                                                                                      fontFamily: FlutterFlowTheme.of(context).headlineSmallFamily,
-                                                                                      fontSize: 22.0,
-                                                                                      letterSpacing: 0.0,
-                                                                                      useGoogleFonts: !FlutterFlowTheme.of(context).headlineSmallIsCustom,
-                                                                                    ),
-                                                                              ),
-                                                                            ].divide(SizedBox(width: 10.0)),
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                5.0,
+                                                                                0.0,
+                                                                                5.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                Row(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                              children: [
+                                                                                Icon(
+                                                                                  Icons.play_arrow_rounded,
+                                                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                                                  size: 24.0,
+                                                                                ),
+                                                                                Text(
+                                                                                  'Play',
+                                                                                  style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                                        fontFamily: FlutterFlowTheme.of(context).headlineSmallFamily,
+                                                                                        fontSize: 22.0,
+                                                                                        letterSpacing: 0.0,
+                                                                                        useGoogleFonts: !FlutterFlowTheme.of(context).headlineSmallIsCustom,
+                                                                                      ),
+                                                                                ),
+                                                                              ].divide(SizedBox(width: 10.0)),
+                                                                            ),
                                                                           ),
                                                                         ),
                                                                       ),
@@ -461,7 +466,34 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                                               focusColor: Colors.transparent,
                                                                               hoverColor: Colors.transparent,
                                                                               highlightColor: Colors.transparent,
-                                                                              onTap: () async {},
+                                                                              onTap: () async {
+                                                                                await currentUserReference!.update({
+                                                                                  ...mapToFirestore(
+                                                                                    {
+                                                                                      'videos_mylist': FieldValue.arrayUnion([
+                                                                                        getVideoDocsMylistFirestoreData(
+                                                                                          updateVideoDocsMylistStruct(
+                                                                                            VideoDocsMylistStruct(
+                                                                                              listSeq: (currentUserDocument?.videosMylist.toList() ?? []).length + 1,
+                                                                                              videoDocId: recVideosListItem.reference,
+                                                                                              topic: recVideosListItem.topic,
+                                                                                              subCategory: recVideosListItem.subCategory,
+                                                                                              websiteCategory: recVideosListItem.websiteCategory,
+                                                                                              videoThumbnailImageUrl: recVideosListItem.videoThumbnailImageUrl,
+                                                                                              videoUrl: recVideosListItem.videoFileUrl,
+                                                                                              videoSeq: recVideosListItem.videoSequence,
+                                                                                            ),
+                                                                                            clearUnsetFields: false,
+                                                                                          ),
+                                                                                          true,
+                                                                                        )
+                                                                                      ]),
+                                                                                    },
+                                                                                  ),
+                                                                                });
+
+                                                                                safeSetState(() {});
+                                                                              },
                                                                               child: Container(
                                                                                 width: MediaQuery.sizeOf(context).width * 0.3,
                                                                                 height: 40.0,

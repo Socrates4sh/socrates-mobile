@@ -105,17 +105,21 @@ class _CancellationPopUpWidgetState extends State<CancellationPopUpWidget> {
                                   ),
                         ),
                       ),
-                      Text(
-                        'If you cancel, you\'ll lose access to all premium content after [End Date].',
-                        textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily:
-                                  FlutterFlowTheme.of(context).bodyMediumFamily,
-                              fontSize: 18.0,
-                              letterSpacing: 0.0,
-                              useGoogleFonts: !FlutterFlowTheme.of(context)
-                                  .bodyMediumIsCustom,
-                            ),
+                      AuthUserStreamWidget(
+                        builder: (context) => Text(
+                          'If you cancel, you\'ll lose access to all premium content after ${currentUserDocument?.subscriptionEndDateTime?.toString()}.',
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context)
+                              .bodyMedium
+                              .override(
+                                fontFamily: FlutterFlowTheme.of(context)
+                                    .bodyMediumFamily,
+                                fontSize: 18.0,
+                                letterSpacing: 0.0,
+                                useGoogleFonts: !FlutterFlowTheme.of(context)
+                                    .bodyMediumIsCustom,
+                              ),
+                        ),
                       ),
                       Flexible(
                         child: Padding(

@@ -172,15 +172,19 @@ class _CancellationRazorPayWidgetState
                                           TextSpan(
                                             text: valueOrDefault<String>(
                                               dateTimeFormat(
-                                                  "d/M/y",
+                                                  "d MMM y",
                                                   currentUserDocument
                                                       ?.subscriptionEndDateTime),
-                                              ' End Date',
+                                              'End Date',
                                             ),
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 14.0,
                                             ),
+                                          ),
+                                          TextSpan(
+                                            text: '.',
+                                            style: TextStyle(),
                                           )
                                         ],
                                         style: FlutterFlowTheme.of(context)

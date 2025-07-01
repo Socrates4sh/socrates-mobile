@@ -198,7 +198,7 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                                 .circular(10.0),
                                                         child: Container(
                                                           width: 150.0,
-                                                          height: 200.0,
+                                                          height: 210.0,
                                                           decoration:
                                                               BoxDecoration(
                                                             color: FlutterFlowTheme
@@ -222,88 +222,84 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                                     MainAxisAlignment
                                                                         .spaceBetween,
                                                                 children: [
-                                                                  ClipRRect(
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .only(
-                                                                      bottomLeft:
-                                                                          Radius.circular(
-                                                                              0.0),
-                                                                      bottomRight:
-                                                                          Radius.circular(
-                                                                              0.0),
-                                                                      topLeft: Radius
-                                                                          .circular(
-                                                                              8.0),
-                                                                      topRight:
-                                                                          Radius.circular(
-                                                                              8.0),
-                                                                    ),
-                                                                    child: Image
-                                                                        .network(
-                                                                      recVideosListItem
-                                                                          .videoThumbnailImageUrl,
-                                                                      width: MediaQuery.sizeOf(context)
-                                                                              .width *
-                                                                          1.0,
-                                                                      height:
-                                                                          150.0,
-                                                                      fit: BoxFit
-                                                                          .cover,
-                                                                      errorBuilder: (context,
-                                                                              error,
-                                                                              stackTrace) =>
-                                                                          Image
-                                                                              .asset(
-                                                                        'assets/images/error_image.png',
+                                                                  Flexible(
+                                                                    child:
+                                                                        ClipRRect(
+                                                                      borderRadius:
+                                                                          BorderRadius
+                                                                              .only(
+                                                                        bottomLeft:
+                                                                            Radius.circular(0.0),
+                                                                        bottomRight:
+                                                                            Radius.circular(0.0),
+                                                                        topLeft:
+                                                                            Radius.circular(8.0),
+                                                                        topRight:
+                                                                            Radius.circular(8.0),
+                                                                      ),
+                                                                      child: Image
+                                                                          .network(
+                                                                        recVideosListItem
+                                                                            .videoThumbnailImageUrl,
                                                                         width: MediaQuery.sizeOf(context).width *
                                                                             1.0,
                                                                         height:
                                                                             150.0,
                                                                         fit: BoxFit
                                                                             .cover,
+                                                                        errorBuilder: (context,
+                                                                                error,
+                                                                                stackTrace) =>
+                                                                            Image.asset(
+                                                                          'assets/images/error_image.png',
+                                                                          width:
+                                                                              MediaQuery.sizeOf(context).width * 1.0,
+                                                                          height:
+                                                                              150.0,
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        ),
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                  Flexible(
+                                                                  Align(
+                                                                    alignment:
+                                                                        AlignmentDirectional(
+                                                                            0.0,
+                                                                            1.0),
                                                                     child:
-                                                                        Align(
-                                                                      alignment:
-                                                                          AlignmentDirectional(
-                                                                              0.0,
-                                                                              1.0),
+                                                                        Container(
+                                                                      width: MediaQuery.sizeOf(context)
+                                                                              .width *
+                                                                          1.0,
+                                                                      height:
+                                                                          60.0,
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryBackground,
+                                                                      ),
                                                                       child:
-                                                                          Container(
-                                                                        width: MediaQuery.sizeOf(context).width *
-                                                                            1.0,
-                                                                        height:
-                                                                            50.0,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).secondaryBackground,
-                                                                        ),
+                                                                          Align(
+                                                                        alignment: AlignmentDirectional(
+                                                                            0.0,
+                                                                            0.0),
                                                                         child:
-                                                                            Align(
-                                                                          alignment: AlignmentDirectional(
-                                                                              0.0,
-                                                                              0.0),
+                                                                            Padding(
+                                                                          padding:
+                                                                              EdgeInsets.all(5.0),
                                                                           child:
-                                                                              Padding(
-                                                                            padding:
-                                                                                EdgeInsets.all(5.0),
-                                                                            child:
-                                                                                Text(
-                                                                              recVideosListItem.topic,
-                                                                              textAlign: TextAlign.center,
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                                    color: FlutterFlowTheme.of(context).primary,
-                                                                                    fontSize: 16.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                    useGoogleFonts: !FlutterFlowTheme.of(context).bodyMediumIsCustom,
-                                                                                  ),
-                                                                            ),
+                                                                              Text(
+                                                                            recVideosListItem.topic,
+                                                                            textAlign:
+                                                                                TextAlign.center,
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                                  color: FlutterFlowTheme.of(context).primary,
+                                                                                  fontSize: 16.0,
+                                                                                  letterSpacing: 0.0,
+                                                                                  useGoogleFonts: !FlutterFlowTheme.of(context).bodyMediumIsCustom,
+                                                                                ),
                                                                           ),
                                                                         ),
                                                                       ),
@@ -376,6 +372,9 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                                               },
                                                                             ),
                                                                           });
+
+                                                                          safeSetState(
+                                                                              () {});
                                                                         },
                                                                         child:
                                                                             Icon(
