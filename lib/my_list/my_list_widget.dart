@@ -85,8 +85,7 @@ class _MyListWidgetState extends State<MyListWidget> {
                               height: MediaQuery.sizeOf(context).height * 0.8,
                               decoration: BoxDecoration(),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    30.0, 0.0, 30.0, 30.0),
+                                padding: EdgeInsets.all(30.0),
                                 child: SingleChildScrollView(
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,

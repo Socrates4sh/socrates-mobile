@@ -107,7 +107,7 @@ class _CancellationPopUpWidgetState extends State<CancellationPopUpWidget> {
                       ),
                       AuthUserStreamWidget(
                         builder: (context) => Text(
-                          'If you cancel, you\'ll lose access to all premium content after ${currentUserDocument?.subscriptionEndDateTime?.toString()}.',
+                          'If you cancel, you\'ll lose access to all premium content after ${dateTimeFormat("d MMM y", currentUserDocument?.subscriptionEndDateTime)}.',
                           textAlign: TextAlign.center,
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
