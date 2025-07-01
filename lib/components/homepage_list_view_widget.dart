@@ -455,10 +455,10 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                                 );
                                               } else {
                                                 return Icon(
-                                                  Icons.bookmark_sharp,
+                                                  Icons.bookmark_rounded,
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .accent4,
+                                                      .info,
                                                   size: 28.0,
                                                 );
                                               }

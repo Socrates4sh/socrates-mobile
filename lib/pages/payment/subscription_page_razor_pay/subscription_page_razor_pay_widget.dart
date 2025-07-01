@@ -849,7 +849,10 @@ class _SubscriptionPageRazorPayWidgetState
                                                             ),
                                                       ),
                                                       TextSpan(
-                                                        text: '[End Date]',
+                                                        text: dateTimeFormat(
+                                                            "d MMM y",
+                                                            currentUserDocument!
+                                                                .subscriptionEndDateTime!),
                                                         style: TextStyle(
                                                           fontWeight:
                                                               FontWeight.bold,
@@ -939,8 +942,10 @@ class _SubscriptionPageRazorPayWidgetState
                                                                 ),
                                                           ),
                                                           TextSpan(
-                                                            text:
-                                                                ' [End Date].',
+                                                            text: dateTimeFormat(
+                                                                "d MMM y",
+                                                                currentUserDocument!
+                                                                    .subscriptionEndDateTime!),
                                                             style: TextStyle(
                                                               fontWeight:
                                                                   FontWeight
