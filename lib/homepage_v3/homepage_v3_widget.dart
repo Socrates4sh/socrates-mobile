@@ -4,6 +4,7 @@ import '/components/homepage_list_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -441,55 +442,86 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                                     ),
                                                                     Flexible(
                                                                       child:
-                                                                          InkWell(
-                                                                        splashColor:
-                                                                            Colors.transparent,
-                                                                        focusColor:
-                                                                            Colors.transparent,
-                                                                        hoverColor:
-                                                                            Colors.transparent,
-                                                                        highlightColor:
-                                                                            Colors.transparent,
-                                                                        onTap:
-                                                                            () async {},
-                                                                        child:
-                                                                            Container(
-                                                                          width:
-                                                                              MediaQuery.sizeOf(context).width * 0.3,
-                                                                          height:
-                                                                              40.0,
-                                                                          decoration:
-                                                                              BoxDecoration(
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryBackground,
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(8.0),
-                                                                          ),
-                                                                          child:
-                                                                              Row(
-                                                                            mainAxisSize:
-                                                                                MainAxisSize.max,
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment.center,
-                                                                            children:
-                                                                                [
-                                                                              Icon(
-                                                                                Icons.add_rounded,
-                                                                                color: FlutterFlowTheme.of(context).primaryText,
-                                                                                size: 24.0,
-                                                                              ),
-                                                                              Text(
-                                                                                'My List',
-                                                                                style: FlutterFlowTheme.of(context).headlineSmall.override(
-                                                                                      fontFamily: FlutterFlowTheme.of(context).headlineSmallFamily,
-                                                                                      fontSize: 22.0,
-                                                                                      letterSpacing: 0.0,
-                                                                                      useGoogleFonts: !FlutterFlowTheme.of(context).headlineSmallIsCustom,
+                                                                          Builder(
+                                                                        builder:
+                                                                            (context) {
+                                                                          if (!functions.checkVideoInFavourite(
+                                                                              (currentUserDocument?.videosMylist.toList() ?? []).toList(),
+                                                                              VideoDocsMylistStruct(
+                                                                                listSeq: (currentUserDocument?.videosMylist.toList() ?? []).length + 1,
+                                                                                videoDocId: recVideosListItem.reference,
+                                                                                topic: recVideosListItem.topic,
+                                                                                subCategory: recVideosListItem.subCategory,
+                                                                                websiteCategory: recVideosListItem.websiteCategory,
+                                                                                videoThumbnailImageUrl: recVideosListItem.videoThumbnailImageUrl,
+                                                                                videoUrl: recVideosListItem.videoFileUrl,
+                                                                              ))) {
+                                                                            return InkWell(
+                                                                              splashColor: Colors.transparent,
+                                                                              focusColor: Colors.transparent,
+                                                                              hoverColor: Colors.transparent,
+                                                                              highlightColor: Colors.transparent,
+                                                                              onTap: () async {},
+                                                                              child: Container(
+                                                                                width: MediaQuery.sizeOf(context).width * 0.3,
+                                                                                height: 40.0,
+                                                                                decoration: BoxDecoration(
+                                                                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                  borderRadius: BorderRadius.circular(8.0),
+                                                                                ),
+                                                                                child: Row(
+                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                                  children: [
+                                                                                    Icon(
+                                                                                      Icons.add_rounded,
+                                                                                      color: FlutterFlowTheme.of(context).primaryText,
+                                                                                      size: 24.0,
                                                                                     ),
+                                                                                    Text(
+                                                                                      'My List',
+                                                                                      style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                                            fontFamily: FlutterFlowTheme.of(context).headlineSmallFamily,
+                                                                                            fontSize: 22.0,
+                                                                                            letterSpacing: 0.0,
+                                                                                            useGoogleFonts: !FlutterFlowTheme.of(context).headlineSmallIsCustom,
+                                                                                          ),
+                                                                                    ),
+                                                                                  ].divide(SizedBox(width: 5.0)),
+                                                                                ),
                                                                               ),
-                                                                            ].divide(SizedBox(width: 5.0)),
-                                                                          ),
-                                                                        ),
+                                                                            );
+                                                                          } else {
+                                                                            return Container(
+                                                                              width: MediaQuery.sizeOf(context).width * 0.3,
+                                                                              height: 40.0,
+                                                                              decoration: BoxDecoration(
+                                                                                color: FlutterFlowTheme.of(context).secondary,
+                                                                                borderRadius: BorderRadius.circular(8.0),
+                                                                              ),
+                                                                              child: Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                children: [
+                                                                                  Icon(
+                                                                                    Icons.bookmark_rounded,
+                                                                                    color: FlutterFlowTheme.of(context).primaryText,
+                                                                                    size: 24.0,
+                                                                                  ),
+                                                                                  Text(
+                                                                                    'Added',
+                                                                                    style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                                          fontFamily: FlutterFlowTheme.of(context).headlineSmallFamily,
+                                                                                          fontSize: 22.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          useGoogleFonts: !FlutterFlowTheme.of(context).headlineSmallIsCustom,
+                                                                                        ),
+                                                                                  ),
+                                                                                ].divide(SizedBox(width: 5.0)),
+                                                                              ),
+                                                                            );
+                                                                          }
+                                                                        },
                                                                       ),
                                                                     ),
                                                                   ],
@@ -515,7 +547,7 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                         enlargeCenterPage: true,
                                                         enlargeFactor: 1.0,
                                                         enableInfiniteScroll:
-                                                            true,
+                                                            false,
                                                         scrollDirection:
                                                             Axis.horizontal,
                                                         autoPlay: false,

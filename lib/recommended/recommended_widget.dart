@@ -2,6 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -276,7 +277,7 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                                         width: MediaQuery.sizeOf(context).width *
                                                                             1.0,
                                                                         height:
-                                                                            60.0,
+                                                                            50.0,
                                                                         decoration:
                                                                             BoxDecoration(
                                                                           color:
@@ -310,62 +311,102 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                                   ),
                                                                 ],
                                                               ),
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            5.0,
-                                                                            5.0,
-                                                                            0.0),
-                                                                child: InkWell(
-                                                                  splashColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  focusColor: Colors
-                                                                      .transparent,
-                                                                  hoverColor: Colors
-                                                                      .transparent,
-                                                                  highlightColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  onTap:
-                                                                      () async {
-                                                                    await currentUserReference!
-                                                                        .update({
-                                                                      ...mapToFirestore(
-                                                                        {
-                                                                          'videos_mylist':
-                                                                              FieldValue.arrayUnion([
-                                                                            getVideoDocsMylistFirestoreData(
-                                                                              updateVideoDocsMylistStruct(
-                                                                                VideoDocsMylistStruct(
-                                                                                  listSeq: (currentUserDocument?.videosMylist.toList() ?? []).length + 1,
-                                                                                  videoDocId: recVideosListItem.reference,
-                                                                                  topic: recVideosListItem.topic,
-                                                                                  subCategory: recVideosListItem.subCategory,
-                                                                                  websiteCategory: recVideosListItem.websiteCategory,
-                                                                                  videoThumbnailImageUrl: recVideosListItem.videoThumbnailImageUrl,
-                                                                                  videoUrl: recVideosListItem.videoFileUrl,
-                                                                                ),
-                                                                                clearUnsetFields: false,
-                                                                              ),
-                                                                              true,
-                                                                            )
-                                                                          ]),
+                                                              Builder(
+                                                                builder:
+                                                                    (context) {
+                                                                  if (!functions
+                                                                      .checkVideoInFavourite(
+                                                                          (currentUserDocument?.videosMylist.toList() ?? [])
+                                                                              .toList(),
+                                                                          VideoDocsMylistStruct(
+                                                                            listSeq:
+                                                                                (currentUserDocument?.videosMylist.toList() ?? []).length + 1,
+                                                                            videoDocId:
+                                                                                recVideosListItem.reference,
+                                                                            topic:
+                                                                                recVideosListItem.topic,
+                                                                            subCategory:
+                                                                                recVideosListItem.subCategory,
+                                                                            websiteCategory:
+                                                                                recVideosListItem.websiteCategory,
+                                                                            videoThumbnailImageUrl:
+                                                                                recVideosListItem.videoThumbnailImageUrl,
+                                                                            videoUrl:
+                                                                                recVideosListItem.videoFileUrl,
+                                                                          ))) {
+                                                                    return Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          5.0,
+                                                                          5.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          InkWell(
+                                                                        splashColor:
+                                                                            Colors.transparent,
+                                                                        focusColor:
+                                                                            Colors.transparent,
+                                                                        hoverColor:
+                                                                            Colors.transparent,
+                                                                        highlightColor:
+                                                                            Colors.transparent,
+                                                                        onTap:
+                                                                            () async {
+                                                                          await currentUserReference!
+                                                                              .update({
+                                                                            ...mapToFirestore(
+                                                                              {
+                                                                                'videos_mylist': FieldValue.arrayUnion([
+                                                                                  getVideoDocsMylistFirestoreData(
+                                                                                    updateVideoDocsMylistStruct(
+                                                                                      VideoDocsMylistStruct(
+                                                                                        listSeq: (currentUserDocument?.videosMylist.toList() ?? []).length + 1,
+                                                                                        videoDocId: recVideosListItem.reference,
+                                                                                        topic: recVideosListItem.topic,
+                                                                                        subCategory: recVideosListItem.subCategory,
+                                                                                        websiteCategory: recVideosListItem.websiteCategory,
+                                                                                        videoThumbnailImageUrl: recVideosListItem.videoThumbnailImageUrl,
+                                                                                        videoUrl: recVideosListItem.videoFileUrl,
+                                                                                      ),
+                                                                                      clearUnsetFields: false,
+                                                                                    ),
+                                                                                    true,
+                                                                                  )
+                                                                                ]),
+                                                                              },
+                                                                            ),
+                                                                          });
                                                                         },
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .add_rounded,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).secondaryBackground,
+                                                                          size:
+                                                                              24.0,
+                                                                        ),
                                                                       ),
-                                                                    });
-                                                                  },
-                                                                  child: Icon(
-                                                                    Icons
-                                                                        .add_rounded,
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .secondaryBackground,
-                                                                    size: 24.0,
-                                                                  ),
-                                                                ),
+                                                                    );
+                                                                  } else {
+                                                                    return Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          5.0,
+                                                                          5.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .bookmark_rounded,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryBackground,
+                                                                        size:
+                                                                            24.0,
+                                                                      ),
+                                                                    );
+                                                                  }
+                                                                },
                                                               ),
                                                             ],
                                                           ),

@@ -170,10 +170,13 @@ class _CancellationRazorPayWidgetState
                                                 ),
                                           ),
                                           TextSpan(
-                                            text: dateTimeFormat(
-                                                "d/M/y",
-                                                currentUserDocument!
-                                                    .subscriptionEndDateTime!),
+                                            text: valueOrDefault<String>(
+                                              dateTimeFormat(
+                                                  "d/M/y",
+                                                  currentUserDocument
+                                                      ?.subscriptionEndDateTime),
+                                              ' End Date',
+                                            ),
                                             style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 14.0,
