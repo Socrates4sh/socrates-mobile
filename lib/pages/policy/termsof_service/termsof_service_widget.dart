@@ -24,6 +24,8 @@ class _TermsofServiceWidgetState extends State<TermsofServiceWidget> {
     super.initState();
     _model = createModel(context, () => TermsofServiceModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'TermsofService'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 

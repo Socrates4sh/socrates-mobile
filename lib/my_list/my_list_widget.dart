@@ -29,8 +29,11 @@ class _MyListWidgetState extends State<MyListWidget> {
     super.initState();
     _model = createModel(context, () => MyListModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'MyList'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('MY_LIST_PAGE_MyList_ON_INIT_STATE');
+      logFirebaseEvent('MyList_firestore_query');
       _model.websiteVideosDoc = await queryWebsiteVideosRecordOnce(
         queryBuilder: (websiteVideosRecord) => websiteVideosRecord
             .where(
@@ -43,6 +46,7 @@ class _MyListWidgetState extends State<MyListWidget> {
             )
             .orderBy('video_sequence'),
       );
+      logFirebaseEvent('MyList_update_page_state');
       _model.initCompleted = true;
       safeSetState(() {});
     });
@@ -124,6 +128,10 @@ class _MyListWidgetState extends State<MyListWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'MY_LIST_PAGE_Icon_3bj6xzj2_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Icon_update_page_state');
                                               _model.isEdit = !_model.isEdit;
                                               safeSetState(() {});
                                             },
@@ -251,6 +259,11 @@ class _MyListWidgetState extends State<MyListWidget> {
                                                                 Colors
                                                                     .transparent,
                                                             onTap: () async {
+                                                              logFirebaseEvent(
+                                                                  'MY_LIST_PAGE_Icon_uh0volkn_ON_TAP');
+                                                              logFirebaseEvent(
+                                                                  'Icon_backend_call');
+
                                                               await currentUserReference!
                                                                   .update({
                                                                 ...mapToFirestore(

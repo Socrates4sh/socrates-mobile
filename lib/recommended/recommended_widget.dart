@@ -30,8 +30,11 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
     super.initState();
     _model = createModel(context, () => RecommendedModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Recommended'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('RECOMMENDED_Recommended_ON_INIT_STATE');
+      logFirebaseEvent('Recommended_firestore_query');
       _model.websiteVideosDoc = await queryWebsiteVideosRecordOnce(
         queryBuilder: (websiteVideosRecord) => websiteVideosRecord
             .where(
@@ -44,6 +47,7 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
             )
             .orderBy('video_sequence'),
       );
+      logFirebaseEvent('Recommended_update_page_state');
       _model.initCompleted = true;
       safeSetState(() {});
     });
@@ -173,6 +177,11 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'RECOMMENDED_Container_2x3jgqwq_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'Container_navigate_to');
+
                                                         context.pushNamed(
                                                           VideoPageV2Widget
                                                               .routeName,
@@ -348,6 +357,11 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                                             Colors.transparent,
                                                                         onTap:
                                                                             () async {
+                                                                          logFirebaseEvent(
+                                                                              'RECOMMENDED_PAGE_Icon_buyy50m4_ON_TAP');
+                                                                          logFirebaseEvent(
+                                                                              'Icon_backend_call');
+
                                                                           await currentUserReference!
                                                                               .update({
                                                                             ...mapToFirestore(
@@ -372,6 +386,8 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                                               },
                                                                             ),
                                                                           });
+                                                                          logFirebaseEvent(
+                                                                              'Icon_update_app_state');
 
                                                                           safeSetState(
                                                                               () {});

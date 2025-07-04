@@ -24,6 +24,8 @@ class _DeleteAccountWebWidgetState extends State<DeleteAccountWebWidget> {
     super.initState();
     _model = createModel(context, () => DeleteAccountWebModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'DeleteAccountWeb'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 

@@ -46,8 +46,11 @@ class _TopicsWidgetState extends State<TopicsWidget> {
     super.initState();
     _model = createModel(context, () => TopicsModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Topics'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('TOPICS_PAGE_Topics_ON_INIT_STATE');
+      logFirebaseEvent('Topics_firestore_query');
       _model.examDataDoc = await queryExamsRecordOnce(
         queryBuilder: (examsRecord) => examsRecord.where(
           'exam_sequence',
@@ -55,6 +58,7 @@ class _TopicsWidgetState extends State<TopicsWidget> {
         ),
         singleRecord: true,
       ).then((s) => s.firstOrNull);
+      logFirebaseEvent('Topics_firestore_query');
       _model.subjectDataDoc = await querySubjectsRecordOnce(
         parent: _model.examDataDoc?.reference,
         queryBuilder: (subjectsRecord) => subjectsRecord.where(
@@ -63,11 +67,13 @@ class _TopicsWidgetState extends State<TopicsWidget> {
         ),
         singleRecord: true,
       ).then((s) => s.firstOrNull);
+      logFirebaseEvent('Topics_update_page_state');
       _model.chapterList = _model.subjectDataDoc?.chapters
           .where((e) => widget.chapter == e.chapter)
           .toList()
           .firstOrNull;
       safeSetState(() {});
+      logFirebaseEvent('Topics_update_page_state');
 
       safeSetState(() {});
     });
@@ -113,6 +119,8 @@ class _TopicsWidgetState extends State<TopicsWidget> {
                         size: 24.0,
                       ),
                       onPressed: () async {
+                        logFirebaseEvent('TOPICS_PAGE_arrow_back_ICN_ON_TAP');
+                        logFirebaseEvent('IconButton_navigate_back');
                         context.safePop();
                       },
                     ),
@@ -142,6 +150,10 @@ class _TopicsWidgetState extends State<TopicsWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'TOPICS_PAGE_Container_i16n5l3l_ON_TAP');
+                          logFirebaseEvent('Container_navigate_to');
+
                           context.pushNamed(ProfileWidget.routeName);
                         },
                         child: Container(
@@ -273,6 +285,11 @@ class _TopicsWidgetState extends State<TopicsWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'TOPICS_PAGE_Text_b8jwujvp_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Text_navigate_to');
+
                                               context.pushNamed(
                                                 ShortsVideoPageWidget.routeName,
                                                 queryParameters: {

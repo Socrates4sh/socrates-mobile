@@ -34,9 +34,13 @@ class _CancellationRazorPayWidgetState
     super.initState();
     _model = createModel(context, () => CancellationRazorPayModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'CancellationRazorPay'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('CANCELLATION_RAZOR_PAY_CancellationRazor');
       if (valueOrDefault(currentUserDocument?.customerId, '') == '') {
+        logFirebaseEvent('CancellationRazorPay_backend_call');
         _model.customerIdResponse = await CreateCustomerIDCall.call(
           name: currentUserDisplayName,
           email: currentUserEmail,
@@ -44,6 +48,8 @@ class _CancellationRazorPayWidgetState
         );
 
         if ((_model.customerIdResponse?.succeeded ?? true)) {
+          logFirebaseEvent('CancellationRazorPay_backend_call');
+
           await currentUserReference!.update(createUsersRecordData(
             customerId: CreateCustomerIDCall.customerId(
               (_model.customerIdResponse?.jsonBody ?? ''),
@@ -51,13 +57,16 @@ class _CancellationRazorPayWidgetState
           ));
         }
       }
+      logFirebaseEvent('CancellationRazorPay_firestore_query');
       _model.constantDataDoc = await queryConstantDataRecordOnce(
         singleRecord: true,
       ).then((s) => s.firstOrNull);
+      logFirebaseEvent('CancellationRazorPay_firestore_query');
       _model.paymentPlanDoc = await queryPaymentPlanDetailsRecordOnce(
         parent: _model.constantDataDoc?.reference,
         singleRecord: true,
       ).then((s) => s.firstOrNull);
+      logFirebaseEvent('CancellationRazorPay_backend_call');
       _model.razorPayResponseMonthly = await CreateSubscriptionIDCall.call(
         planId: _model.paymentPlanDoc?.planId,
         totalCount: 1,
@@ -67,6 +76,7 @@ class _CancellationRazorPayWidgetState
       );
 
       if ((_model.razorPayResponseMonthly?.succeeded ?? true)) {
+        logFirebaseEvent('CancellationRazorPay_update_app_state');
         FFAppState().monthlySubscriptionId = '';
         safeSetState(() {});
       }
@@ -254,6 +264,10 @@ class _CancellationRazorPayWidgetState
                                 ),
                                 FFButtonWidget(
                                   onPressed: () async {
+                                    logFirebaseEvent(
+                                        'CANCELLATION_RAZOR_PAY_SUBSCRIBE_AGAIN_B');
+                                    logFirebaseEvent('Button_navigate_to');
+
                                     context.pushNamed(
                                         SubscriptionPageRazorPayWidget
                                             .routeName);

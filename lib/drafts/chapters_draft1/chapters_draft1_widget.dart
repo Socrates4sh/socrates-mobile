@@ -25,6 +25,8 @@ class _ChaptersDraft1WidgetState extends State<ChaptersDraft1Widget> {
     super.initState();
     _model = createModel(context, () => ChaptersDraft1Model());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ChaptersDraft1'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -84,6 +86,10 @@ class _ChaptersDraft1WidgetState extends State<ChaptersDraft1Widget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'CHAPTERS_DRAFT1_Container_ls4y7j4g_ON_TA');
+                          logFirebaseEvent('Container_navigate_to');
+
                           context.pushNamed(ProfileWidget.routeName);
                         },
                         child: Container(
@@ -164,7 +170,10 @@ class _ChaptersDraft1WidgetState extends State<ChaptersDraft1Widget> {
                                         focusColor: Colors.transparent,
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
-                                        onTap: () async {},
+                                        onTap: () async {
+                                          logFirebaseEvent(
+                                              'CHAPTERS_DRAFT1_Container_1tt7hr58_ON_TA');
+                                        },
                                         child: Container(
                                           height: 50.0,
                                           decoration: BoxDecoration(

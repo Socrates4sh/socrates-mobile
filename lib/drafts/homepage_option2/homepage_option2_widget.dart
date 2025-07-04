@@ -26,6 +26,8 @@ class _HomepageOption2WidgetState extends State<HomepageOption2Widget> {
     super.initState();
     _model = createModel(context, () => HomepageOption2Model());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'HomepageOption2'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -153,6 +155,11 @@ class _HomepageOption2WidgetState extends State<HomepageOption2Widget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'HOMEPAGE_OPTION2_PAGE_Container_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Container_navigate_to');
+
                                               context.pushNamed(
                                                 SubjectsV1Widget.routeName,
                                                 queryParameters: {

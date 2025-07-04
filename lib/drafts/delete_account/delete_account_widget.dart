@@ -244,11 +244,15 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
                                 ),
                                 FFButtonWidget(
                                   onPressed: () async {
+                                    logFirebaseEvent(
+                                        'DELETE_ACCOUNT_DELETE_ACCOUNT_BTN_ON_TAP');
                                     Function() _navigate = () {};
                                     if (_model.deleteTextFieldTextController
                                             .text ==
                                         'DELETE') {
+                                      logFirebaseEvent('Button_auth');
                                       await authManager.deleteUser(context);
+                                      logFirebaseEvent('Button_auth');
                                       GoRouter.of(context).prepareAuthEvent();
                                       await authManager.signOut();
                                       GoRouter.of(context)
@@ -257,6 +261,7 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
                                       _navigate = () => context.goNamedAuth(
                                           SignUpWidget.routeName,
                                           context.mounted);
+                                      logFirebaseEvent('Button_show_snack_bar');
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         SnackBar(
@@ -276,6 +281,7 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
                                         ),
                                       );
                                     } else {
+                                      logFirebaseEvent('Button_show_snack_bar');
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         SnackBar(
@@ -343,6 +349,9 @@ class _DeleteAccountWidgetState extends State<DeleteAccountWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'DELETE_ACCOUNT_COMP_Icon_5wv5yqhs_ON_TAP');
+                          logFirebaseEvent('Icon_bottom_sheet');
                           Navigator.pop(context);
                         },
                         child: Icon(

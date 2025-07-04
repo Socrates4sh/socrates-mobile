@@ -34,8 +34,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     super.initState();
     _model = createModel(context, () => ProfileModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Profile'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('PROFILE_PAGE_Profile_ON_INIT_STATE');
+      logFirebaseEvent('Profile_backend_call');
       _model.userRecord =
           await UsersRecord.getDocumentOnce(currentUserReference!);
     });
@@ -178,6 +181,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                                             .transparent,
                                                                     onTap:
                                                                         () async {
+                                                                      logFirebaseEvent(
+                                                                          'PROFILE_PAGE_Icon_1yio9d4j_ON_TAP');
+                                                                      logFirebaseEvent(
+                                                                          'Icon_alert_dialog');
                                                                       await showDialog(
                                                                         barrierColor:
                                                                             FlutterFlowTheme.of(context).secondary,
@@ -273,6 +280,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                                           .transparent,
                                                                   onTap:
                                                                       () async {
+                                                                    logFirebaseEvent(
+                                                                        'PROFILE_PAGE_Icon_pupu6mjr_ON_TAP');
+                                                                    logFirebaseEvent(
+                                                                        'Icon_alert_dialog');
                                                                     await showDialog(
                                                                       barrierColor:
                                                                           FlutterFlowTheme.of(context)
@@ -396,11 +407,19 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'PROFILE_PAGE_Payment_ON_TAP');
                                               if (isAndroid) {
+                                                logFirebaseEvent(
+                                                    'Payment_navigate_to');
+
                                                 context.pushNamed(
                                                     SubscriptionPageRazorPayWidget
                                                         .routeName);
                                               } else {
+                                                logFirebaseEvent(
+                                                    'Payment_navigate_to');
+
                                                 context.pushNamed(
                                                     SubscriptionPageWidget
                                                         .routeName);
@@ -528,6 +547,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'PROFILE_PAGE_Support_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Support_launch_u_r_l');
                                               await launchURL(
                                                   'https://wa.me/+18652233814?text=I%27m%20facing%20an%20issue%20on%20the%20Socrates%20app');
                                             },
@@ -629,6 +652,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'PROFILE_PAGE_MyListProfile_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'MyListProfile_navigate_to');
+
                                               context.pushNamed(
                                                   MyListWidget.routeName);
                                             },
@@ -823,6 +851,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'PROFILE_PAGE_InviteFriends_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'InviteFriends_share');
                                                 await Share.share(
                                                   'Hey! ${'\n'}Check out Socrates – an app to learn school subjects and prep for entrance exams with focused content. 📚 It’s super helpful! ${'\n' '\n'}Try it here: [App Link] 🚀',
                                                   sharePositionOrigin:
@@ -924,6 +956,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'PROFILE_PAGE_WACommunity_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'WACommunity_launch_u_r_l');
                                               await launchURL(
                                                   'https://chat.whatsapp.com/GsB7wJoVKi2LRQVNkTytcE');
                                             },
@@ -1019,6 +1055,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'PROFILE_PAGE_Newsletters_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Newsletters_navigate_to');
+
                                               context.pushNamed(
                                                   NewsLetterWidget.routeName);
                                             },
@@ -1114,7 +1155,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'PROFILE_PAGE_Logout_ON_TAP');
                                               Function() _navigate = () {};
+                                              logFirebaseEvent(
+                                                  'Logout_alert_dialog');
                                               var confirmDialogResponse =
                                                   await showDialog<bool>(
                                                         context: context,
@@ -1148,10 +1193,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                       ) ??
                                                       false;
                                               if (confirmDialogResponse) {
+                                                logFirebaseEvent(
+                                                    'Logout_update_app_state');
                                                 FFAppState().isOtpSend = false;
                                                 FFAppState().continueOnTap =
                                                     false;
                                                 safeSetState(() {});
+                                                logFirebaseEvent('Logout_auth');
                                                 GoRouter.of(context)
                                                     .prepareAuthEvent();
                                                 await authManager.signOut();
@@ -1269,6 +1317,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'PROFILE_PAGE_DeleteAccount_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'DeleteAccount_bottom_sheet');
                                                     await showModalBottomSheet(
                                                       isScrollControlled: true,
                                                       backgroundColor:
@@ -1350,6 +1402,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                       highlightColor:
                                                           Colors.transparent,
                                                       onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'PROFILE_PAGE_DeleteAccount_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'DeleteAccount_bottom_sheet');
                                                         await showModalBottomSheet(
                                                           isScrollControlled:
                                                               true,
@@ -1431,6 +1487,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'PROFILE_PAGE_Text_fm042qnq_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Text_navigate_to');
+
                                                     context.pushNamed(
                                                         TermsofServiceWidget
                                                             .routeName);
@@ -1475,6 +1536,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'PROFILE_PAGE_Text_hkrtu1te_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Text_navigate_to');
+
                                                     context.pushNamed(
                                                         PrivacyPolicyWidget
                                                             .routeName);

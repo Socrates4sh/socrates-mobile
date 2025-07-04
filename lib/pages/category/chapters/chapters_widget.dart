@@ -45,8 +45,11 @@ class _ChaptersWidgetState extends State<ChaptersWidget> {
     super.initState();
     _model = createModel(context, () => ChaptersModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Chapters'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('CHAPTERS_PAGE_Chapters_ON_INIT_STATE');
+      logFirebaseEvent('Chapters_firestore_query');
       _model.examDataDoc = await queryExamsRecordOnce(
         queryBuilder: (examsRecord) => examsRecord.where(
           'exam_sequence',
@@ -54,6 +57,7 @@ class _ChaptersWidgetState extends State<ChaptersWidget> {
         ),
         singleRecord: true,
       ).then((s) => s.firstOrNull);
+      logFirebaseEvent('Chapters_firestore_query');
       _model.subjectDataDoc = await querySubjectsRecordOnce(
         parent: _model.examDataDoc?.reference,
         queryBuilder: (subjectsRecord) => subjectsRecord.where(
@@ -62,6 +66,7 @@ class _ChaptersWidgetState extends State<ChaptersWidget> {
         ),
         singleRecord: true,
       ).then((s) => s.firstOrNull);
+      logFirebaseEvent('Chapters_update_page_state');
       _model.isLoading = true;
       safeSetState(() {});
     });
@@ -107,6 +112,8 @@ class _ChaptersWidgetState extends State<ChaptersWidget> {
                         size: 24.0,
                       ),
                       onPressed: () async {
+                        logFirebaseEvent('CHAPTERS_PAGE_arrow_back_ICN_ON_TAP');
+                        logFirebaseEvent('IconButton_navigate_back');
                         context.safePop();
                       },
                     ),
@@ -136,6 +143,10 @@ class _ChaptersWidgetState extends State<ChaptersWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'CHAPTERS_PAGE_Container_apt78qij_ON_TAP');
+                          logFirebaseEvent('Container_navigate_to');
+
                           context.pushNamed(ProfileWidget.routeName);
                         },
                         child: Container(
@@ -312,6 +323,8 @@ class _ChaptersWidgetState extends State<ChaptersWidget> {
                                                         highlightColor:
                                                             Colors.transparent,
                                                         onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'CHAPTERS_PAGE_Text_is06drg7_ON_TAP');
                                                           if (chapterListItem
                                                               .canAccess) {
                                                             if (revenue_cat
@@ -319,6 +332,9 @@ class _ChaptersWidgetState extends State<ChaptersWidget> {
                                                                 .contains(
                                                                     FFAppConstants
                                                                         .EntitlementIDVideoAccess)) {
+                                                              logFirebaseEvent(
+                                                                  'Text_navigate_to');
+
                                                               context.pushNamed(
                                                                 TopicsWidget
                                                                     .routeName,
@@ -386,6 +402,9 @@ class _ChaptersWidgetState extends State<ChaptersWidget> {
                                                                         .toList()
                                                                         .length >
                                                                     0) {
+                                                                  logFirebaseEvent(
+                                                                      'Text_navigate_to');
+
                                                                   context
                                                                       .pushNamed(
                                                                     TopicsWidget
@@ -444,6 +463,8 @@ class _ChaptersWidgetState extends State<ChaptersWidget> {
                                                                     }.withoutNulls,
                                                                   );
                                                                 } else {
+                                                                  logFirebaseEvent(
+                                                                      'Text_bottom_sheet');
                                                                   await showModalBottomSheet(
                                                                     isScrollControlled:
                                                                         true,
@@ -495,6 +516,9 @@ class _ChaptersWidgetState extends State<ChaptersWidget> {
                                                                           () {}));
                                                                 }
                                                               } else {
+                                                                logFirebaseEvent(
+                                                                    'Text_navigate_to');
+
                                                                 context
                                                                     .pushNamed(
                                                                   TopicsWidget
@@ -555,6 +579,8 @@ class _ChaptersWidgetState extends State<ChaptersWidget> {
                                                               }
                                                             }
                                                           } else {
+                                                            logFirebaseEvent(
+                                                                'Text_show_snack_bar');
                                                             ScaffoldMessenger
                                                                     .of(context)
                                                                 .showSnackBar(
@@ -645,6 +671,10 @@ class _ChaptersWidgetState extends State<ChaptersWidget> {
                                                                 Colors
                                                                     .transparent,
                                                             onTap: () async {
+                                                              logFirebaseEvent(
+                                                                  'CHAPTERS_PAGE_Container_caq7vv6q_ON_TAP');
+                                                              logFirebaseEvent(
+                                                                  'Container_revenue_cat');
                                                               _model.purchaseSuccessful1 =
                                                                   await revenue_cat.purchasePackage(revenue_cat
                                                                       .offerings!
@@ -653,6 +683,9 @@ class _ChaptersWidgetState extends State<ChaptersWidget> {
                                                                       .identifier);
                                                               if (_model
                                                                   .purchaseSuccessful1!) {
+                                                                logFirebaseEvent(
+                                                                    'Container_backend_call');
+
                                                                 await currentUserReference!
                                                                     .update(
                                                                         createUsersRecordData(
@@ -660,6 +693,8 @@ class _ChaptersWidgetState extends State<ChaptersWidget> {
                                                                       true,
                                                                 ));
                                                               } else {
+                                                                logFirebaseEvent(
+                                                                    'Container_show_snack_bar');
                                                                 ScaffoldMessenger.of(
                                                                         context)
                                                                     .showSnackBar(

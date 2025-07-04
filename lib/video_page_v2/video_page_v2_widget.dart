@@ -38,8 +38,12 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
     super.initState();
     _model = createModel(context, () => VideoPageV2Model());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'VideoPage_V2'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('VIDEO_V2_VideoPage_V2_ON_INIT_STATE');
+      logFirebaseEvent('VideoPage_V2_firestore_query');
       _model.websiteVideoDoc = await queryWebsiteVideosRecordOnce(
         queryBuilder: (websiteVideosRecord) => websiteVideosRecord
             .where(
@@ -53,16 +57,21 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
             .orderBy('video_sequence'),
       );
       if (widget.initialIndex == null) {
+        logFirebaseEvent('VideoPage_V2_update_page_state');
         _model.initialTabIndex = functions.findIndexOfTable(
             _model.websiteVideoDoc!.toList(), widget.videoSequence!);
         safeSetState(() {});
       } else {
+        logFirebaseEvent('VideoPage_V2_update_page_state');
         _model.initialTabIndex = widget.initialIndex!;
         safeSetState(() {});
       }
 
+      logFirebaseEvent('VideoPage_V2_update_page_state');
       _model.initCompleted = true;
       safeSetState(() {});
+      logFirebaseEvent('VideoPage_V2_google_analytics_event');
+      logFirebaseEvent('app_video_opened');
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));

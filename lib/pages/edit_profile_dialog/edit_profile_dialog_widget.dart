@@ -33,19 +33,26 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('EDIT_PROFILE_DIALOG_editProfileDialog_ON');
+      logFirebaseEvent('editProfileDialog_backend_call');
       _model.userRecord =
           await UsersRecord.getDocumentOnce(currentUserReference!);
+      logFirebaseEvent('editProfileDialog_set_form_field');
       safeSetState(() {
         _model.displayNameTextController?.text = _model.userRecord!.displayName;
       });
+      logFirebaseEvent('editProfileDialog_set_form_field');
       safeSetState(() {
         _model.phoneNumberTextController?.text = _model.userRecord!.phoneNumber;
       });
+      logFirebaseEvent('editProfileDialog_set_form_field');
       safeSetState(() {
         _model.emailTextController?.text = _model.userRecord!.email;
       });
+      logFirebaseEvent('editProfileDialog_update_component_state');
       _model.isLoading = true;
       safeSetState(() {});
+      logFirebaseEvent('editProfileDialog_update_component_state');
       _model.isLoading = true;
       safeSetState(() {});
     });
@@ -295,6 +302,9 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
                       children: [
                         FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'EDIT_PROFILE_DIALOG_CANCEL_BTN_ON_TAP');
+                            logFirebaseEvent('Button_close_dialog_drawer_etc');
                             Navigator.pop(context);
                           },
                           text: 'Cancel',
@@ -327,6 +337,10 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
                         ),
                         FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'EDIT_PROFILE_DIALOG_COMP_SAVE_BTN_ON_TAP');
+                            logFirebaseEvent('Button_backend_call');
+
                             await currentUserReference!
                                 .update(createUsersRecordData(
                               phoneNumber:
@@ -335,10 +349,13 @@ class _EditProfileDialogWidgetState extends State<EditProfileDialogWidget> {
                               displayName:
                                   _model.displayNameTextController.text,
                             ));
+                            logFirebaseEvent('Button_close_dialog_drawer_etc');
                             Navigator.pop(context);
+                            logFirebaseEvent('Button_navigate_to');
 
                             context.pushNamed(ProfileWidget.routeName);
 
+                            logFirebaseEvent('Button_show_snack_bar');
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(

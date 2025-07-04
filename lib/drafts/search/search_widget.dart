@@ -30,8 +30,11 @@ class _SearchWidgetState extends State<SearchWidget> {
     super.initState();
     _model = createModel(context, () => SearchModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Search'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('SEARCH_PAGE_Search_ON_INIT_STATE');
+      logFirebaseEvent('Search_update_page_state');
       _model.isSearch = false;
       safeSetState(() {});
     });
@@ -138,8 +141,14 @@ class _SearchWidgetState extends State<SearchWidget> {
                                             '_model.searchBarTextController',
                                             Duration(milliseconds: 1000),
                                             () async {
+                                              logFirebaseEvent(
+                                                  'SEARCH_SearchBar_ON_TEXTFIELD_CHANGE');
+                                              logFirebaseEvent(
+                                                  'SearchBar_update_page_state');
                                               _model.isSearch = true;
                                               safeSetState(() {});
+                                              logFirebaseEvent(
+                                                  'SearchBar_simple_search');
                                               await queryWebsiteVideosRecordOnce()
                                                   .then(
                                                     (records) => _model
@@ -319,6 +328,11 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                           highlightColor: Colors
                                                               .transparent,
                                                           onTap: () async {
+                                                            logFirebaseEvent(
+                                                                'SEARCH_PAGE_Container_5wgamw7n_ON_TAP');
+                                                            logFirebaseEvent(
+                                                                'Container_navigate_to');
+
                                                             context.pushNamed(
                                                               VideoPageV2Widget
                                                                   .routeName,
@@ -556,6 +570,11 @@ class _SearchWidgetState extends State<SearchWidget> {
                                                                         .transparent,
                                                                 onTap:
                                                                     () async {
+                                                                  logFirebaseEvent(
+                                                                      'SEARCH_PAGE_Container_ntl1g05g_ON_TAP');
+                                                                  logFirebaseEvent(
+                                                                      'Container_navigate_to');
+
                                                                   context
                                                                       .pushNamed(
                                                                     VideoPageV2Widget

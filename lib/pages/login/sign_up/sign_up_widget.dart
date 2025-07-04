@@ -31,6 +31,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     super.initState();
     _model = createModel(context, () => SignUpModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'SignUp'});
     _model.phoneNumberTextController ??= TextEditingController();
     _model.phoneNumberFocusNode ??= FocusNode();
 
@@ -634,10 +635,16 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                                 .termsCheckboxValue =
                                                             newValue!);
                                                         if (newValue!) {
+                                                          logFirebaseEvent(
+                                                              'SIGN_UP_PAGE_TermsCheckbox_ON_TOGGLE_ON');
+                                                          logFirebaseEvent(
+                                                              'TermsCheckbox_update_app_state');
                                                           FFAppState()
                                                                   .continueOnTap =
                                                               true;
                                                           safeSetState(() {});
+                                                          logFirebaseEvent(
+                                                              'TermsCheckbox_backend_call');
 
                                                           await currentUserReference!
                                                               .update(
@@ -728,11 +735,17 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                       0.0, 0.0, 0.0, 16.0),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
+                                                  logFirebaseEvent(
+                                                      'SIGN_UP_PAGE_Continue_Button_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Continue_Button_update_page_state');
                                                   _model.phoneWithCode =
                                                       '${valueOrDefault<String>(
                                                     FFAppState().selectedCode,
                                                     '+91',
                                                   )}${_model.phoneNumberTextController.text}';
+                                                  logFirebaseEvent(
+                                                      'Continue_Button_auth');
                                                   final phoneNumberVal =
                                                       _model.phoneWithCode;
                                                   if (phoneNumberVal == null ||
@@ -765,6 +778,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                   );
 
                                                   if (!isWeb) {
+                                                    logFirebaseEvent(
+                                                        'Continue_Button_reset_form_fields');
                                                     safeSetState(() {
                                                       _model
                                                           .phoneNumberTextController
@@ -822,12 +837,16 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                       0.0, 0.0, 0.0, 16.0),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
+                                                  logFirebaseEvent(
+                                                      'SIGN_UP_PAGE_Verify_Button_ON_TAP');
                                                   if (FFAppState()
                                                           .continueOnTap ==
                                                       true) {
                                                     if (FFAppState()
                                                             .isOtpSend ==
                                                         true) {
+                                                      logFirebaseEvent(
+                                                          'Verify_Button_auth');
                                                       GoRouter.of(context)
                                                           .prepareAuthEvent();
                                                       final smsCodeVal = _model
@@ -855,10 +874,14 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                         return;
                                                       }
 
+                                                      logFirebaseEvent(
+                                                          'Verify_Button_reset_form_fields');
                                                       safeSetState(() {
                                                         _model.otpTextController
                                                             ?.clear();
                                                       });
+                                                      logFirebaseEvent(
+                                                          'Verify_Button_reset_form_fields');
                                                       safeSetState(() {
                                                         _model.termsCheckboxValue =
                                                             false;
@@ -867,17 +890,25 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                           currentUserDocument
                                                               ?.onBoardingComplete,
                                                           false)) {
+                                                        logFirebaseEvent(
+                                                            'Verify_Button_navigate_to');
+
                                                         context.pushNamedAuth(
                                                             OnboardingFormWidget
                                                                 .routeName,
                                                             context.mounted);
                                                       } else {
+                                                        logFirebaseEvent(
+                                                            'Verify_Button_navigate_to');
+
                                                         context.pushNamedAuth(
                                                             HomepageV3Widget
                                                                 .routeName,
                                                             context.mounted);
                                                       }
                                                     } else {
+                                                      logFirebaseEvent(
+                                                          'Verify_Button_show_snack_bar');
                                                       ScaffoldMessenger.of(
                                                               context)
                                                           .showSnackBar(
@@ -901,6 +932,8 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                       );
                                                     }
                                                   } else {
+                                                    logFirebaseEvent(
+                                                        'Verify_Button_show_snack_bar');
                                                     ScaffoldMessenger.of(
                                                             context)
                                                         .showSnackBar(
@@ -996,6 +1029,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent('SIGN_UP_PAGE_Terms_ON_TAP');
+                              logFirebaseEvent('Terms_navigate_to');
+
                               context.pushNamed(TermsofServiceWidget.routeName);
                             },
                             child: Text(
@@ -1029,6 +1065,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'SIGN_UP_PAGE_Text_c1b0oomv_ON_TAP');
+                            logFirebaseEvent('Text_navigate_to');
+
                             context.pushNamed(PrivacyPolicyWidget.routeName);
                           },
                           child: Text(
@@ -1061,6 +1101,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'SIGN_UP_PAGE_Text_yu94jo1t_ON_TAP');
+                              logFirebaseEvent('Text_navigate_to');
+
                               context
                                   .pushNamed(DeleteAccountWebWidget.routeName);
                             },

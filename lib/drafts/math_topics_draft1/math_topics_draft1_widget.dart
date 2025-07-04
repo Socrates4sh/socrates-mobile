@@ -26,6 +26,8 @@ class _MathTopicsDraft1WidgetState extends State<MathTopicsDraft1Widget> {
     super.initState();
     _model = createModel(context, () => MathTopicsDraft1Model());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'MathTopicsDraft1'});
     _model.expandableExpandableController1 =
         ExpandableController(initialExpanded: false);
     _model.expandableExpandableController2 =
@@ -412,6 +414,11 @@ class _MathTopicsDraft1WidgetState extends State<MathTopicsDraft1Widget> {
                                                 highlightColor:
                                                     Colors.transparent,
                                                 onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'MATH_TOPICS_DRAFT1_Text_jdem982d_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Text_navigate_to');
+
                                                   context.pushNamed(
                                                       VideoPageWidget
                                                           .routeName);

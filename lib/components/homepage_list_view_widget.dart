@@ -107,6 +107,8 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      logFirebaseEvent('HOMELIST_VIEW_Row_k7b5wfbs_ON_TAP');
+                      logFirebaseEvent('Row_firestore_query');
                       _model.videosList = await queryWebsiteVideosRecordOnce(
                         queryBuilder: (websiteVideosRecord) =>
                             websiteVideosRecord
@@ -120,6 +122,7 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                 )
                                 .orderBy('video_sequence'),
                       );
+                      logFirebaseEvent('Row_navigate_to');
 
                       context.pushNamed(
                         VideosListWidget.routeName,
@@ -199,6 +202,8 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'HOMELIST_VIEW_Container_rfxmr8gg_ON_TAP');
                               if (((valueOrDefault<bool>(
                                               currentUserDocument
                                                   ?.userSubscribed,
@@ -208,6 +213,7 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                           currentUserDocument?.userSubscribed,
                                           false)) &&
                                   (videosIndex >= 3)) {
+                                logFirebaseEvent('Container_alert_dialog');
                                 await showDialog(
                                   context: context,
                                   builder: (dialogContext) {
@@ -228,6 +234,8 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                   },
                                 );
                               } else {
+                                logFirebaseEvent('Container_navigate_to');
+
                                 context.pushNamed(
                                   VideoPageV2Widget.routeName,
                                   queryParameters: {
@@ -397,6 +405,11 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                                   highlightColor:
                                                       Colors.transparent,
                                                   onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'HOMELIST_VIEW_Icon_ezlgzsjo_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Icon_backend_call');
+
                                                     await currentUserReference!
                                                         .update({
                                                       ...mapToFirestore(
@@ -442,6 +455,8 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                                         },
                                                       ),
                                                     });
+                                                    logFirebaseEvent(
+                                                        'Icon_update_app_state');
 
                                                     safeSetState(() {});
                                                   },

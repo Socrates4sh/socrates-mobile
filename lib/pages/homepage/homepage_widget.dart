@@ -28,8 +28,11 @@ class _HomepageWidgetState extends State<HomepageWidget> {
     super.initState();
     _model = createModel(context, () => HomepageModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Homepage'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('HOMEPAGE_PAGE_Homepage_ON_INIT_STATE');
+      logFirebaseEvent('Homepage_firestore_query');
       _model.examDataDoc = await queryExamsRecordOnce(
         queryBuilder: (examsRecord) => examsRecord
             .where(
@@ -38,6 +41,7 @@ class _HomepageWidgetState extends State<HomepageWidget> {
             )
             .orderBy('exam_sequence'),
       );
+      logFirebaseEvent('Homepage_update_page_state');
       _model.isLoading = true;
       safeSetState(() {});
     });
@@ -161,6 +165,11 @@ class _HomepageWidgetState extends State<HomepageWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'HOMEPAGE_PAGE_Container_edqouvls_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Container_navigate_to');
+
                                           context.pushNamed(
                                             SubjectsWidget.routeName,
                                             queryParameters: {

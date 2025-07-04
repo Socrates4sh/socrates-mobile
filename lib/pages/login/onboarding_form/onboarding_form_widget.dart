@@ -30,6 +30,8 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
     super.initState();
     _model = createModel(context, () => OnboardingFormModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'OnboardingForm'});
     _model.userFirstNameTextController ??= TextEditingController();
     _model.userFirstNameFocusNode ??= FocusNode();
     _model.userFirstNameFocusNode!.addListener(() => safeSetState(() {}));
@@ -879,6 +881,9 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
                                       16.0, 20.0, 16.0, 12.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
+                                      logFirebaseEvent(
+                                          'ONBOARDING_FORM_PAGE_SUBMIT_BTN_ON_TAP');
+                                      logFirebaseEvent('Button_validate_form');
                                       _model.verifiedUserDetails = true;
                                       if (_model.formKey.currentState == null ||
                                           !_model.formKey.currentState!
@@ -887,6 +892,7 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
                                             _model.verifiedUserDetails = false);
                                         return;
                                       }
+                                      logFirebaseEvent('Button_backend_call');
                                       _model.customerIdResponse =
                                           await CreateCustomerIDCall.call(
                                         name:
@@ -898,6 +904,8 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
                                       if ((_model
                                               .customerIdResponse?.succeeded ??
                                           true)) {
+                                        logFirebaseEvent('Button_backend_call');
+
                                         await currentUserReference!
                                             .update(createUsersRecordData(
                                           customerId:
@@ -908,6 +916,7 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
                                           ),
                                         ));
                                       }
+                                      logFirebaseEvent('Button_backend_call');
 
                                       await currentUserReference!
                                           .update(createUsersRecordData(
@@ -924,6 +933,11 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
                                         onBoardingComplete: true,
                                         wACommunity: _model.wACheckboxValue,
                                       ));
+                                      logFirebaseEvent(
+                                          'Button_google_analytics_event');
+                                      logFirebaseEvent(
+                                          'app_onboarding_completed');
+                                      logFirebaseEvent('Button_navigate_to');
 
                                       context
                                           .pushNamed(HomepageWidget.routeName);

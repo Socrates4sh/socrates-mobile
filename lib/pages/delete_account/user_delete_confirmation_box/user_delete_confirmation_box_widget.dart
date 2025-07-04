@@ -103,6 +103,9 @@ class _UserDeleteConfirmationBoxWidgetState
                             size: 20.0,
                           ),
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'USER_DELETE_CONFIRMATION_BOX_close_ICN_O');
+                            logFirebaseEvent('IconButton_bottom_sheet');
                             Navigator.pop(context);
                           },
                         ),
@@ -206,15 +209,20 @@ class _UserDeleteConfirmationBoxWidgetState
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
+                      logFirebaseEvent(
+                          'USER_DELETE_CONFIRMATION_BOX_DELETE_ACCO');
                       Function() _navigate = () {};
                       if (_model.textController.text == 'DELETE') {
+                        logFirebaseEvent('Button_auth');
                         await authManager.deleteUser(context);
+                        logFirebaseEvent('Button_auth');
                         GoRouter.of(context).prepareAuthEvent();
                         await authManager.signOut();
                         GoRouter.of(context).clearRedirectLocation();
 
                         _navigate = () => context.goNamedAuth(
                             SignUpWidget.routeName, context.mounted);
+                        logFirebaseEvent('Button_show_snack_bar');
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
@@ -229,6 +237,7 @@ class _UserDeleteConfirmationBoxWidgetState
                           ),
                         );
                       } else {
+                        logFirebaseEvent('Button_show_snack_bar');
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(

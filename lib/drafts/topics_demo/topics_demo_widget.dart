@@ -25,6 +25,7 @@ class _TopicsDemoWidgetState extends State<TopicsDemoWidget> {
     super.initState();
     _model = createModel(context, () => TopicsDemoModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'TopicsDemo'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -83,6 +84,10 @@ class _TopicsDemoWidgetState extends State<TopicsDemoWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'TOPICS_DEMO_Container_sft6ywbr_ON_TAP');
+                          logFirebaseEvent('Container_navigate_to');
+
                           context.pushNamed(ProfileWidget.routeName);
                         },
                         child: Container(

@@ -40,8 +40,11 @@ class _SubjectsWidgetState extends State<SubjectsWidget> {
     super.initState();
     _model = createModel(context, () => SubjectsModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Subjects'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('SUBJECTS_PAGE_Subjects_ON_INIT_STATE');
+      logFirebaseEvent('Subjects_firestore_query');
       _model.listSubjects = await querySubjectsRecordOnce(
         parent: widget.examdoc?.reference,
         queryBuilder: (subjectsRecord) => subjectsRecord
@@ -52,17 +55,21 @@ class _SubjectsWidgetState extends State<SubjectsWidget> {
             .orderBy('subject_sequence'),
       );
       while (_model.listColorsDynamic.length < _model.listSubjects!.length) {
+        logFirebaseEvent('Subjects_update_page_state');
         _model.addToListColorsDynamic(
             _model.listColors.elementAtOrNull(_model.loopIndex)!);
         safeSetState(() {});
         if (_model.loopIndex < (_model.listColors.length - 1)) {
+          logFirebaseEvent('Subjects_update_page_state');
           _model.loopIndex = _model.loopIndex + 1;
           safeSetState(() {});
         } else {
+          logFirebaseEvent('Subjects_update_page_state');
           _model.loopIndex = 0;
           safeSetState(() {});
         }
       }
+      logFirebaseEvent('Subjects_update_page_state');
       _model.initComplete = true;
       safeSetState(() {});
     });
@@ -167,6 +174,10 @@ class _SubjectsWidgetState extends State<SubjectsWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'SUBJECTS_PAGE_Container_lzws1p8s_ON_TAP');
+                          logFirebaseEvent('Container_navigate_to');
+
                           context.pushNamed(ProfileWidget.routeName);
                         },
                         child: Container(
@@ -293,6 +304,11 @@ class _SubjectsWidgetState extends State<SubjectsWidget> {
                                             hoverColor: Colors.transparent,
                                             highlightColor: Colors.transparent,
                                             onTap: () async {
+                                              logFirebaseEvent(
+                                                  'SUBJECTS_PAGE_Stack_u3eirc5w_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Stack_navigate_to');
+
                                               context.pushNamed(
                                                 ChaptersWidget.routeName,
                                                 queryParameters: {
