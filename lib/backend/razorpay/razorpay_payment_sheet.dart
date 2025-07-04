@@ -19,7 +19,7 @@ enum PaymentStatus {
 final bool _isProd = true;
 
 // Razorpay Credentials
-const _kProdRazorpayKeyId = 'rzp_live_qvujNjB2Ume7lm';
+const _kProdRazorpayKeyId = 'rzp_live_80exC6ZrHSwW5F';
 const _kTestRazorpayKeyId = 'rzp_test_uTzy9xBVhiNrSO';
 const _kBusinessName = '4sh.education';
 
