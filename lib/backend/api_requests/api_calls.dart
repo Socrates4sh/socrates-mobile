@@ -96,7 +96,7 @@ class CreateSubscriptionIDCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
-            'Basic cnpwX2xpdmVfcXZ1ak5qQjJVbWU3bG06T3A4eTdCcEY0dzNkeDVKWHhIeFdJOFdU',
+            'Basic cnpwX2xpdmVfODBleEM2WnJIU3dXNUY6TVNNd3dpVGhSN2RJT0p0MjFkaUFSN2hy',
         'Content-Type': 'application/json',
       },
       params: {},
@@ -137,7 +137,7 @@ class CreateCustomerIDCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
-            'Basic cnpwX2xpdmVfcXZ1ak5qQjJVbWU3bG06T3A4eTdCcEY0dzNkeDVKWHhIeFdJOFdU',
+            'Basic cnpwX2xpdmVfODBleEM2WnJIU3dXNUY6TVNNd3dpVGhSN2RJT0p0MjFkaUFSN2hy',
         'Content-Type': 'application/json',
       },
       params: {},
@@ -169,7 +169,7 @@ class CancelSubscriptionCall {
       callType: ApiCallType.POST,
       headers: {
         'Authorization':
-            'Basic cnpwX2xpdmVfcXZ1ak5qQjJVbWU3bG06T3A4eTdCcEY0dzNkeDVKWHhIeFdJOFdU',
+            'Basic cnpwX2xpdmVfODBleEM2WnJIU3dXNUY6TVNNd3dpVGhSN2RJT0p0MjFkaUFSN2hy',
         'Content-Type': 'application/json',
       },
       params: {},
