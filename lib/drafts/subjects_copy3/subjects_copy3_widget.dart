@@ -33,6 +33,8 @@ class _SubjectsCopy3WidgetState extends State<SubjectsCopy3Widget> {
     super.initState();
     _model = createModel(context, () => SubjectsCopy3Model());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'SubjectsCopy3'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -122,6 +124,10 @@ class _SubjectsCopy3WidgetState extends State<SubjectsCopy3Widget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'SUBJECTS_COPY3_Container_6zom8xww_ON_TAP');
+                          logFirebaseEvent('Container_navigate_to');
+
                           context.pushNamed(ProfileWidget.routeName);
                         },
                         child: Container(
@@ -206,6 +212,10 @@ class _SubjectsCopy3WidgetState extends State<SubjectsCopy3Widget> {
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
+                                logFirebaseEvent(
+                                    'SUBJECTS_COPY3_Container_hidijoxi_ON_TAP');
+                                logFirebaseEvent('Container_navigate_to');
+
                                 context.pushNamed(
                                   ChaptersWidget.routeName,
                                   queryParameters: {
@@ -281,6 +291,11 @@ class _SubjectsCopy3WidgetState extends State<SubjectsCopy3Widget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'SUBJECTS_COPY3_Stack_ah8c0kzf_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Stack_navigate_to');
+
                                             context.pushNamed(
                                               ChaptersWidget.routeName,
                                               queryParameters: {

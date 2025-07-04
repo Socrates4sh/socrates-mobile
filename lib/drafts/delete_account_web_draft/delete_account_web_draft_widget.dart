@@ -31,6 +31,8 @@ class _DeleteAccountWebDraftWidgetState
     super.initState();
     _model = createModel(context, () => DeleteAccountWebDraftModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'DeleteAccountWebDraft'});
     _model.firstNameTextController ??= TextEditingController();
     _model.firstNameFocusNode ??= FocusNode();
 
@@ -614,6 +616,10 @@ class _DeleteAccountWebDraftWidgetState
                                                   0.0, 0.0, 0.0, 10.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'DELETE_ACCOUNT_WEB_DRAFT_DELETE_ACCOUNT_');
+                                              logFirebaseEvent(
+                                                  'Button_send_email');
                                               await launchUrl(Uri(
                                                   scheme: 'mailto',
                                                   path:
@@ -630,16 +636,22 @@ class _DeleteAccountWebDraftWidgetState
                                                               e) =>
                                                           '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
                                                       .join('&')));
+                                              logFirebaseEvent('Button_auth');
                                               GoRouter.of(context)
                                                   .prepareAuthEvent();
                                               await authManager.signOut();
                                               GoRouter.of(context)
                                                   .clearRedirectLocation();
 
+                                              logFirebaseEvent(
+                                                  'Button_navigate_to');
+
                                               context.pushNamedAuth(
                                                   SignUpWidget.routeName,
                                                   context.mounted);
 
+                                              logFirebaseEvent(
+                                                  'Button_show_snack_bar');
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
                                                 SnackBar(

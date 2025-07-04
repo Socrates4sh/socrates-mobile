@@ -25,6 +25,8 @@ class _HomePageDraft2WidgetState extends State<HomePageDraft2Widget> {
     super.initState();
     _model = createModel(context, () => HomePageDraft2Model());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'HomePageDraft2'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -84,6 +86,10 @@ class _HomePageDraft2WidgetState extends State<HomePageDraft2Widget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'HOME_DRAFT2_Container_ugo4cxxj_ON_TAP');
+                          logFirebaseEvent('Container_navigate_to');
+
                           context.pushNamed(ProfileWidget.routeName);
                         },
                         child: Container(

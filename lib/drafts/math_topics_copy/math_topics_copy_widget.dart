@@ -26,6 +26,8 @@ class _MathTopicsCopyWidgetState extends State<MathTopicsCopyWidget> {
     super.initState();
     _model = createModel(context, () => MathTopicsCopyModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'MathTopicsCopy'});
     _model.expandableExpandableController1 =
         ExpandableController(initialExpanded: false);
     _model.expandableExpandableController2 =
@@ -417,6 +419,11 @@ class _MathTopicsCopyWidgetState extends State<MathTopicsCopyWidget> {
                                                 highlightColor:
                                                     Colors.transparent,
                                                 onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'MATH_TOPICS_COPY_Text_yhamlrt9_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Text_navigate_to');
+
                                                   context.pushNamed(
                                                       VideoPageWidget
                                                           .routeName);

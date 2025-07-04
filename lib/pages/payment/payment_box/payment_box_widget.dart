@@ -122,10 +122,15 @@ class _PaymentBoxWidgetState extends State<PaymentBoxWidget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'PAYMENT_BOX_Container_9psl8dei_ON_TAP');
+                        logFirebaseEvent('Container_revenue_cat');
                         _model.purchaseSuccessful = await revenue_cat
                             .purchasePackage(widget.packageID!);
                         if (_model.purchaseSuccessful!) {
+                          logFirebaseEvent('Container_bottom_sheet');
                           Navigator.pop(context);
+                          logFirebaseEvent('Container_backend_call');
 
                           await currentUserReference!.update({
                             ...mapToFirestore(
@@ -153,6 +158,7 @@ class _PaymentBoxWidgetState extends State<PaymentBoxWidget> {
                               },
                             ),
                           });
+                          logFirebaseEvent('Container_navigate_to');
 
                           context.pushNamed(
                             ChaptersWidget.routeName,
@@ -180,7 +186,9 @@ class _PaymentBoxWidgetState extends State<PaymentBoxWidget> {
                             }.withoutNulls,
                           );
                         } else {
+                          logFirebaseEvent('Container_bottom_sheet');
                           Navigator.pop(context);
+                          logFirebaseEvent('Container_show_snack_bar');
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -254,6 +262,8 @@ class _PaymentBoxWidgetState extends State<PaymentBoxWidget> {
                     size: 15.0,
                   ),
                   onPressed: () async {
+                    logFirebaseEvent('PAYMENT_BOX_COMP_close_sharp_ICN_ON_TAP');
+                    logFirebaseEvent('IconButton_bottom_sheet');
                     Navigator.pop(context);
                   },
                 ),

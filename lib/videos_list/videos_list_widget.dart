@@ -39,8 +39,11 @@ class _VideosListWidgetState extends State<VideosListWidget> {
     super.initState();
     _model = createModel(context, () => VideosListModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'VideosList'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('VIDEOS_LIST_VideosList_ON_INIT_STATE');
+      logFirebaseEvent('VideosList_update_page_state');
       _model.initCompleted = true;
       safeSetState(() {});
     });
@@ -163,6 +166,8 @@ class _VideosListWidgetState extends State<VideosListWidget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'VIDEOS_LIST_PAGE_Row_gf1hdiwm_ON_TAP');
                                                 if ((!valueOrDefault<bool>(
                                                             currentUserDocument
                                                                 ?.userSubscribed,
@@ -174,6 +179,8 @@ class _VideosListWidgetState extends State<VideosListWidget> {
                                                             null)) &&
                                                     (subCategoryVideosIndex >=
                                                         3)) {
+                                                  logFirebaseEvent(
+                                                      'Row_alert_dialog');
                                                   await showDialog(
                                                     context: context,
                                                     builder: (dialogContext) {
@@ -205,6 +212,9 @@ class _VideosListWidgetState extends State<VideosListWidget> {
                                                     },
                                                   );
                                                 } else {
+                                                  logFirebaseEvent(
+                                                      'Row_navigate_to');
+
                                                   context.pushNamed(
                                                     VideoPageV2Widget.routeName,
                                                     queryParameters: {

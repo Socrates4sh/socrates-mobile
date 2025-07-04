@@ -30,6 +30,7 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
     super.initState();
     _model = createModel(context, () => VerifyCodeModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'VerifyCode'});
     _model.otpTextController ??= TextEditingController();
     _model.otpFocusNode ??= FocusNode();
 
@@ -361,10 +362,16 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                                               _model.termsCheckboxValue =
                                                                   newValue!);
                                                           if (newValue!) {
+                                                            logFirebaseEvent(
+                                                                'VERIFY_CODE_TermsCheckbox_ON_TOGGLE_ON');
+                                                            logFirebaseEvent(
+                                                                'TermsCheckbox_update_app_state');
                                                             FFAppState()
                                                                     .continueOnTap =
                                                                 true;
                                                             safeSetState(() {});
+                                                            logFirebaseEvent(
+                                                                'TermsCheckbox_backend_call');
 
                                                             await currentUserReference!
                                                                 .update(
@@ -485,9 +492,13 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                                         0.0, 0.0, 0.0, 16.0),
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
+                                                    logFirebaseEvent(
+                                                        'VERIFY_CODE_PAGE_Verify_Button_ON_TAP');
                                                     if (FFAppState()
                                                             .continueOnTap ==
                                                         true) {
+                                                      logFirebaseEvent(
+                                                          'Verify_Button_auth');
                                                       GoRouter.of(context)
                                                           .prepareAuthEvent();
                                                       final smsCodeVal = _model
@@ -515,10 +526,14 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                                         return;
                                                       }
 
+                                                      logFirebaseEvent(
+                                                          'Verify_Button_reset_form_fields');
                                                       safeSetState(() {
                                                         _model.termsCheckboxValue =
                                                             false;
                                                       });
+                                                      logFirebaseEvent(
+                                                          'Verify_Button_reset_form_fields');
                                                       safeSetState(() {
                                                         _model.otpTextController
                                                             ?.clear();
@@ -527,17 +542,25 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                                           currentUserDocument
                                                               ?.onBoardingComplete,
                                                           false)) {
+                                                        logFirebaseEvent(
+                                                            'Verify_Button_navigate_to');
+
                                                         context.pushNamedAuth(
                                                             OnboardingFormWidget
                                                                 .routeName,
                                                             context.mounted);
                                                       } else {
+                                                        logFirebaseEvent(
+                                                            'Verify_Button_navigate_to');
+
                                                         context.pushNamedAuth(
                                                             HomepageV3Widget
                                                                 .routeName,
                                                             context.mounted);
                                                       }
                                                     } else {
+                                                      logFirebaseEvent(
+                                                          'Verify_Button_show_snack_bar');
                                                       ScaffoldMessenger.of(
                                                               context)
                                                           .showSnackBar(
@@ -637,6 +660,9 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent('VERIFY_CODE_PAGE_Terms_ON_TAP');
+                              logFirebaseEvent('Terms_navigate_to');
+
                               context.pushNamed(TermsofServiceWidget.routeName);
                             },
                             child: Text(
@@ -670,6 +696,10 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'VERIFY_CODE_PAGE_Text_qnw7gp6o_ON_TAP');
+                            logFirebaseEvent('Text_navigate_to');
+
                             context.pushNamed(PrivacyPolicyWidget.routeName);
                           },
                           child: Text(
@@ -702,6 +732,10 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                             hoverColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () async {
+                              logFirebaseEvent(
+                                  'VERIFY_CODE_PAGE_Text_9xdk5oaa_ON_TAP');
+                              logFirebaseEvent('Text_navigate_to');
+
                               context
                                   .pushNamed(DeleteAccountWebWidget.routeName);
                             },

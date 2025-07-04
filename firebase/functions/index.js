@@ -214,8 +214,8 @@ const kTestKeyId = "rzp_test_uTzy9xBVhiNrSO";
 const kTestKeySecret = "FojRteIVHX0BA0ZX441j1j7T";
 
 // Prod credentials
-const kProdKeyId = "";
-const kProdKeySecret = "";
+const kProdKeyId = "rzp_live_qvujNjB2Ume7lm";
+const kProdKeySecret = "Op8y7BpF4w3dx5JXxHxWI8WT";
 
 const keyId = (isProd) => (isProd ? kProdKeyId : kTestKeyId);
 const keySecret = (isProd) => (isProd ? kProdKeySecret : kTestKeySecret);

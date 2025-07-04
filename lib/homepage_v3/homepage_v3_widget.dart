@@ -33,8 +33,11 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
     super.initState();
     _model = createModel(context, () => HomepageV3Model());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomepageV3'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('HOMEV3_HomepageV3_ON_INIT_STATE');
+      logFirebaseEvent('HomepageV3_firestore_query');
       _model.websiteStructureDocs = await queryWebsiteStructureRecordOnce(
         queryBuilder: (websiteStructureRecord) => websiteStructureRecord
             .where(
@@ -43,23 +46,28 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
             )
             .orderBy('nav_seq'),
       );
+      logFirebaseEvent('HomepageV3_firestore_query');
       _model.websiteVideosDoc = await queryWebsiteVideosRecordOnce(
         queryBuilder: (websiteVideosRecord) => websiteVideosRecord.where(
           'is_display',
           isEqualTo: true,
         ),
       );
+      logFirebaseEvent('HomepageV3_firestore_query');
       _model.langSeq = await queryHomepageLanguageSequenceRecordOnce(
         queryBuilder: (homepageLanguageSequenceRecord) =>
             homepageLanguageSequenceRecord.orderBy('lang_seq'),
       );
+      logFirebaseEvent('HomepageV3_custom_action');
       _model.dataRecord = await actions.fetchHomeAllData(
         _model.websiteStructureDocs!.toList(),
         _model.langSeq!.toList(),
       );
+      logFirebaseEvent('HomepageV3_update_page_state');
       _model.allDataList =
           _model.dataRecord!.toList().cast<HomeAllDataStruct>();
       safeSetState(() {});
+      logFirebaseEvent('HomepageV3_update_page_state');
       _model.initCompleted = true;
       safeSetState(() {});
     });
@@ -146,6 +154,11 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'HOMEPAGE_V3_PAGE_Icon_80clkez6_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Icon_navigate_to');
+
                                                 context.pushNamed(
                                                     SearchWidget.routeName);
                                               },
@@ -384,6 +397,11 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                                             Colors.transparent,
                                                                         onTap:
                                                                             () async {
+                                                                          logFirebaseEvent(
+                                                                              'HOMEV3_Container_hp6r9jcb_ON_TAP');
+                                                                          logFirebaseEvent(
+                                                                              'Container_navigate_to');
+
                                                                           context
                                                                               .pushNamed(
                                                                             VideoPageV2Widget.routeName,
@@ -467,6 +485,9 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                                               hoverColor: Colors.transparent,
                                                                               highlightColor: Colors.transparent,
                                                                               onTap: () async {
+                                                                                logFirebaseEvent('HOMEV3_Container_33st0j50_ON_TAP');
+                                                                                logFirebaseEvent('Container_backend_call');
+
                                                                                 await currentUserReference!.update({
                                                                                   ...mapToFirestore(
                                                                                     {
@@ -491,6 +512,7 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                                                     },
                                                                                   ),
                                                                                 });
+                                                                                logFirebaseEvent('Container_update_app_state');
 
                                                                                 safeSetState(() {});
                                                                               },
@@ -730,6 +752,10 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  logFirebaseEvent(
+                                      'HOMEPAGE_V3_PAGE_Column_0obqvtd3_ON_TAP');
+                                  logFirebaseEvent('Column_navigate_to');
+
                                   context.pushNamed(HomepageV3Widget.routeName);
                                 },
                                 child: Column(
@@ -768,6 +794,10 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  logFirebaseEvent(
+                                      'HOMEPAGE_V3_PAGE_Column_gmf0kbxc_ON_TAP');
+                                  logFirebaseEvent('Column_navigate_to');
+
                                   context
                                       .pushNamed(RecommendedWidget.routeName);
                                 },
@@ -807,6 +837,10 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  logFirebaseEvent(
+                                      'HOMEPAGE_V3_PAGE_Column_h6j8eqdu_ON_TAP');
+                                  logFirebaseEvent('Column_navigate_to');
+
                                   context.pushNamed(ProfileWidget.routeName);
                                 },
                                 child: Column(

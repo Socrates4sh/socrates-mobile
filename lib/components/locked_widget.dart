@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'locked_model.dart';
 export 'locked_model.dart';
@@ -27,6 +28,13 @@ class _LockedWidgetState extends State<LockedWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => LockedModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('LOCKED_COMP_Locked_ON_INIT_STATE');
+      logFirebaseEvent('Locked_google_analytics_event');
+      logFirebaseEvent('app_locked_tapCount');
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -100,6 +108,9 @@ class _LockedWidgetState extends State<LockedWidget> {
                             children: [
                               FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                      'LOCKED_COMP_GO_BACK_BTN_ON_TAP');
+                                  logFirebaseEvent('Button_dismiss_dialog');
                                   Navigator.pop(context);
                                 },
                                 text: 'Go Back',
@@ -129,6 +140,10 @@ class _LockedWidgetState extends State<LockedWidget> {
                               ),
                               FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                      'LOCKED_COMP_SUBSCRIBE_BTN_ON_TAP');
+                                  logFirebaseEvent('Button_navigate_to');
+
                                   context.pushNamed(
                                       SubscriptionPageRazorPayWidget.routeName);
                                 },
@@ -174,6 +189,8 @@ class _LockedWidgetState extends State<LockedWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
+                      logFirebaseEvent('LOCKED_COMP_Icon_2j796hp5_ON_TAP');
+                      logFirebaseEvent('Icon_dismiss_dialog');
                       Navigator.pop(context);
                     },
                     child: Icon(

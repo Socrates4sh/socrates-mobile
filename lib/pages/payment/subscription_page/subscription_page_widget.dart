@@ -28,6 +28,8 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
     super.initState();
     _model = createModel(context, () => SubscriptionPageModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'SubscriptionPage'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -183,6 +185,10 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  logFirebaseEvent(
+                                      'SUBSCRIPTION_Container_kzg444tj_ON_TAP');
+                                  logFirebaseEvent(
+                                      'Container_update_page_state');
                                   _model.selectedPlan = 'Monthly';
                                   safeSetState(() {});
                                 },
@@ -285,6 +291,10 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
+                                      logFirebaseEvent(
+                                          'SUBSCRIPTION_Column_lyqae4k8_ON_TAP');
+                                      logFirebaseEvent(
+                                          'Column_update_page_state');
                                       _model.selectedPlan = 'Annual';
                                       safeSetState(() {});
                                     },
@@ -342,13 +352,18 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'SUBSCRIPTION_SUBSCRIBE_BTN_ON_TAP');
                             if (_model.selectedPlan != null &&
                                 _model.selectedPlan != '') {
                               if (_model.selectedPlan == 'Monthly') {
+                                logFirebaseEvent('Button_revenue_cat');
                                 _model.monthlyPurchase = await revenue_cat
                                     .purchasePackage(revenue_cat.offerings!
                                         .current!.monthly!.identifier);
                                 if (_model.monthlyPurchase!) {
+                                  logFirebaseEvent('Button_backend_call');
+
                                   await currentUserReference!.update({
                                     ...mapToFirestore(
                                       {
@@ -369,10 +384,12 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                       },
                                     ),
                                   });
+                                  logFirebaseEvent('Button_navigate_to');
 
                                   context.pushNamed(
                                       SubscriptionPageWidget.routeName);
                                 } else {
+                                  logFirebaseEvent('Button_show_snack_bar');
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
@@ -390,10 +407,13 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                   );
                                 }
                               } else {
+                                logFirebaseEvent('Button_revenue_cat');
                                 _model.annualPurchase = await revenue_cat
                                     .purchasePackage(revenue_cat.offerings!
                                         .current!.annual!.identifier);
                                 if (_model.annualPurchase!) {
+                                  logFirebaseEvent('Button_backend_call');
+
                                   await currentUserReference!.update({
                                     ...mapToFirestore(
                                       {
@@ -414,10 +434,12 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                       },
                                     ),
                                   });
+                                  logFirebaseEvent('Button_navigate_to');
 
                                   context.pushNamed(
                                       SubscriptionPageWidget.routeName);
                                 } else {
+                                  logFirebaseEvent('Button_show_snack_bar');
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
@@ -436,6 +458,7 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                 }
                               }
                             } else {
+                              logFirebaseEvent('Button_show_snack_bar');
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(

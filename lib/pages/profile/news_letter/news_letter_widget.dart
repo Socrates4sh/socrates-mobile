@@ -29,13 +29,17 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
     super.initState();
     _model = createModel(context, () => NewsLetterModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'NewsLetter'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('NEWS_LETTER_NewsLetter_ON_INIT_STATE');
       if (valueOrDefault(currentUserDocument?.subscribedEmail, '') != '') {
+        logFirebaseEvent('NewsLetter_update_page_state');
         _model.isSubscribedEmail =
             valueOrDefault<bool>(currentUserDocument?.newsletters, false);
         safeSetState(() {});
       } else {
+        logFirebaseEvent('NewsLetter_update_page_state');
         _model.isSubscribedEmail = false;
         safeSetState(() {});
       }
@@ -288,6 +292,9 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
                                 children: [
                                   FFButtonWidget(
                                     onPressed: () async {
+                                      logFirebaseEvent(
+                                          'NEWS_LETTER_PAGE_SUBSCRIBE_BTN_ON_TAP');
+                                      logFirebaseEvent('Button_backend_call');
                                       _model.subscribed =
                                           await MailchimpSubscriptionCall.call(
                                         email: _model.emailTextController.text,
@@ -295,12 +302,19 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
                                         uid: currentUserUid,
                                       );
 
+                                      logFirebaseEvent('Button_backend_call');
+
                                       await currentUserReference!
                                           .update(createUsersRecordData(
                                         newsletters: true,
                                         subscribedEmail:
                                             _model.emailTextController.text,
                                       ));
+                                      logFirebaseEvent(
+                                          'Button_google_analytics_event');
+                                      logFirebaseEvent(
+                                          'app_newsletter_subscribed');
+                                      logFirebaseEvent('Button_navigate_to');
 
                                       context
                                           .goNamed(NewsLetterWidget.routeName);
@@ -357,12 +371,17 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
+                                        logFirebaseEvent(
+                                            'NEWS_LETTER_PAGE_Text_m4uxvstz_ON_TAP');
+                                        logFirebaseEvent('Text_backend_call');
                                         await MailchimpSubscriptionCall.call(
                                           email:
                                               _model.emailTextController.text,
                                           subscription: false,
                                           uid: currentUserUid,
                                         );
+
+                                        logFirebaseEvent('Text_backend_call');
 
                                         await currentUserReference!.update({
                                           ...createUsersRecordData(
@@ -375,6 +394,7 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
                                             },
                                           ),
                                         });
+                                        logFirebaseEvent('Text_show_snack_bar');
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(
@@ -393,6 +413,8 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
                                                     .primary,
                                           ),
                                         );
+                                        logFirebaseEvent(
+                                            'Text_reset_form_fields');
                                         safeSetState(() {
                                           _model.emailTextController?.text =
                                               currentUserEmail;
@@ -531,12 +553,17 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
                             ),
                             FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent(
+                                    'NEWS_LETTER_PAGE_UNSUBSCRIBE_BTN_ON_TAP');
+                                logFirebaseEvent('Button_backend_call');
                                 _model.subscribe =
                                     await MailchimpSubscriptionCall.call(
                                   email: _model.emailTextController.text,
                                   subscription: false,
                                   uid: currentUserUid,
                                 );
+
+                                logFirebaseEvent('Button_backend_call');
 
                                 await currentUserReference!.update({
                                   ...createUsersRecordData(
@@ -548,6 +575,10 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
                                     },
                                   ),
                                 });
+                                logFirebaseEvent(
+                                    'Button_google_analytics_event');
+                                logFirebaseEvent('app_newsletter_unsubscribed');
+                                logFirebaseEvent('Button_navigate_to');
 
                                 context.pushNamed(NewsLetterWidget.routeName);
 

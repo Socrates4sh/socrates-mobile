@@ -24,6 +24,8 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
     super.initState();
     _model = createModel(context, () => PrivacyPolicyModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'PrivacyPolicy'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -1196,6 +1198,10 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'PRIVACY_POLICY_PAGE_Text_9a7pwjei_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Text_launch_u_r_l');
                                             await launchURL(
                                                 'https://wa.me/+18652233814?text=I%27m%20facing%20an%20issue%20on%20the%20Socrates%20app');
                                           },

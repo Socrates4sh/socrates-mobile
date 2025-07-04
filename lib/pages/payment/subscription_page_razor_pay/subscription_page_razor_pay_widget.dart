@@ -36,9 +36,13 @@ class _SubscriptionPageRazorPayWidgetState
     super.initState();
     _model = createModel(context, () => SubscriptionPageRazorPayModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'SubscriptionPageRazorPay'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('SUBSCRIPTION_RAZOR_PAY_SubscriptionPageR');
       if (valueOrDefault(currentUserDocument?.customerId, '') == '') {
+        logFirebaseEvent('SubscriptionPageRazorPay_backend_call');
         _model.customerIdResponse = await CreateCustomerIDCall.call(
           name: currentUserDisplayName,
           email: currentUserEmail,
@@ -46,6 +50,8 @@ class _SubscriptionPageRazorPayWidgetState
         );
 
         if ((_model.customerIdResponse?.succeeded ?? true)) {
+          logFirebaseEvent('SubscriptionPageRazorPay_backend_call');
+
           await currentUserReference!.update(createUsersRecordData(
             customerId: CreateCustomerIDCall.customerId(
               (_model.customerIdResponse?.jsonBody ?? ''),
@@ -53,17 +59,22 @@ class _SubscriptionPageRazorPayWidgetState
           ));
         }
       }
+      logFirebaseEvent('SubscriptionPageRazorPay_update_app_stat');
       FFAppState().monthlySubscriptionId = '';
       safeSetState(() {});
+      logFirebaseEvent('SubscriptionPageRazorPay_firestore_query');
       _model.constantDataDoc = await queryConstantDataRecordOnce(
         singleRecord: true,
       ).then((s) => s.firstOrNull);
+      logFirebaseEvent('SubscriptionPageRazorPay_firestore_query');
       _model.paymentPlanDoc = await queryPaymentPlanDetailsRecordOnce(
         parent: _model.constantDataDoc?.reference,
         singleRecord: true,
       ).then((s) => s.firstOrNull);
+      logFirebaseEvent('SubscriptionPageRazorPay_update_page_sta');
       _model.initComplete = true;
       safeSetState(() {});
+      logFirebaseEvent('SubscriptionPageRazorPay_backend_call');
       _model.razorPayResponseMonthly = await CreateSubscriptionIDCall.call(
         planId: _model.paymentPlanDoc?.planId,
         totalCount: 1,
@@ -73,6 +84,7 @@ class _SubscriptionPageRazorPayWidgetState
       );
 
       if ((_model.razorPayResponseMonthly?.succeeded ?? true)) {
+        logFirebaseEvent('SubscriptionPageRazorPay_update_app_stat');
         FFAppState().monthlySubscriptionId =
             CreateSubscriptionIDCall.subscriptionId(
           (_model.razorPayResponseMonthly?.jsonBody ?? ''),
@@ -418,6 +430,10 @@ class _SubscriptionPageRazorPayWidgetState
                                                         highlightColor:
                                                             Colors.transparent,
                                                         onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'SUBSCRIPTION_RAZOR_PAY_Container_7esrk3e');
+                                                          logFirebaseEvent(
+                                                              'Container_update_page_state');
                                                           _model.selectedPlan =
                                                               'Monthly';
                                                           safeSetState(() {});
@@ -529,6 +545,8 @@ class _SubscriptionPageRazorPayWidgetState
                                                     0.0, 30.0, 0.0, 0.0),
                                             child: FFButtonWidget(
                                               onPressed: () async {
+                                                logFirebaseEvent(
+                                                    'SUBSCRIPTION_RAZOR_PAY_SUBSCRIBE_BTN_ON_');
                                                 if (CreateSubscriptionIDCall
                                                             .subscriptionId(
                                                           (_model.razorPayResponseMonthly
@@ -543,6 +561,8 @@ class _SubscriptionPageRazorPayWidgetState
                                                               ''),
                                                         ) ==
                                                         '') {
+                                                  logFirebaseEvent(
+                                                      'Button_backend_call');
                                                   _model.razorPayResponseMonthlyAvv =
                                                       await CreateSubscriptionIDCall
                                                           .call(
@@ -557,6 +577,8 @@ class _SubscriptionPageRazorPayWidgetState
                                                     description: 'Monthly Plan',
                                                   );
 
+                                                  logFirebaseEvent(
+                                                      'Button_update_app_state');
                                                   FFAppState()
                                                           .monthlySubscriptionId =
                                                       CreateSubscriptionIDCall
@@ -567,12 +589,22 @@ class _SubscriptionPageRazorPayWidgetState
                                                   )!;
                                                   safeSetState(() {});
                                                 }
+                                                logFirebaseEvent(
+                                                    'Button_custom_action');
                                                 await actions
                                                     .startRazorpaySubscriptionPayment(
                                                   FFAppState()
                                                       .monthlySubscriptionId,
-                                                  () async {},
                                                   () async {
+                                                    logFirebaseEvent(
+                                                        '_google_analytics_event');
+                                                    logFirebaseEvent(
+                                                        'app_subscription_notTaken');
+                                                  },
+                                                  () async {
+                                                    logFirebaseEvent(
+                                                        '_backend_call');
+
                                                     await currentUserReference!
                                                         .update({
                                                       ...createUsersRecordData(
@@ -617,9 +649,17 @@ class _SubscriptionPageRazorPayWidgetState
                                                         },
                                                       ),
                                                     });
+                                                    logFirebaseEvent(
+                                                        '_google_analytics_event');
+                                                    logFirebaseEvent(
+                                                        'app_subscription_successful');
+                                                    logFirebaseEvent(
+                                                        '_update_app_state');
                                                     FFAppState()
                                                         .monthlySubscriptionId = '';
                                                     safeSetState(() {});
+                                                    logFirebaseEvent(
+                                                        '_alert_dialog');
                                                     await showDialog(
                                                       context: context,
                                                       builder:
@@ -938,6 +978,10 @@ class _SubscriptionPageRazorPayWidgetState
                                                                 ),
                                                           ),
                                                           TextSpan(
+                                                            text: ' ',
+                                                            style: TextStyle(),
+                                                          ),
+                                                          TextSpan(
                                                             text: dateTimeFormat(
                                                                 "d MMM y",
                                                                 currentUserDocument!
@@ -979,6 +1023,10 @@ class _SubscriptionPageRazorPayWidgetState
                                                         highlightColor:
                                                             Colors.transparent,
                                                         onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'SUBSCRIPTION_RAZOR_PAY_Text_451pcrxv_ON_');
+                                                          logFirebaseEvent(
+                                                              'Text_alert_dialog');
                                                           await showDialog(
                                                             context: context,
                                                             builder:

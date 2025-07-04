@@ -43,8 +43,12 @@ class _ShortsVideoPageWidgetState extends State<ShortsVideoPageWidget> {
     super.initState();
     _model = createModel(context, () => ShortsVideoPageModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'shortsVideoPage'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('SHORTS_VIDEO_shortsVideoPage_ON_INIT_STA');
+      logFirebaseEvent('shortsVideoPage_firestore_query');
       _model.listVideos = await queryUploadedVideosRecordOnce(
         queryBuilder: (uploadedVideosRecord) => uploadedVideosRecord
             .where(
@@ -65,6 +69,7 @@ class _ShortsVideoPageWidgetState extends State<ShortsVideoPageWidget> {
             )
             .orderBy('video_sequence'),
       );
+      logFirebaseEvent('shortsVideoPage_update_page_state');
       _model.startingIndex = _model.listVideos!
           .where((e) =>
               e.videoSequence <
@@ -76,6 +81,7 @@ class _ShortsVideoPageWidgetState extends State<ShortsVideoPageWidget> {
           .toList()
           .length;
       safeSetState(() {});
+      logFirebaseEvent('shortsVideoPage_update_page_state');
       _model.initComplete = true;
       safeSetState(() {});
     });
@@ -130,6 +136,9 @@ class _ShortsVideoPageWidgetState extends State<ShortsVideoPageWidget> {
                                   size: 24.0,
                                 ),
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                      'SHORTS_VIDEO_solidArrowAltCircleLeft_ICN');
+                                  logFirebaseEvent('IconButton_navigate_back');
                                   context.safePop();
                                 },
                               ),

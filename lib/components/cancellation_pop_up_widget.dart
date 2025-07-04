@@ -73,6 +73,9 @@ class _CancellationPopUpWidgetState extends State<CancellationPopUpWidget> {
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
+                            logFirebaseEvent(
+                                'CANCELLATION_POP_UP_Icon_qocpvmst_ON_TAP');
+                            logFirebaseEvent('Icon_dismiss_dialog');
                             Navigator.pop(context);
                           },
                           child: Icon(
@@ -131,6 +134,9 @@ class _CancellationPopUpWidgetState extends State<CancellationPopUpWidget> {
                             children: [
                               FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                      'CANCELLATION_POP_UP_CANCEL_PLAN_BTN_ON_T');
+                                  logFirebaseEvent('Button_backend_call');
                                   _model.apiResult1u4 =
                                       await CancelSubscriptionCall.call(
                                     subId: valueOrDefault(
@@ -140,15 +146,23 @@ class _CancellationPopUpWidgetState extends State<CancellationPopUpWidget> {
 
                                   if ((_model.apiResult1u4?.succeeded ??
                                       true)) {
+                                    logFirebaseEvent('Button_backend_call');
+
                                     await currentUserReference!
                                         .update(createUsersRecordData(
                                       userSubscribed: false,
                                       subscriptionCancelled: true,
                                     ));
+                                    logFirebaseEvent(
+                                        'Button_google_analytics_event');
+                                    logFirebaseEvent(
+                                        'app_subscription_cancelled');
+                                    logFirebaseEvent('Button_navigate_to');
 
                                     context.pushNamed(
                                         CancellationRazorPayWidget.routeName);
                                   } else {
+                                    logFirebaseEvent('Button_show_snack_bar');
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
@@ -198,6 +212,9 @@ class _CancellationPopUpWidgetState extends State<CancellationPopUpWidget> {
                               ),
                               FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent(
+                                      'CANCELLATION_POP_UP_CONTINUE_BTN_ON_TAP');
+                                  logFirebaseEvent('Button_dismiss_dialog');
                                   Navigator.pop(context);
                                 },
                                 text: 'Continue',

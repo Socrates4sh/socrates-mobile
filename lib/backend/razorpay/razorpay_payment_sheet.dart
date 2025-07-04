@@ -16,10 +16,10 @@ enum PaymentStatus {
   failed,
 }
 
-final bool _isProd = false;
+final bool _isProd = true;
 
 // Razorpay Credentials
-const _kProdRazorpayKeyId = '';
+const _kProdRazorpayKeyId = 'rzp_live_qvujNjB2Ume7lm';
 const _kTestRazorpayKeyId = 'rzp_test_uTzy9xBVhiNrSO';
 const _kBusinessName = '4sh.education';
 

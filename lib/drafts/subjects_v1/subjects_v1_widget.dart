@@ -37,8 +37,11 @@ class _SubjectsV1WidgetState extends State<SubjectsV1Widget> {
     super.initState();
     _model = createModel(context, () => SubjectsV1Model());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'SubjectsV1'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('SUBJECTS_V1_SubjectsV1_ON_INIT_STATE');
+      logFirebaseEvent('SubjectsV1_firestore_query');
       _model.examDataDoc = await queryExamsRecordOnce(
         queryBuilder: (examsRecord) => examsRecord.where(
           'exam_sequence',
@@ -46,9 +49,11 @@ class _SubjectsV1WidgetState extends State<SubjectsV1Widget> {
         ),
         singleRecord: true,
       ).then((s) => s.firstOrNull);
+      logFirebaseEvent('SubjectsV1_firestore_query');
       _model.subjectDataDoc = await querySubjectsRecordOnce(
         parent: _model.examDataDoc?.reference,
       );
+      logFirebaseEvent('SubjectsV1_update_page_state');
       _model.isLoading = true;
       safeSetState(() {});
     });
@@ -137,6 +142,10 @@ class _SubjectsV1WidgetState extends State<SubjectsV1Widget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'SUBJECTS_V1_Container_glschr2u_ON_TAP');
+                          logFirebaseEvent('Container_navigate_to');
+
                           context.pushNamed(ProfileWidget.routeName);
                         },
                         child: Container(
@@ -210,6 +219,10 @@ class _SubjectsV1WidgetState extends State<SubjectsV1Widget> {
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
+                                        logFirebaseEvent(
+                                            'SUBJECTS_V1_PAGE_Stack_z2qxwbyr_ON_TAP');
+                                        logFirebaseEvent('Stack_navigate_to');
+
                                         context.pushNamed(
                                           ChaptersWidget.routeName,
                                           queryParameters: {
