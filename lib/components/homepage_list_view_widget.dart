@@ -55,10 +55,12 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
     return StreamBuilder<List<SubCategoriesRecord>>(
       stream: querySubCategoriesRecord(
         parent: widget.websiteStructureDoc,
-        queryBuilder: (subCategoriesRecord) => subCategoriesRecord.where(
-          'exam',
-          isEqualTo: widget.subCategory,
-        ),
+        queryBuilder: (subCategoriesRecord) => subCategoriesRecord
+            .where(
+              'exam',
+              isEqualTo: widget.subCategory,
+            )
+            .orderBy('exam_sequence'),
         singleRecord: true,
       ),
       builder: (context, snapshot) {
