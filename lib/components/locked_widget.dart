@@ -142,10 +142,18 @@ class _LockedWidgetState extends State<LockedWidget> {
                                 onPressed: () async {
                                   logFirebaseEvent(
                                       'LOCKED_COMP_SUBSCRIBE_BTN_ON_TAP');
-                                  logFirebaseEvent('Button_navigate_to');
+                                  if (isAndroid) {
+                                    logFirebaseEvent('Button_navigate_to');
 
-                                  context.pushNamed(
-                                      SubscriptionPageRazorPayWidget.routeName);
+                                    context.pushNamed(
+                                        SubscriptionPageRazorPayWidget
+                                            .routeName);
+                                  } else {
+                                    logFirebaseEvent('Button_navigate_to');
+
+                                    context.pushNamed(
+                                        SubscriptionPageWidget.routeName);
+                                  }
                                 },
                                 text: 'Subscribe',
                                 options: FFButtonOptions(

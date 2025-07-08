@@ -939,8 +939,8 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
                                           'app_onboarding_completed');
                                       logFirebaseEvent('Button_navigate_to');
 
-                                      context
-                                          .pushNamed(HomepageWidget.routeName);
+                                      context.pushNamed(
+                                          HomepageV3Widget.routeName);
 
                                       safeSetState(() {});
                                     },
