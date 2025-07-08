@@ -22,7 +22,7 @@ export '/drafts/subjects_draft2/subjects_draft2_widget.dart'
 export '/drafts/chapters_draft1/chapters_draft1_widget.dart'
     show ChaptersDraft1Widget;
 export '/drafts/topics_demo/topics_demo_widget.dart' show TopicsDemoWidget;
-export '/pages/homepage/homepage_widget.dart' show HomepageWidget;
+export '/drafts/homepage/homepage_widget.dart' show HomepageWidget;
 export '/drafts/homepage_option2/homepage_option2_widget.dart'
     show HomepageOption2Widget;
 export '/drafts/subjects_v1/subjects_v1_widget.dart' show SubjectsV1Widget;
@@ -51,7 +51,7 @@ export '/pages/payment/subscription_page/subscription_page_widget.dart'
     show SubscriptionPageWidget;
 export '/pages/login/verify_code/verify_code_widget.dart' show VerifyCodeWidget;
 export '/homepage_v2/homepage_v2_widget.dart' show HomepageV2Widget;
-export '/homepage_v3/homepage_v3_widget.dart' show HomepageV3Widget;
+export '/pages/homepage_v3/homepage_v3_widget.dart' show HomepageV3Widget;
 export '/videos_list/videos_list_widget.dart' show VideosListWidget;
 export '/video_page_v2/video_page_v2_widget.dart' show VideoPageV2Widget;
 export '/recommended/recommended_widget.dart' show RecommendedWidget;
