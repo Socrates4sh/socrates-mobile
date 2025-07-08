@@ -48,10 +48,12 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
       );
       logFirebaseEvent('HomepageV3_firestore_query');
       _model.websiteVideosDoc = await queryWebsiteVideosRecordOnce(
-        queryBuilder: (websiteVideosRecord) => websiteVideosRecord.where(
-          'is_display',
-          isEqualTo: true,
-        ),
+        queryBuilder: (websiteVideosRecord) => websiteVideosRecord
+            .where(
+              'is_display',
+              isEqualTo: true,
+            )
+            .orderBy('video_sequence'),
       );
       logFirebaseEvent('HomepageV3_firestore_query');
       _model.langSeq = await queryHomepageLanguageSequenceRecordOnce(
