@@ -206,14 +206,12 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                             onTap: () async {
                               logFirebaseEvent(
                                   'HOMELIST_VIEW_Container_rfxmr8gg_ON_TAP');
-                              if (((valueOrDefault<bool>(
-                                              currentUserDocument
-                                                  ?.userSubscribed,
-                                              false) ==
-                                          null) ||
-                                      !valueOrDefault<bool>(
-                                          currentUserDocument?.userSubscribed,
-                                          false)) &&
+                              if (!valueOrDefault<bool>(
+                                    valueOrDefault<bool>(
+                                        currentUserDocument?.userSubscribed,
+                                        false),
+                                    false,
+                                  ) &&
                                   (videosIndex >= 3)) {
                                 logFirebaseEvent('Container_alert_dialog');
                                 await showDialog(
