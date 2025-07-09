@@ -484,15 +484,13 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                         ),
                                       ],
                                     ),
-                                    if (((valueOrDefault<bool>(
-                                                    currentUserDocument
-                                                        ?.userSubscribed,
-                                                    false) ==
-                                                null) &&
-                                            !valueOrDefault<bool>(
-                                                currentUserDocument
-                                                    ?.userSubscribed,
-                                                false)) &&
+                                    if (!valueOrDefault<bool>(
+                                          valueOrDefault<bool>(
+                                              currentUserDocument
+                                                  ?.userSubscribed,
+                                              false),
+                                          false,
+                                        ) &&
                                         (videosIndex >= 3))
                                       AuthUserStreamWidget(
                                         builder: (context) => Container(
