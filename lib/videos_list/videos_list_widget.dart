@@ -176,7 +176,13 @@ class _VideosListWidgetState extends State<VideosListWidget> {
                                                       false,
                                                     ) &&
                                                     (subCategoryVideosIndex >=
-                                                        3)) {
+                                                        3) &&
+                                                    ((currentUserDocument
+                                                                ?.subscriptionEndDateTime ==
+                                                            null) ||
+                                                        (currentUserDocument!
+                                                                .subscriptionEndDateTime! <
+                                                            getCurrentTimestamp))) {
                                                   logFirebaseEvent(
                                                       'Row_alert_dialog');
                                                   await showDialog(

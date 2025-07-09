@@ -212,7 +212,13 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                         false),
                                     false,
                                   ) &&
-                                  (videosIndex >= 3)) {
+                                  (videosIndex >= 3) &&
+                                  ((currentUserDocument
+                                              ?.subscriptionEndDateTime ==
+                                          null) ||
+                                      (currentUserDocument!
+                                              .subscriptionEndDateTime! <
+                                          getCurrentTimestamp))) {
                                 logFirebaseEvent('Container_alert_dialog');
                                 await showDialog(
                                   context: context,
@@ -489,7 +495,13 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                               false),
                                           false,
                                         ) &&
-                                        (videosIndex >= 3))
+                                        (videosIndex >= 3) &&
+                                        ((currentUserDocument
+                                                    ?.subscriptionEndDateTime ==
+                                                null) ||
+                                            (currentUserDocument!
+                                                    .subscriptionEndDateTime! <
+                                                getCurrentTimestamp)))
                                       AuthUserStreamWidget(
                                         builder: (context) => Container(
                                           width: double.infinity,
