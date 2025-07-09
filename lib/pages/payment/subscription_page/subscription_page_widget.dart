@@ -177,7 +177,7 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                         children: [
                           Row(
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               InkWell(
                                 splashColor: Colors.transparent,
@@ -261,84 +261,97 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                   ),
                                 ),
                               ),
-                              Material(
-                                color: Colors.transparent,
-                                elevation: 4.0,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                child: Container(
-                                  width: 100.0,
-                                  height: 60.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
+                              if (responsiveVisibility(
+                                context: context,
+                                phone: false,
+                                tablet: false,
+                                tabletLandscape: false,
+                                desktop: false,
+                              ))
+                                Material(
+                                  color: Colors.transparent,
+                                  elevation: 4.0,
+                                  shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12.0),
-                                    border: Border.all(
-                                      color: _model.selectedPlan == 'Annual'
-                                          ? FlutterFlowTheme.of(context)
-                                              .tertiary
-                                          : FlutterFlowTheme.of(context)
-                                              .primary,
-                                      width: _model.selectedPlan == 'Annual'
-                                          ? 2.0
-                                          : 1.0,
-                                    ),
                                   ),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'SUBSCRIPTION_Column_lyqae4k8_ON_TAP');
-                                      logFirebaseEvent(
-                                          'Column_update_page_state');
-                                      _model.selectedPlan = 'Annual';
-                                      safeSetState(() {});
-                                    },
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Annual Plan',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts:
-                                                    !FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMediumIsCustom,
-                                              ),
-                                        ),
-                                        Text(
-                                          revenue_cat.offerings!.current!
-                                              .annual!.storeProduct.priceString,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts:
-                                                    !FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMediumIsCustom,
-                                              ),
-                                        ),
-                                      ].divide(SizedBox(height: 5.0)),
+                                  child: Container(
+                                    width: 100.0,
+                                    height: 60.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      borderRadius: BorderRadius.circular(12.0),
+                                      border: Border.all(
+                                        color: _model.selectedPlan == 'Annual'
+                                            ? FlutterFlowTheme.of(context)
+                                                .tertiary
+                                            : FlutterFlowTheme.of(context)
+                                                .primary,
+                                        width: _model.selectedPlan == 'Annual'
+                                            ? 2.0
+                                            : 1.0,
+                                      ),
+                                    ),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'SUBSCRIPTION_Column_lyqae4k8_ON_TAP');
+                                        logFirebaseEvent(
+                                            'Column_update_page_state');
+                                        _model.selectedPlan = 'Annual';
+                                        safeSetState(() {});
+                                      },
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Annual Plan',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily,
+                                                  letterSpacing: 0.0,
+                                                  useGoogleFonts:
+                                                      !FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumIsCustom,
+                                                ),
+                                          ),
+                                          Text(
+                                            revenue_cat
+                                                .offerings!
+                                                .current!
+                                                .annual!
+                                                .storeProduct
+                                                .priceString,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily,
+                                                  letterSpacing: 0.0,
+                                                  useGoogleFonts:
+                                                      !FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumIsCustom,
+                                                ),
+                                          ),
+                                        ].divide(SizedBox(height: 5.0)),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
                             ],
                           ),
                         ]
@@ -354,115 +367,42 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                           onPressed: () async {
                             logFirebaseEvent(
                                 'SUBSCRIPTION_SUBSCRIBE_BTN_ON_TAP');
-                            if (_model.selectedPlan != null &&
-                                _model.selectedPlan != '') {
-                              if (_model.selectedPlan == 'Monthly') {
-                                logFirebaseEvent('Button_revenue_cat');
-                                _model.monthlyPurchase = await revenue_cat
-                                    .purchasePackage(revenue_cat.offerings!
-                                        .current!.monthly!.identifier);
-                                if (_model.monthlyPurchase!) {
-                                  logFirebaseEvent('Button_backend_call');
+                            logFirebaseEvent('Button_revenue_cat');
+                            _model.monthlyPurchase =
+                                await revenue_cat.purchasePackage(revenue_cat
+                                    .offerings!.current!.monthly!.identifier);
+                            if (_model.monthlyPurchase!) {
+                              logFirebaseEvent('Button_backend_call');
 
-                                  await currentUserReference!.update({
-                                    ...mapToFirestore(
-                                      {
-                                        'subscriptionPaymentList':
-                                            FieldValue.arrayUnion([
-                                          getSubscriptionPaymentFirestoreData(
-                                            createSubscriptionPaymentStruct(
-                                              subscriptionPlan: 'Monthly',
-                                              subscriptionDate:
-                                                  getCurrentTimestamp,
-                                              packageID: revenue_cat.offerings!
-                                                  .current!.monthly!.identifier,
-                                              clearUnsetFields: false,
-                                            ),
-                                            true,
-                                          )
-                                        ]),
-                                      },
-                                    ),
-                                  });
-                                  logFirebaseEvent('Button_navigate_to');
-
-                                  context.pushNamed(
-                                      SubscriptionPageWidget.routeName);
-                                } else {
-                                  logFirebaseEvent('Button_show_snack_bar');
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Something went wrong. Please try again.',
-                                        style: TextStyle(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
+                              await currentUserReference!.update({
+                                ...mapToFirestore(
+                                  {
+                                    'subscriptionPaymentList':
+                                        FieldValue.arrayUnion([
+                                      getSubscriptionPaymentFirestoreData(
+                                        createSubscriptionPaymentStruct(
+                                          subscriptionPlan: 'Monthly',
+                                          subscriptionDate: getCurrentTimestamp,
+                                          packageID: revenue_cat.offerings!
+                                              .current!.monthly!.identifier,
+                                          clearUnsetFields: false,
                                         ),
-                                      ),
-                                      duration: Duration(milliseconds: 4000),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .secondary,
-                                    ),
-                                  );
-                                }
-                              } else {
-                                logFirebaseEvent('Button_revenue_cat');
-                                _model.annualPurchase = await revenue_cat
-                                    .purchasePackage(revenue_cat.offerings!
-                                        .current!.annual!.identifier);
-                                if (_model.annualPurchase!) {
-                                  logFirebaseEvent('Button_backend_call');
+                                        true,
+                                      )
+                                    ]),
+                                  },
+                                ),
+                              });
+                              logFirebaseEvent('Button_navigate_to');
 
-                                  await currentUserReference!.update({
-                                    ...mapToFirestore(
-                                      {
-                                        'subscriptionPaymentList':
-                                            FieldValue.arrayUnion([
-                                          getSubscriptionPaymentFirestoreData(
-                                            createSubscriptionPaymentStruct(
-                                              subscriptionPlan: 'Annual',
-                                              subscriptionDate:
-                                                  getCurrentTimestamp,
-                                              packageID: revenue_cat.offerings!
-                                                  .current!.annual!.identifier,
-                                              clearUnsetFields: false,
-                                            ),
-                                            true,
-                                          )
-                                        ]),
-                                      },
-                                    ),
-                                  });
-                                  logFirebaseEvent('Button_navigate_to');
-
-                                  context.pushNamed(
-                                      SubscriptionPageWidget.routeName);
-                                } else {
-                                  logFirebaseEvent('Button_show_snack_bar');
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Something went wrong. Please try again.',
-                                        style: TextStyle(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                        ),
-                                      ),
-                                      duration: Duration(milliseconds: 4000),
-                                      backgroundColor:
-                                          FlutterFlowTheme.of(context)
-                                              .secondary,
-                                    ),
-                                  );
-                                }
-                              }
+                              context
+                                  .pushNamed(SubscriptionPageWidget.routeName);
                             } else {
                               logFirebaseEvent('Button_show_snack_bar');
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'Please select the plan first.',
+                                    'Something went wrong. Please try again.',
                                     style: TextStyle(
                                       color: FlutterFlowTheme.of(context)
                                           .primaryText,
