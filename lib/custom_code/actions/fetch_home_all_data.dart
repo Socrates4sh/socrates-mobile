@@ -22,10 +22,12 @@ Future<List<HomeAllDataStruct>> fetchHomeAllData(
 
     final subCategories = await querySubCategoriesRecordOnce(
         parent: item.reference,
-        queryBuilder: (subCategoriesRecord) => subCategoriesRecord.where(
+        queryBuilder: (subCategoriesRecord) => subCategoriesRecord
+            .where(
               'is_display',
               isEqualTo: true,
-            ));
+            )
+            .orderBy('exam_sequence'));
 
     for (final data in subCategories) {
       allDataList.add(HomeAllDataStruct(
