@@ -148,6 +148,11 @@ class UsersRecord extends FirestoreRecord {
       _subscriptionDetails ?? const [];
   bool hasSubscriptionDetails() => _subscriptionDetails != null;
 
+  // "subscriptionEndDate" field.
+  DateTime? _subscriptionEndDate;
+  DateTime? get subscriptionEndDate => _subscriptionEndDate;
+  bool hasSubscriptionEndDate() => _subscriptionEndDate != null;
+
   void _initializeFields() {
     _uid = snapshotData['uid'] as String?;
     _createdTime = snapshotData['created_time'] as DateTime?;
@@ -193,6 +198,7 @@ class UsersRecord extends FirestoreRecord {
       snapshotData['subscriptionDetails'],
       SubscriptionStruct.fromMap,
     );
+    _subscriptionEndDate = snapshotData['subscriptionEndDate'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -250,6 +256,7 @@ Map<String, dynamic> createUsersRecordData({
   String? subscriptionID,
   bool? userSubscribed,
   bool? subscriptionCancelled,
+  DateTime? subscriptionEndDate,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -274,6 +281,7 @@ Map<String, dynamic> createUsersRecordData({
       'subscriptionID': subscriptionID,
       'userSubscribed': userSubscribed,
       'subscriptionCancelled': subscriptionCancelled,
+      'subscriptionEndDate': subscriptionEndDate,
     }.withoutNulls,
   );
 
@@ -312,7 +320,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.subscriptionID == e2?.subscriptionID &&
         e1?.userSubscribed == e2?.userSubscribed &&
         e1?.subscriptionCancelled == e2?.subscriptionCancelled &&
-        listEquality.equals(e1?.subscriptionDetails, e2?.subscriptionDetails);
+        listEquality.equals(e1?.subscriptionDetails, e2?.subscriptionDetails) &&
+        e1?.subscriptionEndDate == e2?.subscriptionEndDate;
   }
 
   @override
@@ -342,7 +351,8 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.subscriptionID,
         e?.userSubscribed,
         e?.subscriptionCancelled,
-        e?.subscriptionDetails
+        e?.subscriptionDetails,
+        e?.subscriptionEndDate
       ]);
 
   @override
