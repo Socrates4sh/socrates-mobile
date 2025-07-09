@@ -488,7 +488,7 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                                     currentUserDocument
                                                         ?.userSubscribed,
                                                     false) ==
-                                                null) ||
+                                                null) &&
                                             !valueOrDefault<bool>(
                                                 currentUserDocument
                                                     ?.userSubscribed,
