@@ -168,17 +168,21 @@ class _VideosListWidgetState extends State<VideosListWidget> {
                                               onTap: () async {
                                                 logFirebaseEvent(
                                                     'VIDEOS_LIST_PAGE_Row_gf1hdiwm_ON_TAP');
-                                                if ((!valueOrDefault<bool>(
-                                                            currentUserDocument
-                                                                ?.userSubscribed,
-                                                            false) ||
-                                                        (valueOrDefault<bool>(
-                                                                currentUserDocument
-                                                                    ?.userSubscribed,
-                                                                false) ==
-                                                            null)) &&
+                                                if (!valueOrDefault<bool>(
+                                                      valueOrDefault<bool>(
+                                                          currentUserDocument
+                                                              ?.userSubscribed,
+                                                          false),
+                                                      false,
+                                                    ) &&
                                                     (subCategoryVideosIndex >=
-                                                        3)) {
+                                                        3) &&
+                                                    ((currentUserDocument
+                                                                ?.subscriptionEndDateTime ==
+                                                            null) ||
+                                                        (currentUserDocument!
+                                                                .subscriptionEndDateTime! <
+                                                            getCurrentTimestamp))) {
                                                   logFirebaseEvent(
                                                       'Row_alert_dialog');
                                                   await showDialog(
@@ -298,17 +302,15 @@ class _VideosListWidgetState extends State<VideosListWidget> {
                                                               ),
                                                             ],
                                                           ),
-                                                          if ((!valueOrDefault<
-                                                                          bool>(
-                                                                      currentUserDocument
-                                                                          ?.userSubscribed,
-                                                                      false) ||
-                                                                  (valueOrDefault<
-                                                                              bool>(
-                                                                          currentUserDocument
-                                                                              ?.userSubscribed,
-                                                                          false) ==
-                                                                      null)) &&
+                                                          if (!valueOrDefault<
+                                                                  bool>(
+                                                                valueOrDefault<
+                                                                        bool>(
+                                                                    currentUserDocument
+                                                                        ?.userSubscribed,
+                                                                    false),
+                                                                false,
+                                                              ) &&
                                                               (subCategoryVideosIndex >=
                                                                   3))
                                                             AuthUserStreamWidget(

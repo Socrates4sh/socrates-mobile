@@ -206,15 +206,19 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                             onTap: () async {
                               logFirebaseEvent(
                                   'HOMELIST_VIEW_Container_rfxmr8gg_ON_TAP');
-                              if (((valueOrDefault<bool>(
-                                              currentUserDocument
-                                                  ?.userSubscribed,
-                                              false) ==
+                              if (!valueOrDefault<bool>(
+                                    valueOrDefault<bool>(
+                                        currentUserDocument?.userSubscribed,
+                                        false),
+                                    false,
+                                  ) &&
+                                  (videosIndex >= 3) &&
+                                  ((currentUserDocument
+                                              ?.subscriptionEndDateTime ==
                                           null) ||
-                                      !valueOrDefault<bool>(
-                                          currentUserDocument?.userSubscribed,
-                                          false)) &&
-                                  (videosIndex >= 3)) {
+                                      (currentUserDocument!
+                                              .subscriptionEndDateTime! <
+                                          getCurrentTimestamp))) {
                                 logFirebaseEvent('Container_alert_dialog');
                                 await showDialog(
                                   context: context,
@@ -491,7 +495,13 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                               false),
                                           false,
                                         ) &&
-                                        (videosIndex >= 3))
+                                        (videosIndex >= 3) &&
+                                        ((currentUserDocument
+                                                    ?.subscriptionEndDateTime ==
+                                                null) ||
+                                            (currentUserDocument!
+                                                    .subscriptionEndDateTime! <
+                                                getCurrentTimestamp)))
                                       AuthUserStreamWidget(
                                         builder: (context) => Container(
                                           width: double.infinity,
