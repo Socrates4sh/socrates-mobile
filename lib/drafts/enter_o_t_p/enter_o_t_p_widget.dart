@@ -111,6 +111,7 @@ class _EnterOTPWidgetState extends State<EnterOTPWidget> {
                         child: TextFormField(
                           controller: _model.oTPTextFieldTextController,
                           focusNode: _model.oTPTextFieldFocusNode,
+                          autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
                             labelStyle: FlutterFlowTheme.of(context)
