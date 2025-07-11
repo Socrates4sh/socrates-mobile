@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'homepage_list_view_model.dart';
@@ -292,8 +293,12 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                                   topRight:
                                                       Radius.circular(8.0),
                                                 ),
-                                                child: Image.network(
-                                                  videosItem
+                                                child: CachedNetworkImage(
+                                                  fadeInDuration: Duration(
+                                                      milliseconds: 500),
+                                                  fadeOutDuration: Duration(
+                                                      milliseconds: 500),
+                                                  imageUrl: videosItem
                                                       .videoThumbnailImageUrl,
                                                   width:
                                                       MediaQuery.sizeOf(context)
@@ -301,7 +306,7 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                                                           1.0,
                                                   height: 150.0,
                                                   fit: BoxFit.cover,
-                                                  errorBuilder: (context, error,
+                                                  errorWidget: (context, error,
                                                           stackTrace) =>
                                                       Image.asset(
                                                     'assets/images/error_image.png',

@@ -7,6 +7,7 @@ import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:lottie/lottie.dart';
@@ -354,9 +355,18 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                                       .circular(
                                                                           8.0),
                                                               child:
-                                                                  Image.network(
-                                                                recVideosListItem
-                                                                    .videoThumbnailImageUrl,
+                                                                  CachedNetworkImage(
+                                                                fadeInDuration:
+                                                                    Duration(
+                                                                        milliseconds:
+                                                                            500),
+                                                                fadeOutDuration:
+                                                                    Duration(
+                                                                        milliseconds:
+                                                                            500),
+                                                                imageUrl:
+                                                                    recVideosListItem
+                                                                        .videoThumbnailImageUrl,
                                                                 width: MediaQuery.sizeOf(
                                                                             context)
                                                                         .width *
