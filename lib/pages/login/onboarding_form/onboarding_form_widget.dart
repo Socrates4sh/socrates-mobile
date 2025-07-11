@@ -908,7 +908,7 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
 
                                         await currentUserReference!
                                             .update(createUsersRecordData(
-                                          customerId:
+                                          razorpayCustomerId:
                                               CreateCustomerIDCall.customerId(
                                             (_model.customerIdResponse
                                                     ?.jsonBody ??

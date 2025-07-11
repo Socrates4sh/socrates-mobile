@@ -112,11 +112,6 @@ class UsersRecord extends FirestoreRecord {
   List<VideoDocsMylistStruct> get videosMylist => _videosMylist ?? const [];
   bool hasVideosMylist() => _videosMylist != null;
 
-  // "customerId" field.
-  String? _customerId;
-  String get customerId => _customerId ?? '';
-  bool hasCustomerId() => _customerId != null;
-
   // "subscriptionEndDateTime" field.
   DateTime? _subscriptionEndDateTime;
   DateTime? get subscriptionEndDateTime => _subscriptionEndDateTime;
@@ -147,6 +142,11 @@ class UsersRecord extends FirestoreRecord {
   List<SubscriptionStruct> get subscriptionDetails =>
       _subscriptionDetails ?? const [];
   bool hasSubscriptionDetails() => _subscriptionDetails != null;
+
+  // "razorpay_customer_id" field.
+  String? _razorpayCustomerId;
+  String get razorpayCustomerId => _razorpayCustomerId ?? '';
+  bool hasRazorpayCustomerId() => _razorpayCustomerId != null;
 
   void _initializeFields() {
     _uid = snapshotData['uid'] as String?;
@@ -181,7 +181,6 @@ class UsersRecord extends FirestoreRecord {
       snapshotData['videos_mylist'],
       VideoDocsMylistStruct.fromMap,
     );
-    _customerId = snapshotData['customerId'] as String?;
     _subscriptionEndDateTime =
         snapshotData['subscriptionEndDateTime'] as DateTime?;
     _subscriptionStartDateTime =
@@ -193,6 +192,7 @@ class UsersRecord extends FirestoreRecord {
       snapshotData['subscriptionDetails'],
       SubscriptionStruct.fromMap,
     );
+    _razorpayCustomerId = snapshotData['razorpay_customer_id'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -244,12 +244,12 @@ Map<String, dynamic> createUsersRecordData({
   String? subscribedEmail,
   bool? wACommunity,
   String? photoUrl,
-  String? customerId,
   DateTime? subscriptionEndDateTime,
   DateTime? subscriptionStartDateTime,
   String? subscriptionID,
   bool? userSubscribed,
   bool? subscriptionCancelled,
+  String? razorpayCustomerId,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -268,12 +268,12 @@ Map<String, dynamic> createUsersRecordData({
       'subscribedEmail': subscribedEmail,
       'WACommunity': wACommunity,
       'photo_url': photoUrl,
-      'customerId': customerId,
       'subscriptionEndDateTime': subscriptionEndDateTime,
       'subscriptionStartDateTime': subscriptionStartDateTime,
       'subscriptionID': subscriptionID,
       'userSubscribed': userSubscribed,
       'subscriptionCancelled': subscriptionCancelled,
+      'razorpay_customer_id': razorpayCustomerId,
     }.withoutNulls,
   );
 
@@ -306,13 +306,13 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e1?.wACommunity == e2?.wACommunity &&
         e1?.photoUrl == e2?.photoUrl &&
         listEquality.equals(e1?.videosMylist, e2?.videosMylist) &&
-        e1?.customerId == e2?.customerId &&
         e1?.subscriptionEndDateTime == e2?.subscriptionEndDateTime &&
         e1?.subscriptionStartDateTime == e2?.subscriptionStartDateTime &&
         e1?.subscriptionID == e2?.subscriptionID &&
         e1?.userSubscribed == e2?.userSubscribed &&
         e1?.subscriptionCancelled == e2?.subscriptionCancelled &&
-        listEquality.equals(e1?.subscriptionDetails, e2?.subscriptionDetails);
+        listEquality.equals(e1?.subscriptionDetails, e2?.subscriptionDetails) &&
+        e1?.razorpayCustomerId == e2?.razorpayCustomerId;
   }
 
   @override
@@ -336,13 +336,13 @@ class UsersRecordDocumentEquality implements Equality<UsersRecord> {
         e?.wACommunity,
         e?.photoUrl,
         e?.videosMylist,
-        e?.customerId,
         e?.subscriptionEndDateTime,
         e?.subscriptionStartDateTime,
         e?.subscriptionID,
         e?.userSubscribed,
         e?.subscriptionCancelled,
-        e?.subscriptionDetails
+        e?.subscriptionDetails,
+        e?.razorpayCustomerId
       ]);
 
   @override

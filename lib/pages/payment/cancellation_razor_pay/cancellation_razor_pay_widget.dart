@@ -39,7 +39,7 @@ class _CancellationRazorPayWidgetState
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('CANCELLATION_RAZOR_PAY_CancellationRazor');
-      if (valueOrDefault(currentUserDocument?.customerId, '') == '') {
+      if (valueOrDefault(currentUserDocument?.razorpayCustomerId, '') == '') {
         logFirebaseEvent('CancellationRazorPay_backend_call');
         _model.customerIdResponse = await CreateCustomerIDCall.call(
           name: currentUserDisplayName,
@@ -51,7 +51,7 @@ class _CancellationRazorPayWidgetState
           logFirebaseEvent('CancellationRazorPay_backend_call');
 
           await currentUserReference!.update(createUsersRecordData(
-            customerId: CreateCustomerIDCall.customerId(
+            razorpayCustomerId: CreateCustomerIDCall.customerId(
               (_model.customerIdResponse?.jsonBody ?? ''),
             ),
           ));
@@ -71,7 +71,7 @@ class _CancellationRazorPayWidgetState
         planId: _model.paymentPlanDoc?.planId,
         totalCount: 1,
         uID: currentUserUid,
-        customerId: valueOrDefault(currentUserDocument?.customerId, ''),
+        customerId: valueOrDefault(currentUserDocument?.razorpayCustomerId, ''),
         description: 'Monthly Plan',
       );
 

@@ -41,7 +41,7 @@ class _SubscriptionPageRazorPayWidgetState
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('SUBSCRIPTION_RAZOR_PAY_SubscriptionPageR');
-      if (valueOrDefault(currentUserDocument?.customerId, '') == '') {
+      if (valueOrDefault(currentUserDocument?.razorpayCustomerId, '') == '') {
         logFirebaseEvent('SubscriptionPageRazorPay_backend_call');
         _model.customerIdResponse = await CreateCustomerIDCall.call(
           name: currentUserDisplayName,
@@ -53,7 +53,7 @@ class _SubscriptionPageRazorPayWidgetState
           logFirebaseEvent('SubscriptionPageRazorPay_backend_call');
 
           await currentUserReference!.update(createUsersRecordData(
-            customerId: CreateCustomerIDCall.customerId(
+            razorpayCustomerId: CreateCustomerIDCall.customerId(
               (_model.customerIdResponse?.jsonBody ?? ''),
             ),
           ));
@@ -79,7 +79,7 @@ class _SubscriptionPageRazorPayWidgetState
         planId: _model.paymentPlanDoc?.planId,
         totalCount: 1,
         uID: currentUserUid,
-        customerId: valueOrDefault(currentUserDocument?.customerId, ''),
+        customerId: valueOrDefault(currentUserDocument?.razorpayCustomerId, ''),
         description: 'Monthly Plan',
       );
 
@@ -572,7 +572,7 @@ class _SubscriptionPageRazorPayWidgetState
                                                     uID: currentUserUid,
                                                     customerId: valueOrDefault(
                                                         currentUserDocument
-                                                            ?.customerId,
+                                                            ?.razorpayCustomerId,
                                                         ''),
                                                     description: 'Monthly Plan',
                                                   );

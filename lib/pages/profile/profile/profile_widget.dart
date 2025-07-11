@@ -856,7 +856,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                 logFirebaseEvent(
                                                     'InviteFriends_share');
                                                 await Share.share(
-                                                  'Hey! ${'\n'}Check out Socrates – an app to learn school subjects and prep for entrance exams with focused content. 📚 It’s super helpful! ${'\n' '\n'}Try it here: [App Link] 🚀',
+                                                  'Hey! ${'\n'}Check out 4sh – an app to learn school subjects and prep for entrance exams with focused content. 📚 It’s super helpful! ${'\n' '\n'}Try it here: https://play.google.com/store/apps/details?id=com.socrates.zappa',
                                                   sharePositionOrigin:
                                                       getWidgetBoundingBox(
                                                           context),
