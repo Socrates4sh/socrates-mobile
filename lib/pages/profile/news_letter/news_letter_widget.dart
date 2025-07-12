@@ -38,10 +38,6 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
         _model.isSubscribedEmail =
             valueOrDefault<bool>(currentUserDocument?.newsletters, false);
         safeSetState(() {});
-      } else {
-        logFirebaseEvent('NewsLetter_update_page_state');
-        _model.isSubscribedEmail = false;
-        safeSetState(() {});
       }
     });
 
@@ -304,8 +300,19 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
                                       onPressed: () async {
                                         logFirebaseEvent(
                                             'NEWS_LETTER_PAGE_SUBSCRIBE_BTN_ON_TAP');
+                                        logFirebaseEvent(
+                                            'Button_validate_form');
+                                        _model.verifiedUserDetails = true;
+                                        if (_model.formKey.currentState ==
+                                                null ||
+                                            !_model.formKey.currentState!
+                                                .validate()) {
+                                          safeSetState(() => _model
+                                              .verifiedUserDetails = false);
+                                          return;
+                                        }
                                         logFirebaseEvent('Button_backend_call');
-                                        _model.subscribed =
+                                        _model.subscribedApi =
                                             await MailchimpSubscriptionCall
                                                 .call(
                                           email:
@@ -314,22 +321,26 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
                                           uid: currentUserUid,
                                         );
 
-                                        logFirebaseEvent('Button_backend_call');
+                                        if ((_model.subscribedApi?.succeeded ??
+                                            true)) {
+                                          logFirebaseEvent(
+                                              'Button_backend_call');
 
-                                        await currentUserReference!
-                                            .update(createUsersRecordData(
-                                          newsletters: true,
-                                          subscribedEmail:
-                                              _model.emailTextController.text,
-                                        ));
-                                        logFirebaseEvent(
-                                            'Button_google_analytics_event');
-                                        logFirebaseEvent(
-                                            'app_newsletter_subscribed');
-                                        logFirebaseEvent('Button_navigate_to');
-
-                                        context.goNamed(
-                                            NewsLetterWidget.routeName);
+                                          await currentUserReference!
+                                              .update(createUsersRecordData(
+                                            newsletters: true,
+                                            subscribedEmail:
+                                                _model.emailTextController.text,
+                                          ));
+                                          logFirebaseEvent(
+                                              'Button_google_analytics_event');
+                                          logFirebaseEvent(
+                                              'app_newsletter_subscribed');
+                                          logFirebaseEvent(
+                                              'Button_update_page_state');
+                                          _model.isSubscribedEmail = true;
+                                          safeSetState(() {});
+                                        }
 
                                         safeSetState(() {});
                                       },
