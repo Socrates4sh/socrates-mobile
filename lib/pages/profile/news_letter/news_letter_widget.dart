@@ -483,53 +483,57 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
                               FlutterFlowTheme.of(context).secondaryBackground,
                         ),
                         alignment: AlignmentDirectional(0.0, 0.0),
-                        child: Padding(
-                          padding: EdgeInsets.all(30.0),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'You are Subscribed',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      fontSize: 30.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                      useGoogleFonts:
-                                          !FlutterFlowTheme.of(context)
-                                              .bodyMediumIsCustom,
-                                    ),
-                              ),
-                              Flexible(
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 40.0),
-                                  child: AuthUserStreamWidget(
-                                    builder: (context) => Text(
-                                      'You are subscribed to the 4sh Newsletter with the Email ID: ${valueOrDefault(currentUserDocument?.subscribedEmail, '')} .',
-                                      textAlign: TextAlign.center,
-                                      style: FlutterFlowTheme.of(context)
-                                          .headlineMedium
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .headlineMediumFamily,
-                                            fontSize: 16.0,
-                                            letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w500,
-                                            useGoogleFonts:
-                                                !FlutterFlowTheme.of(context)
-                                                    .headlineMediumIsCustom,
-                                          ),
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(30.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'You are Subscribed',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMediumFamily,
+                                          fontSize: 30.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.bold,
+                                          useGoogleFonts:
+                                              !FlutterFlowTheme.of(context)
+                                                  .bodyMediumIsCustom,
+                                        ),
+                                  ),
+                                  Flexible(
+                                    child: AuthUserStreamWidget(
+                                      builder: (context) => Text(
+                                        'You are subscribed to the 4sh Newsletter with the Email ID: ${valueOrDefault(currentUserDocument?.subscribedEmail, '')} .',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineMediumFamily,
+                                              fontSize: 16.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts:
+                                                  !FlutterFlowTheme.of(context)
+                                                      .headlineMediumIsCustom,
+                                            ),
+                                      ),
                                     ),
                                   ),
-                                ),
+                                ].divide(SizedBox(height: 20.0)),
                               ),
-                              Padding(
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 1.0),
+                              child: Padding(
                                 padding: EdgeInsets.all(30.0),
                                 child: Container(
                                   height: 150.0,
@@ -696,8 +700,8 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
                                   ),
                                 ),
                               ),
-                            ].divide(SizedBox(height: 20.0)),
-                          ),
+                            ),
+                          ],
                         ),
                       );
                     }
