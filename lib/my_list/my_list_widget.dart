@@ -123,27 +123,35 @@ class _MyListWidgetState extends State<MyListWidget> {
                                                   ),
                                             ),
                                           ),
-                                          InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              logFirebaseEvent(
-                                                  'MY_LIST_PAGE_Icon_3bj6xzj2_ON_TAP');
-                                              logFirebaseEvent(
-                                                  'Icon_update_page_state');
-                                              _model.isEdit = !_model.isEdit;
-                                              safeSetState(() {});
-                                            },
-                                            child: FaIcon(
-                                              FontAwesomeIcons.pencilAlt,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
+                                          if ((currentUserDocument?.videosMylist
+                                                      .toList() ??
+                                                  [])
+                                              .isNotEmpty)
+                                            AuthUserStreamWidget(
+                                              builder: (context) => InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'MY_LIST_PAGE_Icon_3bj6xzj2_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Icon_update_page_state');
+                                                  _model.isEdit =
+                                                      !_model.isEdit;
+                                                  safeSetState(() {});
+                                                },
+                                                child: FaIcon(
+                                                  FontAwesomeIcons.pencilAlt,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
                                                       .secondaryBackground,
-                                              size: 25.0,
+                                                  size: 25.0,
+                                                ),
+                                              ),
                                             ),
-                                          ),
                                         ],
                                       ),
                                       Align(
@@ -288,6 +296,11 @@ class _MyListWidgetState extends State<MyListWidget> {
                                                                       },
                                                                     ),
                                                                   });
+                                                                  logFirebaseEvent(
+                                                                      'Icon_update_page_state');
+
+                                                                  safeSetState(
+                                                                      () {});
                                                                 },
                                                                 child: Icon(
                                                                   Icons.delete,
