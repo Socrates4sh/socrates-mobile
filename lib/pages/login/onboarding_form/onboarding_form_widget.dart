@@ -758,6 +758,14 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
                                           onChanged: (newValue) async {
                                             safeSetState(() => _model
                                                 .wACheckboxValue = newValue!);
+                                            if (newValue!) {
+                                              logFirebaseEvent(
+                                                  'ONBOARDING_FORM_WACheckbox_ON_TOGGLE_ON');
+                                              logFirebaseEvent(
+                                                  'WACheckbox_launch_u_r_l');
+                                              await launchURL(
+                                                  'https://chat.whatsapp.com/GsB7wJoVKi2LRQVNkTytcE');
+                                            }
                                           },
                                           side: (FlutterFlowTheme.of(context)
                                                       .secondaryText !=
