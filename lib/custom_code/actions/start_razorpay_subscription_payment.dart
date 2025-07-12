@@ -46,7 +46,7 @@ Future startRazorpaySubscriptionPayment(
   var options = {
     'key': razorpayKeyId, // your Razorpay Key ID
     'subscription_id': subscriptionId,
-    'name': 'Bibli',
+    'name': 'Socrates',
     'description': 'Subscription Payment',
 
     'theme': {
