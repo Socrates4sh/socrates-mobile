@@ -2,6 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -206,26 +207,68 @@ class _MyListWidgetState extends State<MyListWidget> {
                                                                   .spaceBetween,
                                                           children: [
                                                             Flexible(
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8.0),
-                                                                child: Image
-                                                                    .network(
-                                                                  valueOrDefault<
-                                                                      String>(
-                                                                    myListVideosItem
-                                                                        .videoThumbnailImageUrl,
-                                                                    'Image',
+                                                              child: InkWell(
+                                                                splashColor: Colors
+                                                                    .transparent,
+                                                                focusColor: Colors
+                                                                    .transparent,
+                                                                hoverColor: Colors
+                                                                    .transparent,
+                                                                highlightColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                onTap:
+                                                                    () async {
+                                                                  logFirebaseEvent(
+                                                                      'MY_LIST_PAGE_Image_y6198j4v_ON_TAP');
+                                                                  logFirebaseEvent(
+                                                                      'Image_navigate_to');
+
+                                                                  context
+                                                                      .pushNamed(
+                                                                    VideoPageV2Widget
+                                                                        .routeName,
+                                                                    queryParameters:
+                                                                        {
+                                                                      'videoSequence':
+                                                                          serializeParam(
+                                                                        myListVideosItem
+                                                                            .videoSeq,
+                                                                        ParamType
+                                                                            .double,
+                                                                      ),
+                                                                      'subCategory':
+                                                                          serializeParam(
+                                                                        myListVideosItem
+                                                                            .subCategory,
+                                                                        ParamType
+                                                                            .String,
+                                                                      ),
+                                                                    }.withoutNulls,
+                                                                  );
+                                                                },
+                                                                child:
+                                                                    ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8.0),
+                                                                  child: Image
+                                                                      .network(
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                      myListVideosItem
+                                                                          .videoThumbnailImageUrl,
+                                                                      'Image',
+                                                                    ),
+                                                                    width: MediaQuery.sizeOf(context)
+                                                                            .width *
+                                                                        0.3,
+                                                                    height:
+                                                                        80.0,
+                                                                    fit: BoxFit
+                                                                        .cover,
                                                                   ),
-                                                                  width: MediaQuery.sizeOf(
-                                                                              context)
-                                                                          .width *
-                                                                      0.3,
-                                                                  height: 80.0,
-                                                                  fit: BoxFit
-                                                                      .cover,
                                                                 ),
                                                               ),
                                                             ),
