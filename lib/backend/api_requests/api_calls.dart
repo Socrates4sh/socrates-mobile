@@ -52,8 +52,7 @@ class MailchimpSubscriptionCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'mailchimpSubscription',
-      apiUrl:
-          'https://us-central1-socrates-2c93f.cloudfunctions.net/subscriebEmail2',
+      apiUrl: 'https://subscriebemail2-399924722785.us-central1.run.app',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -67,6 +66,11 @@ class MailchimpSubscriptionCall {
       alwaysAllowBody: false,
     );
   }
+
+  static bool? sucess(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.success''',
+      ));
 }
 
 class CreateSubscriptionIDCall {
