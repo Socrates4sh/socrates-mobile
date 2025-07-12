@@ -336,16 +336,17 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                                       0.0,
                                                                       0.0),
                                                           child: Text(
-                                                            _model.userRecord
-                                                                            ?.email !=
-                                                                        null &&
-                                                                    _model.userRecord
-                                                                            ?.email !=
-                                                                        ''
-                                                                ? _model
-                                                                    .userRecord!
-                                                                    .email
-                                                                : '',
+                                                            valueOrDefault<
+                                                                String>(
+                                                              (_model.userRecord
+                                                                              ?.email !=
+                                                                          null &&
+                                                                      _model.userRecord
+                                                                              ?.email !=
+                                                                          '')
+                                                                  .toString(),
+                                                              'Email',
+                                                            ),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .labelMedium
