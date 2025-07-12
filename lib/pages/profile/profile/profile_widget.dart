@@ -336,17 +336,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                                       0.0,
                                                                       0.0),
                                                           child: Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              (_model.userRecord
-                                                                              ?.email !=
-                                                                          null &&
-                                                                      _model.userRecord
-                                                                              ?.email !=
-                                                                          '')
-                                                                  .toString(),
-                                                              'Email',
-                                                            ),
+                                                            currentUserEmail,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .labelMedium
