@@ -53,8 +53,7 @@ class FlutterFlowVideoPlayer extends StatefulWidget {
   State<StatefulWidget> createState() => _FlutterFlowVideoPlayerState();
 }
 
-class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer>
-    with RouteAware {
+class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer> with RouteAware {
   VideoPlayerController? _videoPlayerController;
   ChewieController? _chewieController;
   bool _loggedError = false;
@@ -106,14 +105,12 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer>
       ? MediaQuery.sizeOf(context).width
       : widget.width!;
 
-  double get height =>
-      widget.height == null || widget.height! >= double.infinity
-          ? width / aspectRatio
-          : widget.height!;
+  double get height => widget.height == null || widget.height! >= double.infinity
+      ? width / aspectRatio
+      : widget.height!;
 
   double get aspectRatio =>
-      _chewieController?.videoPlayerController.value.aspectRatio ??
-      kDefaultAspectRatio;
+      _chewieController?.videoPlayerController.value.aspectRatio ?? kDefaultAspectRatio;
 
   void _disposeCurrentPlayer() {
     _videoPlayers.remove(_videoPlayerController);
@@ -167,9 +164,7 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer>
       // Pause other players
       if (controller.value.isPlaying) {
         for (final otherPlayer in _videoPlayers) {
-          if (otherPlayer != controller &&
-              otherPlayer.value.isPlaying &&
-              mounted) {
+          if (otherPlayer != controller && otherPlayer.value.isPlaying && mounted) {
             setState(() {
               otherPlayer.pause();
             });
@@ -213,14 +208,12 @@ class _FlutterFlowVideoPlayerState extends State<FlutterFlowVideoPlayer>
 
   @override
   Widget build(BuildContext context) => FittedBox(
-        fit: BoxFit.cover,
+        fit: BoxFit.contain,
         child: Container(
           height: height,
           width: width,
           child: _chewieController != null &&
-                  (widget.lazyLoad ||
-                      _chewieController!
-                          .videoPlayerController.value.isInitialized)
+                  (widget.lazyLoad || _chewieController!.videoPlayerController.value.isInitialized)
               ? Chewie(controller: _chewieController!)
               : (_chewieController != null &&
                       _chewieController!.videoPlayerController.value.hasError)
