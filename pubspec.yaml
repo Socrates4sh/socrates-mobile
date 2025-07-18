@@ -39,7 +39,7 @@ dependencies:
   cloud_functions: 5.5.2
   cloud_functions_platform_interface: 5.7.2
   cloud_functions_web: 4.11.2
-  collection: any
+  collection: 1.19.1
   country_code_picker: ^3.1.0
   csslib: 1.0.2
   easy_debounce: 2.0.1
