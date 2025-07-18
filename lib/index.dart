@@ -28,7 +28,7 @@ export '/drafts/homepage_option2/homepage_option2_widget.dart'
 export '/drafts/subjects_v1/subjects_v1_widget.dart' show SubjectsV1Widget;
 export '/drafts/subjects_copy/subjects_copy_widget.dart'
     show SubjectsCopyWidget;
-export '/pages/category/chapters/chapters_widget.dart' show ChaptersWidget;
+export '/pages/chapters/chapters_widget.dart' show ChaptersWidget;
 export '/drafts/chapters_demo/chapters_demo_widget.dart'
     show ChaptersDemoWidget;
 export '/pages/profile/news_letter/news_letter_widget.dart'
