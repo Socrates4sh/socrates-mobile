@@ -101,8 +101,6 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
               preferredSize: Size.fromHeight(50.0),
               child: AppBar(
                 backgroundColor: FlutterFlowTheme.of(context).primaryText,
-                iconTheme: IconThemeData(
-                    color: FlutterFlowTheme.of(context).primaryBackground),
                 automaticallyImplyLeading: true,
                 actions: [],
                 centerTitle: false,
