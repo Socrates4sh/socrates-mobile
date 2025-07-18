@@ -1,5 +1,4 @@
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
@@ -102,26 +101,12 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
               preferredSize: Size.fromHeight(50.0),
               child: AppBar(
                 backgroundColor: FlutterFlowTheme.of(context).primaryText,
-                automaticallyImplyLeading: false,
-                leading: FlutterFlowIconButton(
-                  borderColor: Colors.transparent,
-                  borderRadius: 30.0,
-                  borderWidth: 1.0,
-                  buttonSize: 60.0,
-                  icon: Icon(
-                    Icons.arrow_back_rounded,
-                    color: Colors.white,
-                    size: 30.0,
-                  ),
-                  onPressed: () async {
-                    logFirebaseEvent('VIDEO_V2_arrow_back_rounded_ICN_ON_TAP');
-                    logFirebaseEvent('IconButton_navigate_back');
-                    context.pop();
-                  },
-                ),
+                iconTheme: IconThemeData(
+                    color: FlutterFlowTheme.of(context).primaryBackground),
+                automaticallyImplyLeading: true,
                 actions: [],
                 centerTitle: false,
-                elevation: 2.0,
+                elevation: 0.0,
               ),
             ),
             body: SafeArea(
