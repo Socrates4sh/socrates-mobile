@@ -9,6 +9,7 @@ class VideoPageV2Model extends FlutterFlowModel<VideoPageV2Widget> {
   bool initCompleted = false;
 
   int initialTabIndex = 0;
+  int scrollLock = 0;
 
   ///  State fields for stateful widgets in this page.
 

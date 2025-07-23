@@ -22,13 +22,13 @@ export '/drafts/subjects_draft2/subjects_draft2_widget.dart'
 export '/drafts/chapters_draft1/chapters_draft1_widget.dart'
     show ChaptersDraft1Widget;
 export '/drafts/topics_demo/topics_demo_widget.dart' show TopicsDemoWidget;
-export '/pages/homepage/homepage_widget.dart' show HomepageWidget;
+export '/drafts/homepage/homepage_widget.dart' show HomepageWidget;
 export '/drafts/homepage_option2/homepage_option2_widget.dart'
     show HomepageOption2Widget;
 export '/drafts/subjects_v1/subjects_v1_widget.dart' show SubjectsV1Widget;
 export '/drafts/subjects_copy/subjects_copy_widget.dart'
     show SubjectsCopyWidget;
-export '/pages/category/chapters/chapters_widget.dart' show ChaptersWidget;
+export '/pages/chapters/chapters_widget.dart' show ChaptersWidget;
 export '/drafts/chapters_demo/chapters_demo_widget.dart'
     show ChaptersDemoWidget;
 export '/pages/profile/news_letter/news_letter_widget.dart'
@@ -51,8 +51,12 @@ export '/pages/payment/subscription_page/subscription_page_widget.dart'
     show SubscriptionPageWidget;
 export '/pages/login/verify_code/verify_code_widget.dart' show VerifyCodeWidget;
 export '/homepage_v2/homepage_v2_widget.dart' show HomepageV2Widget;
-export '/homepage_v3/homepage_v3_widget.dart' show HomepageV3Widget;
+export '/pages/homepage_v3/homepage_v3_widget.dart' show HomepageV3Widget;
 export '/videos_list/videos_list_widget.dart' show VideosListWidget;
 export '/video_page_v2/video_page_v2_widget.dart' show VideoPageV2Widget;
 export '/recommended/recommended_widget.dart' show RecommendedWidget;
 export '/my_list/my_list_widget.dart' show MyListWidget;
+export '/pages/payment/subscription_page_razor_pay/subscription_page_razor_pay_widget.dart'
+    show SubscriptionPageRazorPayWidget;
+export '/pages/payment/cancellation_razor_pay/cancellation_razor_pay_widget.dart'
+    show CancellationRazorPayWidget;

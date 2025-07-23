@@ -27,6 +27,7 @@ class _EmailSignInWidgetState extends State<EmailSignInWidget> {
     super.initState();
     _model = createModel(context, () => EmailSignInModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'EmailSignIn'});
     _model.emailAddressTextController ??= TextEditingController();
     _model.emailAddressFocusNode ??= FocusNode();
 
@@ -332,6 +333,9 @@ class _EmailSignInWidgetState extends State<EmailSignInWidget> {
                                           0.0, 0.0, 0.0, 16.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
+                                          logFirebaseEvent(
+                                              'EMAIL_SIGN_IN_PAGE_SIGN_IN_BTN_ON_TAP');
+                                          logFirebaseEvent('Button_auth');
                                           GoRouter.of(context)
                                               .prepareAuthEvent();
 
@@ -400,6 +404,11 @@ class _EmailSignInWidgetState extends State<EmailSignInWidget> {
                                         hoverColor: Colors.transparent,
                                         highlightColor: Colors.transparent,
                                         onTap: () async {
+                                          logFirebaseEvent(
+                                              'EMAIL_SIGN_IN_RichText_scw75chg_ON_TAP');
+                                          logFirebaseEvent(
+                                              'RichText_navigate_to');
+
                                           context.pushNamed(
                                               EmailSignUpWidget.routeName);
                                         },

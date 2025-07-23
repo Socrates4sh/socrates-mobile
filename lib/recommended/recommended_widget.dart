@@ -2,6 +2,7 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -29,8 +30,11 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
     super.initState();
     _model = createModel(context, () => RecommendedModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Recommended'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('RECOMMENDED_Recommended_ON_INIT_STATE');
+      logFirebaseEvent('Recommended_firestore_query');
       _model.websiteVideosDoc = await queryWebsiteVideosRecordOnce(
         queryBuilder: (websiteVideosRecord) => websiteVideosRecord
             .where(
@@ -43,6 +47,7 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
             )
             .orderBy('video_sequence'),
       );
+      logFirebaseEvent('Recommended_update_page_state');
       _model.initCompleted = true;
       safeSetState(() {});
     });
@@ -124,7 +129,7 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                           AlignmentDirectional(0.0, -1.0),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 100.0),
+                                            0.0, 0.0, 0.0, 20.0),
                                         child: Container(
                                           width:
                                               MediaQuery.sizeOf(context).width *
@@ -133,122 +138,142 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                   .height *
                                               0.8,
                                           decoration: BoxDecoration(),
-                                          child: Builder(
-                                            builder: (context) {
-                                              final recVideosList = _model
-                                                      .websiteVideosDoc
-                                                      ?.toList() ??
-                                                  [];
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 20.0),
+                                            child: Builder(
+                                              builder: (context) {
+                                                final recVideosList = _model
+                                                        .websiteVideosDoc
+                                                        ?.toList() ??
+                                                    [];
 
-                                              return GridView.builder(
-                                                padding: EdgeInsets.zero,
-                                                gridDelegate:
-                                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 2,
-                                                  crossAxisSpacing: 20.0,
-                                                  mainAxisSpacing: 20.0,
-                                                  childAspectRatio: 0.7,
-                                                ),
-                                                scrollDirection: Axis.vertical,
-                                                itemCount: recVideosList.length,
-                                                itemBuilder: (context,
-                                                    recVideosListIndex) {
-                                                  final recVideosListItem =
-                                                      recVideosList[
-                                                          recVideosListIndex];
-                                                  return InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      context.pushNamed(
-                                                        VideoPageV2Widget
-                                                            .routeName,
-                                                        queryParameters: {
-                                                          'subCategory':
-                                                              serializeParam(
-                                                            recVideosListItem
-                                                                .subCategory,
-                                                            ParamType.String,
+                                                return GridView.builder(
+                                                  padding: EdgeInsets.zero,
+                                                  gridDelegate:
+                                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount:
+                                                        MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .width <
+                                                                600.0
+                                                            ? 2
+                                                            : 4,
+                                                    crossAxisSpacing: 20.0,
+                                                    mainAxisSpacing: 20.0,
+                                                    childAspectRatio: 0.7,
+                                                  ),
+                                                  scrollDirection:
+                                                      Axis.vertical,
+                                                  itemCount:
+                                                      recVideosList.length,
+                                                  itemBuilder: (context,
+                                                      recVideosListIndex) {
+                                                    final recVideosListItem =
+                                                        recVideosList[
+                                                            recVideosListIndex];
+                                                    return InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'RECOMMENDED_Container_2x3jgqwq_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'Container_navigate_to');
+
+                                                        context.pushNamed(
+                                                          VideoPageV2Widget
+                                                              .routeName,
+                                                          queryParameters: {
+                                                            'subCategory':
+                                                                serializeParam(
+                                                              recVideosListItem
+                                                                  .subCategory,
+                                                              ParamType.String,
+                                                            ),
+                                                            'videoSequence':
+                                                                serializeParam(
+                                                              recVideosListItem
+                                                                  .videoSequence,
+                                                              ParamType.double,
+                                                            ),
+                                                          }.withoutNulls,
+                                                        );
+                                                      },
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10.0),
+                                                        child: Container(
+                                                          width: 150.0,
+                                                          height: 210.0,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryBackground,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10.0),
                                                           ),
-                                                          'videoSequence':
-                                                              serializeParam(
-                                                            recVideosListItem
-                                                                .videoSequence,
-                                                            ParamType.double,
-                                                          ),
-                                                        }.withoutNulls,
-                                                      );
-                                                    },
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10.0),
-                                                      child: Container(
-                                                        width: 150.0,
-                                                        height: 200.0,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .secondaryBackground,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10.0),
-                                                        ),
-                                                        child: Stack(
-                                                          alignment:
-                                                              AlignmentDirectional(
-                                                                  1.0, -1.0),
-                                                          children: [
-                                                            Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                ClipRRect(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8.0),
-                                                                  child: Image
-                                                                      .network(
-                                                                    recVideosListItem
-                                                                        .videoThumbnailImageUrl,
-                                                                    width: MediaQuery.sizeOf(context)
-                                                                            .width *
-                                                                        1.0,
-                                                                    height:
-                                                                        150.0,
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                    errorBuilder: (context,
-                                                                            error,
-                                                                            stackTrace) =>
-                                                                        Image
-                                                                            .asset(
-                                                                      'assets/images/error_image.png',
-                                                                      width: MediaQuery.sizeOf(context)
-                                                                              .width *
-                                                                          1.0,
-                                                                      height:
-                                                                          150.0,
-                                                                      fit: BoxFit
-                                                                          .cover,
+                                                          child: Stack(
+                                                            alignment:
+                                                                AlignmentDirectional(
+                                                                    1.0, -1.0),
+                                                            children: [
+                                                              Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceBetween,
+                                                                children: [
+                                                                  Expanded(
+                                                                    child:
+                                                                        ClipRRect(
+                                                                      borderRadius:
+                                                                          BorderRadius
+                                                                              .only(
+                                                                        bottomLeft:
+                                                                            Radius.circular(0.0),
+                                                                        bottomRight:
+                                                                            Radius.circular(0.0),
+                                                                        topLeft:
+                                                                            Radius.circular(8.0),
+                                                                        topRight:
+                                                                            Radius.circular(8.0),
+                                                                      ),
+                                                                      child: Image
+                                                                          .network(
+                                                                        recVideosListItem
+                                                                            .videoThumbnailImageUrl,
+                                                                        width: MediaQuery.sizeOf(context).width *
+                                                                            1.0,
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                        errorBuilder: (context,
+                                                                                error,
+                                                                                stackTrace) =>
+                                                                            Image.asset(
+                                                                          'assets/images/error_image.png',
+                                                                          width:
+                                                                              MediaQuery.sizeOf(context).width * 1.0,
+                                                                          fit: BoxFit
+                                                                              .cover,
+                                                                        ),
+                                                                      ),
                                                                     ),
                                                                   ),
-                                                                ),
-                                                                Flexible(
-                                                                  child: Align(
+                                                                  Align(
                                                                     alignment:
                                                                         AlignmentDirectional(
                                                                             0.0,
@@ -259,10 +284,12 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                                               .width *
                                                                           1.0,
                                                                       height:
-                                                                          MediaQuery.sizeOf(context).height *
-                                                                              0.1,
+                                                                          60.0,
                                                                       decoration:
-                                                                          BoxDecoration(),
+                                                                          BoxDecoration(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryBackground,
+                                                                      ),
                                                                       child:
                                                                           Align(
                                                                         alignment: AlignmentDirectional(
@@ -289,73 +316,124 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
+                                                                ],
+                                                              ),
+                                                              Builder(
+                                                                builder:
+                                                                    (context) {
+                                                                  if (!functions
+                                                                      .checkVideoInFavourite(
+                                                                          (currentUserDocument?.videosMylist.toList() ?? [])
+                                                                              .toList(),
+                                                                          VideoDocsMylistStruct(
+                                                                            listSeq:
+                                                                                (currentUserDocument?.videosMylist.toList() ?? []).length + 1,
+                                                                            videoDocId:
+                                                                                recVideosListItem.reference,
+                                                                            topic:
+                                                                                recVideosListItem.topic,
+                                                                            subCategory:
+                                                                                recVideosListItem.subCategory,
+                                                                            websiteCategory:
+                                                                                recVideosListItem.websiteCategory,
+                                                                            videoThumbnailImageUrl:
+                                                                                recVideosListItem.videoThumbnailImageUrl,
+                                                                            videoUrl:
+                                                                                recVideosListItem.videoFileUrl,
+                                                                          ))) {
+                                                                    return Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
                                                                           5.0,
                                                                           5.0,
                                                                           0.0),
-                                                              child: InkWell(
-                                                                splashColor: Colors
-                                                                    .transparent,
-                                                                focusColor: Colors
-                                                                    .transparent,
-                                                                hoverColor: Colors
-                                                                    .transparent,
-                                                                highlightColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                onTap:
-                                                                    () async {
-                                                                  await currentUserReference!
-                                                                      .update({
-                                                                    ...mapToFirestore(
-                                                                      {
-                                                                        'videos_mylist':
-                                                                            FieldValue.arrayUnion([
-                                                                          getVideoDocsMylistFirestoreData(
-                                                                            updateVideoDocsMylistStruct(
-                                                                              VideoDocsMylistStruct(
-                                                                                listSeq: (currentUserDocument?.videosMylist.toList() ?? []).length + 1,
-                                                                                videoDocId: recVideosListItem.reference,
-                                                                                topic: recVideosListItem.topic,
-                                                                                subCategory: recVideosListItem.subCategory,
-                                                                                websiteCategory: recVideosListItem.websiteCategory,
-                                                                                videoThumbnailImageUrl: recVideosListItem.videoThumbnailImageUrl,
-                                                                                videoUrl: recVideosListItem.videoFileUrl,
-                                                                              ),
-                                                                              clearUnsetFields: false,
+                                                                      child:
+                                                                          InkWell(
+                                                                        splashColor:
+                                                                            Colors.transparent,
+                                                                        focusColor:
+                                                                            Colors.transparent,
+                                                                        hoverColor:
+                                                                            Colors.transparent,
+                                                                        highlightColor:
+                                                                            Colors.transparent,
+                                                                        onTap:
+                                                                            () async {
+                                                                          logFirebaseEvent(
+                                                                              'RECOMMENDED_PAGE_Icon_buyy50m4_ON_TAP');
+                                                                          logFirebaseEvent(
+                                                                              'Icon_backend_call');
+
+                                                                          await currentUserReference!
+                                                                              .update({
+                                                                            ...mapToFirestore(
+                                                                              {
+                                                                                'videos_mylist': FieldValue.arrayUnion([
+                                                                                  getVideoDocsMylistFirestoreData(
+                                                                                    updateVideoDocsMylistStruct(
+                                                                                      VideoDocsMylistStruct(
+                                                                                        listSeq: (currentUserDocument?.videosMylist.toList() ?? []).length + 1,
+                                                                                        videoDocId: recVideosListItem.reference,
+                                                                                        topic: recVideosListItem.topic,
+                                                                                        subCategory: recVideosListItem.subCategory,
+                                                                                        websiteCategory: recVideosListItem.websiteCategory,
+                                                                                        videoThumbnailImageUrl: recVideosListItem.videoThumbnailImageUrl,
+                                                                                        videoUrl: recVideosListItem.videoFileUrl,
+                                                                                      ),
+                                                                                      clearUnsetFields: false,
+                                                                                    ),
+                                                                                    true,
+                                                                                  )
+                                                                                ]),
+                                                                              },
                                                                             ),
-                                                                            true,
-                                                                          )
-                                                                        ]),
-                                                                      },
-                                                                    ),
-                                                                  });
+                                                                          });
+                                                                          logFirebaseEvent(
+                                                                              'Icon_update_app_state');
+
+                                                                          safeSetState(
+                                                                              () {});
+                                                                        },
+                                                                        child:
+                                                                            Icon(
+                                                                          Icons
+                                                                              .add_rounded,
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).secondaryBackground,
+                                                                          size:
+                                                                              24.0,
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                  } else {
+                                                                    return Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          5.0,
+                                                                          5.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Icon(
+                                                                        Icons
+                                                                            .bookmark_rounded,
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .secondaryBackground,
+                                                                        size:
+                                                                            24.0,
+                                                                      ),
+                                                                    );
+                                                                  }
                                                                 },
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .add_rounded,
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryText,
-                                                                  size: 24.0,
-                                                                ),
                                                               ),
-                                                            ),
-                                                          ],
+                                                            ],
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  );
-                                                },
-                                              );
-                                            },
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                            ),
                                           ),
                                         ),
                                       ),

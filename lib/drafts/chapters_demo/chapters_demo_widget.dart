@@ -34,6 +34,8 @@ class _ChaptersDemoWidgetState extends State<ChaptersDemoWidget> {
     super.initState();
     _model = createModel(context, () => ChaptersDemoModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ChaptersDemo'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -92,6 +94,10 @@ class _ChaptersDemoWidgetState extends State<ChaptersDemoWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'CHAPTERS_DEMO_Container_yljxofx0_ON_TAP');
+                          logFirebaseEvent('Container_navigate_to');
+
                           context.pushNamed(ProfileWidget.routeName);
                         },
                         child: Container(
@@ -411,6 +417,10 @@ class _ChaptersDemoWidgetState extends State<ChaptersDemoWidget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'CHAPTERS_DEMO_PAGE_Row_uedik9t4_ON_TAP');
+                                            logFirebaseEvent('Row_navigate_to');
+
                                             context.pushNamed(
                                                 TopicsDemoWidget.routeName);
                                           },

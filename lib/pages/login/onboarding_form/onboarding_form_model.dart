@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
 import 'onboarding_form_widget.dart' show OnboardingFormWidget;
@@ -58,6 +59,10 @@ class OnboardingFormModel extends FlutterFlowModel<OnboardingFormWidget> {
   bool? newsletterCheckboxValue;
   // Stores action output result for [Validate Form] action in Button widget.
   bool? verifiedUserDetails;
+  // Stores action output result for [Backend Call - API (CreateCustomerID)] action in Button widget.
+  ApiCallResponse? customerIdResponse;
+  // Stores action output result for [Backend Call - API (mailchimpSubscription)] action in Button widget.
+  ApiCallResponse? subscribedApi;
 
   @override
   void initState(BuildContext context) {

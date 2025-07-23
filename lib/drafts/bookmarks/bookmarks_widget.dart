@@ -25,6 +25,7 @@ class _BookmarksWidgetState extends State<BookmarksWidget> {
     super.initState();
     _model = createModel(context, () => BookmarksModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Bookmarks'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 

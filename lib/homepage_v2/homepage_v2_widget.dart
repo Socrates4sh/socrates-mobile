@@ -27,8 +27,11 @@ class _HomepageV2WidgetState extends State<HomepageV2Widget> {
     super.initState();
     _model = createModel(context, () => HomepageV2Model());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomepageV2'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('HOMEV2_HomepageV2_ON_INIT_STATE');
+      logFirebaseEvent('HomepageV2_firestore_query');
       _model.websiteStructureDocs = await queryWebsiteStructureRecordOnce(
         queryBuilder: (websiteStructureRecord) => websiteStructureRecord
             .where(
@@ -37,12 +40,14 @@ class _HomepageV2WidgetState extends State<HomepageV2Widget> {
             )
             .orderBy('nav_seq'),
       );
+      logFirebaseEvent('HomepageV2_firestore_query');
       _model.websiteVideosDoc = await queryWebsiteVideosRecordOnce(
         queryBuilder: (websiteVideosRecord) => websiteVideosRecord.where(
           'is_display',
           isEqualTo: true,
         ),
       );
+      logFirebaseEvent('HomepageV2_update_page_state');
       _model.initCompleted = true;
       safeSetState(() {});
     });

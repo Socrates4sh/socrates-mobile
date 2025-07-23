@@ -1,4 +1,6 @@
 import '../flutter_flow/custom_video_player.dart';
+import '../auth/firebase_auth/auth_util.dart';
+import '../components/locked_widget.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -39,8 +41,12 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
     super.initState();
     _model = createModel(context, () => VideoPageV2Model());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'VideoPage_V2'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('VIDEO_V2_VideoPage_V2_ON_INIT_STATE');
+      logFirebaseEvent('VideoPage_V2_firestore_query');
       _model.websiteVideoDoc = await queryWebsiteVideosRecordOnce(
         queryBuilder: (websiteVideosRecord) => websiteVideosRecord
             .where(
@@ -54,16 +60,21 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
             .orderBy('video_sequence'),
       );
       if (widget.initialIndex == null) {
+        logFirebaseEvent('VideoPage_V2_update_page_state');
         _model.initialTabIndex = functions.findIndexOfTable(
             _model.websiteVideoDoc!.toList(), widget.videoSequence!);
         safeSetState(() {});
       } else {
+        logFirebaseEvent('VideoPage_V2_update_page_state');
         _model.initialTabIndex = widget.initialIndex!;
         safeSetState(() {});
       }
 
+      logFirebaseEvent('VideoPage_V2_update_page_state');
       _model.initCompleted = true;
       safeSetState(() {});
+      logFirebaseEvent('VideoPage_V2_google_analytics_event');
+      logFirebaseEvent('app_video_opened');
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -89,6 +100,16 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryText,
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(50.0),
+              child: AppBar(
+                backgroundColor: FlutterFlowTheme.of(context).primaryText,
+                automaticallyImplyLeading: true,
+                actions: [],
+                centerTitle: false,
+                elevation: 0.0,
+              ),
+            ),
             body: SafeArea(
               top: true,
               child: Align(
@@ -100,8 +121,74 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
                         builder: (context) {
                           final video = _model.websiteVideoDoc?.toList() ?? [];
 
-                          return Container(
-                            width: double.infinity,
+                          return GestureDetector(
+                            onVerticalDragEnd: (details) async {
+                              final velocity = details.primaryVelocity ?? 0;
+
+                              final controller = _model.pageViewController;
+                              if (controller == null || !controller.hasClients)
+                                return;
+
+                              int currentPage = controller.page?.round() ?? 0;
+                              int nextPage = currentPage;
+
+                              if (velocity < 0) {
+                                // Swipe Up → Forward
+                                nextPage = currentPage + 1;
+
+                                if (currentPage >= 2) {
+                                  final isSubscribed = valueOrDefault<bool>(
+                                    valueOrDefault<bool>(
+                                        currentUserDocument?.userSubscribed,
+                                        false),
+                                    false,
+                                  );
+                                  final isSubscriptionExpired =
+                                      currentUserDocument
+                                                  ?.subscriptionEndDateTime ==
+                                              null ||
+                                          currentUserDocument!
+                                              .subscriptionEndDateTime!
+                                              .isBefore(getCurrentTimestamp);
+
+                                  if (!isSubscribed && isSubscriptionExpired) {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (dialogContext) {
+                                        return Dialog(
+                                          elevation: 0,
+                                          insetPadding: EdgeInsets.zero,
+                                          backgroundColor: Colors.transparent,
+                                          alignment: AlignmentDirectional(0.0, 0.0)
+                                              .resolve(Directionality.of(context)),
+                                          child: Container(
+                                            height:
+                                            MediaQuery.sizeOf(context).height *
+                                                0.5,
+                                            width: double.infinity,
+                                            child: LockedWidget(),
+                                          ),
+                                        );
+                                      },
+                                    );
+                                    return;
+                                  }
+                                }
+                              } else if (velocity > 0) {
+                                // Swipe Down → Backward
+                                nextPage = currentPage - 1;
+                              }
+
+                              nextPage = nextPage.clamp(0, video.length - 1);
+
+                              if (nextPage != currentPage) {
+                                await controller.animateToPage(
+                                  nextPage,
+                                  duration: Duration(milliseconds: 300),
+                                  curve: Curves.easeInOut,
+                                );
+                              }
+                            },
                             child: PageView.builder(
                               controller: _model.pageViewController ??=
                                   PageController(
@@ -116,6 +203,7 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
                               onPageChanged: (_) => safeSetState(() {}),
                               scrollDirection: Axis.vertical,
                               itemCount: video.length,
+                              physics: NeverScrollableScrollPhysics(),
                               itemBuilder: (context, videoIndex) {
                                 final videoItem = video[videoIndex];
                                 return FlutterFlowVideoPlayer(
@@ -169,3 +257,5 @@ class _VideoPageV2WidgetState extends State<VideoPageV2Widget> {
         ));
   }
 }
+
+class WebViewAware {}

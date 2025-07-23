@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -29,6 +30,8 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
     super.initState();
     _model = createModel(context, () => OnboardingFormModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'OnboardingForm'});
     _model.userFirstNameTextController ??= TextEditingController();
     _model.userFirstNameFocusNode ??= FocusNode();
     _model.userFirstNameFocusNode!.addListener(() => safeSetState(() {}));
@@ -755,6 +758,14 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
                                           onChanged: (newValue) async {
                                             safeSetState(() => _model
                                                 .wACheckboxValue = newValue!);
+                                            if (newValue!) {
+                                              logFirebaseEvent(
+                                                  'ONBOARDING_FORM_WACheckbox_ON_TOGGLE_ON');
+                                              logFirebaseEvent(
+                                                  'WACheckbox_launch_u_r_l');
+                                              await launchURL(
+                                                  'https://chat.whatsapp.com/GsB7wJoVKi2LRQVNkTytcE');
+                                            }
                                           },
                                           side: (FlutterFlowTheme.of(context)
                                                       .secondaryText !=
@@ -878,6 +889,9 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
                                       16.0, 20.0, 16.0, 12.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
+                                      logFirebaseEvent(
+                                          'ONBOARDING_FORM_PAGE_SUBMIT_BTN_ON_TAP');
+                                      logFirebaseEvent('Button_validate_form');
                                       _model.verifiedUserDetails = true;
                                       if (_model.formKey.currentState == null ||
                                           !_model.formKey.currentState!
@@ -886,6 +900,31 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
                                             _model.verifiedUserDetails = false);
                                         return;
                                       }
+                                      logFirebaseEvent('Button_backend_call');
+                                      _model.customerIdResponse =
+                                          await CreateCustomerIDCall.call(
+                                        name:
+                                            '${_model.userFirstNameTextController.text}${_model.userLastNameTextController.text}',
+                                        email: currentUserEmail,
+                                        phone: currentPhoneNumber,
+                                      );
+
+                                      if ((_model
+                                              .customerIdResponse?.succeeded ??
+                                          true)) {
+                                        logFirebaseEvent('Button_backend_call');
+
+                                        await currentUserReference!
+                                            .update(createUsersRecordData(
+                                          razorpayCustomerId:
+                                              CreateCustomerIDCall.customerId(
+                                            (_model.customerIdResponse
+                                                    ?.jsonBody ??
+                                                ''),
+                                          ),
+                                        ));
+                                      }
+                                      logFirebaseEvent('Button_backend_call');
 
                                       await currentUserReference!
                                           .update(createUsersRecordData(
@@ -902,9 +941,42 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
                                         onBoardingComplete: true,
                                         wACommunity: _model.wACheckboxValue,
                                       ));
+                                      logFirebaseEvent(
+                                          'Button_google_analytics_event');
+                                      logFirebaseEvent(
+                                          'app_onboarding_completed');
+                                      if (_model.newsletterCheckboxValue!) {
+                                        logFirebaseEvent('Button_backend_call');
+                                        _model.subscribedApi =
+                                            await MailchimpSubscriptionCall
+                                                .call(
+                                          email: _model
+                                              .userEmailTextController.text,
+                                          subscription: true,
+                                          uid: currentUserUid,
+                                        );
 
-                                      context
-                                          .pushNamed(HomepageWidget.routeName);
+                                        if ((_model.subscribedApi?.succeeded ??
+                                            true)) {
+                                          logFirebaseEvent(
+                                              'Button_backend_call');
+
+                                          await currentUserReference!
+                                              .update(createUsersRecordData(
+                                            newsletters: true,
+                                            subscribedEmail: _model
+                                                .userEmailTextController.text,
+                                          ));
+                                          logFirebaseEvent(
+                                              'Button_google_analytics_event');
+                                          logFirebaseEvent(
+                                              'app_newsletter_subscribed');
+                                        }
+                                      }
+                                      logFirebaseEvent('Button_navigate_to');
+
+                                      context.pushNamed(
+                                          HomepageV3Widget.routeName);
 
                                       safeSetState(() {});
                                     },

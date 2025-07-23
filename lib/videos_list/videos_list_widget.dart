@@ -1,4 +1,6 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
+import '/components/locked_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/index.dart';
@@ -37,8 +39,11 @@ class _VideosListWidgetState extends State<VideosListWidget> {
     super.initState();
     _model = createModel(context, () => VideosListModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'VideosList'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('VIDEOS_LIST_VideosList_ON_INIT_STATE');
+      logFirebaseEvent('VideosList_update_page_state');
       _model.initCompleted = true;
       safeSetState(() {});
     });
@@ -153,133 +158,239 @@ class _VideosListWidgetState extends State<VideosListWidget> {
                                           final subCategoryVideosItem =
                                               subCategoryVideos[
                                                   subCategoryVideosIndex];
-                                          return InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              context.pushNamed(
-                                                VideoPageV2Widget.routeName,
-                                                queryParameters: {
-                                                  'subCategory': serializeParam(
-                                                    subCategoryVideosItem
-                                                        .subCategory,
-                                                    ParamType.String,
-                                                  ),
-                                                  'videoSequence':
-                                                      serializeParam(
-                                                    subCategoryVideosItem
-                                                        .videoSequence,
-                                                    ParamType.double,
-                                                  ),
-                                                  'initialIndex':
-                                                      serializeParam(
-                                                    subCategoryVideosIndex,
-                                                    ParamType.int,
-                                                  ),
-                                                }.withoutNulls,
-                                              );
-                                            },
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: Container(
-                                                    width: MediaQuery.sizeOf(
-                                                                context)
-                                                            .width *
-                                                        0.3,
-                                                    height: 80.0,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          FlutterFlowTheme.of(
+                                          return Builder(
+                                            builder: (context) => InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'VIDEOS_LIST_PAGE_Row_gf1hdiwm_ON_TAP');
+                                                if (!valueOrDefault<bool>(
+                                                      valueOrDefault<bool>(
+                                                          currentUserDocument
+                                                              ?.userSubscribed,
+                                                          false),
+                                                      false,
+                                                    ) &&
+                                                    (subCategoryVideosIndex >=
+                                                        3) &&
+                                                    ((currentUserDocument
+                                                                ?.subscriptionEndDateTime ==
+                                                            null) ||
+                                                        (currentUserDocument!
+                                                                .subscriptionEndDateTime! <
+                                                            getCurrentTimestamp))) {
+                                                  logFirebaseEvent(
+                                                      'Row_alert_dialog');
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder: (dialogContext) {
+                                                      return Dialog(
+                                                        elevation: 0,
+                                                        insetPadding:
+                                                            EdgeInsets.zero,
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                    0.0, 0.0)
+                                                                .resolve(
+                                                                    Directionality.of(
+                                                                        context)),
+                                                        child: GestureDetector(
+                                                          onTap: () {
+                                                            FocusScope.of(
+                                                                    dialogContext)
+                                                                .unfocus();
+                                                            FocusManager
+                                                                .instance
+                                                                .primaryFocus
+                                                                ?.unfocus();
+                                                          },
+                                                          child: LockedWidget(),
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                } else {
+                                                  logFirebaseEvent(
+                                                      'Row_navigate_to');
+
+                                                  context.pushNamed(
+                                                    VideoPageV2Widget.routeName,
+                                                    queryParameters: {
+                                                      'subCategory':
+                                                          serializeParam(
+                                                        subCategoryVideosItem
+                                                            .subCategory,
+                                                        ParamType.String,
+                                                      ),
+                                                      'videoSequence':
+                                                          serializeParam(
+                                                        subCategoryVideosItem
+                                                            .videoSequence,
+                                                        ParamType.double,
+                                                      ),
+                                                      'initialIndex':
+                                                          serializeParam(
+                                                        subCategoryVideosIndex,
+                                                        ParamType.int,
+                                                      ),
+                                                    }.withoutNulls,
+                                                  );
+                                                }
+                                              },
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    child: Container(
+                                                      width: MediaQuery.sizeOf(
                                                                   context)
-                                                              .alternate,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8.0),
-                                                    ),
-                                                    child: Stack(
-                                                      children: [
-                                                        ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.0),
-                                                          child: Image.network(
-                                                            subCategoryVideosItem
-                                                                .videoThumbnailImageUrl,
-                                                            width: 200.0,
-                                                            height: 200.0,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                        Align(
-                                                          alignment:
-                                                              AlignmentDirectional(
-                                                                  0.0, 0.0),
-                                                          child: Icon(
-                                                            Icons
-                                                                .play_arrow_rounded,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
-                                                            size: 24.0,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                                Flexible(
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(20.0, 0.0,
-                                                                0.0, 0.0),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          subCategoryVideosItem
-                                                              .topic,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .headlineSmall
-                                                              .override(
-                                                                fontFamily: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .headlineSmallFamily,
-                                                                fontSize: 16.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
-                                                                useGoogleFonts:
-                                                                    !FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .headlineSmallIsCustom,
+                                                              .width *
+                                                          0.3,
+                                                      height: 80.0,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                      ),
+                                                      child: Stack(
+                                                        children: [
+                                                          Stack(
+                                                            children: [
+                                                              ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            8.0),
+                                                                child: Image
+                                                                    .network(
+                                                                  subCategoryVideosItem
+                                                                      .videoThumbnailImageUrl,
+                                                                  width: 200.0,
+                                                                  height: 200.0,
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
                                                               ),
-                                                        ),
-                                                      ],
+                                                              Align(
+                                                                alignment:
+                                                                    AlignmentDirectional(
+                                                                        0.0,
+                                                                        0.0),
+                                                                child: Icon(
+                                                                  Icons
+                                                                      .play_arrow_rounded,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryBackground,
+                                                                  size: 24.0,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          if (!valueOrDefault<
+                                                                  bool>(
+                                                                valueOrDefault<
+                                                                        bool>(
+                                                                    currentUserDocument
+                                                                        ?.userSubscribed,
+                                                                    false),
+                                                                false,
+                                                              ) &&
+                                                              (subCategoryVideosIndex >=
+                                                                  3) &&
+                                                              ((currentUserDocument
+                                                                          ?.subscriptionEndDateTime ==
+                                                                      null) ||
+                                                                  (currentUserDocument!
+                                                                          .subscriptionEndDateTime! <
+                                                                      getCurrentTimestamp)))
+                                                            AuthUserStreamWidget(
+                                                              builder:
+                                                                  (context) =>
+                                                                      Container(
+                                                                width: 200.0,
+                                                                height: 200.0,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Color(
+                                                                      0x8757636C),
+                                                                ),
+                                                                child: Icon(
+                                                                  Icons.lock,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryText,
+                                                                  size: 24.0,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                  Flexible(
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  20.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            subCategoryVideosItem
+                                                                .topic,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .headlineSmall
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .headlineSmallFamily,
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  useGoogleFonts:
+                                                                      !FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .headlineSmallIsCustom,
+                                                                ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           );
                                         },

@@ -480,6 +480,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             builder: (context, params) => NavBarPage(
                   initialPage: '',
                   page: MyListWidget(),
+                )),
+        FFRoute(
+            name: SubscriptionPageRazorPayWidget.routeName,
+            path: SubscriptionPageRazorPayWidget.routePath,
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: SubscriptionPageRazorPayWidget(),
+                )),
+        FFRoute(
+            name: CancellationRazorPayWidget.routeName,
+            path: CancellationRazorPayWidget.routePath,
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: CancellationRazorPayWidget(),
                 ))
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

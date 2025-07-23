@@ -261,6 +261,9 @@ class _UploadVideosWidgetState extends State<UploadVideosWidget> {
                             0.0, 24.0, 0.0, 44.0),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'UPLOAD_VIDEOS_COMP_SUBMIT_BTN_ON_TAP');
+                            logFirebaseEvent('Button_backend_call');
                             _model.videoUpload = await VideoUploadCall.call(
                               googlesheetURL:
                                   _model.sheetURLTextController.text,
@@ -268,7 +271,9 @@ class _UploadVideosWidgetState extends State<UploadVideosWidget> {
                             );
 
                             if ((_model.videoUpload?.succeeded ?? true)) {
+                              logFirebaseEvent('Button_bottom_sheet');
                               Navigator.pop(context);
+                              logFirebaseEvent('Button_show_snack_bar');
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
@@ -284,7 +289,9 @@ class _UploadVideosWidgetState extends State<UploadVideosWidget> {
                                 ),
                               );
                             } else {
+                              logFirebaseEvent('Button_bottom_sheet');
                               Navigator.pop(context);
+                              logFirebaseEvent('Button_show_snack_bar');
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
@@ -351,6 +358,8 @@ class _UploadVideosWidgetState extends State<UploadVideosWidget> {
                     size: 24.0,
                   ),
                   onPressed: () async {
+                    logFirebaseEvent('UPLOAD_VIDEOS_close_rounded_ICN_ON_TAP');
+                    logFirebaseEvent('IconButton_bottom_sheet');
                     Navigator.pop(context);
                   },
                 ),

@@ -29,14 +29,14 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
     super.initState();
     _model = createModel(context, () => NewsLetterModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'NewsLetter'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('NEWS_LETTER_NewsLetter_ON_INIT_STATE');
       if (valueOrDefault(currentUserDocument?.subscribedEmail, '') != '') {
+        logFirebaseEvent('NewsLetter_update_page_state');
         _model.isSubscribedEmail =
             valueOrDefault<bool>(currentUserDocument?.newsletters, false);
-        safeSetState(() {});
-      } else {
-        _model.isSubscribedEmail = false;
         safeSetState(() {});
       }
     });
@@ -89,35 +89,64 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
             ),
             body: SafeArea(
               top: true,
-              child: Builder(
-                builder: (context) {
-                  if (!_model.isSubscribedEmail) {
-                    return Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 30.0, 30.0),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 0.0, 16.0),
-                              child: Row(
+              child: Container(
+                height: MediaQuery.sizeOf(context).height * 0.8,
+                decoration: BoxDecoration(),
+                child: Builder(
+                  builder: (context) {
+                    if (!_model.isSubscribedEmail) {
+                      return Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            30.0, 0.0, 30.0, 30.0),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 16.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Flexible(
+                                      child: Text(
+                                        'Subscribe to our Newsletter!',
+                                        style: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineMediumFamily,
+                                              fontSize: 24.0,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts:
+                                                  !FlutterFlowTheme.of(context)
+                                                      .headlineMediumIsCustom,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Flexible(
                                     child: Text(
-                                      'Subscribe to our Newsletter!',
+                                      'Stay ahead in your learning journey! \n\nSubscribe to our newsletter and explore a world of knowledge with curated topics and engaging video lessons. \n\nNever miss an update—sign up today!',
+                                      textAlign: TextAlign.center,
                                       style: FlutterFlowTheme.of(context)
                                           .headlineMedium
                                           .override(
                                             fontFamily:
                                                 FlutterFlowTheme.of(context)
                                                     .headlineMediumFamily,
-                                            fontSize: 24.0,
+                                            fontSize: 16.0,
                                             letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w500,
                                             useGoogleFonts:
                                                 !FlutterFlowTheme.of(context)
                                                     .headlineMediumIsCustom,
@@ -126,224 +155,6 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
                                   ),
                                 ],
                               ),
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Flexible(
-                                  child: Text(
-                                    'Stay ahead in your learning journey! \n\nSubscribe to our newsletter and explore a world of knowledge with curated topics and engaging video lessons. \n\nNever miss an update—sign up today!',
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .headlineMedium
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .headlineMediumFamily,
-                                          fontSize: 16.0,
-                                          letterSpacing: 0.0,
-                                          fontWeight: FontWeight.w500,
-                                          useGoogleFonts:
-                                              !FlutterFlowTheme.of(context)
-                                                  .headlineMediumIsCustom,
-                                        ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 20.0, 0.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Form(
-                                    key: _model.formKey,
-                                    autovalidateMode: AutovalidateMode.always,
-                                    child: Container(
-                                      width: 200.0,
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 20.0),
-                                        child: Container(
-                                          width: 200.0,
-                                          child: TextFormField(
-                                            controller:
-                                                _model.emailTextController,
-                                            focusNode: _model.emailFocusNode,
-                                            autofocus: false,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              isDense: true,
-                                              labelStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts:
-                                                            !FlutterFlowTheme
-                                                                    .of(context)
-                                                                .labelMediumIsCustom,
-                                                      ),
-                                              hintText: 'Enter your Email ID',
-                                              hintStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        useGoogleFonts:
-                                                            !FlutterFlowTheme
-                                                                    .of(context)
-                                                                .labelMediumIsCustom,
-                                                      ),
-                                              enabledBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondary,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(0.0),
-                                              ),
-                                              focusedBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(0.0),
-                                              ),
-                                              errorBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(0.0),
-                                              ),
-                                              focusedErrorBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  width: 1.0,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(0.0),
-                                              ),
-                                              filled: true,
-                                              fillColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumFamily,
-                                                  letterSpacing: 0.0,
-                                                  useGoogleFonts:
-                                                      !FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMediumIsCustom,
-                                                ),
-                                            cursorColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            validator: _model
-                                                .emailTextControllerValidator
-                                                .asValidator(context),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 16.0, 0.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  FFButtonWidget(
-                                    onPressed: () async {
-                                      _model.subscribed =
-                                          await MailchimpSubscriptionCall.call(
-                                        email: _model.emailTextController.text,
-                                        subscription: true,
-                                        uid: currentUserUid,
-                                      );
-
-                                      await currentUserReference!
-                                          .update(createUsersRecordData(
-                                        newsletters: true,
-                                        subscribedEmail:
-                                            _model.emailTextController.text,
-                                      ));
-
-                                      context
-                                          .goNamed(NewsLetterWidget.routeName);
-
-                                      safeSetState(() {});
-                                    },
-                                    text: 'Subscribe',
-                                    options: FFButtonOptions(
-                                      width: 200.0,
-                                      height: 40.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16.0, 0.0, 16.0, 0.0),
-                                      iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
-                                              0.0, 0.0, 0.0, 0.0),
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmallFamily,
-                                            color: Colors.white,
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts:
-                                                !FlutterFlowTheme.of(context)
-                                                    .titleSmallIsCustom,
-                                          ),
-                                      elevation: 0.0,
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            if (responsiveVisibility(
-                              context: context,
-                              phone: false,
-                              tablet: false,
-                              tabletLandscape: false,
-                              desktop: false,
-                            ))
                               Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 20.0, 0.0, 0.0),
@@ -351,156 +162,344 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
-                                        await MailchimpSubscriptionCall.call(
-                                          email:
-                                              _model.emailTextController.text,
-                                          subscription: false,
-                                          uid: currentUserUid,
-                                        );
-
-                                        await currentUserReference!.update({
-                                          ...createUsersRecordData(
-                                            newsletters: false,
-                                          ),
-                                          ...mapToFirestore(
-                                            {
-                                              'subscribedEmail':
-                                                  FieldValue.delete(),
-                                            },
-                                          ),
-                                        });
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'You have unsubscribed from our newsletter.',
-                                              style: TextStyle(
-                                                color:
+                                    Form(
+                                      key: _model.formKey,
+                                      autovalidateMode: AutovalidateMode.always,
+                                      child: Container(
+                                        width: 200.0,
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 20.0),
+                                          child: Container(
+                                            width: 200.0,
+                                            child: TextFormField(
+                                              controller:
+                                                  _model.emailTextController,
+                                              focusNode: _model.emailFocusNode,
+                                              autofocus: false,
+                                              obscureText: false,
+                                              decoration: InputDecoration(
+                                                isDense: true,
+                                                labelStyle:
                                                     FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts:
+                                                              !FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .labelMediumIsCustom,
+                                                        ),
+                                                hintText: 'Enter your Email ID',
+                                                hintStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .labelMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts:
+                                                              !FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .labelMediumIsCustom,
+                                                        ),
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondary,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          0.0),
+                                                ),
+                                                focusedBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: Color(0x00000000),
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          0.0),
+                                                ),
+                                                errorBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          0.0),
+                                                ),
+                                                focusedErrorBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    width: 1.0,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          0.0),
+                                                ),
+                                                filled: true,
+                                                fillColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
                                               ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts:
+                                                            !FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMediumIsCustom,
+                                                      ),
+                                              cursorColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryText,
+                                              validator: _model
+                                                  .emailTextControllerValidator
+                                                  .asValidator(context),
                                             ),
-                                            duration:
-                                                Duration(milliseconds: 4000),
-                                            backgroundColor:
-                                                FlutterFlowTheme.of(context)
-                                                    .primary,
                                           ),
-                                        );
-                                        safeSetState(() {
-                                          _model.emailTextController?.text =
-                                              currentUserEmail;
-                                        });
-                                      },
-                                      child: Text(
-                                        'Unsubscribe',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMediumFamily,
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryText,
-                                              fontSize: 10.0,
-                                              letterSpacing: 0.0,
-                                              decoration:
-                                                  TextDecoration.underline,
-                                              useGoogleFonts:
-                                                  !FlutterFlowTheme.of(context)
-                                                      .bodyMediumIsCustom,
-                                            ),
+                                        ),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                          ],
-                        ),
-                      ),
-                    );
-                  } else {
-                    return Container(
-                      width: MediaQuery.sizeOf(context).width * 1.0,
-                      height: 500.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                      ),
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Padding(
-                        padding: EdgeInsets.all(30.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Sad to see you go!',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    fontSize: 30.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts:
-                                        !FlutterFlowTheme.of(context)
-                                            .bodyMediumIsCustom,
-                                  ),
-                            ),
-                            Flexible(
-                              child: AuthUserStreamWidget(
-                                builder: (context) => Text(
-                                  'You are subscribed to the Socrates Newsletter with the email ID ${valueOrDefault(currentUserDocument?.subscribedEmail, '')}',
-                                  textAlign: TextAlign.center,
-                                  style: FlutterFlowTheme.of(context)
-                                      .headlineMedium
-                                      .override(
-                                        fontFamily: FlutterFlowTheme.of(context)
-                                            .headlineMediumFamily,
-                                        fontSize: 16.0,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w500,
-                                        useGoogleFonts:
-                                            !FlutterFlowTheme.of(context)
-                                                .headlineMediumIsCustom,
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 16.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        logFirebaseEvent(
+                                            'NEWS_LETTER_PAGE_SUBSCRIBE_BTN_ON_TAP');
+                                        logFirebaseEvent(
+                                            'Button_validate_form');
+                                        _model.verifiedUserDetails = true;
+                                        if (_model.formKey.currentState ==
+                                                null ||
+                                            !_model.formKey.currentState!
+                                                .validate()) {
+                                          safeSetState(() => _model
+                                              .verifiedUserDetails = false);
+                                          return;
+                                        }
+                                        logFirebaseEvent('Button_backend_call');
+                                        _model.subscribedApi =
+                                            await MailchimpSubscriptionCall
+                                                .call(
+                                          email:
+                                              _model.emailTextController.text,
+                                          subscription: true,
+                                          uid: currentUserUid,
+                                        );
+
+                                        if ((_model.subscribedApi?.succeeded ??
+                                            true)) {
+                                          logFirebaseEvent(
+                                              'Button_backend_call');
+
+                                          await currentUserReference!
+                                              .update(createUsersRecordData(
+                                            newsletters: true,
+                                            subscribedEmail:
+                                                _model.emailTextController.text,
+                                          ));
+                                          logFirebaseEvent(
+                                              'Button_google_analytics_event');
+                                          logFirebaseEvent(
+                                              'app_newsletter_subscribed');
+                                          logFirebaseEvent(
+                                              'Button_update_page_state');
+                                          _model.isSubscribedEmail = true;
+                                          safeSetState(() {});
+                                        }
+
+                                        safeSetState(() {});
+                                      },
+                                      text: 'Subscribe',
+                                      options: FFButtonOptions(
+                                        width: 200.0,
+                                        height: 40.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 0.0, 16.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmallFamily,
+                                              color: Colors.white,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts:
+                                                  !FlutterFlowTheme.of(context)
+                                                      .titleSmallIsCustom,
+                                            ),
+                                        elevation: 0.0,
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ),
-                            RichText(
-                              textScaler: MediaQuery.of(context).textScaler,
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: 'Tap ',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyMediumFamily,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts:
-                                              !FlutterFlowTheme.of(context)
-                                                  .bodyMediumIsCustom,
+                              if (responsiveVisibility(
+                                context: context,
+                                phone: false,
+                                tablet: false,
+                                tabletLandscape: false,
+                                desktop: false,
+                              ))
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 20.0, 0.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      InkWell(
+                                        splashColor: Colors.transparent,
+                                        focusColor: Colors.transparent,
+                                        hoverColor: Colors.transparent,
+                                        highlightColor: Colors.transparent,
+                                        onTap: () async {
+                                          logFirebaseEvent(
+                                              'NEWS_LETTER_PAGE_Text_m4uxvstz_ON_TAP');
+                                          logFirebaseEvent('Text_backend_call');
+                                          await MailchimpSubscriptionCall.call(
+                                            email:
+                                                _model.emailTextController.text,
+                                            subscription: false,
+                                            uid: currentUserUid,
+                                          );
+
+                                          logFirebaseEvent('Text_backend_call');
+
+                                          await currentUserReference!.update({
+                                            ...createUsersRecordData(
+                                              newsletters: false,
+                                            ),
+                                            ...mapToFirestore(
+                                              {
+                                                'subscribedEmail':
+                                                    FieldValue.delete(),
+                                              },
+                                            ),
+                                          });
+                                          logFirebaseEvent(
+                                              'Text_show_snack_bar');
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text(
+                                                'You have unsubscribed from our newsletter.',
+                                                style: TextStyle(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
+                                                ),
+                                              ),
+                                              duration:
+                                                  Duration(milliseconds: 4000),
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                            ),
+                                          );
+                                          logFirebaseEvent(
+                                              'Text_reset_form_fields');
+                                          safeSetState(() {
+                                            _model.emailTextController?.text =
+                                                currentUserEmail;
+                                          });
+                                        },
+                                        child: Text(
+                                          'Unsubscribe',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                fontSize: 10.0,
+                                                letterSpacing: 0.0,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                useGoogleFonts:
+                                                    !FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMediumIsCustom,
+                                              ),
                                         ),
+                                      ),
+                                    ],
                                   ),
-                                  TextSpan(
-                                    text: 'Unsubscribe',
+                                ),
+                            ],
+                          ),
+                        ),
+                      );
+                    } else {
+                      return Container(
+                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        height: MediaQuery.sizeOf(context).height * 0.5,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                        ),
+                        alignment: AlignmentDirectional(0.0, 0.0),
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(30.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'You are Subscribed',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
                                           fontFamily:
                                               FlutterFlowTheme.of(context)
                                                   .bodyMediumFamily,
+                                          fontSize: 30.0,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
                                           useGoogleFonts:
@@ -508,80 +507,206 @@ class _NewsLetterWidgetState extends State<NewsLetterWidget> {
                                                   .bodyMediumIsCustom,
                                         ),
                                   ),
-                                  TextSpan(
-                                    text:
-                                        ' if you don’t want to receive emails, tips, or future updates.',
-                                    style: TextStyle(),
-                                  )
-                                ],
-                                style: FlutterFlowTheme.of(context)
-                                    .headlineMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .headlineMediumFamily,
-                                      fontSize: 16.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w500,
-                                      useGoogleFonts:
-                                          !FlutterFlowTheme.of(context)
-                                              .headlineMediumIsCustom,
+                                  Flexible(
+                                    child: AuthUserStreamWidget(
+                                      builder: (context) => Text(
+                                        'You are subscribed to the 4sh Newsletter with the Email ID: ${valueOrDefault(currentUserDocument?.subscribedEmail, '')} .',
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .headlineMedium
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineMediumFamily,
+                                              fontSize: 16.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w500,
+                                              useGoogleFonts:
+                                                  !FlutterFlowTheme.of(context)
+                                                      .headlineMediumIsCustom,
+                                            ),
+                                      ),
                                     ),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            FFButtonWidget(
-                              onPressed: () async {
-                                _model.subscribe =
-                                    await MailchimpSubscriptionCall.call(
-                                  email: _model.emailTextController.text,
-                                  subscription: false,
-                                  uid: currentUserUid,
-                                );
-
-                                await currentUserReference!.update({
-                                  ...createUsersRecordData(
-                                    newsletters: false,
                                   ),
-                                  ...mapToFirestore(
-                                    {
-                                      'subscribedEmail': FieldValue.delete(),
-                                    },
-                                  ),
-                                });
-
-                                context.pushNamed(NewsLetterWidget.routeName);
-
-                                safeSetState(() {});
-                              },
-                              text: 'Unsubscribe',
-                              options: FFButtonOptions(
-                                height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).primary,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .titleSmallFamily,
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts:
-                                          !FlutterFlowTheme.of(context)
-                                              .titleSmallIsCustom,
-                                    ),
-                                elevation: 0.0,
-                                borderRadius: BorderRadius.circular(8.0),
+                                ].divide(SizedBox(height: 20.0)),
                               ),
                             ),
-                          ].divide(SizedBox(height: 20.0)),
+                            Align(
+                              alignment: AlignmentDirectional(0.0, 1.0),
+                              child: Padding(
+                                padding: EdgeInsets.all(30.0),
+                                child: Container(
+                                  height: 150.0,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    border: Border.all(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondary,
+                                      width: 2.0,
+                                    ),
+                                  ),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(20.0),
+                                        child: RichText(
+                                          textScaler:
+                                              MediaQuery.of(context).textScaler,
+                                          text: TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: 'Tap ',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          useGoogleFonts:
+                                                              !FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMediumIsCustom,
+                                                        ),
+                                              ),
+                                              TextSpan(
+                                                text: 'Unsubscribe',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          useGoogleFonts:
+                                                              !FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMediumIsCustom,
+                                                        ),
+                                              ),
+                                              TextSpan(
+                                                text:
+                                                    ' if you don’t want to receive emails, tips, or future updates.',
+                                                style: TextStyle(),
+                                              )
+                                            ],
+                                            style: FlutterFlowTheme.of(context)
+                                                .headlineMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .headlineMediumFamily,
+                                                  fontSize: 16.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w500,
+                                                  useGoogleFonts:
+                                                      !FlutterFlowTheme.of(
+                                                              context)
+                                                          .headlineMediumIsCustom,
+                                                ),
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      Flexible(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 20.0),
+                                          child: FFButtonWidget(
+                                            onPressed: () async {
+                                              logFirebaseEvent(
+                                                  'NEWS_LETTER_PAGE_UNSUBSCRIBE_BTN_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Button_backend_call');
+                                              _model.subscribe =
+                                                  await MailchimpSubscriptionCall
+                                                      .call(
+                                                email: _model
+                                                    .emailTextController.text,
+                                                subscription: false,
+                                                uid: currentUserUid,
+                                              );
+
+                                              logFirebaseEvent(
+                                                  'Button_backend_call');
+
+                                              await currentUserReference!
+                                                  .update({
+                                                ...createUsersRecordData(
+                                                  newsletters: false,
+                                                ),
+                                                ...mapToFirestore(
+                                                  {
+                                                    'subscribedEmail':
+                                                        FieldValue.delete(),
+                                                  },
+                                                ),
+                                              });
+                                              logFirebaseEvent(
+                                                  'Button_google_analytics_event');
+                                              logFirebaseEvent(
+                                                  'app_newsletter_unsubscribed');
+                                              logFirebaseEvent(
+                                                  'Button_navigate_to');
+
+                                              context.pushNamed(
+                                                  NewsLetterWidget.routeName);
+
+                                              safeSetState(() {});
+                                            },
+                                            text: 'Unsubscribe',
+                                            options: FFButtonOptions(
+                                              height: 40.0,
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      16.0, 0.0, 16.0, 0.0),
+                                              iconPadding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmallFamily,
+                                                        color: Colors.white,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts:
+                                                            !FlutterFlowTheme
+                                                                    .of(context)
+                                                                .titleSmallIsCustom,
+                                                      ),
+                                              elevation: 0.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    );
-                  }
-                },
+                      );
+                    }
+                  },
+                ),
               ),
             ),
           ),

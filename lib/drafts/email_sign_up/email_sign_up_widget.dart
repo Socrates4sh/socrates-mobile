@@ -28,6 +28,7 @@ class _EmailSignUpWidgetState extends State<EmailSignUpWidget> {
     super.initState();
     _model = createModel(context, () => EmailSignUpModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'EmailSignUp'});
     _model.emailAddressTextController ??= TextEditingController();
     _model.emailAddressFocusNode ??= FocusNode();
 
@@ -481,6 +482,9 @@ class _EmailSignUpWidgetState extends State<EmailSignUpWidget> {
                                             0.0, 30.0, 0.0, 16.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
+                                            logFirebaseEvent(
+                                                'EMAIL_SIGN_UP_CREATE_ACCOUNT_BTN_ON_TAP');
+                                            logFirebaseEvent('Button_auth');
                                             GoRouter.of(context)
                                                 .prepareAuthEvent();
                                             if (_model.passwordTextController

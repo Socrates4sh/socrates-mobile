@@ -4,8 +4,10 @@ import '/components/homepage_list_view_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:lottie/lottie.dart';
@@ -32,8 +34,11 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
     super.initState();
     _model = createModel(context, () => HomepageV3Model());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomepageV3'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('HOMEV3_HomepageV3_ON_INIT_STATE');
+      logFirebaseEvent('HomepageV3_firestore_query');
       _model.websiteStructureDocs = await queryWebsiteStructureRecordOnce(
         queryBuilder: (websiteStructureRecord) => websiteStructureRecord
             .where(
@@ -42,23 +47,30 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
             )
             .orderBy('nav_seq'),
       );
+      logFirebaseEvent('HomepageV3_firestore_query');
       _model.websiteVideosDoc = await queryWebsiteVideosRecordOnce(
-        queryBuilder: (websiteVideosRecord) => websiteVideosRecord.where(
-          'is_display',
-          isEqualTo: true,
-        ),
+        queryBuilder: (websiteVideosRecord) => websiteVideosRecord
+            .where(
+              'is_display',
+              isEqualTo: true,
+            )
+            .orderBy('video_sequence'),
       );
+      logFirebaseEvent('HomepageV3_firestore_query');
       _model.langSeq = await queryHomepageLanguageSequenceRecordOnce(
         queryBuilder: (homepageLanguageSequenceRecord) =>
             homepageLanguageSequenceRecord.orderBy('lang_seq'),
       );
+      logFirebaseEvent('HomepageV3_custom_action');
       _model.dataRecord = await actions.fetchHomeAllData(
         _model.websiteStructureDocs!.toList(),
         _model.langSeq!.toList(),
       );
+      logFirebaseEvent('HomepageV3_update_page_state');
       _model.allDataList =
           _model.dataRecord!.toList().cast<HomeAllDataStruct>();
       safeSetState(() {});
+      logFirebaseEvent('HomepageV3_update_page_state');
       _model.initCompleted = true;
       safeSetState(() {});
     });
@@ -145,6 +157,11 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                               highlightColor:
                                                   Colors.transparent,
                                               onTap: () async {
+                                                logFirebaseEvent(
+                                                    'HOMEPAGE_V3_PAGE_Icon_80clkez6_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Icon_navigate_to');
+
                                                 context.pushNamed(
                                                     SearchWidget.routeName);
                                               },
@@ -338,9 +355,18 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                                       .circular(
                                                                           8.0),
                                                               child:
-                                                                  Image.network(
-                                                                recVideosListItem
-                                                                    .videoThumbnailImageUrl,
+                                                                  CachedNetworkImage(
+                                                                fadeInDuration:
+                                                                    Duration(
+                                                                        milliseconds:
+                                                                            500),
+                                                                fadeOutDuration:
+                                                                    Duration(
+                                                                        milliseconds:
+                                                                            500),
+                                                                imageUrl:
+                                                                    recVideosListItem
+                                                                        .videoThumbnailImageUrl,
                                                                 width: MediaQuery.sizeOf(
                                                                             context)
                                                                         .width *
@@ -372,82 +398,196 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                                   children: [
                                                                     Flexible(
                                                                       child:
-                                                                          Container(
-                                                                        width: MediaQuery.sizeOf(context).width *
-                                                                            0.3,
-                                                                        height:
-                                                                            40.0,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).secondaryBackground,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8.0),
-                                                                        ),
+                                                                          InkWell(
+                                                                        splashColor:
+                                                                            Colors.transparent,
+                                                                        focusColor:
+                                                                            Colors.transparent,
+                                                                        hoverColor:
+                                                                            Colors.transparent,
+                                                                        highlightColor:
+                                                                            Colors.transparent,
+                                                                        onTap:
+                                                                            () async {
+                                                                          logFirebaseEvent(
+                                                                              'HOMEV3_Container_hp6r9jcb_ON_TAP');
+                                                                          logFirebaseEvent(
+                                                                              'Container_navigate_to');
+
+                                                                          context
+                                                                              .pushNamed(
+                                                                            VideoPageV2Widget.routeName,
+                                                                            queryParameters:
+                                                                                {
+                                                                              'videoSequence': serializeParam(
+                                                                                recVideosListItem.videoSequence,
+                                                                                ParamType.double,
+                                                                              ),
+                                                                              'subCategory': serializeParam(
+                                                                                recVideosListItem.subCategory,
+                                                                                ParamType.String,
+                                                                              ),
+                                                                            }.withoutNulls,
+                                                                          );
+                                                                        },
                                                                         child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children:
-                                                                              [
-                                                                            Icon(
-                                                                              Icons.play_arrow_rounded,
-                                                                              color: FlutterFlowTheme.of(context).primaryText,
-                                                                              size: 24.0,
+                                                                            Container(
+                                                                          width:
+                                                                              MediaQuery.sizeOf(context).width * 0.3,
+                                                                          height:
+                                                                              40.0,
+                                                                          decoration:
+                                                                              BoxDecoration(
+                                                                            color:
+                                                                                FlutterFlowTheme.of(context).secondaryBackground,
+                                                                            borderRadius:
+                                                                                BorderRadius.circular(8.0),
+                                                                          ),
+                                                                          child:
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                5.0,
+                                                                                0.0,
+                                                                                5.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                Row(
+                                                                              mainAxisSize: MainAxisSize.max,
+                                                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                                              children: [
+                                                                                Icon(
+                                                                                  Icons.play_arrow_rounded,
+                                                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                                                  size: 24.0,
+                                                                                ),
+                                                                                Text(
+                                                                                  'Play',
+                                                                                  style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                                        fontFamily: FlutterFlowTheme.of(context).headlineSmallFamily,
+                                                                                        fontSize: 22.0,
+                                                                                        letterSpacing: 0.0,
+                                                                                        useGoogleFonts: !FlutterFlowTheme.of(context).headlineSmallIsCustom,
+                                                                                      ),
+                                                                                ),
+                                                                              ].divide(SizedBox(width: 10.0)),
                                                                             ),
-                                                                            Text(
-                                                                              'Play',
-                                                                              style: FlutterFlowTheme.of(context).headlineSmall.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).headlineSmallFamily,
-                                                                                    fontSize: 22.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                    useGoogleFonts: !FlutterFlowTheme.of(context).headlineSmallIsCustom,
-                                                                                  ),
-                                                                            ),
-                                                                          ].divide(SizedBox(width: 10.0)),
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ),
                                                                     Flexible(
                                                                       child:
-                                                                          Container(
-                                                                        width: MediaQuery.sizeOf(context).width *
-                                                                            0.3,
-                                                                        height:
-                                                                            40.0,
-                                                                        decoration:
-                                                                            BoxDecoration(
-                                                                          color:
-                                                                              FlutterFlowTheme.of(context).secondaryBackground,
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(8.0),
-                                                                        ),
-                                                                        child:
-                                                                            Row(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.max,
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          children:
-                                                                              [
-                                                                            Icon(
-                                                                              Icons.add_rounded,
-                                                                              color: FlutterFlowTheme.of(context).primaryText,
-                                                                              size: 24.0,
-                                                                            ),
-                                                                            Text(
-                                                                              'My List',
-                                                                              style: FlutterFlowTheme.of(context).headlineSmall.override(
-                                                                                    fontFamily: FlutterFlowTheme.of(context).headlineSmallFamily,
-                                                                                    fontSize: 22.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                    useGoogleFonts: !FlutterFlowTheme.of(context).headlineSmallIsCustom,
+                                                                          Builder(
+                                                                        builder:
+                                                                            (context) {
+                                                                          if (!functions.checkVideoInFavourite(
+                                                                              (currentUserDocument?.videosMylist.toList() ?? []).toList(),
+                                                                              VideoDocsMylistStruct(
+                                                                                listSeq: (currentUserDocument?.videosMylist.toList() ?? []).length + 1,
+                                                                                videoDocId: recVideosListItem.reference,
+                                                                                topic: recVideosListItem.topic,
+                                                                                subCategory: recVideosListItem.subCategory,
+                                                                                websiteCategory: recVideosListItem.websiteCategory,
+                                                                                videoThumbnailImageUrl: recVideosListItem.videoThumbnailImageUrl,
+                                                                                videoUrl: recVideosListItem.videoFileUrl,
+                                                                              ))) {
+                                                                            return InkWell(
+                                                                              splashColor: Colors.transparent,
+                                                                              focusColor: Colors.transparent,
+                                                                              hoverColor: Colors.transparent,
+                                                                              highlightColor: Colors.transparent,
+                                                                              onTap: () async {
+                                                                                logFirebaseEvent('HOMEV3_Container_33st0j50_ON_TAP');
+                                                                                logFirebaseEvent('Container_backend_call');
+
+                                                                                await currentUserReference!.update({
+                                                                                  ...mapToFirestore(
+                                                                                    {
+                                                                                      'videos_mylist': FieldValue.arrayUnion([
+                                                                                        getVideoDocsMylistFirestoreData(
+                                                                                          updateVideoDocsMylistStruct(
+                                                                                            VideoDocsMylistStruct(
+                                                                                              listSeq: (currentUserDocument?.videosMylist.toList() ?? []).length + 1,
+                                                                                              videoDocId: recVideosListItem.reference,
+                                                                                              topic: recVideosListItem.topic,
+                                                                                              subCategory: recVideosListItem.subCategory,
+                                                                                              websiteCategory: recVideosListItem.websiteCategory,
+                                                                                              videoThumbnailImageUrl: recVideosListItem.videoThumbnailImageUrl,
+                                                                                              videoUrl: recVideosListItem.videoFileUrl,
+                                                                                              videoSeq: recVideosListItem.videoSequence,
+                                                                                            ),
+                                                                                            clearUnsetFields: false,
+                                                                                          ),
+                                                                                          true,
+                                                                                        )
+                                                                                      ]),
+                                                                                    },
                                                                                   ),
-                                                                            ),
-                                                                          ].divide(SizedBox(width: 5.0)),
-                                                                        ),
+                                                                                });
+                                                                                logFirebaseEvent('Container_update_app_state');
+
+                                                                                safeSetState(() {});
+                                                                              },
+                                                                              child: Container(
+                                                                                width: MediaQuery.sizeOf(context).width * 0.3,
+                                                                                height: 40.0,
+                                                                                decoration: BoxDecoration(
+                                                                                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                  borderRadius: BorderRadius.circular(8.0),
+                                                                                ),
+                                                                                child: Row(
+                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                                  children: [
+                                                                                    Icon(
+                                                                                      Icons.add_rounded,
+                                                                                      color: FlutterFlowTheme.of(context).primaryText,
+                                                                                      size: 24.0,
+                                                                                    ),
+                                                                                    Text(
+                                                                                      'My List',
+                                                                                      style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                                            fontFamily: FlutterFlowTheme.of(context).headlineSmallFamily,
+                                                                                            fontSize: 22.0,
+                                                                                            letterSpacing: 0.0,
+                                                                                            useGoogleFonts: !FlutterFlowTheme.of(context).headlineSmallIsCustom,
+                                                                                          ),
+                                                                                    ),
+                                                                                  ].divide(SizedBox(width: 5.0)),
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          } else {
+                                                                            return Container(
+                                                                              width: MediaQuery.sizeOf(context).width * 0.3,
+                                                                              height: 40.0,
+                                                                              decoration: BoxDecoration(
+                                                                                color: FlutterFlowTheme.of(context).secondary,
+                                                                                borderRadius: BorderRadius.circular(8.0),
+                                                                              ),
+                                                                              child: Row(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                                                children: [
+                                                                                  Icon(
+                                                                                    Icons.bookmark_rounded,
+                                                                                    color: FlutterFlowTheme.of(context).primaryText,
+                                                                                    size: 24.0,
+                                                                                  ),
+                                                                                  Text(
+                                                                                    'Added',
+                                                                                    style: FlutterFlowTheme.of(context).headlineSmall.override(
+                                                                                          fontFamily: FlutterFlowTheme.of(context).headlineSmallFamily,
+                                                                                          fontSize: 22.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          useGoogleFonts: !FlutterFlowTheme.of(context).headlineSmallIsCustom,
+                                                                                        ),
+                                                                                  ),
+                                                                                ].divide(SizedBox(width: 5.0)),
+                                                                              ),
+                                                                            );
+                                                                          }
+                                                                        },
                                                                       ),
                                                                     ),
                                                                   ],
@@ -473,7 +613,7 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                         enlargeCenterPage: true,
                                                         enlargeFactor: 1.0,
                                                         enableInfiniteScroll:
-                                                            true,
+                                                            false,
                                                         scrollDirection:
                                                             Axis.horizontal,
                                                         autoPlay: false,
@@ -496,8 +636,8 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
 
                                             return Column(
                                               mainAxisSize: MainAxisSize.max,
-                                              children:
-                                                  List.generate(allData.length,
+                                              children: List.generate(
+                                                      allData.length,
                                                       (allDataIndex) {
                                                 final allDataItem =
                                                     allData[allDataIndex];
@@ -520,7 +660,11 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                   subCategory:
                                                       allDataItem.subCategory,
                                                 );
-                                              }).divide(SizedBox(height: 10.0)),
+                                              })
+                                                  .divide(
+                                                      SizedBox(height: 20.0))
+                                                  .addToStart(
+                                                      SizedBox(height: 10.0)),
                                             );
                                           },
                                         ),
@@ -620,6 +764,10 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  logFirebaseEvent(
+                                      'HOMEPAGE_V3_PAGE_Column_0obqvtd3_ON_TAP');
+                                  logFirebaseEvent('Column_navigate_to');
+
                                   context.pushNamed(HomepageV3Widget.routeName);
                                 },
                                 child: Column(
@@ -658,6 +806,10 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  logFirebaseEvent(
+                                      'HOMEPAGE_V3_PAGE_Column_gmf0kbxc_ON_TAP');
+                                  logFirebaseEvent('Column_navigate_to');
+
                                   context
                                       .pushNamed(RecommendedWidget.routeName);
                                 },
@@ -697,6 +849,10 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
+                                  logFirebaseEvent(
+                                      'HOMEPAGE_V3_PAGE_Column_h6j8eqdu_ON_TAP');
+                                  logFirebaseEvent('Column_navigate_to');
+
                                   context.pushNamed(ProfileWidget.routeName);
                                 },
                                 child: Column(

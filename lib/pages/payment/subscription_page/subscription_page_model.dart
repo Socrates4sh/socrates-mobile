@@ -12,8 +12,6 @@ class SubscriptionPageModel extends FlutterFlowModel<SubscriptionPageWidget> {
 
   // Stores action output result for [RevenueCat - Purchase] action in Button widget.
   bool? monthlyPurchase;
-  // Stores action output result for [RevenueCat - Purchase] action in Button widget.
-  bool? annualPurchase;
 
   @override
   void initState(BuildContext context) {}

@@ -25,6 +25,7 @@ class _VideoPageWidgetState extends State<VideoPageWidget> {
     super.initState();
     _model = createModel(context, () => VideoPageModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'VideoPage'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 

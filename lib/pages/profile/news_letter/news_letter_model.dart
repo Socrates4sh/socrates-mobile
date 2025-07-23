@@ -27,8 +27,10 @@ class NewsLetterModel extends FlutterFlowModel<NewsLetterWidget> {
     return null;
   }
 
+  // Stores action output result for [Validate Form] action in Button widget.
+  bool? verifiedUserDetails;
   // Stores action output result for [Backend Call - API (mailchimpSubscription)] action in Button widget.
-  ApiCallResponse? subscribed;
+  ApiCallResponse? subscribedApi;
   // Stores action output result for [Backend Call - API (mailchimpSubscription)] action in Button widget.
   ApiCallResponse? subscribe;
 

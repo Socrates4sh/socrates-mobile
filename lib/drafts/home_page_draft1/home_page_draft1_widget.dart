@@ -25,6 +25,8 @@ class _HomePageDraft1WidgetState extends State<HomePageDraft1Widget> {
     super.initState();
     _model = createModel(context, () => HomePageDraft1Model());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'HomePageDraft1'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -77,6 +79,10 @@ class _HomePageDraft1WidgetState extends State<HomePageDraft1Widget> {
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
+                        logFirebaseEvent(
+                            'HOME_DRAFT1_Container_tzntdqvd_ON_TAP');
+                        logFirebaseEvent('Container_navigate_to');
+
                         context.pushNamed(ProfileWidget.routeName);
                       },
                       child: Container(
@@ -171,6 +177,11 @@ class _HomePageDraft1WidgetState extends State<HomePageDraft1Widget> {
                                           hoverColor: Colors.transparent,
                                           highlightColor: Colors.transparent,
                                           onTap: () async {
+                                            logFirebaseEvent(
+                                                'HOME_DRAFT1_Container_nb07n6ia_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Container_navigate_to');
+
                                             context.pushNamed(
                                                 MathTopicsDraft1Widget
                                                     .routeName);

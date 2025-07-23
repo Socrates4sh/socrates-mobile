@@ -25,6 +25,8 @@ class _SubjectsDraft2WidgetState extends State<SubjectsDraft2Widget> {
     super.initState();
     _model = createModel(context, () => SubjectsDraft2Model());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'SubjectsDraft2'});
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
@@ -84,6 +86,10 @@ class _SubjectsDraft2WidgetState extends State<SubjectsDraft2Widget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'SUBJECTS_DRAFT2_Container_a9ws9y2n_ON_TA');
+                          logFirebaseEvent('Container_navigate_to');
+
                           context.pushNamed(ProfileWidget.routeName);
                         },
                         child: Container(

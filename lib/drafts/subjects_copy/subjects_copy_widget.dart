@@ -34,8 +34,12 @@ class _SubjectsCopyWidgetState extends State<SubjectsCopyWidget> {
     super.initState();
     _model = createModel(context, () => SubjectsCopyModel());
 
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'SubjectsCopy'});
     // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {});
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('SUBJECTS_COPY_SubjectsCopy_ON_INIT_STATE');
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -126,6 +130,10 @@ class _SubjectsCopyWidgetState extends State<SubjectsCopyWidget> {
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
+                          logFirebaseEvent(
+                              'SUBJECTS_COPY_Container_c8z6z7kb_ON_TAP');
+                          logFirebaseEvent('Container_navigate_to');
+
                           context.pushNamed(ProfileWidget.routeName);
                         },
                         child: Container(

@@ -28,6 +28,7 @@ class _EnterOTPWidgetState extends State<EnterOTPWidget> {
     super.initState();
     _model = createModel(context, () => EnterOTPModel());
 
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'EnterOTP'});
     _model.oTPTextFieldTextController ??= TextEditingController();
     _model.oTPTextFieldFocusNode ??= FocusNode();
 
@@ -110,6 +111,7 @@ class _EnterOTPWidgetState extends State<EnterOTPWidget> {
                         child: TextFormField(
                           controller: _model.oTPTextFieldTextController,
                           focusNode: _model.oTPTextFieldFocusNode,
+                          autofocus: true,
                           obscureText: false,
                           decoration: InputDecoration(
                             labelStyle: FlutterFlowTheme.of(context)
@@ -189,6 +191,9 @@ class _EnterOTPWidgetState extends State<EnterOTPWidget> {
                             16.0, 40.0, 16.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent(
+                                'ENTER_O_T_P_PAGE_Button-Login_ON_TAP');
+                            logFirebaseEvent('Button-Login_auth');
                             GoRouter.of(context).prepareAuthEvent();
                             final smsCodeVal =
                                 _model.oTPTextFieldTextController.text;
@@ -209,15 +214,20 @@ class _EnterOTPWidgetState extends State<EnterOTPWidget> {
                               return;
                             }
 
+                            logFirebaseEvent('Button-Login_backend_call');
                             _model.userDocs = await UsersRecord.getDocumentOnce(
                                 currentUserReference!);
                             if (currentUserDisplayName == '') {
+                              logFirebaseEvent('Button-Login_navigate_to');
+
                               context.pushNamedAuth(
                                   OnboardingFormWidget.routeName,
                                   context.mounted);
                             } else {
+                              logFirebaseEvent('Button-Login_navigate_to');
+
                               context.pushNamedAuth(
-                                  HomepageWidget.routeName, context.mounted);
+                                  HomepageV3Widget.routeName, context.mounted);
                             }
 
                             safeSetState(() {});
