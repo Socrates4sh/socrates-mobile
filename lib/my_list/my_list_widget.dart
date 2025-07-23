@@ -264,8 +264,10 @@ class _MyListWidgetState extends State<MyListWidget> {
                                                                     width: MediaQuery.sizeOf(context)
                                                                             .width *
                                                                         0.3,
-                                                                    height:
-                                                                        80.0,
+                                                                    height: MediaQuery.sizeOf(context).width <
+                                                                            600.0
+                                                                        ? 80.0
+                                                                        : 210.0,
                                                                     fit: BoxFit
                                                                         .cover,
                                                                   ),
@@ -289,16 +291,16 @@ class _MyListWidgetState extends State<MyListWidget> {
                                                                   ),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyMedium
+                                                                      .bodyLarge
                                                                       .override(
                                                                         fontFamily:
-                                                                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                            FlutterFlowTheme.of(context).bodyLargeFamily,
                                                                         color: FlutterFlowTheme.of(context)
-                                                                            .secondaryBackground,
+                                                                            .primaryBackground,
                                                                         letterSpacing:
                                                                             0.0,
                                                                         useGoogleFonts:
-                                                                            !FlutterFlowTheme.of(context).bodyMediumIsCustom,
+                                                                            !FlutterFlowTheme.of(context).bodyLargeIsCustom,
                                                                       ),
                                                                 ),
                                                               ),
@@ -350,7 +352,11 @@ class _MyListWidgetState extends State<MyListWidget> {
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .error,
-                                                                  size: 20.0,
+                                                                  size: MediaQuery.sizeOf(context)
+                                                                              .width <
+                                                                          600.0
+                                                                      ? 20.0
+                                                                      : 30.0,
                                                                 ),
                                                               ),
                                                           ],
@@ -377,7 +383,7 @@ class _MyListWidgetState extends State<MyListWidget> {
                                                     mainAxisSize:
                                                         MainAxisSize.max,
                                                     children: [
-                                                      Flexible(
+                                                      Expanded(
                                                         child: Padding(
                                                           padding:
                                                               EdgeInsetsDirectional
