@@ -544,7 +544,11 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                                           false)) {
                                                         logFirebaseEvent(
                                                             'Verify_Button_navigate_to');
-
+                                                        if (Navigator.of(
+                                                                context)
+                                                            .canPop()) {
+                                                          context.pop();
+                                                        }
                                                         context.pushNamedAuth(
                                                             OnboardingFormWidget
                                                                 .routeName,
@@ -552,7 +556,11 @@ class _VerifyCodeWidgetState extends State<VerifyCodeWidget> {
                                                       } else {
                                                         logFirebaseEvent(
                                                             'Verify_Button_navigate_to');
-
+                                                        if (Navigator.of(
+                                                                context)
+                                                            .canPop()) {
+                                                          context.pop();
+                                                        }
                                                         context.pushNamedAuth(
                                                             HomepageV3Widget
                                                                 .routeName,

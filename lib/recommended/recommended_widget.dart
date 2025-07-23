@@ -153,7 +153,13 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                   padding: EdgeInsets.zero,
                                                   gridDelegate:
                                                       SliverGridDelegateWithFixedCrossAxisCount(
-                                                    crossAxisCount: 2,
+                                                    crossAxisCount:
+                                                        MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .width <
+                                                                600.0
+                                                            ? 2
+                                                            : 4,
                                                     crossAxisSpacing: 20.0,
                                                     mainAxisSpacing: 20.0,
                                                     childAspectRatio: 0.7,
@@ -231,7 +237,7 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                                     MainAxisAlignment
                                                                         .spaceBetween,
                                                                 children: [
-                                                                  Flexible(
+                                                                  Expanded(
                                                                     child:
                                                                         ClipRRect(
                                                                       borderRadius:
@@ -252,8 +258,6 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                                             .videoThumbnailImageUrl,
                                                                         width: MediaQuery.sizeOf(context).width *
                                                                             1.0,
-                                                                        height:
-                                                                            150.0,
                                                                         fit: BoxFit
                                                                             .cover,
                                                                         errorBuilder: (context,
@@ -263,8 +267,6 @@ class _RecommendedWidgetState extends State<RecommendedWidget> {
                                                                           'assets/images/error_image.png',
                                                                           width:
                                                                               MediaQuery.sizeOf(context).width * 1.0,
-                                                                          height:
-                                                                              150.0,
                                                                           fit: BoxFit
                                                                               .cover,
                                                                         ),
