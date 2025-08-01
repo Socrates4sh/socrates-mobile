@@ -77,7 +77,7 @@ class _SubscriptionPageRazorPayWidgetState
       logFirebaseEvent('SubscriptionPageRazorPay_backend_call');
       _model.razorPayResponseMonthly = await CreateSubscriptionIDCall.call(
         planId: _model.paymentPlanDoc?.planId,
-        totalCount: 1,
+        totalCount: 60,
         uID: currentUserUid,
         customerId: valueOrDefault(currentUserDocument?.razorpayCustomerId, ''),
         description: 'Monthly Plan',
