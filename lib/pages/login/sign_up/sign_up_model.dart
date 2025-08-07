@@ -10,6 +10,8 @@ class SignUpModel extends FlutterFlowModel<SignUpWidget> {
 
   String? phoneWithCode;
 
+  bool hideDelete = true;
+
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for phone_number widget.
