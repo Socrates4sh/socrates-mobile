@@ -131,6 +131,42 @@
           "order": "ASCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "WebsiteStructure",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "is_display",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "categories",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "nav_seq",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "WebsiteVideos",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "is_display",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "website_category",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "video_sequence",
+          "order": "ASCENDING"
+        }
+      ]
     }
   ],
   "fieldOverrides": [
