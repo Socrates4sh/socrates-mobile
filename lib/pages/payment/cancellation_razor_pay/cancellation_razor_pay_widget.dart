@@ -262,42 +262,54 @@ class _CancellationRazorPayWidgetState
                                     ),
                                   ].divide(SizedBox(height: 20.0)),
                                 ),
-                                FFButtonWidget(
-                                  onPressed: () async {
-                                    logFirebaseEvent(
-                                        'CANCELLATION_RAZOR_PAY_SUBSCRIBE_AGAIN_B');
-                                    logFirebaseEvent('Button_navigate_to');
+                                if ((currentUserDocument
+                                            ?.subscriptionEndDateTime !=
+                                        null) &&
+                                    (currentUserDocument!
+                                            .subscriptionEndDateTime! <
+                                        getCurrentTimestamp))
+                                  AuthUserStreamWidget(
+                                    builder: (context) => FFButtonWidget(
+                                      onPressed: () async {
+                                        logFirebaseEvent(
+                                            'CANCELLATION_RAZOR_PAY_SUBSCRIBE_AGAIN_B');
+                                        logFirebaseEvent('Button_navigate_to');
 
-                                    context.pushNamed(
-                                        SubscriptionPageRazorPayWidget
-                                            .routeName);
-                                  },
-                                  text: 'Subscribe Again',
-                                  options: FFButtonOptions(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 0.6,
-                                    height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16.0, 0.0, 16.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 0.0),
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmallFamily,
-                                          color: Colors.white,
-                                          letterSpacing: 0.0,
-                                          useGoogleFonts:
-                                              !FlutterFlowTheme.of(context)
-                                                  .titleSmallIsCustom,
-                                        ),
-                                    elevation: 0.0,
-                                    borderRadius: BorderRadius.circular(8.0),
+                                        context.pushNamed(
+                                            SubscriptionPageRazorPayWidget
+                                                .routeName);
+                                      },
+                                      text: 'Subscribe Again',
+                                      options: FFButtonOptions(
+                                        width:
+                                            MediaQuery.sizeOf(context).width *
+                                                0.6,
+                                        height: 40.0,
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16.0, 0.0, 16.0, 0.0),
+                                        iconPadding:
+                                            EdgeInsetsDirectional.fromSTEB(
+                                                0.0, 0.0, 0.0, 0.0),
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmallFamily,
+                                              color: Colors.white,
+                                              letterSpacing: 0.0,
+                                              useGoogleFonts:
+                                                  !FlutterFlowTheme.of(context)
+                                                      .titleSmallIsCustom,
+                                            ),
+                                        elevation: 0.0,
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                    ),
                                   ),
-                                ),
                               ],
                             ),
                           ),
