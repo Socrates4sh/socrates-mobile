@@ -84,13 +84,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               alignment: AlignmentDirectional(0.0, -0.97),
                               child: Container(
                                 height:
-                                    MediaQuery.sizeOf(context).height * 0.84,
+                                    MediaQuery.sizeOf(context).height * 0.88,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context).primary,
                                 ),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      15.0, 0.0, 15.0, 0.0),
+                                      15.0, 50.0, 15.0, 0.0),
                                   child: SingleChildScrollView(
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -383,7 +383,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                           .labelLargeFamily,
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .secondaryText,
+                                                      .secondary,
                                                   letterSpacing: 0.0,
                                                   useGoogleFonts:
                                                       !FlutterFlowTheme.of(
@@ -405,12 +405,30 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                               logFirebaseEvent(
                                                   'PROFILE_PAGE_Payment_ON_TAP');
                                               if (isAndroid) {
-                                                logFirebaseEvent(
-                                                    'Payment_navigate_to');
+                                                if (((currentUserDocument
+                                                                ?.subscriptionEndDateTime ==
+                                                            null) ||
+                                                        (currentUserDocument!
+                                                                .subscriptionEndDateTime! <
+                                                            getCurrentTimestamp)) &&
+                                                    !valueOrDefault<bool>(
+                                                        currentUserDocument
+                                                            ?.subscriptionCancelled,
+                                                        false)) {
+                                                  logFirebaseEvent(
+                                                      'Payment_navigate_to');
 
-                                                context.pushNamed(
-                                                    SubscriptionPageRazorPayWidget
-                                                        .routeName);
+                                                  context.pushNamed(
+                                                      SubscriptionPageRazorPayWidget
+                                                          .routeName);
+                                                } else {
+                                                  logFirebaseEvent(
+                                                      'Payment_navigate_to');
+
+                                                  context.pushNamed(
+                                                      CancellationRazorPayWidget
+                                                          .routeName);
+                                                }
                                               } else {
                                                 logFirebaseEvent(
                                                     'Payment_navigate_to');
@@ -523,7 +541,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                           .labelLargeFamily,
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .secondaryText,
+                                                      .secondary,
                                                   letterSpacing: 0.0,
                                                   useGoogleFonts:
                                                       !FlutterFlowTheme.of(
@@ -1295,77 +1313,180 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  20.0, 24.0, 20.0, 10.0),
+                                                  16.0, 16.0, 16.0, 30.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'PROFILE_PAGE_Text_fvsrg1uq_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Text_navigate_to');
+
+                                                  context.pushNamed(
+                                                      TermsofServiceWidget
+                                                          .routeName);
+                                                },
+                                                child: Text(
+                                                  'Terms of Service',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts:
+                                                            !FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMediumIsCustom,
+                                                      ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 20.0,
+                                                child: VerticalDivider(
+                                                  thickness: 2.0,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                ),
+                                              ),
+                                              InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'PROFILE_PAGE_Text_cr3fvlwe_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Text_navigate_to');
+
+                                                  context.pushNamed(
+                                                      PrivacyPolicyWidget
+                                                          .routeName);
+                                                },
+                                                child: Text(
+                                                  'Privacy Policy',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .alternate,
+                                                        letterSpacing: 0.0,
+                                                        useGoogleFonts:
+                                                            !FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMediumIsCustom,
+                                                      ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  20.0, 0.0, 20.0, 10.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Align(
                                                 alignment: AlignmentDirectional(
                                                     -0.51, 0.25),
-                                                child: InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    logFirebaseEvent(
-                                                        'PROFILE_PAGE_DeleteAccount_ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'DeleteAccount_bottom_sheet');
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      enableDrag: false,
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return GestureDetector(
-                                                          onTap: () {
-                                                            FocusScope.of(
-                                                                    context)
-                                                                .unfocus();
-                                                            FocusManager
-                                                                .instance
-                                                                .primaryFocus
-                                                                ?.unfocus();
-                                                          },
-                                                          child: Padding(
-                                                            padding: MediaQuery
-                                                                .viewInsetsOf(
-                                                                    context),
-                                                            child:
-                                                                UserDeleteConfirmationBoxWidget(),
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).then((value) =>
-                                                        safeSetState(() {}));
-                                                  },
-                                                  child: Text(
-                                                    'Delete Account',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 10.0, 0.0, 0.0),
+                                                  child: InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      logFirebaseEvent(
+                                                          'PROFILE_PAGE_DeleteAccount_ON_TAP');
+                                                      logFirebaseEvent(
+                                                          'DeleteAccount_bottom_sheet');
+                                                      await showModalBottomSheet(
+                                                        isScrollControlled:
+                                                            true,
+                                                        backgroundColor:
+                                                            Colors.transparent,
+                                                        enableDrag: false,
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return GestureDetector(
+                                                            onTap: () {
+                                                              FocusScope.of(
                                                                       context)
-                                                                  .bodyMediumFamily,
-                                                          color:
-                                                              Color(0xDFE0E3E7),
-                                                          fontSize: 12.0,
-                                                          letterSpacing: 0.0,
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          useGoogleFonts:
-                                                              !FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMediumIsCustom,
-                                                        ),
+                                                                  .unfocus();
+                                                              FocusManager
+                                                                  .instance
+                                                                  .primaryFocus
+                                                                  ?.unfocus();
+                                                            },
+                                                            child: Padding(
+                                                              padding: MediaQuery
+                                                                  .viewInsetsOf(
+                                                                      context),
+                                                              child:
+                                                                  UserDeleteConfirmationBoxWidget(),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ).then((value) =>
+                                                          safeSetState(() {}));
+                                                    },
+                                                    child: Text(
+                                                      'Delete Account',
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumFamily,
+                                                            color: Color(
+                                                                0xDFE0E3E7),
+                                                            fontSize: 12.0,
+                                                            letterSpacing: 0.0,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            useGoogleFonts:
+                                                                !FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMediumIsCustom,
+                                                          ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -1466,84 +1587,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 16.0, 16.0, 60.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'PROFILE_PAGE_Text_fvsrg1uq_ON_TAP');
-                                      logFirebaseEvent('Text_navigate_to');
-
-                                      context.pushNamed(
-                                          TermsofServiceWidget.routeName);
-                                    },
-                                    child: Text(
-                                      'Terms of Service',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily,
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts:
-                                                !FlutterFlowTheme.of(context)
-                                                    .bodyMediumIsCustom,
-                                          ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20.0,
-                                    child: VerticalDivider(
-                                      thickness: 2.0,
-                                      color: FlutterFlowTheme.of(context)
-                                          .alternate,
-                                    ),
-                                  ),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'PROFILE_PAGE_Text_cr3fvlwe_ON_TAP');
-                                      logFirebaseEvent('Text_navigate_to');
-
-                                      context.pushNamed(
-                                          PrivacyPolicyWidget.routeName);
-                                    },
-                                    child: Text(
-                                      'Privacy Policy',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyMediumFamily,
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            letterSpacing: 0.0,
-                                            useGoogleFonts:
-                                                !FlutterFlowTheme.of(context)
-                                                    .bodyMediumIsCustom,
-                                          ),
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
                           ],
