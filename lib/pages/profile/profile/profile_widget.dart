@@ -410,7 +410,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                             null) ||
                                                         (currentUserDocument!
                                                                 .subscriptionEndDateTime! <
-                                                            getCurrentTimestamp)) &&
+                                                            getCurrentTimestamp)) ||
                                                     !valueOrDefault<bool>(
                                                         currentUserDocument
                                                             ?.subscriptionCancelled,
