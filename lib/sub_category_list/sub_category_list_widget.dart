@@ -49,10 +49,19 @@ class _SubCategoryListWidgetState extends State<SubCategoryListWidget> {
             .where(
               'categories',
               isEqualTo: widget.websiteCategory,
-            )
-            .orderBy('nav_seq'),
+            ),
         singleRecord: true,
       ).then((s) => s.firstOrNull);
+      logFirebaseEvent('SubCategoryList_firestore_query');
+      _model.subCategory = await querySubCategoriesRecordOnce(
+        parent: _model.websiteStructureDocs?.reference,
+        queryBuilder: (subCategoriesRecord) => subCategoriesRecord
+            .where(
+              'is_display',
+              isEqualTo: true,
+            )
+            .orderBy('exam_sequence'),
+      );
       logFirebaseEvent('SubCategoryList_firestore_query');
       _model.videosWebCat = await queryWebsiteVideosRecordOnce(
         queryBuilder: (websiteVideosRecord) => websiteVideosRecord
@@ -138,7 +147,7 @@ class _SubCategoryListWidgetState extends State<SubCategoryListWidget> {
                                   child: Builder(
                                     builder: (context) {
                                       final subCat =
-                                          _model.videosWebCat?.toList() ?? [];
+                                          _model.subCategory?.toList() ?? [];
 
                                       return ListView.separated(
                                         padding: EdgeInsets.zero,
@@ -168,14 +177,13 @@ class _SubCategoryListWidgetState extends State<SubCategoryListWidget> {
                                                     _model.videosWebCat
                                                         ?.where((e) =>
                                                             e.subCategory ==
-                                                            subCatItem
-                                                                .subCategory)
+                                                            subCatItem.exam)
                                                         .toList(),
                                                     ParamType.Document,
                                                     isList: true,
                                                   ),
                                                   'subCategory': serializeParam(
-                                                    subCatItem.subCategory,
+                                                    subCatItem.exam,
                                                     ParamType.String,
                                                   ),
                                                   'websiteCategory':
@@ -189,8 +197,7 @@ class _SubCategoryListWidgetState extends State<SubCategoryListWidget> {
                                                       .videosWebCat
                                                       ?.where((e) =>
                                                           e.subCategory ==
-                                                          subCatItem
-                                                              .subCategory)
+                                                          subCatItem.exam)
                                                       .toList(),
                                                 },
                                               );
@@ -237,7 +244,7 @@ class _SubCategoryListWidgetState extends State<SubCategoryListWidget> {
                                                             child:
                                                                 Image.network(
                                                               subCatItem
-                                                                  .videoThumbnailImageUrl,
+                                                                  .examImageUrl,
                                                               width: 200.0,
                                                               height: 200.0,
                                                               fit: BoxFit.cover,
@@ -267,7 +274,7 @@ class _SubCategoryListWidgetState extends State<SubCategoryListWidget> {
                                                                   Flexible(
                                                                     child: Text(
                                                                       subCatItem
-                                                                          .subCategory,
+                                                                          .exam,
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .headlineSmall
