@@ -14,6 +14,8 @@ class SubCategoryListModel extends FlutterFlowModel<SubCategoryListWidget> {
   // Stores action output result for [Firestore Query - Query a collection] action in SubCategoryList widget.
   WebsiteStructureRecord? websiteStructureDocs;
   // Stores action output result for [Firestore Query - Query a collection] action in SubCategoryList widget.
+  List<SubCategoriesRecord>? subCategory;
+  // Stores action output result for [Firestore Query - Query a collection] action in SubCategoryList widget.
   List<WebsiteVideosRecord>? videosWebCat;
 
   @override
