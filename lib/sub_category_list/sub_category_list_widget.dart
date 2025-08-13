@@ -68,6 +68,7 @@ class _SubCategoryListWidgetState extends State<SubCategoryListWidget> {
       );
       logFirebaseEvent('SubCategoryList_update_page_state');
       _model.initCompleted = true;
+      safeSetState(() {});
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
