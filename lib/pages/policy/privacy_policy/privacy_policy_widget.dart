@@ -894,7 +894,7 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
                                           children: [
                                             TextSpan(
                                               text:
-                                                  '8.1 4sh employs industry-standard security measures to protect your information but cannot guarantee absolute security.',
+                                                  '7.1 4sh employs industry-standard security measures to protect your information but cannot guarantee absolute security.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -982,7 +982,7 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
                                           children: [
                                             TextSpan(
                                               text:
-                                                  '9.1 4sh does not knowingly collect information from children under 9 without parental consent.',
+                                                  '8.1 4sh does not knowingly collect information from children under 9 without parental consent.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -1071,7 +1071,7 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
                                           children: [
                                             TextSpan(
                                               text:
-                                                  '10.1 4sh reserves the right to update this Privacy Policy. Continued use of the App constitutes acceptance of the revised policy.',
+                                                  '9.1 4sh reserves the right to update this Privacy Policy. Continued use of the App constitutes acceptance of the revised policy.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
