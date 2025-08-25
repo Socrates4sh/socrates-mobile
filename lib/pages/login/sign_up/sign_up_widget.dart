@@ -1118,51 +1118,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                     ),
                   ],
                 ),
-                if (_model.hideDelete)
-                  Align(
-                    alignment: AlignmentDirectional(0.0, 0.97),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 30.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (isWeb)
-                            InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                logFirebaseEvent(
-                                    'SIGN_UP_PAGE_Text_yu94jo1t_ON_TAP');
-                                logFirebaseEvent('Text_navigate_to');
-
-                                context.pushNamed(
-                                    DeleteAccountWebWidget.routeName);
-                              },
-                              child: Text(
-                                'Delete Account',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: FlutterFlowTheme.of(context)
-                                          .bodyMediumFamily,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                      letterSpacing: 0.0,
-                                      useGoogleFonts:
-                                          !FlutterFlowTheme.of(context)
-                                              .bodyMediumIsCustom,
-                                    ),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ),
               ],
             ),
           ),
