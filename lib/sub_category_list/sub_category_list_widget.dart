@@ -245,8 +245,6 @@ class _SubCategoryListWidgetState extends State<SubCategoryListWidget> {
                                                                 Image.network(
                                                               subCatItem
                                                                   .examImageUrl,
-                                                              width: 200.0,
-                                                              height: 200.0,
                                                               fit: BoxFit.cover,
                                                             ),
                                                           ),
