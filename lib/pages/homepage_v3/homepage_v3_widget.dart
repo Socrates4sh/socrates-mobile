@@ -56,15 +56,9 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
             )
             .orderBy('video_sequence'),
       );
-      logFirebaseEvent('HomepageV3_firestore_query');
-      _model.langSeq = await queryHomepageLanguageSequenceRecordOnce(
-        queryBuilder: (homepageLanguageSequenceRecord) =>
-            homepageLanguageSequenceRecord.orderBy('lang_seq'),
-      );
       logFirebaseEvent('HomepageV3_custom_action');
       _model.dataRecord = await actions.fetchHomeAllData(
         _model.websiteStructureDocs!.toList(),
-        _model.langSeq!.toList(),
       );
       logFirebaseEvent('HomepageV3_update_page_state');
       _model.allDataList =
