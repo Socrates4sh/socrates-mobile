@@ -27,8 +27,6 @@ class HomepageV3Model extends FlutterFlowModel<HomepageV3Widget> {
   List<WebsiteStructureRecord>? websiteStructureDocs;
   // Stores action output result for [Firestore Query - Query a collection] action in HomepageV3 widget.
   List<WebsiteVideosRecord>? websiteVideosDoc;
-  // Stores action output result for [Firestore Query - Query a collection] action in HomepageV3 widget.
-  List<HomepageLanguageSequenceRecord>? langSeq;
   // Stores action output result for [Custom Action - fetchHomeAllData] action in HomepageV3 widget.
   List<HomeAllDataStruct>? dataRecord;
   // State field(s) for Carousel widget.
