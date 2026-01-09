@@ -20,8 +20,14 @@ class ConstantDataRecord extends FirestoreRecord {
   String get dataDummy => _dataDummy ?? '';
   bool hasDataDummy() => _dataDummy != null;
 
+  // "whatsappCommunityLink" field.
+  String? _whatsappCommunityLink;
+  String get whatsappCommunityLink => _whatsappCommunityLink ?? '';
+  bool hasWhatsappCommunityLink() => _whatsappCommunityLink != null;
+
   void _initializeFields() {
     _dataDummy = snapshotData['data_dummy'] as String?;
+    _whatsappCommunityLink = snapshotData['whatsappCommunityLink'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -60,10 +66,12 @@ class ConstantDataRecord extends FirestoreRecord {
 
 Map<String, dynamic> createConstantDataRecordData({
   String? dataDummy,
+  String? whatsappCommunityLink,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'data_dummy': dataDummy,
+      'whatsappCommunityLink': whatsappCommunityLink,
     }.withoutNulls,
   );
 
@@ -76,11 +84,13 @@ class ConstantDataRecordDocumentEquality
 
   @override
   bool equals(ConstantDataRecord? e1, ConstantDataRecord? e2) {
-    return e1?.dataDummy == e2?.dataDummy;
+    return e1?.dataDummy == e2?.dataDummy &&
+        e1?.whatsappCommunityLink == e2?.whatsappCommunityLink;
   }
 
   @override
-  int hash(ConstantDataRecord? e) => const ListEquality().hash([e?.dataDummy]);
+  int hash(ConstantDataRecord? e) =>
+      const ListEquality().hash([e?.dataDummy, e?.whatsappCommunityLink]);
 
   @override
   bool isValidKey(Object? o) => o is ConstantDataRecord;
