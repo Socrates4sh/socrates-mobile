@@ -9,9 +9,11 @@ export 'package:purchases_flutter/purchases_flutter.dart'
 Offerings? _offerings;
 CustomerInfo? _customerInfo;
 String? _loggedInUid;
+bool _isConfigured = false;
 
 Offerings? get offerings => _offerings;
 CustomerInfo? get customerInfo => _customerInfo;
+bool get isConfigured => _isConfigured;
 
 set customerInfo(CustomerInfo? customerInfo) => _customerInfo = customerInfo;
 
@@ -32,7 +34,10 @@ Future initialize(
     PurchasesConfiguration configuration;
     if (kIsWeb) {
       if (webKey.isEmpty) {
-        print('RevenueCat web support requires a web API key.');
+        print(
+          'RevenueCat web support requires a web API key. '
+          'RevenueCat features will be disabled in Test Mode.',
+        );
         return;
       }
       configuration = PurchasesConfiguration(webKey);
@@ -46,6 +51,7 @@ Future initialize(
     }
 
     await Purchases.configure(configuration);
+    _isConfigured = true;
 
     if (loadDataAfterLaunch) {
       loadCustomerInfo();
@@ -65,6 +71,10 @@ Future initialize(
 
 // Purchase a package.
 Future<bool> purchasePackage(String package) async {
+  if (!_isConfigured) {
+    print('RevenueCat is not configured. Cannot purchase package.');
+    return false;
+  }
   try {
     final revenueCatPackage = offerings?.current?.getPackage(package);
     if (revenueCatPackage == null) {
@@ -86,6 +96,9 @@ List<String> get activeEntitlementIds => _customerInfo != null
     : [];
 
 Future loadOfferings() async {
+  if (!_isConfigured) {
+    return;
+  }
   try {
     _offerings = await Purchases.getOfferings();
   } on PlatformException catch (e) {
@@ -94,6 +107,9 @@ Future loadOfferings() async {
 }
 
 Future loadCustomerInfo() async {
+  if (!_isConfigured) {
+    return;
+  }
   try {
     _customerInfo = await Purchases.getCustomerInfo();
   } on PlatformException catch (e) {
@@ -103,7 +119,13 @@ Future loadCustomerInfo() async {
 
 // Return if the user has the entitlement.
 // Return null on errors.
+// Returns false if RevenueCat is not configured (e.g., no web billing key in Test Mode).
 Future<bool?> isEntitled(String entitlementId) async {
+  if (!_isConfigured) {
+    // Return false instead of null to indicate no entitlement when unconfigured.
+    // This allows Test Mode to work without a web billing key.
+    return false;
+  }
   try {
     customerInfo = await Purchases.getCustomerInfo();
     return customerInfo!.entitlements.all[entitlementId]?.isActive ?? false;
@@ -115,6 +137,9 @@ Future<bool?> isEntitled(String entitlementId) async {
 
 // https://docs.revenuecat.com/docs/user-ids
 Future login(String? uid) async {
+  if (!_isConfigured) {
+    return;
+  }
   if (uid == _loggedInUid) {
     return;
   }
@@ -132,6 +157,9 @@ Future login(String? uid) async {
 
 // https://docs.revenuecat.com/docs/restoring-purchases
 Future restorePurchases() async {
+  if (!_isConfigured) {
+    return;
+  }
   // Note: On web, purchases are automatically restored by Web Billing.
   // This method is only needed for iOS/Android.
   if (kIsWeb) {
