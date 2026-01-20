@@ -554,7 +554,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                   logFirebaseEvent(
                                                       'Support_launch_u_r_l');
                                                   await launchURL(
-                                                      'https://wa.me/+18652233814?text=I%27m%20facing%20an%20issue%20on%20the%20Socrates%20app');
+                                                      'https://wa.me/916290076464?text=I%20need%20support%20with%20the%204sh%20app');
                                                 },
                                                 child: Container(
                                                   width: double.infinity,
