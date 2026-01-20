@@ -441,15 +441,8 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                           ),
                         ),
                       ),
-                    if (!revenue_cat.activeEntitlementIds.contains(
-                            FFAppConstants.EntitlementIDVideoAccess) &&
-                        responsiveVisibility(
-                          context: context,
-                          phone: false,
-                          tablet: false,
-                          tabletLandscape: false,
-                          desktop: false,
-                        ))
+                    if (!revenue_cat.activeEntitlementIds
+                        .contains(FFAppConstants.EntitlementIDVideoAccess))
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
