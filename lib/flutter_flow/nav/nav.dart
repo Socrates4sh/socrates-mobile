@@ -494,6 +494,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             builder: (context, params) => NavBarPage(
                   initialPage: '',
                   page: CancellationRazorPayWidget(),
+                )),
+        FFRoute(
+            name: SubCategoryListWidget.routeName,
+            path: SubCategoryListWidget.routePath,
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: SubCategoryListWidget(
+                    websiteCategory: params.getParam(
+                      'websiteCategory',
+                      ParamType.String,
+                    ),
+                  ),
                 ))
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       observers: [routeObserver],

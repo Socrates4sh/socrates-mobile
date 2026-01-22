@@ -50,10 +50,40 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             appBar: AppBar(
-              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-              automaticallyImplyLeading: false,
+              backgroundColor: FlutterFlowTheme.of(context).primary,
+              iconTheme: IconThemeData(
+                  color: FlutterFlowTheme.of(context).secondaryBackground),
+              automaticallyImplyLeading: true,
+              leading: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  logFirebaseEvent('PRIVACY_POLICY_PAGE_Icon_410ehxvb_ON_TAP');
+                  logFirebaseEvent('Icon_navigate_back');
+                  context.safePop();
+                },
+                child: Icon(
+                  Icons.arrow_back,
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  size: 24.0,
+                ),
+              ),
+              title: Text(
+                'Privacy Policy',
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      fontSize: 24.0,
+                      letterSpacing: 0.0,
+                      fontWeight: FontWeight.w500,
+                      useGoogleFonts:
+                          !FlutterFlowTheme.of(context).bodyMediumIsCustom,
+                    ),
+              ),
               actions: [],
-              centerTitle: false,
+              centerTitle: true,
               elevation: 0.0,
             ),
             body: SafeArea(
@@ -65,36 +95,14 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Privacy Policy',
-                            style: FlutterFlowTheme.of(context)
-                                .headlineMedium
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .headlineMediumFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: !FlutterFlowTheme.of(context)
-                                      .headlineMediumIsCustom,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 14.0, 0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Flexible(
                             child: Container(
-                              height: 730.0,
+                              height: MediaQuery.sizeOf(context).height * 0.88,
                               decoration: BoxDecoration(),
                               child: SingleChildScrollView(
                                 child: Column(
@@ -440,7 +448,7 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
                                           children: [
                                             TextSpan(
                                               text:
-                                                  '3.1 Socrates does not sell or rent your personal information.\n3.2 We may share your information with:\n• Service providers for operational purposes (e.g., hosting, analytics).\n• Legal authorities if required by law.',
+                                                  '3.1 4sh does not sell or rent your personal information.\n3.2 We may share your information with:\n• Service providers for operational purposes (e.g., hosting, analytics).\n• Legal authorities if required by law.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -740,6 +748,99 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
                                         textAlign: TextAlign.start,
                                       ),
                                     ),
+                                    if (_model.hideThirdPartyServices)
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 5.0),
+                                        child: RichText(
+                                          textScaler:
+                                              MediaQuery.of(context).textScaler,
+                                          text: TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: '7. Third-Party Services',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          useGoogleFonts:
+                                                              !FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMediumIsCustom,
+                                                        ),
+                                              )
+                                            ],
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily,
+                                                  letterSpacing: 0.0,
+                                                  useGoogleFonts:
+                                                      !FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumIsCustom,
+                                                ),
+                                          ),
+                                          textAlign: TextAlign.justify,
+                                        ),
+                                      ),
+                                    if (_model.hideThirdPartyServices)
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 10.0),
+                                        child: RichText(
+                                          textScaler:
+                                              MediaQuery.of(context).textScaler,
+                                          text: TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text:
+                                                    '7.1 The App may include links to third-party websites or services. Socrates is not responsible for their privacy practices.',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                          useGoogleFonts:
+                                                              !FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMediumIsCustom,
+                                                        ),
+                                              )
+                                            ],
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily,
+                                                  letterSpacing: 0.0,
+                                                  useGoogleFonts:
+                                                      !FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumIsCustom,
+                                                ),
+                                          ),
+                                          textAlign: TextAlign.start,
+                                        ),
+                                      ),
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 5.0),
@@ -749,7 +850,7 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
                                         text: TextSpan(
                                           children: [
                                             TextSpan(
-                                              text: '7. Third-Party Services',
+                                              text: '7. Data Security',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
@@ -793,7 +894,7 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
                                           children: [
                                             TextSpan(
                                               text:
-                                                  '7.1 The App may include links to third-party websites or services. Socrates is not responsible for their privacy practices.',
+                                                  '7.1 4sh employs industry-standard security measures to protect your information but cannot guarantee absolute security.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -837,7 +938,7 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
                                         text: TextSpan(
                                           children: [
                                             TextSpan(
-                                              text: '8. Data Security',
+                                              text: '8. Children’s Privacy',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
@@ -881,7 +982,96 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
                                           children: [
                                             TextSpan(
                                               text:
-                                                  '8.1 Socrates employs industry-standard security measures to protect your information but cannot guarantee absolute security.',
+                                                  '8.1 4sh does not knowingly collect information from children under 9 without parental consent.',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMediumFamily,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        useGoogleFonts:
+                                                            !FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMediumIsCustom,
+                                                      ),
+                                            )
+                                          ],
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily,
+                                                letterSpacing: 0.0,
+                                                useGoogleFonts:
+                                                    !FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMediumIsCustom,
+                                              ),
+                                        ),
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 5.0),
+                                      child: RichText(
+                                        textScaler:
+                                            MediaQuery.of(context).textScaler,
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text:
+                                                  '9. Changes to Privacy Policy',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMediumFamily,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight: FontWeight.bold,
+                                                    useGoogleFonts:
+                                                        !FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMediumIsCustom,
+                                                  ),
+                                            )
+                                          ],
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMediumFamily,
+                                                letterSpacing: 0.0,
+                                                useGoogleFonts:
+                                                    !FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMediumIsCustom,
+                                              ),
+                                        ),
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 0.0, 0.0, 10.0),
+                                      child: RichText(
+                                        textScaler:
+                                            MediaQuery.of(context).textScaler,
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text:
+                                                  '9.1 4sh reserves the right to update this Privacy Policy. Continued use of the App constitutes acceptance of the revised policy.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -925,184 +1115,7 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
                                         text: TextSpan(
                                           children: [
                                             TextSpan(
-                                              text: '9. Children’s Privacy',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumFamily,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.bold,
-                                                    useGoogleFonts:
-                                                        !FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumIsCustom,
-                                                  ),
-                                            )
-                                          ],
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts:
-                                                    !FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMediumIsCustom,
-                                              ),
-                                        ),
-                                        textAlign: TextAlign.justify,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 10.0),
-                                      child: RichText(
-                                        textScaler:
-                                            MediaQuery.of(context).textScaler,
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text:
-                                                  '9.1 Socrates does not knowingly collect information from children under 9 without parental consent.',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                        useGoogleFonts:
-                                                            !FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMediumIsCustom,
-                                                      ),
-                                            )
-                                          ],
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts:
-                                                    !FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMediumIsCustom,
-                                              ),
-                                        ),
-                                        textAlign: TextAlign.justify,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 5.0),
-                                      child: RichText(
-                                        textScaler:
-                                            MediaQuery.of(context).textScaler,
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text:
-                                                  '10. Changes to Privacy Policy',
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumFamily,
-                                                    letterSpacing: 0.0,
-                                                    fontWeight: FontWeight.bold,
-                                                    useGoogleFonts:
-                                                        !FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMediumIsCustom,
-                                                  ),
-                                            )
-                                          ],
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts:
-                                                    !FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMediumIsCustom,
-                                              ),
-                                        ),
-                                        textAlign: TextAlign.justify,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 10.0),
-                                      child: RichText(
-                                        textScaler:
-                                            MediaQuery.of(context).textScaler,
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text:
-                                                  '10.1 Socrates reserves the right to update this Privacy Policy. Continued use of the App constitutes acceptance of the revised policy.',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMediumFamily,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.normal,
-                                                        useGoogleFonts:
-                                                            !FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMediumIsCustom,
-                                                      ),
-                                            )
-                                          ],
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts:
-                                                    !FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMediumIsCustom,
-                                              ),
-                                        ),
-                                        textAlign: TextAlign.start,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 0.0, 5.0),
-                                      child: RichText(
-                                        textScaler:
-                                            MediaQuery.of(context).textScaler,
-                                        text: TextSpan(
-                                          children: [
-                                            TextSpan(
-                                              text: '11. Contact Us',
+                                              text: '10. Contact Us',
                                               style: FlutterFlowTheme.of(
                                                       context)
                                                   .bodyMedium
@@ -1215,6 +1228,8 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
                                                               context)
                                                           .bodyMediumFamily,
                                                   letterSpacing: 0.0,
+                                                  decoration:
+                                                      TextDecoration.underline,
                                                   useGoogleFonts:
                                                       !FlutterFlowTheme.of(
                                                               context)
@@ -1225,9 +1240,12 @@ class _PrivacyPolicyWidgetState extends State<PrivacyPolicyWidget> {
                                       ],
                                     ),
                                     Container(
-                                      width: double.infinity,
+                                      width: 100.0,
                                       height: 100.0,
-                                      decoration: BoxDecoration(),
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                      ),
                                     ),
                                   ],
                                 ),

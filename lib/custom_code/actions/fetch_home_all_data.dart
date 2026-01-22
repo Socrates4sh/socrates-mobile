@@ -9,9 +9,11 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'index.dart'; // Imports other custom actions
+
 Future<List<HomeAllDataStruct>> fetchHomeAllData(
   List<WebsiteStructureRecord> websiteStructureDoc,
-  List<HomepageLanguageSequenceRecord> firstLanguage,
+  // List<HomepageLanguageSequenceRecord> firstLanguage,
 ) async {
   List<HomeAllDataStruct> allDataList = [];
 
@@ -36,20 +38,20 @@ Future<List<HomeAllDataStruct>> fetchHomeAllData(
           referenceWebStructure: item.reference));
     }
   }
-  List<String> firstLanguageRecords =
-      firstLanguage.map((e) => e.language).toList();
-
-  final languagePriority = {
-    for (int i = 0; i < firstLanguageRecords.length; i++)
-      firstLanguageRecords[i]: i,
-  };
-
-  // Sort based on language priority
-  allDataList.sort((a, b) {
-    final aPriority = languagePriority[a.language] ?? firstLanguage.length;
-    final bPriority = languagePriority[b.language] ?? firstLanguage.length;
-    return aPriority.compareTo(bPriority);
-  });
+  // List<String> firstLanguageRecords =
+  //     firstLanguage.map((e) => e.language).toList();
+  //
+  // final languagePriority = {
+  //   for (int i = 0; i < firstLanguageRecords.length; i++)
+  //     firstLanguageRecords[i]: i,
+  // };
+  //
+  // // Sort based on language priority
+  // allDataList.sort((a, b) {
+  //   final aPriority = languagePriority[a.language] ?? firstLanguage.length;
+  //   final bPriority = languagePriority[b.language] ?? firstLanguage.length;
+  //   return aPriority.compareTo(bPriority);
+  // });
 
   return allDataList;
 }

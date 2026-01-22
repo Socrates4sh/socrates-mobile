@@ -438,7 +438,7 @@ class _VideosListWidgetState extends State<VideosListWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 5.0, 0.0, 0.0),
                               child: Text(
-                                'We’re preparing powerful lessons to shape your future.',
+                                'Prepare for your career leap.',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(

@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/revenue_cat_util.dart' as revenue_cat;
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'subscription_page_model.dart';
 export 'subscription_page_model.dart';
@@ -440,6 +441,41 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                           ),
                         ),
                       ),
+                    if (!revenue_cat.activeEntitlementIds
+                        .contains(FFAppConstants.EntitlementIDVideoAccess))
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            logFirebaseEvent(
+                                'SUBSCRIPTION_RESTORE_PURCHASE_BTN_ON_TAP');
+                            logFirebaseEvent('Button_revenue_cat');
+                            await revenue_cat.restorePurchases();
+                          },
+                          text: 'Restore Purchase',
+                          options: FFButtonOptions(
+                            height: 40.0,
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                16.0, 0.0, 16.0, 0.0),
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: FlutterFlowTheme.of(context)
+                                      .titleSmallFamily,
+                                  color: Colors.white,
+                                  letterSpacing: 0.0,
+                                  useGoogleFonts: !FlutterFlowTheme.of(context)
+                                      .titleSmallIsCustom,
+                                ),
+                            elevation: 0.0,
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                      ),
                     if (revenue_cat.activeEntitlementIds
                         .contains(FFAppConstants.EntitlementIDVideoAccess))
                       Text(
@@ -453,6 +489,75 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                       .titleMediumIsCustom,
                                 ),
                       ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 10.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              logFirebaseEvent(
+                                  'SUBSCRIPTION_Text_1o003www_ON_TAP');
+                              logFirebaseEvent('Text_navigate_to');
+
+                              context.pushNamed(TermsofServiceWidget.routeName);
+                            },
+                            child: Text(
+                              'Terms of Use',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    fontSize: 14.0,
+                                    letterSpacing: 0.0,
+                                    decoration: TextDecoration.underline,
+                                    useGoogleFonts:
+                                        !FlutterFlowTheme.of(context)
+                                            .bodyMediumIsCustom,
+                                  ),
+                            ),
+                          ),
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              logFirebaseEvent(
+                                  'SUBSCRIPTION_Text_0ihge8w8_ON_TAP');
+                              logFirebaseEvent('Text_navigate_to');
+
+                              context.pushNamed(PrivacyPolicyWidget.routeName);
+                            },
+                            child: Text(
+                              'Privacy Policy',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: FlutterFlowTheme.of(context)
+                                        .bodyMediumFamily,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryText,
+                                    letterSpacing: 0.0,
+                                    decoration: TextDecoration.underline,
+                                    useGoogleFonts:
+                                        !FlutterFlowTheme.of(context)
+                                            .bodyMediumIsCustom,
+                                  ),
+                            ),
+                          ),
+                        ].divide(SizedBox(width: 20.0)),
+                      ),
+                    ),
                   ]
                       .divide(SizedBox(height: 10.0))
                       .around(SizedBox(height: 10.0)),

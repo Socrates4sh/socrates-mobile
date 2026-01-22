@@ -224,6 +224,11 @@ final parametersBuilderMap =
   'MyList': ParameterData.none(),
   'SubscriptionPageRazorPay': ParameterData.none(),
   'CancellationRazorPay': ParameterData.none(),
+  'SubCategoryList': (data) async => ParameterData(
+        allParams: {
+          'websiteCategory': getParameter<String>(data, 'websiteCategory'),
+        },
+      ),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

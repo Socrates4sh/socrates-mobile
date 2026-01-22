@@ -56,7 +56,9 @@ export '/videos_list/videos_list_widget.dart' show VideosListWidget;
 export '/video_page_v2/video_page_v2_widget.dart' show VideoPageV2Widget;
 export '/recommended/recommended_widget.dart' show RecommendedWidget;
 export '/my_list/my_list_widget.dart' show MyListWidget;
-export '/pages/payment/subscription_page_razor_pay/subscription_page_razor_pay_widget.dart'
+export '/pages/subscription_page_razor_pay/subscription_page_razor_pay_widget.dart'
     show SubscriptionPageRazorPayWidget;
 export '/pages/payment/cancellation_razor_pay/cancellation_razor_pay_widget.dart'
     show CancellationRazorPayWidget;
+export '/sub_category_list/sub_category_list_widget.dart'
+    show SubCategoryListWidget;

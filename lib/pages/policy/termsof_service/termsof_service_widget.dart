@@ -50,10 +50,40 @@ class _TermsofServiceWidgetState extends State<TermsofServiceWidget> {
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             appBar: AppBar(
-              backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-              automaticallyImplyLeading: false,
+              backgroundColor: FlutterFlowTheme.of(context).primary,
+              iconTheme: IconThemeData(
+                  color: FlutterFlowTheme.of(context).secondaryBackground),
+              automaticallyImplyLeading: true,
+              leading: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  logFirebaseEvent('TERMSOF_SERVICE_Icon_jszqntq8_ON_TAP');
+                  logFirebaseEvent('Icon_navigate_back');
+                  context.safePop();
+                },
+                child: Icon(
+                  Icons.arrow_back,
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                  size: 24.0,
+                ),
+              ),
+              title: Text(
+                'Terms of Service',
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: FlutterFlowTheme.of(context).bodyMediumFamily,
+                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      fontSize: 24.0,
+                      letterSpacing: 0.0,
+                      fontWeight: FontWeight.w500,
+                      useGoogleFonts:
+                          !FlutterFlowTheme.of(context).bodyMediumIsCustom,
+                    ),
+              ),
               actions: [],
-              centerTitle: false,
+              centerTitle: true,
               elevation: 0.0,
             ),
             body: SafeArea(
@@ -65,36 +95,14 @@ class _TermsofServiceWidgetState extends State<TermsofServiceWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Terms Of Service',
-                            style: FlutterFlowTheme.of(context)
-                                .headlineMedium
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .headlineMediumFamily,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: !FlutterFlowTheme.of(context)
-                                      .headlineMediumIsCustom,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 14.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 14.0, 0.0, 14.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Flexible(
                             child: Container(
-                              height: 730.0,
+                              height: MediaQuery.sizeOf(context).height * 0.88,
                               decoration: BoxDecoration(),
                               child: SingleChildScrollView(
                                 child: Column(
@@ -262,7 +270,7 @@ class _TermsofServiceWidgetState extends State<TermsofServiceWidget> {
                                           children: [
                                             TextSpan(
                                               text:
-                                                  '1.1 These Terms constitute a binding agreement between you and Socrates. By accessing or using the App, you acknowledge that you have read, understood, and agreed to these Terms.',
+                                                  '1.1 These Terms constitute a binding agreement between you and 4sh. By accessing or using the App, you acknowledge that you have read, understood, and agreed to these Terms.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -350,7 +358,7 @@ class _TermsofServiceWidgetState extends State<TermsofServiceWidget> {
                                           children: [
                                             TextSpan(
                                               text:
-                                                  '2.1 You must be at least 9 years old to use Socrates. If you are under 18, you must have the consent of a parent or guardian.',
+                                                  '2.1 You must be at least 9 years old to use 4sh. If you are under 18, you must have the consent of a parent or guardian.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -439,7 +447,7 @@ class _TermsofServiceWidgetState extends State<TermsofServiceWidget> {
                                           children: [
                                             TextSpan(
                                               text:
-                                                  '3.1 To access certain features, you must create an account by providing accurate and complete information, including your name, age, contact number, and email address.\n3.2 You are responsible for maintaining the confidentiality of your account information and for all activities under your account.\n3.3 You agree to notify Socrates immediately of any unauthorized access or security breach.',
+                                                  '3.1 To access certain features, you must create an account by providing accurate and complete information, including your name, age, contact number, and email address.\n3.2 You are responsible for maintaining the confidentiality of your account information and for all activities under your account.\n3.3 You agree to notify 4sh immediately of any unauthorized access or security breach.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -631,7 +639,7 @@ class _TermsofServiceWidgetState extends State<TermsofServiceWidget> {
                                           children: [
                                             TextSpan(
                                               text:
-                                                  '5.1 All content, trademarks, and logos on the App are the intellectual property of Socrates or its licensors.\n5.2 Unauthorized use, reproduction, or distribution of this content is prohibited.',
+                                                  '5.1 All content, trademarks, and logos on the App are the intellectual property of 4sh or its licensors.\n5.2 Unauthorized use, reproduction, or distribution of this content is prohibited.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -808,7 +816,7 @@ class _TermsofServiceWidgetState extends State<TermsofServiceWidget> {
                                           children: [
                                             TextSpan(
                                               text:
-                                                  '7.1 Socrates reserves the right to suspend or terminate your access to the App if you violate these Terms or engage in unlawful activities.',
+                                                  '7.1 4sh reserves the right to suspend or terminate your access to the App if you violate these Terms or engage in unlawful activities.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -897,7 +905,7 @@ class _TermsofServiceWidgetState extends State<TermsofServiceWidget> {
                                           children: [
                                             TextSpan(
                                               text:
-                                                  '8.1 The App is provided “As Is” and “As Available.” Socrates disclaims all warranties, express or implied, including fitness for a particular purpose.\n8.2 Socrates does not guarantee uninterrupted or error-free access to the App.',
+                                                  '8.1 The App is provided “As Is” and “As Available.” 4sh disclaims all warranties, express or implied, including fitness for a particular purpose.\n8.2 4sh does not guarantee uninterrupted or error-free access to the App.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -986,7 +994,7 @@ class _TermsofServiceWidgetState extends State<TermsofServiceWidget> {
                                           children: [
                                             TextSpan(
                                               text:
-                                                  '9.1 To the extent permitted by law, Socrates will not be liable for any indirect, incidental, or consequential damages arising from your use of the App.',
+                                                  '9.1 To the extent permitted by law, 4sh will not be liable for any indirect, incidental, or consequential damages arising from your use of the App.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -1074,7 +1082,7 @@ class _TermsofServiceWidgetState extends State<TermsofServiceWidget> {
                                           children: [
                                             TextSpan(
                                               text:
-                                                  '10.1 Socrates reserves the right to update these Terms at any time. Continued use of the App constitutes acceptance of the updated Terms.',
+                                                  '10.1 4sh reserves the right to update these Terms at any time. Continued use of the App constitutes acceptance of the updated Terms.',
                                               style:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium

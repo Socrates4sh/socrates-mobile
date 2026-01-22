@@ -56,15 +56,9 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
             )
             .orderBy('video_sequence'),
       );
-      logFirebaseEvent('HomepageV3_firestore_query');
-      _model.langSeq = await queryHomepageLanguageSequenceRecordOnce(
-        queryBuilder: (homepageLanguageSequenceRecord) =>
-            homepageLanguageSequenceRecord.orderBy('lang_seq'),
-      );
       logFirebaseEvent('HomepageV3_custom_action');
       _model.dataRecord = await actions.fetchHomeAllData(
         _model.websiteStructureDocs!.toList(),
-        _model.langSeq!.toList(),
       );
       logFirebaseEvent('HomepageV3_update_page_state');
       _model.allDataList =
@@ -242,43 +236,76 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                                           alignment:
                                                               AlignmentDirectional(
                                                                   -1.0, 0.0),
-                                                          child: Container(
-                                                            height: 35.0,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryBackground,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          20.0),
-                                                            ),
-                                                            child: Align(
-                                                              alignment:
-                                                                  AlignmentDirectional(
-                                                                      0.0, 0.0),
-                                                              child: Padding(
-                                                                padding: EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        10.0,
+                                                          child: InkWell(
+                                                            splashColor: Colors
+                                                                .transparent,
+                                                            focusColor: Colors
+                                                                .transparent,
+                                                            hoverColor: Colors
+                                                                .transparent,
+                                                            highlightColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            onTap: () async {
+                                                              logFirebaseEvent(
+                                                                  'HOMEV3_Container_f0pe691q_ON_TAP');
+                                                              logFirebaseEvent(
+                                                                  'Container_navigate_to');
+
+                                                              context.pushNamed(
+                                                                SubCategoryListWidget
+                                                                    .routeName,
+                                                                queryParameters:
+                                                                    {
+                                                                  'websiteCategory':
+                                                                      serializeParam(
+                                                                    rowWebsiteStructureRecord
+                                                                        .categories,
+                                                                    ParamType
+                                                                        .String,
+                                                                  ),
+                                                                }.withoutNulls,
+                                                              );
+                                                            },
+                                                            child: Container(
+                                                              height: 35.0,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryBackground,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20.0),
+                                                              ),
+                                                              child: Align(
+                                                                alignment:
+                                                                    AlignmentDirectional(
                                                                         0.0,
-                                                                        10.0,
                                                                         0.0),
-                                                                child: Text(
-                                                                  rowWebsiteStructureRecord
-                                                                      .categories,
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            FlutterFlowTheme.of(context).bodyMediumFamily,
-                                                                        letterSpacing:
-                                                                            0.0,
-                                                                        useGoogleFonts:
-                                                                            !FlutterFlowTheme.of(context).bodyMediumIsCustom,
-                                                                      ),
+                                                                child: Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          10.0,
+                                                                          0.0,
+                                                                          10.0,
+                                                                          0.0),
+                                                                  child: Text(
+                                                                    rowWebsiteStructureRecord
+                                                                        .categories,
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          useGoogleFonts:
+                                                                              !FlutterFlowTheme.of(context).bodyMediumIsCustom,
+                                                                        ),
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
@@ -634,16 +661,33 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                             final allData =
                                                 _model.allDataList.toList();
 
+                                            // Filter to only include items that have videos to display
+                                            final filteredData =
+                                                allData.where((allDataItem) {
+                                              final videosForSubCategory =
+                                                  _model.websiteVideosDoc!
+                                                      .where((e) =>
+                                                          e.subCategory ==
+                                                          allDataItem
+                                                              .subCategory)
+                                                      .toList();
+
+                                              // Check if there are any videos with isDisplay = true
+                                              return videosForSubCategory
+                                                  .any((e) => e.isDisplay);
+                                            }).toList();
+
                                             return Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: List.generate(
-                                                      allData.length,
-                                                      (allDataIndex) {
+                                                      filteredData.length,
+                                                      (filteredDataIndex) {
                                                 final allDataItem =
-                                                    allData[allDataIndex];
+                                                    filteredData[
+                                                        filteredDataIndex];
                                                 return HomepageListViewWidget(
                                                   key: Key(
-                                                      'Key4e7_${allDataIndex}_of_${allData.length}'),
+                                                      'Key4e7_${filteredDataIndex}_of_${filteredData.length}'),
                                                   websiteStructureDoc: allDataItem
                                                       .referenceWebStructure!,
                                                   websiteVideosDoc: _model
@@ -711,7 +755,7 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 5.0, 0.0, 0.0),
                                   child: Text(
-                                    'We’re preparing powerful lessons to shape your future.',
+                                    'Prepare for your career leap.',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(

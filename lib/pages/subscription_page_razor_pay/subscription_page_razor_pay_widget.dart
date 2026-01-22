@@ -77,7 +77,7 @@ class _SubscriptionPageRazorPayWidgetState
       logFirebaseEvent('SubscriptionPageRazorPay_backend_call');
       _model.razorPayResponseMonthly = await CreateSubscriptionIDCall.call(
         planId: _model.paymentPlanDoc?.planId,
-        totalCount: 1,
+        totalCount: 60,
         uID: currentUserUid,
         customerId: valueOrDefault(currentUserDocument?.razorpayCustomerId, ''),
         description: 'Monthly Plan',
@@ -147,13 +147,18 @@ class _SubscriptionPageRazorPayWidgetState
                                 return Builder(
                                   builder: (context) {
                                     if (!valueOrDefault<bool>(
-                                            currentUserDocument?.userSubscribed,
-                                            false) ||
-                                        (valueOrDefault<bool>(
-                                                currentUserDocument
-                                                    ?.userSubscribed,
-                                                false) ==
-                                            null)) {
+                                          valueOrDefault<bool>(
+                                              currentUserDocument
+                                                  ?.userSubscribed,
+                                              false),
+                                          false,
+                                        ) &&
+                                        ((currentUserDocument
+                                                    ?.subscriptionEndDateTime ==
+                                                null) ||
+                                            (currentUserDocument!
+                                                    .subscriptionEndDateTime! <
+                                                getCurrentTimestamp))) {
                                       return Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
@@ -568,7 +573,7 @@ class _SubscriptionPageRazorPayWidgetState
                                                           .call(
                                                     planId: _model
                                                         .paymentPlanDoc?.planId,
-                                                    totalCount: 1,
+                                                    totalCount: 60,
                                                     uID: currentUserUid,
                                                     customerId: valueOrDefault(
                                                         currentUserDocument

@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/index.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -683,8 +684,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                       text: TextSpan(
                                                         children: [
                                                           TextSpan(
-                                                            text:
-                                                                'I agree to Terms of Use & Privacy Policy',
+                                                            text: 'I agree to ',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyMedium
@@ -704,6 +704,112 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                                               context)
                                                                           .bodyMediumIsCustom,
                                                                 ),
+                                                          ),
+                                                          TextSpan(
+                                                            text:
+                                                                'Terms of Use',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  fontSize:
+                                                                      12.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  decoration:
+                                                                      TextDecoration
+                                                                          .underline,
+                                                                  useGoogleFonts:
+                                                                      !FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMediumIsCustom,
+                                                                ),
+                                                            mouseCursor:
+                                                                SystemMouseCursors
+                                                                    .click,
+                                                            recognizer:
+                                                                TapGestureRecognizer()
+                                                                  ..onTap =
+                                                                      () async {
+                                                                    logFirebaseEvent(
+                                                                        'SIGN_UP_RichTextSpan_qphtnj29_ON_TAP');
+                                                                    logFirebaseEvent(
+                                                                        'RichTextSpan_navigate_to');
+
+                                                                    context.pushNamed(
+                                                                        TermsofServiceWidget
+                                                                            .routeName);
+                                                                  },
+                                                          ),
+                                                          TextSpan(
+                                                            text: ' & ',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  fontSize:
+                                                                      12.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  useGoogleFonts:
+                                                                      !FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMediumIsCustom,
+                                                                ),
+                                                          ),
+                                                          TextSpan(
+                                                            text:
+                                                                'Privacy Policy',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .secondaryText,
+                                                                  fontSize:
+                                                                      12.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  decoration:
+                                                                      TextDecoration
+                                                                          .underline,
+                                                                  useGoogleFonts:
+                                                                      !FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMediumIsCustom,
+                                                                ),
+                                                            mouseCursor:
+                                                                SystemMouseCursors
+                                                                    .click,
+                                                            recognizer:
+                                                                TapGestureRecognizer()
+                                                                  ..onTap =
+                                                                      () async {
+                                                                    logFirebaseEvent(
+                                                                        'SIGN_UP_RichTextSpan_oo7wj2li_ON_TAP');
+                                                                    logFirebaseEvent(
+                                                                        'RichTextSpan_navigate_to');
+
+                                                                    context.pushNamed(
+                                                                        PrivacyPolicyWidget
+                                                                            .routeName);
+                                                                  },
                                                           )
                                                         ],
                                                         style: FlutterFlowTheme
@@ -1011,122 +1117,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       ),
                     ),
                   ],
-                ),
-                Align(
-                  alignment: AlignmentDirectional(0.0, 0.97),
-                  child: Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(30.0, 0.0, 30.0, 0.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Flexible(
-                          child: InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              logFirebaseEvent('SIGN_UP_PAGE_Terms_ON_TAP');
-                              logFirebaseEvent('Terms_navigate_to');
-
-                              context.pushNamed(TermsofServiceWidget.routeName);
-                            },
-                            child: Text(
-                              'Terms of Service',
-                              textAlign: TextAlign.center,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts:
-                                        !FlutterFlowTheme.of(context)
-                                            .bodyMediumIsCustom,
-                                  ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 18.0,
-                          child: VerticalDivider(
-                            thickness: 2.0,
-                            color: FlutterFlowTheme.of(context).secondaryText,
-                          ),
-                        ),
-                        InkWell(
-                          splashColor: Colors.transparent,
-                          focusColor: Colors.transparent,
-                          hoverColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () async {
-                            logFirebaseEvent(
-                                'SIGN_UP_PAGE_Text_c1b0oomv_ON_TAP');
-                            logFirebaseEvent('Text_navigate_to');
-
-                            context.pushNamed(PrivacyPolicyWidget.routeName);
-                          },
-                          child: Text(
-                            'Privacy Policy',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: FlutterFlowTheme.of(context)
-                                      .bodyMediumFamily,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryText,
-                                  letterSpacing: 0.0,
-                                  useGoogleFonts: !FlutterFlowTheme.of(context)
-                                      .bodyMediumIsCustom,
-                                ),
-                          ),
-                        ),
-                        if (isWeb)
-                          SizedBox(
-                            height: 18.0,
-                            child: VerticalDivider(
-                              thickness: 2.0,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                            ),
-                          ),
-                        if (isWeb)
-                          InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              logFirebaseEvent(
-                                  'SIGN_UP_PAGE_Text_yu94jo1t_ON_TAP');
-                              logFirebaseEvent('Text_navigate_to');
-
-                              context
-                                  .pushNamed(DeleteAccountWebWidget.routeName);
-                            },
-                            child: Text(
-                              'Delete Account',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: FlutterFlowTheme.of(context)
-                                        .bodyMediumFamily,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryText,
-                                    letterSpacing: 0.0,
-                                    useGoogleFonts:
-                                        !FlutterFlowTheme.of(context)
-                                            .bodyMediumIsCustom,
-                                  ),
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
                 ),
               ],
             ),

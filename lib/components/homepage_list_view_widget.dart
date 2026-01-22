@@ -83,12 +83,23 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
             snapshot.data!;
         // Return an empty Container when the item does not exist.
         if (snapshot.data!.isEmpty) {
-          return Container();
+          return SizedBox.shrink();
         }
         final containerSubCategoriesRecord =
             containerSubCategoriesRecordList.isNotEmpty
                 ? containerSubCategoriesRecordList.first
                 : null;
+
+        // Return an empty Container when there are no videos to display
+        final hasVideosToDisplay = widget.websiteVideosDoc!
+            .sortedList(keyOf: (e) => e.videoSequence, desc: false)
+            .where((e) => e.isDisplay)
+            .toList()
+            .isNotEmpty;
+
+        if (!hasVideosToDisplay) {
+          return SizedBox.shrink();
+        }
 
         return Container(
           decoration: BoxDecoration(),
@@ -185,356 +196,371 @@ class _HomepageListViewWidgetState extends State<HomepageListViewWidget> {
                     ),
                   ),
                 ),
-              Builder(
-                builder: (context) {
-                  final videos = widget.websiteVideosDoc!
+              if (widget.websiteVideosDoc!
                       .sortedList(keyOf: (e) => e.videoSequence, desc: false)
                       .where((e) => e.isDisplay)
-                      .toList();
+                      .toList()
+                      .length >
+                  0)
+                Builder(
+                  builder: (context) {
+                    final videos = widget.websiteVideosDoc!
+                        .sortedList(keyOf: (e) => e.videoSequence, desc: false)
+                        .where((e) => e.isDisplay)
+                        .toList();
 
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: List.generate(videos.length, (videosIndex) {
-                        final videosItem = videos[videosIndex];
-                        return Builder(
-                          builder: (context) => InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              logFirebaseEvent(
-                                  'HOMELIST_VIEW_Container_rfxmr8gg_ON_TAP');
-                              if (!valueOrDefault<bool>(
-                                    valueOrDefault<bool>(
-                                        currentUserDocument?.userSubscribed,
-                                        false),
-                                    false,
-                                  ) &&
-                                  (videosIndex >= 3) &&
-                                  ((currentUserDocument
-                                              ?.subscriptionEndDateTime ==
-                                          null) ||
-                                      (currentUserDocument!
-                                              .subscriptionEndDateTime! <
-                                          getCurrentTimestamp))) {
-                                logFirebaseEvent('Container_alert_dialog');
-                                await showDialog(
-                                  context: context,
-                                  builder: (dialogContext) {
-                                    return Dialog(
-                                      elevation: 0,
-                                      insetPadding: EdgeInsets.zero,
-                                      backgroundColor: Colors.transparent,
-                                      alignment: AlignmentDirectional(0.0, 0.0)
-                                          .resolve(Directionality.of(context)),
-                                      child: Container(
-                                        height:
-                                            MediaQuery.sizeOf(context).height *
-                                                0.5,
-                                        width: double.infinity,
-                                        child: LockedWidget(),
+                    return SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: List.generate(videos.length, (videosIndex) {
+                          final videosItem = videos[videosIndex];
+                          return Builder(
+                            builder: (context) => InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                logFirebaseEvent(
+                                    'HOMELIST_VIEW_Container_rfxmr8gg_ON_TAP');
+                                if (!valueOrDefault<bool>(
+                                      valueOrDefault<bool>(
+                                          currentUserDocument?.userSubscribed,
+                                          false),
+                                      false,
+                                    ) &&
+                                    (videosIndex >= 3) &&
+                                    ((currentUserDocument
+                                                ?.subscriptionEndDateTime ==
+                                            null) ||
+                                        (currentUserDocument!
+                                                .subscriptionEndDateTime! <
+                                            getCurrentTimestamp))) {
+                                  logFirebaseEvent('Container_alert_dialog');
+                                  await showDialog(
+                                    context: context,
+                                    builder: (dialogContext) {
+                                      return Dialog(
+                                        elevation: 0,
+                                        insetPadding: EdgeInsets.zero,
+                                        backgroundColor: Colors.transparent,
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0)
+                                                .resolve(
+                                                    Directionality.of(context)),
+                                        child: Container(
+                                          height: MediaQuery.sizeOf(context)
+                                                  .height *
+                                              0.5,
+                                          width: double.infinity,
+                                          child: LockedWidget(),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  logFirebaseEvent('Container_navigate_to');
+
+                                  context.pushNamed(
+                                    VideoPageV2Widget.routeName,
+                                    queryParameters: {
+                                      'subCategory': serializeParam(
+                                        videosItem.subCategory,
+                                        ParamType.String,
                                       ),
-                                    );
-                                  },
-                                );
-                              } else {
-                                logFirebaseEvent('Container_navigate_to');
-
-                                context.pushNamed(
-                                  VideoPageV2Widget.routeName,
-                                  queryParameters: {
-                                    'subCategory': serializeParam(
-                                      videosItem.subCategory,
-                                      ParamType.String,
-                                    ),
-                                    'videoSequence': serializeParam(
-                                      videosItem.videoSequence,
-                                      ParamType.double,
-                                    ),
-                                    'initialIndex': serializeParam(
-                                      videosIndex,
-                                      ParamType.int,
-                                    ),
-                                  }.withoutNulls,
-                                );
-                              }
-                            },
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.0),
-                              child: Container(
-                                width: 150.0,
-                                height: 210.0,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: Stack(
-                                  children: [
-                                    Stack(
-                                      alignment:
-                                          AlignmentDirectional(1.0, -1.0),
-                                      children: [
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Flexible(
-                                              child: ClipRRect(
-                                                borderRadius: BorderRadius.only(
-                                                  bottomLeft:
-                                                      Radius.circular(0.0),
-                                                  bottomRight:
-                                                      Radius.circular(0.0),
-                                                  topLeft: Radius.circular(8.0),
-                                                  topRight:
-                                                      Radius.circular(8.0),
-                                                ),
-                                                child: CachedNetworkImage(
-                                                  fadeInDuration: Duration(
-                                                      milliseconds: 500),
-                                                  fadeOutDuration: Duration(
-                                                      milliseconds: 500),
-                                                  imageUrl: videosItem
-                                                      .videoThumbnailImageUrl,
-                                                  width:
-                                                      MediaQuery.sizeOf(context)
-                                                              .width *
-                                                          1.0,
-                                                  height: 150.0,
-                                                  fit: BoxFit.cover,
-                                                  errorWidget: (context, error,
-                                                          stackTrace) =>
-                                                      Image.asset(
-                                                    'assets/images/error_image.png',
+                                      'videoSequence': serializeParam(
+                                        videosItem.videoSequence,
+                                        ParamType.double,
+                                      ),
+                                      'initialIndex': serializeParam(
+                                        videosIndex,
+                                        ParamType.int,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+                                }
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10.0),
+                                child: Container(
+                                  width: 150.0,
+                                  height: 210.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  child: Stack(
+                                    children: [
+                                      Stack(
+                                        alignment:
+                                            AlignmentDirectional(1.0, -1.0),
+                                        children: [
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Flexible(
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                    bottomLeft:
+                                                        Radius.circular(0.0),
+                                                    bottomRight:
+                                                        Radius.circular(0.0),
+                                                    topLeft:
+                                                        Radius.circular(8.0),
+                                                    topRight:
+                                                        Radius.circular(8.0),
+                                                  ),
+                                                  child: CachedNetworkImage(
+                                                    fadeInDuration: Duration(
+                                                        milliseconds: 500),
+                                                    fadeOutDuration: Duration(
+                                                        milliseconds: 500),
+                                                    imageUrl: videosItem
+                                                        .videoThumbnailImageUrl,
                                                     width: MediaQuery.sizeOf(
                                                                 context)
                                                             .width *
                                                         1.0,
                                                     height: 150.0,
                                                     fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment: AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        1.0,
-                                                height: 60.0,
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryBackground,
-                                                ),
-                                                child: Align(
-                                                  alignment:
-                                                      AlignmentDirectional(
-                                                          0.0, 0.0),
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsets.all(5.0),
-                                                    child: Text(
-                                                      videosItem.topic,
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily:
-                                                                FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumFamily,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primary,
-                                                            fontSize: 16.0,
-                                                            letterSpacing: 0.0,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            useGoogleFonts:
-                                                                !FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMediumIsCustom,
-                                                          ),
+                                                    errorWidget: (context,
+                                                            error,
+                                                            stackTrace) =>
+                                                        Image.asset(
+                                                      'assets/images/error_image.png',
+                                                      width: MediaQuery.sizeOf(
+                                                                  context)
+                                                              .width *
+                                                          1.0,
+                                                      height: 150.0,
+                                                      fit: BoxFit.cover,
                                                     ),
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 5.0, 5.0, 0.0),
-                                          child: Builder(
-                                            builder: (context) {
-                                              if (!functions
-                                                  .checkVideoInFavourite(
-                                                      (currentUserDocument
-                                                                  ?.videosMylist
-                                                                  .toList() ??
-                                                              [])
-                                                          .toList(),
-                                                      VideoDocsMylistStruct(
-                                                        listSeq: (currentUserDocument
-                                                                        ?.videosMylist
-                                                                        .toList() ??
-                                                                    [])
-                                                                .length +
-                                                            1,
-                                                        videoDocId: videosItem
-                                                            .reference,
-                                                        topic: videosItem.topic,
-                                                        subCategory: videosItem
-                                                            .subCategory,
-                                                        websiteCategory:
-                                                            videosItem
-                                                                .websiteCategory,
-                                                        videoThumbnailImageUrl:
-                                                            videosItem
-                                                                .videoThumbnailImageUrl,
-                                                        videoUrl: videosItem
-                                                            .videoFileUrl,
-                                                      ))) {
-                                                return InkWell(
-                                                  splashColor:
-                                                      Colors.transparent,
-                                                  focusColor:
-                                                      Colors.transparent,
-                                                  hoverColor:
-                                                      Colors.transparent,
-                                                  highlightColor:
-                                                      Colors.transparent,
-                                                  onTap: () async {
-                                                    logFirebaseEvent(
-                                                        'HOMELIST_VIEW_Icon_ezlgzsjo_ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'Icon_backend_call');
-
-                                                    await currentUserReference!
-                                                        .update({
-                                                      ...mapToFirestore(
-                                                        {
-                                                          'videos_mylist':
-                                                              FieldValue
-                                                                  .arrayUnion([
-                                                            getVideoDocsMylistFirestoreData(
-                                                              updateVideoDocsMylistStruct(
-                                                                VideoDocsMylistStruct(
-                                                                  listSeq: (currentUserDocument?.videosMylist.toList() ??
-                                                                              [])
-                                                                          .length +
-                                                                      1,
-                                                                  videoDocId:
-                                                                      videosItem
-                                                                          .reference,
-                                                                  topic:
-                                                                      videosItem
-                                                                          .topic,
-                                                                  subCategory:
-                                                                      videosItem
-                                                                          .subCategory,
-                                                                  websiteCategory:
-                                                                      videosItem
-                                                                          .websiteCategory,
-                                                                  videoThumbnailImageUrl:
-                                                                      videosItem
-                                                                          .videoThumbnailImageUrl,
-                                                                  videoUrl:
-                                                                      videosItem
-                                                                          .videoFileUrl,
-                                                                  videoSeq:
-                                                                      videosItem
-                                                                          .videoSequence,
-                                                                ),
-                                                                clearUnsetFields:
-                                                                    false,
-                                                              ),
-                                                              true,
-                                                            )
-                                                          ]),
-                                                        },
-                                                      ),
-                                                    });
-                                                    logFirebaseEvent(
-                                                        'Icon_update_app_state');
-
-                                                    safeSetState(() {});
-                                                  },
-                                                  child: Icon(
-                                                    Icons.add_rounded,
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: Container(
+                                                  width:
+                                                      MediaQuery.sizeOf(context)
+                                                              .width *
+                                                          1.0,
+                                                  height: 60.0,
+                                                  decoration: BoxDecoration(
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .secondaryBackground,
-                                                    size: 28.0,
                                                   ),
-                                                );
-                                              } else {
-                                                return Icon(
-                                                  Icons.bookmark_rounded,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .info,
-                                                  size: 28.0,
-                                                );
-                                              }
-                                            },
+                                                  child: Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            0.0, 0.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsets.all(5.0),
+                                                      child: Text(
+                                                        videosItem.topic,
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMediumFamily,
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primary,
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  useGoogleFonts:
+                                                                      !FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMediumIsCustom,
+                                                                ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    if (!valueOrDefault<bool>(
-                                          valueOrDefault<bool>(
-                                              currentUserDocument
-                                                  ?.userSubscribed,
-                                              false),
-                                          false,
-                                        ) &&
-                                        (videosIndex >= 3) &&
-                                        ((currentUserDocument
-                                                    ?.subscriptionEndDateTime ==
-                                                null) ||
-                                            (currentUserDocument!
-                                                    .subscriptionEndDateTime! <
-                                                getCurrentTimestamp)))
-                                      AuthUserStreamWidget(
-                                        builder: (context) => Container(
-                                          width: double.infinity,
-                                          height: 150.0,
-                                          decoration: BoxDecoration(
-                                            color: Color(0x8757636C),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 5.0, 5.0, 0.0),
+                                            child: Builder(
+                                              builder: (context) {
+                                                if (!functions
+                                                    .checkVideoInFavourite(
+                                                        (currentUserDocument
+                                                                    ?.videosMylist
+                                                                    .toList() ??
+                                                                [])
+                                                            .toList(),
+                                                        VideoDocsMylistStruct(
+                                                          listSeq: (currentUserDocument
+                                                                          ?.videosMylist
+                                                                          .toList() ??
+                                                                      [])
+                                                                  .length +
+                                                              1,
+                                                          videoDocId: videosItem
+                                                              .reference,
+                                                          topic:
+                                                              videosItem.topic,
+                                                          subCategory:
+                                                              videosItem
+                                                                  .subCategory,
+                                                          websiteCategory:
+                                                              videosItem
+                                                                  .websiteCategory,
+                                                          videoThumbnailImageUrl:
+                                                              videosItem
+                                                                  .videoThumbnailImageUrl,
+                                                          videoUrl: videosItem
+                                                              .videoFileUrl,
+                                                        ))) {
+                                                  return InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      logFirebaseEvent(
+                                                          'HOMELIST_VIEW_Icon_ezlgzsjo_ON_TAP');
+                                                      logFirebaseEvent(
+                                                          'Icon_backend_call');
+
+                                                      await currentUserReference!
+                                                          .update({
+                                                        ...mapToFirestore(
+                                                          {
+                                                            'videos_mylist':
+                                                                FieldValue
+                                                                    .arrayUnion([
+                                                              getVideoDocsMylistFirestoreData(
+                                                                updateVideoDocsMylistStruct(
+                                                                  VideoDocsMylistStruct(
+                                                                    listSeq:
+                                                                        (currentUserDocument?.videosMylist.toList() ?? []).length +
+                                                                            1,
+                                                                    videoDocId:
+                                                                        videosItem
+                                                                            .reference,
+                                                                    topic: videosItem
+                                                                        .topic,
+                                                                    subCategory:
+                                                                        videosItem
+                                                                            .subCategory,
+                                                                    websiteCategory:
+                                                                        videosItem
+                                                                            .websiteCategory,
+                                                                    videoThumbnailImageUrl:
+                                                                        videosItem
+                                                                            .videoThumbnailImageUrl,
+                                                                    videoUrl:
+                                                                        videosItem
+                                                                            .videoFileUrl,
+                                                                    videoSeq:
+                                                                        videosItem
+                                                                            .videoSequence,
+                                                                  ),
+                                                                  clearUnsetFields:
+                                                                      false,
+                                                                ),
+                                                                true,
+                                                              )
+                                                            ]),
+                                                          },
+                                                        ),
+                                                      });
+                                                      logFirebaseEvent(
+                                                          'Icon_update_app_state');
+
+                                                      safeSetState(() {});
+                                                    },
+                                                    child: Icon(
+                                                      Icons.add_rounded,
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                      size: 28.0,
+                                                    ),
+                                                  );
+                                                } else {
+                                                  return Icon(
+                                                    Icons.bookmark_rounded,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .info,
+                                                    size: 28.0,
+                                                  );
+                                                }
+                                              },
+                                            ),
                                           ),
-                                          child: Icon(
-                                            Icons.lock,
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            size: 24.0,
-                                          ),
-                                        ),
+                                        ],
                                       ),
-                                  ],
+                                      if (!valueOrDefault<bool>(
+                                            valueOrDefault<bool>(
+                                                currentUserDocument
+                                                    ?.userSubscribed,
+                                                false),
+                                            false,
+                                          ) &&
+                                          (videosIndex >= 3) &&
+                                          ((currentUserDocument
+                                                      ?.subscriptionEndDateTime ==
+                                                  null) ||
+                                              (currentUserDocument!
+                                                      .subscriptionEndDateTime! <
+                                                  getCurrentTimestamp)))
+                                        AuthUserStreamWidget(
+                                          builder: (context) => Container(
+                                            width: double.infinity,
+                                            height: 150.0,
+                                            decoration: BoxDecoration(
+                                              color: Color(0x8757636C),
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                            ),
+                                            child: Icon(
+                                              Icons.lock,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              size: 24.0,
+                                            ),
+                                          ),
+                                        ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        );
-                      }).divide(SizedBox(width: 10.0)),
-                    ),
-                  );
-                },
-              ),
+                          );
+                        }).divide(SizedBox(width: 10.0)),
+                      ),
+                    );
+                  },
+                ),
             ],
           ),
         );
