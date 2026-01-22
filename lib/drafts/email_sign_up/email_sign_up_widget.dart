@@ -318,12 +318,12 @@ class _EmailSignUpWidgetState extends State<EmailSignUpWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
                                               suffixIcon: InkWell(
-                                                onTap: () => safeSetState(
-                                                  () => _model
+                                                onTap: () async {
+                                                  safeSetState(() => _model
                                                           .passwordVisibility =
                                                       !_model
-                                                          .passwordVisibility,
-                                                ),
+                                                          .passwordVisibility);
+                                                },
                                                 focusNode: FocusNode(
                                                     skipTraversal: true),
                                                 child: Icon(
@@ -436,12 +436,12 @@ class _EmailSignUpWidgetState extends State<EmailSignUpWidget> {
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
                                               suffixIcon: InkWell(
-                                                onTap: () => safeSetState(
-                                                  () => _model
+                                                onTap: () async {
+                                                  safeSetState(() => _model
                                                           .passwordConfirmVisibility =
                                                       !_model
-                                                          .passwordConfirmVisibility,
-                                                ),
+                                                          .passwordConfirmVisibility);
+                                                },
                                                 focusNode: FocusNode(
                                                     skipTraversal: true),
                                                 child: Icon(
