@@ -661,16 +661,33 @@ class _HomepageV3WidgetState extends State<HomepageV3Widget> {
                                             final allData =
                                                 _model.allDataList.toList();
 
+                                            // Filter to only include items that have videos to display
+                                            final filteredData =
+                                                allData.where((allDataItem) {
+                                              final videosForSubCategory =
+                                                  _model.websiteVideosDoc!
+                                                      .where((e) =>
+                                                          e.subCategory ==
+                                                          allDataItem
+                                                              .subCategory)
+                                                      .toList();
+
+                                              // Check if there are any videos with isDisplay = true
+                                              return videosForSubCategory
+                                                  .any((e) => e.isDisplay);
+                                            }).toList();
+
                                             return Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: List.generate(
-                                                      allData.length,
-                                                      (allDataIndex) {
+                                                      filteredData.length,
+                                                      (filteredDataIndex) {
                                                 final allDataItem =
-                                                    allData[allDataIndex];
+                                                    filteredData[
+                                                        filteredDataIndex];
                                                 return HomepageListViewWidget(
                                                   key: Key(
-                                                      'Key4e7_${allDataIndex}_of_${allData.length}'),
+                                                      'Key4e7_${filteredDataIndex}_of_${filteredData.length}'),
                                                   websiteStructureDoc: allDataItem
                                                       .referenceWebStructure!,
                                                   websiteVideosDoc: _model
