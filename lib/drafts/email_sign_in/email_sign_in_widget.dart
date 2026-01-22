@@ -291,11 +291,11 @@ class _EmailSignInWidgetState extends State<EmailSignInWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .primaryBackground,
                                             suffixIcon: InkWell(
-                                              onTap: () => safeSetState(
-                                                () => _model
+                                              onTap: () async {
+                                                safeSetState(() => _model
                                                         .passwordVisibility =
-                                                    !_model.passwordVisibility,
-                                              ),
+                                                    !_model.passwordVisibility);
+                                              },
                                               focusNode: FocusNode(
                                                   skipTraversal: true),
                                               child: Icon(
