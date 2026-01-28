@@ -47,7 +47,7 @@ export '/drafts/delete_account_web_draft/delete_account_web_draft_widget.dart'
     show DeleteAccountWebDraftWidget;
 export '/pages/delete_account/delete_account_web/delete_account_web_widget.dart'
     show DeleteAccountWebWidget;
-export '/pages/payment/subscription_page/subscription_page_widget.dart'
+export '/pages/subscription_page/subscription_page_widget.dart'
     show SubscriptionPageWidget;
 export '/pages/login/verify_code/verify_code_widget.dart' show VerifyCodeWidget;
 export '/homepage_v2/homepage_v2_widget.dart' show HomepageV2Widget;

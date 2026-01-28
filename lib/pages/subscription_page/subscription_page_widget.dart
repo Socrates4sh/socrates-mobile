@@ -72,8 +72,15 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    if (!revenue_cat.activeEntitlementIds
-                        .contains(FFAppConstants.EntitlementIDVideoAccess))
+                    if (!revenue_cat.activeEntitlementIds.contains(
+                            FFAppConstants.EntitlementIDVideoAccess) &&
+                        responsiveVisibility(
+                          context: context,
+                          phone: false,
+                          tablet: false,
+                          tabletLandscape: false,
+                          desktop: false,
+                        ))
                       Padding(
                         padding:
                             EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
@@ -200,8 +207,6 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Container(
-                                    width: 100.0,
-                                    height: 60.0,
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
@@ -217,47 +222,51 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                                             : 1.0,
                                       ),
                                     ),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Monthly Plan',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts:
-                                                    !FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMediumIsCustom,
-                                              ),
-                                        ),
-                                        Text(
-                                          revenue_cat
-                                              .offerings!
-                                              .current!
-                                              .monthly!
-                                              .storeProduct
-                                              .priceString,
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMediumFamily,
-                                                letterSpacing: 0.0,
-                                                useGoogleFonts:
-                                                    !FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMediumIsCustom,
-                                              ),
-                                        ),
-                                      ].divide(SizedBox(height: 5.0)),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(12.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Monthly Plan',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily,
+                                                  fontSize: 20.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.bold,
+                                                  useGoogleFonts:
+                                                      !FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumIsCustom,
+                                                ),
+                                          ),
+                                          Text(
+                                            '${revenue_cat.offerings!.current!.monthly!.storeProduct.priceString} per month',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumFamily,
+                                                  fontSize: 16.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w600,
+                                                  useGoogleFonts:
+                                                      !FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMediumIsCustom,
+                                                ),
+                                          ),
+                                        ].divide(SizedBox(height: 5.0)),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -362,8 +371,8 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                     if (!revenue_cat.activeEntitlementIds
                         .contains(FFAppConstants.EntitlementIDVideoAccess))
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            30.0, 0.0, 30.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
@@ -420,6 +429,7 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                           },
                           text: 'Subscribe',
                           options: FFButtonOptions(
+                            width: double.infinity,
                             height: 40.0,
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),
@@ -444,8 +454,8 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                     if (!revenue_cat.activeEntitlementIds
                         .contains(FFAppConstants.EntitlementIDVideoAccess))
                       Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            30.0, 0.0, 30.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
@@ -455,6 +465,7 @@ class _SubscriptionPageWidgetState extends State<SubscriptionPageWidget> {
                           },
                           text: 'Restore Purchase',
                           options: FFButtonOptions(
+                            width: double.infinity,
                             height: 40.0,
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 16.0, 0.0),

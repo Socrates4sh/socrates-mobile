@@ -476,7 +476,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                                         0.0,
                                                                         0.0),
                                                             child: Text(
-                                                              'Subscription Purchase Plans',
+                                                              'Subscription Plan',
                                                               style: FlutterFlowTheme
                                                                       .of(context)
                                                                   .bodyLarge

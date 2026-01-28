@@ -7,6 +7,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -162,254 +163,248 @@ class _SubscriptionPageRazorPayWidgetState
                                       return Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 10.0, 0.0, 0.0),
-                                            child: Container(
-                                              width: MediaQuery.sizeOf(context)
-                                                      .width *
-                                                  1.0,
-                                              decoration: BoxDecoration(),
-                                              child: Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: [
-                                                  Text(
-                                                    'Unlock Unlimited Access with \n4sh Subscription!',
-                                                    textAlign: TextAlign.center,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .titleLarge
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .titleLargeFamily,
+                                          if (responsiveVisibility(
+                                            context: context,
+                                            phone: false,
+                                            tablet: false,
+                                            tabletLandscape: false,
+                                            desktop: false,
+                                          ))
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 10.0, 0.0, 0.0),
+                                              child: Container(
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        1.0,
+                                                decoration: BoxDecoration(),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Text(
+                                                      'Unlock Unlimited Access with \n4sh Subscription!',
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleLarge
+                                                              .override(
+                                                                fontFamily: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleLargeFamily,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                useGoogleFonts:
+                                                                    !FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleLargeIsCustom,
+                                                              ),
+                                                    ),
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Icon(
+                                                          Icons
+                                                              .check_circle_rounded,
                                                           color: FlutterFlowTheme
                                                                   .of(context)
-                                                              .primary,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts:
-                                                              !FlutterFlowTheme
+                                                              .tertiary,
+                                                          size: 24.0,
+                                                        ),
+                                                        Flexible(
+                                                          child: RichText(
+                                                            textScaler:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .textScaler,
+                                                            text: TextSpan(
+                                                              children: [
+                                                                TextSpan(
+                                                                  text:
+                                                                      'Unlimited Video Content:\n',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                        fontSize:
+                                                                            16.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.w600,
+                                                                        useGoogleFonts:
+                                                                            !FlutterFlowTheme.of(context).bodyMediumIsCustom,
+                                                                      ),
+                                                                ),
+                                                                TextSpan(
+                                                                  text:
+                                                                      'Get access to all our expert-led video content, from ',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                        useGoogleFonts:
+                                                                            !FlutterFlowTheme.of(context).bodyMediumIsCustom,
+                                                                      ),
+                                                                ),
+                                                                TextSpan(
+                                                                  text:
+                                                                      'US Admissions to Exam Prep',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.bold,
+                                                                        useGoogleFonts:
+                                                                            !FlutterFlowTheme.of(context).bodyMediumIsCustom,
+                                                                      ),
+                                                                )
+                                                              ],
+                                                              style: FlutterFlowTheme
                                                                       .of(context)
-                                                                  .titleLargeIsCustom,
-                                                        ),
-                                                  ),
-                                                  Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Icon(
-                                                        Icons
-                                                            .check_circle_rounded,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .tertiary,
-                                                        size: 24.0,
-                                                      ),
-                                                      Flexible(
-                                                        child: RichText(
-                                                          textScaler:
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .textScaler,
-                                                          text: TextSpan(
-                                                            children: [
-                                                              TextSpan(
-                                                                text:
-                                                                    'Unlimited Video Content:\n',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily,
-                                                                      fontSize:
-                                                                          16.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                      useGoogleFonts:
-                                                                          !FlutterFlowTheme.of(context)
-                                                                              .bodyMediumIsCustom,
-                                                                    ),
-                                                              ),
-                                                              TextSpan(
-                                                                text:
-                                                                    'Get access to all our expert-led video content, from ',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily,
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      useGoogleFonts:
-                                                                          !FlutterFlowTheme.of(context)
-                                                                              .bodyMediumIsCustom,
-                                                                    ),
-                                                              ),
-                                                              TextSpan(
-                                                                text:
-                                                                    'US Admissions to Exam Prep',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily,
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .bold,
-                                                                      useGoogleFonts:
-                                                                          !FlutterFlowTheme.of(context)
-                                                                              .bodyMediumIsCustom,
-                                                                    ),
-                                                              )
-                                                            ],
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  useGoogleFonts:
-                                                                      !FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMediumIsCustom,
-                                                                ),
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyMediumFamily,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    useGoogleFonts:
+                                                                        !FlutterFlowTheme.of(context)
+                                                                            .bodyMediumIsCustom,
+                                                                  ),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ]
-                                                        .divide(SizedBox(
-                                                            width: 10.0))
-                                                        .around(SizedBox(
-                                                            width: 10.0)),
-                                                  ),
-                                                  Row(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment.start,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Icon(
-                                                        Icons
-                                                            .check_circle_rounded,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .tertiary,
-                                                        size: 24.0,
-                                                      ),
-                                                      Flexible(
-                                                        child: RichText(
-                                                          textScaler:
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .textScaler,
-                                                          text: TextSpan(
-                                                            children: [
-                                                              TextSpan(
-                                                                text:
-                                                                    'Exclusive Resources:\n',
-                                                                style: FlutterFlowTheme.of(
+                                                      ]
+                                                          .divide(SizedBox(
+                                                              width: 10.0))
+                                                          .around(SizedBox(
+                                                              width: 10.0)),
+                                                    ),
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Icon(
+                                                          Icons
+                                                              .check_circle_rounded,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .tertiary,
+                                                          size: 24.0,
+                                                        ),
+                                                        Flexible(
+                                                          child: RichText(
+                                                            textScaler:
+                                                                MediaQuery.of(
                                                                         context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily,
-                                                                      fontSize:
-                                                                          16.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                      useGoogleFonts:
-                                                                          !FlutterFlowTheme.of(context)
-                                                                              .bodyMediumIsCustom,
-                                                                    ),
-                                                              ),
-                                                              TextSpan(
-                                                                text:
-                                                                    'Gain access to premium lessons, practice tests, and tips that are available only to subscribers.',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          FlutterFlowTheme.of(context)
-                                                                              .bodyMediumFamily,
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w500,
-                                                                      useGoogleFonts:
-                                                                          !FlutterFlowTheme.of(context)
-                                                                              .bodyMediumIsCustom,
-                                                                    ),
-                                                              )
-                                                            ],
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily: FlutterFlowTheme.of(
+                                                                    .textScaler,
+                                                            text: TextSpan(
+                                                              children: [
+                                                                TextSpan(
+                                                                  text:
+                                                                      'Exclusive Resources:\n',
+                                                                  style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyMediumFamily,
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                  useGoogleFonts:
-                                                                      !FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMediumIsCustom,
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                        fontSize:
+                                                                            16.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.w600,
+                                                                        useGoogleFonts:
+                                                                            !FlutterFlowTheme.of(context).bodyMediumIsCustom,
+                                                                      ),
                                                                 ),
+                                                                TextSpan(
+                                                                  text:
+                                                                      'Gain access to premium lessons, practice tests, and tips that are available only to subscribers.',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            FlutterFlowTheme.of(context).bodyMediumFamily,
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.w500,
+                                                                        useGoogleFonts:
+                                                                            !FlutterFlowTheme.of(context).bodyMediumIsCustom,
+                                                                      ),
+                                                                )
+                                                              ],
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .bodyMediumFamily,
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    useGoogleFonts:
+                                                                        !FlutterFlowTheme.of(context)
+                                                                            .bodyMediumIsCustom,
+                                                                  ),
+                                                            ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    ]
-                                                        .divide(SizedBox(
-                                                            width: 10.0))
-                                                        .around(SizedBox(
-                                                            width: 10.0)),
-                                                  ),
-                                                ].divide(
-                                                    SizedBox(height: 10.0)),
+                                                      ]
+                                                          .divide(SizedBox(
+                                                              width: 10.0))
+                                                          .around(SizedBox(
+                                                              width: 10.0)),
+                                                    ),
+                                                  ].divide(
+                                                      SizedBox(height: 10.0)),
+                                                ),
                                               ),
                                             ),
-                                          ),
                                           Column(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
@@ -496,7 +491,7 @@ class _SubscriptionPageRazorPayWidgetState
                                                                           color:
                                                                               FlutterFlowTheme.of(context).primary,
                                                                           fontSize:
-                                                                              20.0,
+                                                                              36.0,
                                                                           letterSpacing:
                                                                               0.0,
                                                                           useGoogleFonts:
@@ -510,7 +505,7 @@ class _SubscriptionPageRazorPayWidgetState
                                                                           ?.originalPrice
                                                                           .toString(),
                                                                       '99',
-                                                                    )}',
+                                                                    )} per month',
                                                                     textAlign:
                                                                         TextAlign
                                                                             .center,
@@ -521,7 +516,7 @@ class _SubscriptionPageRazorPayWidgetState
                                                                           fontFamily:
                                                                               FlutterFlowTheme.of(context).bodyMediumFamily,
                                                                           fontSize:
-                                                                              50.0,
+                                                                              32.0,
                                                                           letterSpacing:
                                                                               0.0,
                                                                           useGoogleFonts:
@@ -692,10 +687,7 @@ class _SubscriptionPageRazorPayWidgetState
                                               },
                                               text: 'Subscribe',
                                               options: FFButtonOptions(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        0.5,
+                                                width: double.infinity,
                                                 height: 40.0,
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(
@@ -730,6 +722,105 @@ class _SubscriptionPageRazorPayWidgetState
                                               ),
                                             ),
                                           ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    10.0, 20.0, 10.0, 0.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'SUBSCRIPTION_RAZOR_PAY_Text_ffsxl5ro_ON_');
+                                                    logFirebaseEvent(
+                                                        'Text_navigate_to');
+
+                                                    context.pushNamed(
+                                                        TermsofServiceWidget
+                                                            .routeName);
+                                                  },
+                                                  child: Text(
+                                                    'Terms of Use',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          fontSize: 14.0,
+                                                          letterSpacing: 0.0,
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .underline,
+                                                          useGoogleFonts:
+                                                              !FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMediumIsCustom,
+                                                        ),
+                                                  ),
+                                                ),
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'SUBSCRIPTION_RAZOR_PAY_Text_396mrkkq_ON_');
+                                                    logFirebaseEvent(
+                                                        'Text_navigate_to');
+
+                                                    context.pushNamed(
+                                                        PrivacyPolicyWidget
+                                                            .routeName);
+                                                  },
+                                                  child: Text(
+                                                    'Privacy Policy',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMediumFamily,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryText,
+                                                          letterSpacing: 0.0,
+                                                          decoration:
+                                                              TextDecoration
+                                                                  .underline,
+                                                          useGoogleFonts:
+                                                              !FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMediumIsCustom,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ].divide(SizedBox(width: 20.0)),
+                                            ),
+                                          ),
                                         ],
                                       );
                                     } else {
@@ -741,13 +832,13 @@ class _SubscriptionPageRazorPayWidgetState
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.start,
                                           children: [
                                             Column(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Text(
-                                                  'You Are Subscribed! 🎉',
+                                                  'You Are Subscribed.',
                                                   style:
                                                       FlutterFlowTheme.of(
                                                               context)
@@ -763,102 +854,6 @@ class _SubscriptionPageRazorPayWidgetState
                                                                         context)
                                                                     .titleMediumIsCustom,
                                                           ),
-                                                ),
-                                                RichText(
-                                                  textScaler:
-                                                      MediaQuery.of(context)
-                                                          .textScaler,
-                                                  text: TextSpan(
-                                                    children: [
-                                                      TextSpan(
-                                                        text:
-                                                            'Your subscription is now active, giving you ',
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumFamily,
-                                                              fontSize: 14.0,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                              useGoogleFonts:
-                                                                  !FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMediumIsCustom,
-                                                            ),
-                                                      ),
-                                                      TextSpan(
-                                                        text:
-                                                            'unlimited access ',
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 14.0,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text:
-                                                            'to all video content—from ',
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 14.0,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text: 'US Admissions ',
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 14.0,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text: 'to ',
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 14.0,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text: 'Exam Prep ',
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 14.0,
-                                                        ),
-                                                      ),
-                                                      TextSpan(
-                                                        text: 'and more!',
-                                                        style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontSize: 14.0,
-                                                        ),
-                                                      )
-                                                    ],
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyMediumFamily,
-                                                          letterSpacing: 0.0,
-                                                          useGoogleFonts:
-                                                              !FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMediumIsCustom,
-                                                        ),
-                                                  ),
                                                 ),
                                                 RichText(
                                                   textScaler:
@@ -926,7 +921,7 @@ class _SubscriptionPageRazorPayWidgetState
                                                         ),
                                                   ),
                                                 ),
-                                              ].divide(SizedBox(height: 20.0)),
+                                              ].divide(SizedBox(height: 16.0)),
                                             ),
                                             Container(
                                               width: MediaQuery.sizeOf(context)
@@ -1107,7 +1102,7 @@ class _SubscriptionPageRazorPayWidgetState
                                                 ),
                                               ),
                                             ),
-                                          ],
+                                          ].divide(SizedBox(height: 28.0)),
                                         ),
                                       );
                                     }

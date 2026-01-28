@@ -719,7 +719,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                                           context)
                                                                       .secondaryText,
                                                                   fontSize:
-                                                                      12.0,
+                                                                      14.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   decoration:
@@ -783,7 +783,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                                                           context)
                                                                       .secondaryText,
                                                                   fontSize:
-                                                                      12.0,
+                                                                      14.0,
                                                                   letterSpacing:
                                                                       0.0,
                                                                   decoration:
