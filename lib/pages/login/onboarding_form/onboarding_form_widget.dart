@@ -1029,36 +1029,6 @@ class _OnboardingFormWidgetState extends State<OnboardingFormWidget> {
                                             'Button_google_analytics_event');
                                         logFirebaseEvent(
                                             'app_onboarding_completed');
-                                        if (_model.newsletterCheckboxValue!) {
-                                          logFirebaseEvent(
-                                              'Button_backend_call');
-                                          _model.subscribedApi =
-                                              await MailchimpSubscriptionCall
-                                                  .call(
-                                            email: _model
-                                                .userEmailTextController.text,
-                                            subscription: true,
-                                            uid: currentUserUid,
-                                          );
-
-                                          if ((_model
-                                                  .subscribedApi?.succeeded ??
-                                              true)) {
-                                            logFirebaseEvent(
-                                                'Button_backend_call');
-
-                                            await currentUserReference!
-                                                .update(createUsersRecordData(
-                                              newsletters: true,
-                                              subscribedEmail: _model
-                                                  .userEmailTextController.text,
-                                            ));
-                                            logFirebaseEvent(
-                                                'Button_google_analytics_event');
-                                            logFirebaseEvent(
-                                                'app_newsletter_subscribed');
-                                          }
-                                        }
                                         logFirebaseEvent('Button_navigate_to');
 
                                         context.pushNamed(

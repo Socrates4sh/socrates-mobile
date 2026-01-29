@@ -61,8 +61,6 @@ class OnboardingFormModel extends FlutterFlowModel<OnboardingFormWidget> {
   bool? verifiedUserDetails;
   // Stores action output result for [Backend Call - API (CreateCustomerID)] action in Button widget.
   ApiCallResponse? customerIdResponse;
-  // Stores action output result for [Backend Call - API (mailchimpSubscription)] action in Button widget.
-  ApiCallResponse? subscribedApi;
 
   @override
   void initState(BuildContext context) {
