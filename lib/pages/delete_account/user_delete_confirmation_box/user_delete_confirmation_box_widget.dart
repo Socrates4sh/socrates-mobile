@@ -226,7 +226,7 @@ class _UserDeleteConfirmationBoxWidgetState
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(
-                              'Your acoount has been deleted.',
+                              'Your account has been deleted.',
                               style: TextStyle(
                                 color: FlutterFlowTheme.of(context).primaryText,
                               ),
